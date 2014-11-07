@@ -1,0 +1,20 @@
+﻿{
+    "version": "1.0.0-*",
+    "dependencies": {
+        "Owin": "1.0.0",
+        "Microsoft.Owin": "3.0.0" 
+    },
+
+    "frameworks" : {
+        "aspnet50" : { 
+            "dependencies": {
+            }
+        },
+        "aspnetcore50" : { 
+            "dependencies": {
+                "System.Runtime": "4.0.20-beta-*",
+                "System.Threading.Tasks": "4.0.10-beta-*"
+            }
+        }
+    }
+}
