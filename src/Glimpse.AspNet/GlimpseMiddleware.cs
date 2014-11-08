@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
-using System;
 using System.Threading.Tasks;
 
 namespace Glimpse.AspNet

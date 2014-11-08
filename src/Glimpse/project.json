@@ -3,13 +3,14 @@
     "dependencies": {
     },
 
-    "frameworks" : {
-        "aspnet50" : { 
+    "frameworks": {
+        "aspnet50": {
             "dependencies": {
             }
         },
-        "aspnetcore50" : { 
+        "aspnetcore50": {
             "dependencies": {
+                "System.Threading": "4.0.0-beta-*",
                 "System.Runtime": "4.0.20-beta-*"
             }
         }
