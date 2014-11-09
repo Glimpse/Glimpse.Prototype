@@ -2,7 +2,7 @@
 using Microsoft.AspNet.Builder;
 using System;
 
-namespace Glimpse.Host.AspNet
+namespace Glimpse.Host.Web.AspNet
 {
     public static class GlimpseExtension
     {

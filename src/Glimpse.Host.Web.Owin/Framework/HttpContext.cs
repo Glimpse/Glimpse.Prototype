@@ -11,11 +11,11 @@ namespace Glimpse.Host.Web.Owin.Framework
         private readonly IHttpRequest _request;
         private readonly IHttpResponse _response;
 
-        public HttpContext(Microsoft.Owin.IOwinContext context)
+        public HttpContext(IDictionary<string, object> environement)
         {
-            _context = context;
-            _request = new HttpRequest(context.Request);
-            _response = new HttpResponse(context.Response);
+            _context = new Microsoft.Owin.OwinContext(environement);
+            _request = new HttpRequest(_context.Request);
+            _response = new HttpResponse(_context.Response);
         }
 
         public IDictionary<string, object> Items

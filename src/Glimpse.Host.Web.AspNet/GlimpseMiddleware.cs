@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNet.Builder;
+using Glimpse.Host.Web.AspNet.Framework;
 
-namespace Glimpse.Host.AspNet
+namespace Glimpse.Host.Web.AspNet
 {
     public class GlimpseMiddleware
     {
@@ -13,8 +13,10 @@ namespace Glimpse.Host.AspNet
             _innerNext = innerNext;
         }
 
-        public async Task Invoke(HttpContext context)
+        public async Task Invoke(Microsoft.AspNet.Http.HttpContext context)
         {
+            var newContext = new HttpContext(context);
+
             await _innerNext(context);
         }
     }

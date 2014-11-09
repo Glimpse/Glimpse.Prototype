@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Glimpse.Host.Web.Owin.Framework;
 
 namespace Glimpse.Host.Web.Owin
 {
@@ -15,6 +16,8 @@ namespace Glimpse.Host.Web.Owin
 
         public async Task Invoke(IDictionary<string, object> environment)
         {
+            var newContext = new HttpContext(environment);
+
             await _innerNext(environment);
         }
     }

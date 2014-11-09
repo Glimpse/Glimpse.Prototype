@@ -1,6 +1,5 @@
-﻿using System;
-using Microsoft.AspNet.Builder;
-using Glimpse.Host.AspNet;
+﻿using Microsoft.AspNet.Builder;
+using Glimpse.Host.Web.AspNet;
 
 namespace Glimpse.AspNet.Sample
 {
