@@ -11,7 +11,7 @@
     ],
     "dependencies": {
         "Microsoft.AspNet.Server.IIS": "1.0.0-beta1",
-        "Glimpse.AspNet": ""
+        "Glimpse.Host.Web.AspNet": ""
     },
     "frameworks" : {
         "aspnet50" : { },

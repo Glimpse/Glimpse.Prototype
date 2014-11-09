@@ -1,7 +1,7 @@
 ﻿{
     "version": "1.0.0-*",
     "dependencies": {
-        "Glimpse": "",
+        "Glimpse.Web": "",
         "Microsoft.AspNet.Http": "1.0.0-*"
     },
     "frameworks" : {

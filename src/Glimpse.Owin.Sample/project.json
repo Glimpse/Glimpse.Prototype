@@ -1,7 +1,7 @@
 ﻿{
     "version": "1.0.0-*",
     "dependencies": {
-        "Glimpse.Owin": "",
+        "Glimpse.Host.Web.Owin": "",
         "Microsoft.Owin": "3.0.0",
         "Microsoft.Owin.Diagnostics": "3.0.0",
         "Microsoft.Owin.Host.HttpListener": "3.0.0",
