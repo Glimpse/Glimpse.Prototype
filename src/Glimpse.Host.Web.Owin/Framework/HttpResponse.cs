@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Glimpse.Web.Framework;
 
-namespace Glimpse.Host.Owin.Framework
+namespace Glimpse.Host.Web.Owin.Framework
 {
     public class HttpResponse : IHttpResponse
     {
-        private readonly Microsoft.Owin.OwinResponse _response;
+        private readonly Microsoft.Owin.IOwinResponse _response;
 
-        public HttpResponse(Microsoft.Owin.OwinResponse response)
+        public HttpResponse(Microsoft.Owin.IOwinResponse response)
         {
             _response = response;
         }

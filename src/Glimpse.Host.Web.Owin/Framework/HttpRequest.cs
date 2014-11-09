@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using Glimpse.Web.Framework;
 
-namespace Glimpse.Host.Owin.Framework
+namespace Glimpse.Host.Web.Owin.Framework
 {
     public class HttpRequest : IHttpRequest
     {
-        private readonly Microsoft.Owin.OwinRequest _request;
+        private readonly Microsoft.Owin.IOwinRequest _request;
 
-        public HttpRequest(Microsoft.Owin.OwinRequest request)
+        public HttpRequest(Microsoft.Owin.IOwinRequest request)
         {
             _request = request;
         }

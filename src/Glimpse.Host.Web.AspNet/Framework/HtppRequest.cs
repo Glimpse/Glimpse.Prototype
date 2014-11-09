@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Glimpse.Web.Framework;
 
-namespace Glimpse.Host.AspNet.Framework
+namespace Glimpse.Host.Web.AspNet.Framework
 {
     public class HttpRequest : IHttpRequest
     {

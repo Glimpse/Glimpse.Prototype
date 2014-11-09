@@ -4,7 +4,7 @@ using Microsoft.AspNet.Http;
 using Glimpse.Web.Framework;
 using System;
 
-namespace Glimpse.Host.AspNet.Framework
+namespace Glimpse.Host.Web.AspNet.Framework
 {
     public class HttpResponse : IHttpResponse
     {
