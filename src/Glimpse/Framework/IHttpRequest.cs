@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Glimpse.Framework
+namespace Glimpse.Web.Framework
 { 
     public interface IHttpRequest
     {

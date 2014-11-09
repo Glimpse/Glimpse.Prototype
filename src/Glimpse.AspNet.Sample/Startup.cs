@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
+using Glimpse.Host.AspNet;
 
 namespace Glimpse.AspNet.Sample
 {

@@ -1,5 +1,5 @@
 ﻿using Owin;
-using System;
+using Glimpse.Host.Owin;
 
 namespace Glimpse.Owin.Sample
 {

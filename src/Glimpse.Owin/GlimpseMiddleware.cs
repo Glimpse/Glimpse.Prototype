@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Glimpse.Owin
+namespace Glimpse.Host.Owin
 {
     public class GlimpseMiddleware
     {

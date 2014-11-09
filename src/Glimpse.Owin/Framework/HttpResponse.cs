@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.Owin;
-using Glimpse.Framework;
+using Glimpse.Web.Framework;
 
-namespace Glimpse.Owin.Framework
+namespace Glimpse.Host.Owin.Framework
 {
-    public class GlimpseResponse : IHttpResponse
+    public class HttpResponse : IHttpResponse
     {
-        private readonly OwinResponse _response;
+        private readonly Microsoft.Owin.OwinResponse _response;
 
-        public GlimpseResponse(OwinResponse response)
+        public HttpResponse(Microsoft.Owin.OwinResponse response)
         {
             _response = response;
         }
@@ -60,7 +59,7 @@ namespace Glimpse.Owin.Framework
 
         public void Append(string key, string value, string domain, string path, DateTime? expires, bool secure, bool httpOnly)
         {
-            _response.Cookies.Append(key, value, new CookieOptions { Domain = domain, Path = path, Expires = expires, Secure = secure, HttpOnly = httpOnly });
+            _response.Cookies.Append(key, value, new Microsoft.Owin.CookieOptions { Domain = domain, Path = path, Expires = expires, Secure = secure, HttpOnly = httpOnly });
         }
 
         public void Delete(string key)
@@ -70,7 +69,7 @@ namespace Glimpse.Owin.Framework
 
         public void Delete(string key, string domain, string path, DateTime? expires, bool secure, bool httpOnly)
         {
-            _response.Cookies.Delete(key, new CookieOptions { Domain = domain, Path = path, Expires = expires, Secure = secure, HttpOnly = httpOnly });
+            _response.Cookies.Delete(key, new Microsoft.Owin.CookieOptions { Domain = domain, Path = path, Expires = expires, Secure = secure, HttpOnly = httpOnly });
         }
 
         public Task WriteAsync(string text)

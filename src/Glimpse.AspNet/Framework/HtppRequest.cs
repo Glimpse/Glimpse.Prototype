@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNet.Http;
-using Glimpse.Framework;
+using Glimpse.Web.Framework;
 
-namespace Glimpse.AspNet.Framework
+namespace Glimpse.Host.AspNet.Framework
 {
-    public class GlimpseRequest : IHttpRequest
+    public class HttpRequest : IHttpRequest
     {
-        private readonly HttpRequest _request;
+        private readonly Microsoft.AspNet.Http.HttpRequest _request;
 
-        public GlimpseRequest(HttpRequest request)
+        public HttpRequest(Microsoft.AspNet.Http.HttpRequest request)
         {
             _request = request;
         }

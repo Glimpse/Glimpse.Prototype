@@ -2,7 +2,7 @@
 using Microsoft.AspNet.Http;
 using System.Threading.Tasks;
 
-namespace Glimpse.AspNet
+namespace Glimpse.Host.AspNet
 {
     public class GlimpseMiddleware
     {

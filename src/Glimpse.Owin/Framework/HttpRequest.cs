@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Owin;
-using Glimpse.Framework;
+using Glimpse.Web.Framework;
 
-namespace Glimpse.Owin.Framework
+namespace Glimpse.Host.Owin.Framework
 {
-    public class GlimpseRequest : IHttpRequest
+    public class HttpRequest : IHttpRequest
     {
-        private readonly OwinRequest _request;
+        private readonly Microsoft.Owin.OwinRequest _request;
 
-        public GlimpseRequest(OwinRequest request)
+        public HttpRequest(Microsoft.Owin.OwinRequest request)
         {
             _request = request;
         }

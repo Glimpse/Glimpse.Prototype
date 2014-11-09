@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
-using Glimpse.Framework;
+using Glimpse.Web.Framework;
 using System;
 
-namespace Glimpse.AspNet.Framework
+namespace Glimpse.Host.AspNet.Framework
 {
-    public class GlimpseResponse : IHttpResponse
+    public class HttpResponse : IHttpResponse
     {
-        private readonly HttpResponse _response;
+        private readonly Microsoft.AspNet.Http.HttpResponse _response;
 
-        public GlimpseResponse(HttpResponse response)
+        public HttpResponse(Microsoft.AspNet.Http.HttpResponse response)
         {
             _response = response;
         }
