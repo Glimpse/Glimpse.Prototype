@@ -3,7 +3,7 @@ using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using System.Collections.Generic;
 
-namespace Glimpse.Web
+namespace Glimpse
 {
     public class GlimpseServices
     {
