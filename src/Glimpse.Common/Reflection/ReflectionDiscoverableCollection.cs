@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Glimpse.Reflection
+namespace Glimpse
 {
     public class ReflectionDiscoverableCollection<T> : List<T>, IDiscoverableCollection<T>
     {

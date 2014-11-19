@@ -1,9 +1,9 @@
-﻿using Glimpse.Reflection;
+﻿using Glimpse;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using System.Collections.Generic;
 
-namespace Glimpse
+namespace Glimpse.Web
 {
     public class GlimpseServices
     {
@@ -19,7 +19,7 @@ namespace Glimpse
             //
             // Discovery & Reflection.
             //
-            yield return describe.Transient<Reflection.ITypeActivator, DefaultTypeActivator>();
+            yield return describe.Transient<ITypeActivator, DefaultTypeActivator>();
             yield return describe.Transient<ITypeSelector, DefaultTypeSelector>();
             yield return describe.Transient<IAssemblyProvider, DefaultAssemblyProvider>();
             yield return describe.Transient<ITypeService, DefaultTypeService>();

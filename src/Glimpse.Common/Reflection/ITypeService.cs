@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Glimpse.Reflection
+namespace Glimpse
 {
     public interface ITypeService
     {

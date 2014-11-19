@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
-using Glimpse.Web.Framework;
+using Glimpse.Web;
 using System;
 
-namespace Glimpse.Host.Web.AspNet.Framework
+namespace Glimpse.Host.Web.AspNet
 {
     public class HttpResponse : IHttpResponse
     {

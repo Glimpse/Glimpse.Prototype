@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Glimpse.Host.Web.Owin.Framework;
+using Glimpse.Host.Web.Owin;
 using Glimpse.Agent.Web;
 
 namespace Glimpse.Host.Web.Owin

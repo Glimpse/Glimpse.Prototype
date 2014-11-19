@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Glimpse.Reflection
+namespace Glimpse
 {
     public interface IAssemblyProvider
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Glimpse.Web.Framework
+namespace Glimpse.Web
 {
     public interface IHttpResponse
     {

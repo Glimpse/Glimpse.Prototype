@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Glimpse.Reflection
+namespace Glimpse
 {
     public interface ITypeActivator
     {
+        object CreateInstance(Type instanceType, params object[] parameters);
+
         IEnumerable<object> CreateInstances(IEnumerable<TypeInfo> types);
 
         IEnumerable<T> CreateInstances<T>(IEnumerable<TypeInfo> types);

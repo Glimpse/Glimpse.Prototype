@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
-using Glimpse.Host.Web.AspNet.Framework;
+using Glimpse.Host.Web.AspNet;
 using Glimpse.Agent.Web;
 
 namespace Glimpse.Host.Web.AspNet

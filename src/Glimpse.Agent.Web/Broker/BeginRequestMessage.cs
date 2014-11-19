@@ -1,7 +1,7 @@
 ﻿using System;
-using Glimpse.Broker;
+using Glimpse;
 
-namespace Glimpse.Agent.Web.Broker
+namespace Glimpse.Agent.Web
 {
     public class BeginRequestMessage : BaseMessage
     {

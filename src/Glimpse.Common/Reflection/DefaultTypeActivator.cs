@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Glimpse.Reflection
+namespace Glimpse
 {
     public class DefaultTypeActivator : ITypeActivator
     {
@@ -14,6 +14,13 @@ namespace Glimpse.Reflection
         {
             _typeActivator = typeActivator;
             _serviceProvider = serviceProvider;
+        }
+
+        public object CreateInstance(Type instanceType, params object[] parameters)
+        {
+            var activated = _typeActivator.CreateInstance(_serviceProvider, instanceType, parameters);
+
+            return activated;
         }
 
         public IEnumerable<object> CreateInstances(IEnumerable<TypeInfo> types)

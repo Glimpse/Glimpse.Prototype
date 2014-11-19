@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Glimpse.Reflection
+namespace Glimpse
 {
     public class DefaultTypeSelector : ITypeSelector
     {

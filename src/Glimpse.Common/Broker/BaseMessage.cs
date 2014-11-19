@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Glimpse.Broker
+namespace Glimpse
 {
     public class BaseMessage : IMessage
     {

@@ -1,9 +1,8 @@
 ﻿{
     "version": "1.0.0-*",
     "dependencies": {
-        "Glimpse.Web.Common": "",
-        "Glimpse.Agent.Web": "",
-        "Microsoft.AspNet.Http": "1.0.0-*"
+        "Microsoft.Framework.Runtime.Interfaces": "1.0.0-*",
+        "Microsoft.Framework.DependencyInjection": "1.0.0-*"
     },
     "frameworks" : {
         "aspnet50" : { 
@@ -12,8 +11,7 @@
         },
         "aspnetcore50" : { 
             "dependencies": {
-                "System.Threading": "4.0.0-beta-*",
-                "System.Runtime": "4.0.20-beta-*"
+                "System.Runtime": "4.0.20-beta-22231"
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Glimpse.Web.Framework
+namespace Glimpse.Web
 {
     public interface IContext
     {

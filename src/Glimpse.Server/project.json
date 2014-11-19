@@ -1,15 +1,16 @@
 ﻿{
     "version": "1.0.0-*",
     "dependencies": {
-        "Glimpse.Web.Common": "",
-        "Glimpse.Agent.Web": "",
-        "Owin": "1.0.0",
-        "Microsoft.Owin": "3.0.0" 
     },
 
     "frameworks" : {
         "aspnet50" : { 
             "dependencies": {
+            }
+        },
+        "aspnetcore50" : { 
+            "dependencies": {
+                "System.Runtime": "4.0.20-beta-22231"
             }
         }
     }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Glimpse.Web.Framework;
+using Glimpse.Web;
 
-namespace Glimpse.Host.Web.AspNet.Framework
+namespace Glimpse.Host.Web.AspNet
 {
     public class HttpRequest : IHttpRequest
     {
