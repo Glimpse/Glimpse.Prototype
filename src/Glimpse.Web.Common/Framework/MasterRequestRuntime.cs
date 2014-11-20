@@ -2,7 +2,7 @@
 
 namespace Glimpse.Web
 {
-    public class RequestRuntime
+    public class MasterRequestRuntime
     {
         public void Begin(IContext newContext)
         {

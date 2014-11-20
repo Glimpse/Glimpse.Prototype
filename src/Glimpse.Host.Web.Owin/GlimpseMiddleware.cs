@@ -11,13 +11,13 @@ namespace Glimpse.Host.Web.Owin
     {
         private readonly Func<IDictionary<string, object>, Task> _innerNext;
         private readonly IServiceProvider _serviceProvider;
-        private readonly RequestRuntime _runtime;
+        private readonly MasterRequestRuntime _runtime;
 
         public GlimpseMiddleware(Func<IDictionary<string, object>, Task> innerNext, IServiceProvider serviceProvider)
         {
             _innerNext = innerNext;
             _serviceProvider = serviceProvider;
-            _runtime = new RequestRuntime();
+            _runtime = new MasterRequestRuntime();
         }
 
         public async Task Invoke(IDictionary<string, object> environment)

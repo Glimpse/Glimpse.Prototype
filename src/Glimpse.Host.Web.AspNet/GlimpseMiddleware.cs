@@ -7,12 +7,12 @@ namespace Glimpse.Host.Web.AspNet
     public class GlimpseMiddleware
     {
         private readonly RequestDelegate _innerNext;
-        private readonly RequestRuntime _runtime;
+        private readonly MasterRequestRuntime _runtime;
 
         public GlimpseMiddleware(RequestDelegate innerNext)
         {
             _innerNext = innerNext;
-            _runtime = new RequestRuntime();
+            _runtime = new MasterRequestRuntime();
         }
 
         public async Task Invoke(Microsoft.AspNet.Http.HttpContext context)
