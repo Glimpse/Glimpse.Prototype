@@ -15,7 +15,6 @@ namespace Glimpse.Owin.Sample
 
             app.Use<GlimpseMiddleware>(serviceProvider);
 
-
             app.UseWelcomePage(); 
             app.UseErrorPage();
         }
