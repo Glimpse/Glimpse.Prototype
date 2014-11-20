@@ -3,7 +3,7 @@
     "dependencies": {
         "Glimpse.Web.Common": "",
         "Glimpse.Agent.Web": "",
-        "Microsoft.AspNet.Http": "1.0.0-*"
+        "Microsoft.AspNet.Http": "1.0.0-beta1"
     },
     "frameworks" : {
         "aspnet50" : { 

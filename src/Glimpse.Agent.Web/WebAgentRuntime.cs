@@ -9,6 +9,7 @@ namespace Glimpse.Agent.Web
         {
 
         }
+
         public void End(IContext newContext)
         {
 

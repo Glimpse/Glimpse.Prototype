@@ -2,7 +2,7 @@
 using Microsoft.Framework.DependencyInjection;
 using System;
 
-namespace Glimpse.Web
+namespace Glimpse
 {
     public static class GlimpseServiceCollectionExtensions
     {

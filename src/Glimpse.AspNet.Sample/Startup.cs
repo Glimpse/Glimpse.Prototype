@@ -8,6 +8,8 @@ namespace Glimpse.AspNet.Sample
         public void Configure(IApplicationBuilder app)
         {
             app.UseGlimpse();
+
+            app.UseWelcomePage();
         }
     }
 }
