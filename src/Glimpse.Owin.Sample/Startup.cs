@@ -2,7 +2,6 @@
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.DependencyInjection.Fallback;
 using Owin;
-using System.Collections.Generic;
 
 namespace Glimpse.Owin.Sample
 {
@@ -10,7 +9,9 @@ namespace Glimpse.Owin.Sample
     {
         public void Configuration(IAppBuilder app)
         {
-            var serviceDescriptors = new List<IServiceDescriptor>();
+            var serviceDescriptors = new ServiceCollection();
+            serviceDescriptors.AddGlimpse();
+
             var serviceProvider = serviceDescriptors.BuildServiceProvider();
 
             app.Use<GlimpseMiddleware>(serviceProvider);
