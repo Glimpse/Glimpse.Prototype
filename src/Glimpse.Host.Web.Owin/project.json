@@ -2,7 +2,6 @@
     "version": "1.0.0-*",
     "dependencies": {
         "Glimpse.Web.Common": "",
-        "Glimpse.Agent.Web": "",
         "Owin": "1.0.0",
         "Microsoft.Owin": "3.0.0" 
     },
