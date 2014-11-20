@@ -10,5 +10,7 @@ namespace Glimpse.Web
         IHttpResponse Response { get; }
 
         IDictionary<string, object> Items { get; }
+
+        IServiceProvider ApplicationServices { get; }
     }
 }

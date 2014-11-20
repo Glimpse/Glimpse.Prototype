@@ -18,6 +18,16 @@ namespace Glimpse.Host.Web.AspNet
             _response = new HttpResponse(context.Response);
         }
 
+        public IHttpRequest Request
+        {
+            get { return _request; }
+        }
+
+        public IHttpResponse Response
+        {
+            get { return _response; }
+        }
+
         public IDictionary<string, object> Items
         {
             get
@@ -34,14 +44,9 @@ namespace Glimpse.Host.Web.AspNet
             }
         }
 
-        public IHttpRequest Request
+        public IServiceProvider ApplicationServices
         {
-            get { return _request; }
-        }
-
-        public IHttpResponse Response
-        {
-            get { return _response; }
+            get { return _context.ApplicationServices; }
         }
     }
 }

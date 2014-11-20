@@ -10,12 +10,24 @@ namespace Glimpse.Host.Web.Owin
         private readonly Microsoft.Owin.IOwinContext _context;
         private readonly IHttpRequest _request;
         private readonly IHttpResponse _response;
+        private readonly IServiceProvider _serviceProvider;
 
-        public HttpContext(IDictionary<string, object> environement)
+        public HttpContext(IDictionary<string, object> environement, IServiceProvider serviceProvider)
         {
             _context = new Microsoft.Owin.OwinContext(environement);
             _request = new HttpRequest(_context.Request);
             _response = new HttpResponse(_context.Response);
+            _serviceProvider = serviceProvider;
+        }
+
+        public IHttpRequest Request
+        {
+            get { return _request;  }
+        }
+
+        public IHttpResponse Response
+        {
+            get { return _response; }
         }
 
         public IDictionary<string, object> Items
@@ -34,14 +46,9 @@ namespace Glimpse.Host.Web.Owin
             }
         }
 
-        public IHttpRequest Request
+        public IServiceProvider ApplicationServices
         {
-            get { return _request;  }
-        }
-
-        public IHttpResponse Response
-        {
-            get { return _response; }
+            get { return _serviceProvider; }
         }
     }
 }
