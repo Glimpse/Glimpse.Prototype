@@ -17,7 +17,7 @@ namespace Glimpse.Host.Web.Owin
         {
             _innerNext = innerNext;
             _serviceProvider = serviceProvider;
-            _runtime = new MasterRequestRuntime();
+            _runtime = new MasterRequestRuntime(serviceProvider);
         }
 
         public async Task Invoke(IDictionary<string, object> environment)

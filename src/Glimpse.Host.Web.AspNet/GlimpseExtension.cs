@@ -13,7 +13,7 @@ namespace Glimpse.Host.Web.AspNet
         /// <returns></returns>
         public static IApplicationBuilder UseGlimpse(this IApplicationBuilder app)
         {
-            return app.Use(next => new GlimpseMiddleware(next).Invoke);
+            return app.Use(next => new GlimpseMiddleware(next, app.ApplicationServices).Invoke);
         }
     }
 }
