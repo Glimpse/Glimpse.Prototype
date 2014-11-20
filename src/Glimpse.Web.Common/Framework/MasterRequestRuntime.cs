@@ -6,11 +6,12 @@ namespace Glimpse.Web
 {
     public class MasterRequestRuntime
     {
-        private readonly IEnumerable<IRequestRuntime> _requestRuntimes;
+        private readonly IDiscoverableCollection<IRequestRuntime> _requestRuntimes;
 
         public MasterRequestRuntime(IServiceProvider serviceProvider)
         {
             _requestRuntimes = serviceProvider.GetService<IDiscoverableCollection<IRequestRuntime>>();
+            _requestRuntimes.Discover();
         }
 
         public void Begin(IContext newContext)
