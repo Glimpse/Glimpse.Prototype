@@ -1,19 +1,18 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Glimpse.Host.Web.AspNet;
-using Glimpse.Agent.Web;
+using Microsoft.AspNet.Builder; 
+using Glimpse.Web;
 
 namespace Glimpse.Host.Web.AspNet
 {
     public class GlimpseMiddleware
     {
         private readonly RequestDelegate _innerNext;
-        private readonly WebAgentRuntime _runtime;
+        private readonly RequestRuntime _runtime;
 
         public GlimpseMiddleware(RequestDelegate innerNext)
         {
             _innerNext = innerNext;
-            _runtime = new WebAgentRuntime();   // TODO: This shouldn't have this direct depedency
+            _runtime = new RequestRuntime();
         }
 
         public async Task Invoke(Microsoft.AspNet.Http.HttpContext context)
