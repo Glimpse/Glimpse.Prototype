@@ -2,6 +2,7 @@
     "version": "1.0.0-*",
     "dependencies": {
         "Glimpse.Host.Web.Owin": "",
+        "Glimpse.Agent.Web": "",
         "Microsoft.Framework.DependencyInjection": "1.0.0-beta1",
         "Microsoft.Owin": "3.0.0",
         "Microsoft.Owin.Diagnostics": "3.0.0",
