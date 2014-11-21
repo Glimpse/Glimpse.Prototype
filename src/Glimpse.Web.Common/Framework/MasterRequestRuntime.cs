@@ -14,14 +14,20 @@ namespace Glimpse.Web
             _requestRuntimes.Discover();
         }
 
-        public void Begin(IContext newContext)
+        public void Begin(IContext context)
         {
-
+            foreach (var requestRuntime in _requestRuntimes)
+            {
+                requestRuntime.Begin(context);
+            }
         }
 
-        public void End(IContext newContext)
+        public void End(IContext context)
         {
-
+            foreach (var requestRuntime in _requestRuntimes)
+            {
+                requestRuntime.End(context);
+            }
         }
     }
 }
