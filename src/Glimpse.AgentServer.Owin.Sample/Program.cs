@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Owin.Hosting;
 
-namespace Glimpse.Owin.Sample
+namespace Glimpse.AgentServer.Owin.Sample
 {
     public class Program
     {

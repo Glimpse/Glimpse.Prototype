@@ -2,7 +2,7 @@
 using Glimpse.Host.Web.AspNet;
 using Microsoft.Framework.DependencyInjection;
 
-namespace Glimpse.AspNet.Sample
+namespace Glimpse.AgentServer.AspNet.Sample
 {
     public class Startup
     {

@@ -3,7 +3,7 @@ using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.DependencyInjection.Fallback;
 using Owin;
 
-namespace Glimpse.Owin.Sample
+namespace Glimpse.AgentServer.Owin.Sample
 {
     public class Startup
     {
