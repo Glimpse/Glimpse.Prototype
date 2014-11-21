@@ -22,7 +22,15 @@ namespace Glimpse.Host.Web.AspNet
 
             _runtime.Begin(newContext);
 
-            await _innerNext(context);
+            var handler = (IRequestHandler)null;
+            if (_runtime.TryGetHandle(newContext, out handler))
+            {
+                await handler.Handle(newContext);
+            }
+            else
+            {
+                await _innerNext(context);
+            }
 
             _runtime.End(newContext);
         }

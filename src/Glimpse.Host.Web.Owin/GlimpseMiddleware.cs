@@ -26,8 +26,16 @@ namespace Glimpse.Host.Web.Owin
 
             _runtime.Begin(newContext);
 
-            await _innerNext(environment);
-
+            var handler = (IRequestHandler)null;
+            if (_runtime.TryGetHandle(newContext, out handler))
+            {
+                await handler.Handle(newContext);
+            }
+            else
+            {
+                await _innerNext(environment);
+            }
+            
             _runtime.End(newContext);
         }
     }
