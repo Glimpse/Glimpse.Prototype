@@ -26,7 +26,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.Web", "src\Gl
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Common", "src\Glimpse.Common\Glimpse.Common.kproj", "{C0FB7983-E851-4567-8540-153F9B7EC42D}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Server", "src\Glimpse.Server\Glimpse.Server.kproj", "{C6EFFA30-9D16-412C-8FD7-C87B909E030E}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Server.Web", "src\Glimpse.Server.Web\Glimpse.Server.Web.kproj", "{C6EFFA30-9D16-412C-8FD7-C87B909E030E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
