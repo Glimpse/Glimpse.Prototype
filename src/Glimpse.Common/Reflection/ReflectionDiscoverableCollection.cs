@@ -11,7 +11,7 @@ namespace Glimpse
         public ReflectionDiscoverableCollection(ITypeService typeService)
         {
             _typeService = typeService;
-            CoreLibarary = "Glimpse";
+            CoreLibarary = "Glimpse.Common";
         }
 
         public string CoreLibarary { get; set; }
