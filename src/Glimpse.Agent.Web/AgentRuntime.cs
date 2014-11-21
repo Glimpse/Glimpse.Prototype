@@ -3,7 +3,7 @@ using System;
 
 namespace Glimpse.Agent.Web
 {
-    public class WebAgentRuntime : IRequestRuntime
+    public class AgentRuntime : IRequestRuntime
     {
         public void Begin(IContext newContext)
         {
