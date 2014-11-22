@@ -32,7 +32,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.AspNet.Sample
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Server.AspNet.Sample", "src\Glimpse.Server.AspNet.Sample\Glimpse.Server.AspNet.Sample.kproj", "{24B423F4-4E7F-4DBA-B998-3F5CB510CAFE}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.Portable", "src\Glimpse.Agent.Portable\Glimpse.Agent.Portable.kproj", "{2B9E66C2-CB44-4CB9-937F-4C167F1352DD}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.Device", "src\Glimpse.Agent.Device\Glimpse.Agent.Device.kproj", "{2B9E66C2-CB44-4CB9-937F-4C167F1352DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
