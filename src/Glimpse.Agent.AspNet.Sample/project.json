@@ -10,7 +10,10 @@
         "**.vspscc"
     ],
     "dependencies": {
-        "Microsoft.AspNet.Server.IIS": "1.0.0-beta1"
+        "Glimpse.Host.Web.AspNet": "",
+        "Glimpse.Agent.Web": "",
+        "Microsoft.AspNet.Server.IIS": "1.0.0-beta1",
+        "Microsoft.AspNet.Diagnostics": "1.0.0-beta1"
     },
     "frameworks" : {
         "aspnet50" : { },
