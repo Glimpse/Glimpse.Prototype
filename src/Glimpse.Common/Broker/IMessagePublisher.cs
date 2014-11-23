@@ -2,7 +2,7 @@
 
 namespace Glimpse
 {
-    public interface IBrokerPublisher
+    public interface IMessagePublisher
     {
         void PublishMessage(IMessage message);
     }

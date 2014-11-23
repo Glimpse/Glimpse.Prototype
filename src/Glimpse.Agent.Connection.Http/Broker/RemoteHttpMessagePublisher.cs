@@ -2,7 +2,7 @@
 
 namespace Glimpse.Agent
 {
-    public class RemoteHttpBrokerPublisher : IBrokerPublisher
+    public class RemoteHttpMessagePublisher : IMessagePublisher
     {
         public void PublishMessage(IMessage message)
         {

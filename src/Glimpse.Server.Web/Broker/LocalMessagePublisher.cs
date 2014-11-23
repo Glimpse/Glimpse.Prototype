@@ -2,7 +2,7 @@
 
 namespace Glimpse.Server
 {
-    public class LocalBrokerPublisher : IBrokerPublisher
+    public class LocalMessagePublisher : IMessagePublisher
     {
         public void PublishMessage(IMessage message)
         {
