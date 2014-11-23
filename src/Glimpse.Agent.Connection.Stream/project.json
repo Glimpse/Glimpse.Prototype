@@ -1,8 +1,8 @@
 ﻿{
     "version": "1.0.0-*",
     "dependencies": {
+        "Glimpse.Common": ""
     },
-
     "frameworks" : {
         "aspnet50" : { 
             "dependencies": {
