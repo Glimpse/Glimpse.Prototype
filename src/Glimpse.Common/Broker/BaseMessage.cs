@@ -10,8 +10,8 @@ namespace Glimpse
             Time = new DateTime();
         }
 
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
-        public DateTime Time { get; set; }
+        public DateTime Time { get; }
     }
 }

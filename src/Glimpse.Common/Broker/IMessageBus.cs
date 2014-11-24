@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Glimpse.Broker
+namespace Glimpse
 {
     public interface IMessageBus
     {
@@ -8,6 +8,6 @@ namespace Glimpse.Broker
 
         IObservable<T> ListenIncludeLatest<T>();
 
-        bool IsRegistered(Type type);
+        void SendMessage(object message);
     }
 }
