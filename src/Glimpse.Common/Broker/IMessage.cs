@@ -4,8 +4,8 @@ namespace Glimpse
 {
     public interface IMessage
     {
-        Guid Id { get; set; }
+        Guid Id { get; }
 
-        DateTime Time { get; set; }
+        DateTime Time { get; }
     }
 }
