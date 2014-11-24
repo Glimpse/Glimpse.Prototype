@@ -4,10 +4,12 @@ namespace Glimpse
 {
     public interface IMessageBus
     {
-        IObservable<T> Listen<T>();
+        IObservable<T> Listen<T>()
+            where T : IMessage;
 
-        IObservable<T> ListenIncludeLatest<T>();
+        IObservable<T> ListenIncludeLatest<T>()
+            where T : IMessage;
 
-        void SendMessage(object message);
+        void SendMessage(IMessage message);
     }
 }
