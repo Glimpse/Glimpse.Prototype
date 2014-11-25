@@ -9,7 +9,7 @@ namespace Glimpse.Server.Web.Resources
     {
         public bool WillHandle(IContext context)
         {
-            return context.Request.Path.StartsWith("/Glimpse");
+            return context.Request.Path == "/Glimpse";
         }
 
         public async Task Handle(IContext context)
