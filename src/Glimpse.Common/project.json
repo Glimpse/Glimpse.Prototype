@@ -1,6 +1,7 @@
 ﻿{
     "version": "1.0.0-*",
     "dependencies": {
+        "Rx-Linq": "2.2.5", 
         "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta1",
         "Microsoft.Framework.DependencyInjection": "1.0.0-beta1"
     },
