@@ -8,7 +8,8 @@ namespace Glimpse.Agent.AspNet.Sample
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddGlimpse();
+            services.AddGlimpse()
+                .WithRemoteHttpAgent();
         }
 
         public void Configure(IApplicationBuilder app)
