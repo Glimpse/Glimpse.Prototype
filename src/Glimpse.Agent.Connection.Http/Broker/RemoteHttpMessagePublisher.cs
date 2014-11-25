@@ -33,13 +33,6 @@ namespace Glimpse.Agent
 
                         // Read response asynchronously as JsonValue and write out top facts for each country
                         var result = response.Content.ReadAsStringAsync().Result;
-
-                        /*
-                        response.Content.ReadAsAsync<string>().ContinueWith(readTask =>
-                            {
-                                var result = readTask.Result;
-                            });
-                            */
                     });
         }
 
