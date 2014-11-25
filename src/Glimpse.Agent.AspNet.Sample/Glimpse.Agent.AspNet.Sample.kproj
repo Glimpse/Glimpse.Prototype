@@ -13,7 +13,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
-    <DevelopmentServerPort>15307</DevelopmentServerPort>
+    <DevelopmentServerPort>14999</DevelopmentServerPort>
+    <CommandLineArguments />
+    <DebugTarget />
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\AspNet\Microsoft.Web.AspNet.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>
