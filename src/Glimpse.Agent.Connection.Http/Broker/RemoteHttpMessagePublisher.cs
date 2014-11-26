@@ -19,8 +19,7 @@ namespace Glimpse.Agent
         public void PublishMessage(IMessage message)
         {
             var content = new StringContent("Hello");
-
-
+            
             // TODO: Try shifting to async and await
             _httpClient.PostAsync("http://localhost:15999/Glimpse/Agent", content)
                 .ContinueWith(requestTask =>
