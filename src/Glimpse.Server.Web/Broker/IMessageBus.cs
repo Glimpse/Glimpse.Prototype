@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Glimpse
+namespace Glimpse.Server
 {
     public interface IMessageBus
     {
