@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Glimpse.Web;
+using System.IO;
 
 namespace Glimpse.Host.Web.Owin
 {
@@ -11,6 +12,11 @@ namespace Glimpse.Host.Web.Owin
         public HttpRequest(Microsoft.Owin.IOwinRequest request)
         {
             _request = request;
+        }
+
+        public Stream Body
+        {
+            get { return _request.Body; }
         }
 
         public string Accept 

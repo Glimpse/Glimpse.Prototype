@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Glimpse.Web
 { 
     public interface IHttpRequest
     {
+        Stream Body { get; }
+
         string Accept { get; }
 
         string Method { get; }
