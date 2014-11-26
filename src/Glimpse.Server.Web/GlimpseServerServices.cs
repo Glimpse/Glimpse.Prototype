@@ -1,4 +1,5 @@
-﻿using Glimpse.Server;
+﻿using Glimpse.Agent;
+using Glimpse.Server;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using System.Collections.Generic;
