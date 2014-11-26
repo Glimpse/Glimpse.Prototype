@@ -6,14 +6,14 @@ using System.Reflection;
 
 namespace Glimpse.Server
 {
-    public class DefaultMessageBus : IMessageServerBus
+    public class DefaultMessageServerBus : IMessageServerBus
     {
         private readonly ISubject<IMessage> _subject;
 
         // TODO: Review if we care about unifying which thread message is published on
         //       and which thread it is recieved on. If so need to use IScheduler.
 
-        public DefaultMessageBus()
+        public DefaultMessageServerBus()
         {
             _subject = new BehaviorSubject<IMessage>(null);
         }
