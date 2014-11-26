@@ -8,7 +8,8 @@ namespace Glimpse.AgentServer.AspNet.Sample
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddGlimpse();
+            services.AddGlimpse()
+                    .RunningServer();
         }
 
         public void Configure(IApplicationBuilder app)
