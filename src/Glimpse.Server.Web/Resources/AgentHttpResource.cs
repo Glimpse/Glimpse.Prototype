@@ -15,6 +15,7 @@ namespace Glimpse.Server.Resources
 
         public async Task Handle(IContext context)
         {
+            // TEST CODE ONLY!!!!
             var request = context.Request;
             var reader = new StreamReader(request.Body);
             var text = reader.ReadToEnd();
@@ -25,6 +26,7 @@ namespace Glimpse.Server.Resources
 
             var data = Encoding.UTF8.GetBytes(text);
             await response.WriteAsync(data);
+            // TEST CODE ONLY!!!!
         }
     }
 }
