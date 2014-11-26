@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Glimpse.Agent;
+using System;
 
 namespace Glimpse.Server
 {
@@ -13,7 +14,13 @@ namespace Glimpse.Server
 
         public void PublishMessage(IMessage message)
         {
-            _messageBus.SendMessage(message);
+            // TODO: Probably want to convert the message to JSON at this point
+
+            var newMessage = new MessageEnvelope();
+            newMessage.Type = message.GetType().FullName;
+            newMessage.Message = message;
+
+            _messageBus.SendMessage(newMessage);
         }
     }
 }
