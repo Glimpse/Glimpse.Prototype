@@ -11,6 +11,7 @@ namespace Glimpse.AgentServer.Owin.Sample
         {
             var serviceDescriptors = new ServiceCollection();
             serviceDescriptors.AddGlimpse()
+                    .WithLocalAgent()
                     .RunningServer();
 
             var serviceProvider = serviceDescriptors.BuildServiceProvider();

@@ -9,6 +9,7 @@ namespace Glimpse.AgentServer.AspNet.Sample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGlimpse()
+                    .WithLocalAgent()
                     .RunningServer();
         }
 
