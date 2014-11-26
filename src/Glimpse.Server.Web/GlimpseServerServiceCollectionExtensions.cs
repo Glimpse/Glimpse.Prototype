@@ -15,5 +15,15 @@ namespace Glimpse
         {
             return services.Add(GlimpseServerServices.GetDefaultServices(configuration));
         }
+
+        public static IServiceCollection WithLocalAgent(this IServiceCollection services)
+        {
+            return services.Add(GlimpseServerServices.GetPublisherServices());
+        }
+
+        public static IServiceCollection WithLocalAgent(this IServiceCollection services, IConfiguration configuration)
+        {
+            return services.Add(GlimpseServerServices.GetPublisherServices(configuration));
+        }
     }
 }

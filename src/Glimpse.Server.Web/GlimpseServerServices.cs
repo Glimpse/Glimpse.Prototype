@@ -21,5 +21,20 @@ namespace Glimpse
             //
             yield return describe.Singleton<IMessageServerBus, DefaultMessageServerBus>();
         }
+
+        public static IEnumerable<IServiceDescriptor> GetPublisherServices()
+        {
+            return GetPublisherServices(new Configuration());
+        }
+
+        public static IEnumerable<IServiceDescriptor> GetPublisherServices(IConfiguration configuration)
+        {
+            var describe = new ServiceDescriber(configuration);
+
+            //
+            // Broker
+            //
+            yield return describe.Singleton<IMessagePublisher, LocalMessagePublisher>();
+        }
     }
 }
