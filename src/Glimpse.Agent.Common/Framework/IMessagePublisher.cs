@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Glimpse
+namespace Glimpse.Agent
 {
     public interface IMessagePublisher
     {
