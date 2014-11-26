@@ -3,7 +3,7 @@
 namespace Glimpse
 {
 
-    public class MessageEnvelope
+    public class MessageEnvelope : IMessageEnvelope
     {
         public string Type { get; set; }
 
