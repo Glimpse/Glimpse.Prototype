@@ -13,6 +13,9 @@ namespace Glimpse.Server
         // TODO: Review if we care about unifying which thread message is published on
         //       and which thread it is recieved on. If so need to use IScheduler.
 
+        // TODO: Review how we think people will want to filter on these messages given 
+        //       the lack of structure 
+
         public DefaultMessageServerBus()
         {
             _subject = new BehaviorSubject<IMessageEnvelope>(null);

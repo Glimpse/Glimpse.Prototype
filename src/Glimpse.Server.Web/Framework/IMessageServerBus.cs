@@ -2,6 +2,9 @@
 
 namespace Glimpse.Server
 {
+    // TODO: Review how we think people will want to filter on these messages given 
+    //       the lack of structure
+
     public interface IMessageServerBus
     {
         IObservable<T> Listen<T>()
