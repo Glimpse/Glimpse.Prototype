@@ -28,7 +28,7 @@ namespace Glimpse
             //
             // Broker
             //
-            yield return describe.Singleton<IMessageBus, DefaultMessageBus>();
+            //yield return describe.Singleton<IMessageBus, DefaultMessageBus>();
         }
     }
 }

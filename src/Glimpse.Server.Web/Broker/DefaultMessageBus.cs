@@ -4,7 +4,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Reflection;
 
-namespace Glimpse
+namespace Glimpse.Server
 {
     public class DefaultMessageBus : IMessageBus
     {
