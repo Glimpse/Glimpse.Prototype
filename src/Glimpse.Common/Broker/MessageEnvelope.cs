@@ -5,8 +5,8 @@ namespace Glimpse
 
     public class MessageEnvelope
     {
-        string Type { get; set; }
+        public string Type { get; set; }
 
-        object Message { get; set; }
+        public object Message { get; set; }
     }
 }
