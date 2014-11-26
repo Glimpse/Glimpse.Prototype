@@ -24,11 +24,6 @@ namespace Glimpse
             yield return describe.Transient<IAssemblyProvider, DefaultAssemblyProvider>();
             yield return describe.Transient<ITypeService, DefaultTypeService>();
             yield return describe.Transient(typeof(IDiscoverableCollection<>), typeof(ReflectionDiscoverableCollection<>));
-
-            //
-            // Broker
-            //
-            //yield return describe.Singleton<IMessageBus, DefaultMessageBus>();
         }
     }
 }
