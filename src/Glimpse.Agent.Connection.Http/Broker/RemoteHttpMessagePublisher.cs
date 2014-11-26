@@ -21,7 +21,8 @@ namespace Glimpse.Agent
             var content = new StringContent("Hello");
             
             // TODO: Try shifting to async and await
-            _httpClient.PostAsync("http://localhost:15999/Glimpse/Agent", content)
+
+            _httpClient.PostAsJsonAsync("http://localhost:15999/Glimpse/Agent", message)
                 .ContinueWith(requestTask =>
                     {
                         // Get HTTP response from completed task.
