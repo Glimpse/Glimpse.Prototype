@@ -5,11 +5,11 @@ namespace Glimpse.Agent.Web
 {
     public class AgentRuntime : IRequestRuntime
     {
-        private readonly IMessagePublisher _messagePublisher;
+        private readonly IMessageAgentBus _messageBus;
 
-        public AgentRuntime(IMessagePublisher messagePublisher)
+        public AgentRuntime(IMessageAgentBus messageBus)
         {
-            _messagePublisher = messagePublisher;
+            _messageBus = messageBus;
         }
 
         public void Begin(IContext newContext)
@@ -18,7 +18,7 @@ namespace Glimpse.Agent.Web
 
             // TODO: Full out message more
 
-            _messagePublisher.PublishMessage(message);
+            _messageBus.SendMessage(message);
         }
 
         public void End(IContext newContext)
@@ -27,7 +27,7 @@ namespace Glimpse.Agent.Web
 
             // TODO: Full out message more
 
-            _messagePublisher.PublishMessage(message);
+            _messageBus.SendMessage(message);
         }
     }
 }
