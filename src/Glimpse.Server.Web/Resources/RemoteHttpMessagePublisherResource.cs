@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Server.Resources
 {
-    public class AgentHttpResource : IRequestHandler
+    public class RemoteHttpMessagePublisherResource : IRequestHandler
     {
         public bool WillHandle(IContext context)
         {

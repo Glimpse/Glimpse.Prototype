@@ -3,7 +3,7 @@ using System;
 
 namespace Glimpse.Server
 {
-    public class LocalMessagePublisher : IMessagePublisher
+    public class LocalMessagePublisher : BaseMessagePublisher
     {
         private readonly IMessageServerBus _messageBus;
 
@@ -12,13 +12,9 @@ namespace Glimpse.Server
             _messageBus = messageBus;
         }
 
-        public void PublishMessage(IMessage message)
+        public override void PublishMessage(IMessage message)
         {
-            // TODO: Probably want to convert the message to JSON at this point
-
-            var newMessage = new MessageEnvelope();
-            newMessage.Type = message.GetType().FullName;
-            newMessage.Message = message;
+            var newMessage = ConvertMessage(message);
 
             _messageBus.SendMessage(newMessage);
         }

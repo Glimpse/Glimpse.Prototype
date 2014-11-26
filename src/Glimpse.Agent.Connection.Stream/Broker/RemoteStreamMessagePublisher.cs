@@ -2,10 +2,12 @@
 
 namespace Glimpse.Agent
 {
-    public class RemoteStreamMessagePublisher : IMessagePublisher
+    public class RemoteStreamMessagePublisher : BaseMessagePublisher
     {
-        public void PublishMessage(IMessage message)
+        public override void PublishMessage(IMessage message)
         {
+            var newMessage = ConvertMessage(message);
+
             // TODO: Use SignalR to publish message
         }
     }

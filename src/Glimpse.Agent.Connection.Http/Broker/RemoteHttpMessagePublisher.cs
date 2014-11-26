@@ -3,7 +3,7 @@ using System.Net.Http;
 
 namespace Glimpse.Agent
 {
-    public class RemoteHttpMessagePublisher : IMessagePublisher, IDisposable
+    public class RemoteHttpMessagePublisher : BaseMessagePublisher, IDisposable
     {
         private readonly HttpClient _httpClient;
         private readonly HttpClientHandler _httpHandler;
@@ -14,13 +14,15 @@ namespace Glimpse.Agent
             _httpClient = new HttpClient(_httpHandler);
         }
 
-        public void PublishMessage(IMessage message)
+        public override void PublishMessage(IMessage message)
         {
             // TODO: Try shifting to async and await
             // TODO: Needs error handelling
             // TODO: Find out what happened to System.Net.Http.Formmating - PostAsJsonAsync
 
-            _httpClient.PostAsJsonAsync("http://localhost:15999/Glimpse/Agent", message)
+            var newMessage = ConvertMessage(message);
+
+            _httpClient.PostAsJsonAsync("http://localhost:15999/Glimpse/Agent", newMessage)
                 .ContinueWith(requestTask =>
                     {
                         // Get HTTP response from completed task.
