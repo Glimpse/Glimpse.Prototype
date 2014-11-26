@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Glimpse.Server
 {
-    public class DefaultMessageBus : IMessageBus
+    public class DefaultMessageBus : IMessageServerBus
     {
         private readonly ISubject<IMessage> _subject;
 

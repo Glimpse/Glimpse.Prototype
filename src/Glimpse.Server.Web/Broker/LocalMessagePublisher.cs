@@ -4,9 +4,9 @@ namespace Glimpse.Server
 {
     public class LocalMessagePublisher : IMessagePublisher
     {
-        private readonly IMessageBus _messageBus;
+        private readonly IMessageServerBus _messageBus;
 
-        public LocalMessagePublisher(IMessageBus messageBus)
+        public LocalMessagePublisher(IMessageServerBus messageBus)
         {
             _messageBus = messageBus;
         }

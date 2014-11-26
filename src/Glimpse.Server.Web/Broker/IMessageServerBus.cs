@@ -2,7 +2,7 @@
 
 namespace Glimpse.Server
 {
-    public interface IMessageBus
+    public interface IMessageServerBus
     {
         IObservable<T> Listen<T>()
             where T : IMessage;
