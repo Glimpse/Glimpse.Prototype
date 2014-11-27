@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Glimpse.Agent
 {
@@ -11,7 +12,7 @@ namespace Glimpse.Agent
             // TODO: Probably want to convert the message to JSON at this point
             var newMessage = new MessageEnvelope();
             newMessage.Type = message.GetType().FullName;
-            newMessage.Message = message;
+            newMessage.Message = JsonConvert.SerializeObject(message, Formatting.None);
 
             return newMessage;
         }
