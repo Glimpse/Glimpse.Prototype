@@ -6,8 +6,8 @@ namespace Glimpse
     {
         public BaseMessage()
         {
-            Id = new Guid();
-            Time = new DateTime();
+            Id = Guid.NewGuid();
+            Time =  DateTime.Now;
         }
 
         public Guid Id { get; }
