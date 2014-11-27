@@ -5,6 +5,7 @@ namespace Glimpse.Agent.Web
 {
     public class AgentRuntime : IRequestRuntime
     {
+        private readonly string _requestIdKey = "RequestId";
         private readonly IMessageAgentBus _messageBus;
 
         public AgentRuntime(IMessageAgentBus messageBus)
@@ -14,7 +15,11 @@ namespace Glimpse.Agent.Web
 
         public void Begin(IContext newContext)
         {
-            var message = new BeginRequestMessage();
+            var requestId = Guid.NewGuid();
+
+            newContext.Items.Add(_requestIdKey, requestId);
+
+            var message = new BeginRequestMessage(requestId);
 
             // TODO: Full out message more
 
@@ -23,7 +28,9 @@ namespace Glimpse.Agent.Web
 
         public void End(IContext newContext)
         {
-            var message = new EndRequestMessage();
+            var requestId = (Guid)newContext.Items[_requestIdKey];
+
+            var message = new EndRequestMessage(requestId);
 
             // TODO: Full out message more
 
