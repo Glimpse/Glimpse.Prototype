@@ -2,15 +2,17 @@
     "version": "1.0.0-*",
     "dependencies": {
         "Glimpse.Common": "",
-        "Glimpse.Agent.Common": ""
+        "Glimpse.Agent.Common": "",
+        "Microsoft.AspNet.SignalR.Client": "2.1.2"
     },
     "frameworks" : {
         "aspnet50" : { 
-            "dependencies": {
+            "dependencies": { 
             }
         },
         "aspnetcore50" : { 
             "dependencies": {
+                "System.Threading": "4.0.0-beta-22231",
                 "System.Runtime": "4.0.20-beta-22231"
             }
         }
