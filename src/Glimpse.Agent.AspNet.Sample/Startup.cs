@@ -10,7 +10,8 @@ namespace Glimpse.Agent.AspNet.Sample
         {
             services.AddGlimpse()
                 .RunningAgent()
-                .WithRemoteHttpAgent();
+                .WithRemoteStreamAgent();
+                //.WithRemoteHttpAgent();
         }
 
         public void Configure(IApplicationBuilder app)

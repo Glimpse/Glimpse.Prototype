@@ -12,7 +12,8 @@
     "dependencies": {
         "Glimpse.Host.Web.AspNet": "",
         "Glimpse.Agent.Web": "",
-        "Glimpse.Agent.Connection.Http": "",
+        "Glimpse.Agent.Connection.Stream": "",
+        //"Glimpse.Agent.Connection.Http": "",
         "Microsoft.AspNet.Server.IIS": "1.0.0-beta1",
         "Microsoft.AspNet.Diagnostics": "1.0.0-beta1"
     },
