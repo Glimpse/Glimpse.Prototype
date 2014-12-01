@@ -17,6 +17,10 @@ namespace Glimpse.Server.AspNet.Sample
         {
             app.UseGlimpse();
 
+            // TODO: Nedd to find a better way of registering this. Problem is that this
+            //       registration is aspnet5 specific.
+            app.UseSignalR("/glimpse/stream");
+
             app.UseWelcomePage();
         }
     }
