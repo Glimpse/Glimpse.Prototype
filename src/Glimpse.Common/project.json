@@ -13,6 +13,7 @@
         },
         "aspnetcore50" : { 
             "dependencies": {
+                "System.Threading": "4.0.0-beta-22231",
                 "System.Runtime": "4.0.20-beta-22231"
             }
         }
