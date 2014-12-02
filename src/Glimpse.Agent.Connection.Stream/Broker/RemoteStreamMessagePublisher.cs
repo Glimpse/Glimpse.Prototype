@@ -1,5 +1,6 @@
 ﻿using Glimpse.Agent.Connection.Stream.Connection;
 using System;
+using System.Threading.Tasks;
 
 namespace Glimpse.Agent
 {
@@ -12,11 +13,11 @@ namespace Glimpse.Agent
             _messagePublisherHub = messagePublisherHub;
         }
 
-        public override void PublishMessage(IMessage message)
+        public override async Task PublishMessage(IMessage message)
         {
             var newMessage = ConvertMessage(message);
 
-            _messagePublisherHub.UseSender(x => x.Invoke("HandleMessage", newMessage));
+            await _messagePublisherHub.UseSender(x => x.Invoke("HandleMessage", newMessage));
         } 
     }
 }

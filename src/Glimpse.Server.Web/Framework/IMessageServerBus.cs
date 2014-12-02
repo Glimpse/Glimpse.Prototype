@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Glimpse.Server
 {
@@ -13,6 +14,6 @@ namespace Glimpse.Server
         IObservable<T> ListenIncludeLatest<T>()
             where T : IMessageEnvelope;
 
-        void SendMessage(IMessageEnvelope message);
+        Task SendMessage(IMessageEnvelope message);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using System;
+using System.Threading.Tasks;
 
 namespace Glimpse.Server.Resources
 {
@@ -12,9 +13,9 @@ namespace Glimpse.Server.Resources
             _messageServerBus = messageServerBus;
         }
 
-        public void HandleMessage(MessageEnvelope envelope)
+        public async Task HandleMessage(MessageEnvelope envelope)
         {
-            _messageServerBus.SendMessage(envelope); 
+            await _messageServerBus.SendMessage(envelope); 
         }
     }
 }

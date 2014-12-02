@@ -1,5 +1,6 @@
 ﻿using Glimpse.Agent;
 using System;
+using System.Threading.Tasks;
 
 namespace Glimpse.Server
 {
@@ -12,11 +13,11 @@ namespace Glimpse.Server
             _messageBus = messageBus;
         }
 
-        public override void PublishMessage(IMessage message)
+        public override async Task PublishMessage(IMessage message)
         {
             var newMessage = ConvertMessage(message);
 
-            _messageBus.SendMessage(newMessage);
+            await _messageBus.SendMessage(newMessage);
         }
     }
 }

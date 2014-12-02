@@ -19,7 +19,7 @@ namespace Glimpse.Agent
             _subject = new BehaviorSubject<IMessage>(null);
 
             // TODO: This probably shouldn't be here but don't want to setup more infrasture atm
-            ListenAll().Subscribe(msg => currentMessagePublisher.PublishMessage(msg));
+            ListenAll().Subscribe(async msg => await currentMessagePublisher.PublishMessage(msg));
         }
 
         public IObservable<T> Listen<T>()

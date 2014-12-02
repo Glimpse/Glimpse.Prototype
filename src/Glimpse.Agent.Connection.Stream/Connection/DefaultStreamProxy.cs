@@ -54,8 +54,8 @@ namespace Glimpse.Agent.Connection.Stream.Connection
                 await task;
             }
             catch (Exception e)
-            {
-                await new Task(() => { var test = 12; });
+            { 
+                await new Task(() => { });
             }
             finally
             {

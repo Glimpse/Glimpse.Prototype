@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Glimpse.Server
 {
@@ -44,9 +45,9 @@ namespace Glimpse.Server
             return _subject;
         }
 
-        public void SendMessage(IMessageEnvelope message)
+        public async Task SendMessage(IMessageEnvelope message)
         {
-            _subject.OnNext(message);
+            await Task.Run(() => _subject.OnNext(message));
         }
     }
 }

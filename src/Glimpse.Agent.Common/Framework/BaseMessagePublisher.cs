@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Threading.Tasks;
 
 namespace Glimpse.Agent
 {
     public abstract class BaseMessagePublisher : IMessagePublisher
     {
-        public abstract void PublishMessage(IMessage message);
+        public abstract Task PublishMessage(IMessage message);
 
         protected IMessageEnvelope ConvertMessage(IMessage message)
         {
