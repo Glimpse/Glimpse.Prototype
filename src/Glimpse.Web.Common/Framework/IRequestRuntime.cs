@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Glimpse.Web
 {
     public interface IRequestRuntime
     {
-        void Begin(IContext newContext);
+        Task Begin(IContext newContext);
 
-        void End(IContext newContext);
+        Task End(IContext newContext);
     }
 }

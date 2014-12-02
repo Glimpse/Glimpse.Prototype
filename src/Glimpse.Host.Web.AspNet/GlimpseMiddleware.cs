@@ -20,7 +20,7 @@ namespace Glimpse.Host.Web.AspNet
         {
             var newContext = new HttpContext(context);
 
-            _runtime.Begin(newContext);
+            await _runtime.Begin(newContext);
 
             var handler = (IRequestHandler)null;
             if (_runtime.TryGetHandle(newContext, out handler))
@@ -32,7 +32,7 @@ namespace Glimpse.Host.Web.AspNet
                 await _innerNext(context);
             }
 
-            _runtime.End(newContext);
+            await _runtime.End(newContext);
         }
     }
 }

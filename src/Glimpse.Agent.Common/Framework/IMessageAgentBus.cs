@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Glimpse.Agent
 {
@@ -10,6 +11,6 @@ namespace Glimpse.Agent
         IObservable<T> ListenIncludeLatest<T>()
             where T : IMessage;
 
-        void SendMessage(IMessage message);
+        Task SendMessage(IMessage message);
     }
 }

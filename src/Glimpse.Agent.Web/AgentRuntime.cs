@@ -1,5 +1,6 @@
 ﻿using Glimpse.Web;
 using System;
+using System.Threading.Tasks;
 
 namespace Glimpse.Agent.Web
 {
@@ -13,7 +14,7 @@ namespace Glimpse.Agent.Web
             _messageBus = messageBus;
         }
 
-        public void Begin(IContext newContext)
+        public async Task Begin(IContext newContext)
         {
             var requestId = Guid.NewGuid();
 
@@ -23,10 +24,10 @@ namespace Glimpse.Agent.Web
 
             // TODO: Full out message more
 
-            _messageBus.SendMessage(message);
+            await _messageBus.SendMessage(message);
         }
 
-        public void End(IContext newContext)
+        public async Task End(IContext newContext)
         {
             var requestId = (Guid)newContext.Items[_requestIdKey];
 
@@ -34,7 +35,7 @@ namespace Glimpse.Agent.Web
 
             // TODO: Full out message more
 
-            _messageBus.SendMessage(message);
+            await _messageBus.SendMessage(message);
         }
     }
 }

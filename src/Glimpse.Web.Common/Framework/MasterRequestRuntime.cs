@@ -19,11 +19,11 @@ namespace Glimpse.Web
             _requestHandlers.Discover();
         }
 
-        public void Begin(IContext context)
+        public async Task Begin(IContext context)
         {
             foreach (var requestRuntime in _requestRuntimes)
             {
-                requestRuntime.Begin(context);
+                await requestRuntime.Begin(context);
             }
         }
 
@@ -43,11 +43,11 @@ namespace Glimpse.Web
             return false;
         }
 
-        public void End(IContext context)
+        public async Task End(IContext context)
         {
             foreach (var requestRuntime in _requestRuntimes)
             {
-                requestRuntime.End(context);
+                await requestRuntime.End(context);
             }
         }
     }

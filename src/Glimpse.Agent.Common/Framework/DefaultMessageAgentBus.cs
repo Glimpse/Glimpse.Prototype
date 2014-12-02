@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Glimpse.Agent
 { 
@@ -44,9 +45,9 @@ namespace Glimpse.Agent
             return _subject;
         }
 
-        public void SendMessage(IMessage message)
+        public async Task SendMessage(IMessage message)
         {
-            _subject.OnNext(message);
+            await Task.Run(() => _subject.OnNext(message));
         }
     }
 }
