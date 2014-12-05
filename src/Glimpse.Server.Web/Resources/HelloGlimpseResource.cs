@@ -3,7 +3,7 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Glimpse.Server.Web.Resources
+namespace Glimpse.Server.Resources
 {
     public class HelloGlimpseResource : IRequestHandler
     {
