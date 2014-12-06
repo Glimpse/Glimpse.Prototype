@@ -10,6 +10,7 @@ namespace Glimpse.Server
     public class DefaultMessageServerBus : IMessageServerBus
     {
         private readonly ISubject<IMessageEnvelope> _subject;
+        private readonly IMessageClientPublisher _currentMessagePublisher;
 
         // TODO: Review if we care about unifying which thread message is published on
         //       and which thread it is recieved on. If so need to use IScheduler.
@@ -17,9 +18,12 @@ namespace Glimpse.Server
         // TODO: Review how we think people will want to filter on these messages given 
         //       the lack of structure 
 
-        public DefaultMessageServerBus()
+        public DefaultMessageServerBus(IMessageClientPublisher currentMessagePublisher)
         {
             _subject = new BehaviorSubject<IMessageEnvelope>(null);
+
+            // TODO: This probably shouldn't be here but don't want to setup more infrasture atm
+            ListenAll().Subscribe(async msg => await currentMessagePublisher.PublishMessage(msg));
         }
 
         public IObservable<T> Listen<T>()
