@@ -11,7 +11,6 @@
 
     <script src="jquery-2.1.1.js"></script>
     <script src="jquery.signalr-2.1.2.js"></script>
-    <!--<script src="http://localhost:15999/glimpse/stream/hubs"></script>-->
     <script>
         var connection = $.hubConnection("http://localhost:15999/glimpse/stream", { useDefaultPath: false });
         var messageClientPublisherHubProxy = connection.createHubProxy('remoteStreamMessageClientPublisherResource');
