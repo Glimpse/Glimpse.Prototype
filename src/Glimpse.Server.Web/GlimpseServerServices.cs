@@ -21,6 +21,7 @@ namespace Glimpse
             // Broker
             //
             yield return describe.Singleton<IMessageServerBus, DefaultMessageServerBus>();
+            yield return describe.Singleton<IMessageClientPublisher, DefaultMessageClientPublisher>();
         }
 
         public static IEnumerable<IServiceDescriptor> GetPublisherServices()
