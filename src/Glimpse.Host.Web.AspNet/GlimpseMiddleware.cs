@@ -32,6 +32,7 @@ namespace Glimpse.Host.Web.AspNet
                 await _innerNext(context);
             }
 
+            // TODO: This doesn't work correctly :(
             await _runtime.End(newContext);
         }
     }
