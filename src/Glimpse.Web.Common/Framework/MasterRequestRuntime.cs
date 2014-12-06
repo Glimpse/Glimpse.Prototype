@@ -27,7 +27,6 @@ namespace Glimpse.Web
             }
         }
 
-
         public bool TryGetHandle(IContext context, out IRequestHandler handeler)
         {
             foreach (var requestHandler in _requestHandlers)
