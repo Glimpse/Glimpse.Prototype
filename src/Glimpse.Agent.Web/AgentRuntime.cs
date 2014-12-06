@@ -20,7 +20,7 @@ namespace Glimpse.Agent.Web
 
             newContext.Items.Add(_requestIdKey, requestId);
 
-            var message = new BeginRequestMessage(requestId);
+            var message = new BeginRequestMessage(requestId, newContext.Request);
 
             // TODO: Full out message more
 
@@ -31,7 +31,7 @@ namespace Glimpse.Agent.Web
         {
             var requestId = (Guid)newContext.Items[_requestIdKey];
 
-            var message = new EndRequestMessage(requestId);
+            var message = new EndRequestMessage(requestId, newContext.Request);
 
             // TODO: Full out message more
 
