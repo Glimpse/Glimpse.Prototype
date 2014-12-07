@@ -28,6 +28,11 @@ namespace Glimpse
             yield return describe.Transient(typeof(IDiscoverableCollection<>), typeof(ReflectionDiscoverableCollection<>));
 
             //
+            // Messages.
+            //
+            yield return describe.Singleton<IMessageConverter, DefaultMessageConverter>();
+
+            //
             // JSON.Net
             //
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
