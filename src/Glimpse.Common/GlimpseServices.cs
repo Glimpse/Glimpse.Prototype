@@ -1,6 +1,8 @@
 ﻿using Glimpse;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 
 namespace Glimpse
@@ -24,6 +26,14 @@ namespace Glimpse
             yield return describe.Transient<IAssemblyProvider, DefaultAssemblyProvider>();
             yield return describe.Transient<ITypeService, DefaultTypeService>();
             yield return describe.Transient(typeof(IDiscoverableCollection<>), typeof(ReflectionDiscoverableCollection<>));
+
+            //
+            // JSON.Net
+            //
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                };
         }
     }
 }
