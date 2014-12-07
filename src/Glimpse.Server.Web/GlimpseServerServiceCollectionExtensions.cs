@@ -8,16 +8,20 @@ namespace Glimpse
     {
         public static IServiceCollection RunningServer(this IServiceCollection services)
         {
+            services.Add(GlimpseServerServices.GetDefaultServices()); 
+
             UseSignalR(services, null);
 
-            return services.Add(GlimpseServerServices.GetDefaultServices());
+            return services;
         }
 
         public static IServiceCollection RunningServer(this IServiceCollection services, IConfiguration configuration)
         {
+            services.Add(GlimpseServerServices.GetDefaultServices(configuration));
+
             UseSignalR(services, configuration);
 
-            return services.Add(GlimpseServerServices.GetDefaultServices(configuration));
+            return services;
         }
 
         public static IServiceCollection WithLocalAgent(this IServiceCollection services)
