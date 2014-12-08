@@ -14,10 +14,27 @@
     <script src="./scripts/reactjs/react.js"></script>
     <script src="./scripts/reactjs/JSXTransformer.js"></script>
     <script>
+        var messageApp = (function () {
+            var messages = [];
+
+            return {
+                recieveMessage: function (data) {
+                    data.Message = JSON.parse(data.Message);
+
+                    console.log(data);
+
+                    messages.push(data);
+                }
+            }
+        })();
+    </script>
+    <script type="text/jsx">
+    </script>
+    <script>
         var connection = $.hubConnection("http://localhost:15999/glimpse/stream", { useDefaultPath: false });
         var messageClientPublisherHubProxy = connection.createHubProxy('remoteStreamMessageClientPublisherResource');
         messageClientPublisherHubProxy.on('recieveMessage', function (message) {
-            console.log(message);
+            messageApp.recieveMessage(message);
         });
         connection.start({ withCredentials: false })
             .done(function () { console.log('Now connected, connection ID=' + connection.id); })
