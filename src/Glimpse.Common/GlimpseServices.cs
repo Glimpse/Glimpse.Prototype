@@ -33,12 +33,9 @@ namespace Glimpse
             yield return describe.Singleton<IMessageConverter, DefaultMessageConverter>();
 
             //
-            // JSON.Net
+            // JSON.Net.
             //
-            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
-                {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
+            yield return describe.Singleton<JsonSerializer>(x => new JsonSerializer { ContractResolver = new CamelCasePropertyNamesContractResolver() });
         }
     }
 }
