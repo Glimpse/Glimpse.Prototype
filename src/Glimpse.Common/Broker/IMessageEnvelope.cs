@@ -6,6 +6,6 @@ namespace Glimpse
     {
         string Type { get; }
 
-        string Message { get; }
+        string Payload { get; }
     }
 }
