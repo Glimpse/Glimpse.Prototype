@@ -15,15 +15,36 @@
     <script src="./scripts/reactjs/JSXTransformer.js"></script>
     <script>
         var messageApp = (function () {
-            var messages = [];
+            var repository = (function () {
+                    var messages = [],
+                        sortMessages = function compare(a, b) {
+                            if (a.timeServer < b.timeServer) { return -1; }
+                            if (a.timeServer > b.timeServer) { return 1; }
+                            return 0;
+                        },
+                        process = function(data) {
+                            data.Message = JSON.parse(data.Message);
+
+                            var message = data.Message;
+                            if (message.time) {
+                                message.timeServer = message.time;
+                                message.time = new Date(message.time);
+                            }
+                        };
+
+                    return {
+                        insert: function (data) {
+                            process(data);
+                            messages.push(data);
+                            messages.sort(sortMessages);
+                        }
+                    }
+                })();
+
 
             return {
-                recieveMessage: function (data) {
-                    data.Message = JSON.parse(data.Message);
-
-                    console.log(data);
-
-                    messages.push(data);
+                recieveMessage: function(data) {
+                    repository.insert(data);
                 }
             }
         })();
