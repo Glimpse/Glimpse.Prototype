@@ -13,5 +13,10 @@ namespace Glimpse
         public Guid Id { get; }
 
         public DateTime Time { get; }
+
+        public long TimeLong
+        {
+            get { return Time.Ticks; }
+        }
     }
 }

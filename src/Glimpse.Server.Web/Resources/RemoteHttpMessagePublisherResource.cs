@@ -32,7 +32,7 @@ namespace Glimpse.Server.Resources
 
             response.SetHeader("Content-Type", "text/plain");
 
-            var data = Encoding.UTF8.GetBytes(envelope.Message);
+            var data = Encoding.UTF8.GetBytes(envelope.Payload);
             await response.WriteAsync(data);
             // TEST CODE ONLY!!!!
         }

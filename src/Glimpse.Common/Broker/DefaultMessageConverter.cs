@@ -19,7 +19,7 @@ namespace Glimpse
         {
             var newMessage = new MessageEnvelope();
             newMessage.Type = message.GetType().FullName;
-            newMessage.Message = Serialize(message);
+            newMessage.Payload = Serialize(message);
 
             return newMessage;
         }
