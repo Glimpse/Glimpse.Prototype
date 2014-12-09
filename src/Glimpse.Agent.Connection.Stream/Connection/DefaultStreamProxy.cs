@@ -91,6 +91,7 @@ namespace Glimpse.Agent.Connection.Stream.Connection
             }
             catch (Exception e)
             {
+                // TODO: Need to do something with the exeception
                 return null;
             }
         }
