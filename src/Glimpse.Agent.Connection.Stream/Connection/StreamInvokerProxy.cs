@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Agent.Connection.Stream.Connection
 {
-    public class StreamInvokerProxy : IStreamInvokerProxy
+    internal class StreamInvokerProxy : IStreamInvokerProxy
     {
         private readonly IHubProxy _hubProxy;
 
