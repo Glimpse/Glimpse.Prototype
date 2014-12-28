@@ -4,22 +4,27 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Agent
 {
-    public class RemoteStreamMessagePublisher : IMessagePublisher
+    public class MessagePublisher : IMessagePublisher
     {
         private readonly IMessageConverter _messageConverter;
-        private readonly IStreamProxy _messagePublisherHub;
+        private readonly IStreamHubProxyFactory _streamHubProxyFactory;
+        private IStreamHubProxy _streamHubProxy;
 
-        public RemoteStreamMessagePublisher(IStreamProxy messagePublisherHub, IMessageConverter messageConverter)
+        public MessagePublisher(IMessageConverter messageConverter, IStreamHubProxyFactory streamHubProxyFactory)
         {
-            _messagePublisherHub = messagePublisherHub;
             _messageConverter = messageConverter;
+            _streamHubProxyFactory = streamHubProxyFactory;
+            _streamHubProxyFactory.Register("RemoteStreamMessagePublisherResource", x => _streamHubProxy = x);
         }
 
         public async Task PublishMessage(IMessage message)
         {
+            // TODO: Probably not the best place to put this
+            await _streamHubProxyFactory.Start();
+
             var newMessage = _messageConverter.ConvertMessage(message);
 
-            await _messagePublisherHub.UseSender(x => x.Invoke("HandleMessage", newMessage));
-        } 
+            await _streamHubProxy.Invoke("HandleMessage", newMessage);
+        }
     }
 }

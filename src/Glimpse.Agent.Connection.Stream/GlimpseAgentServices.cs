@@ -21,12 +21,14 @@ namespace Glimpse
             //
             // Broker
             //
-            yield return describe.Singleton<IMessagePublisher, RemoteStreamMessagePublisher>();
+            //yield return describe.Singleton<IMessagePublisher, RemoteStreamMessagePublisher>();
+            yield return describe.Singleton<IMessagePublisher, MessagePublisher>();
 
             //
             // Connection
             //
-            yield return describe.Singleton<IStreamProxy, DefaultStreamProxy>();
+            //yield return describe.Singleton<IStreamProxy, DefaultStreamProxy>();
+            yield return describe.Singleton<IStreamHubProxyFactory, SignalrStreamHubProxyFactory>();
         }
     }
 }
