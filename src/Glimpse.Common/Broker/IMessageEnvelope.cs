@@ -7,5 +7,7 @@ namespace Glimpse
         string Type { get; }
 
         string Payload { get; }
+
+        IMessageContext Context { get; }
     }
 }
