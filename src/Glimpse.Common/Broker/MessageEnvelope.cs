@@ -9,6 +9,6 @@ namespace Glimpse
 
         public string Payload { get; set; }
 
-        public IMessageContext Context { get; set; }
+        public MessageContext Context { get; set; }
     }
 }

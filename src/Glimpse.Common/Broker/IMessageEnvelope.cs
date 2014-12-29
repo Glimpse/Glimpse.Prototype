@@ -8,6 +8,6 @@ namespace Glimpse
 
         string Payload { get; }
 
-        IMessageContext Context { get; }
+        MessageContext Context { get; }
     }
 }

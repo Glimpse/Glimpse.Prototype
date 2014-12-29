@@ -2,7 +2,7 @@
 
 namespace Glimpse
 {
-    public class MessageContext : IMessageContext
+    public class MessageContext 
     {
         public Guid Id { get; set; }
 
