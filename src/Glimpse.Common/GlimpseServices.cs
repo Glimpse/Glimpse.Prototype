@@ -28,6 +28,7 @@ namespace Glimpse
             yield return describe.Transient<IAssemblyProvider, DefaultAssemblyProvider>();
             yield return describe.Transient<ITypeService, DefaultTypeService>();
             yield return describe.Transient(typeof(IDiscoverableCollection<>), typeof(ReflectionDiscoverableCollection<>));
+            // TODO: consider making above singleton 
 
             //
             // Messages.
