@@ -44,9 +44,14 @@ namespace Glimpse.Host.Web.AspNet
             }
         }
 
-        public IServiceProvider ApplicationServices
+        public IServiceProvider GlobalServices
         {
             get { return _context.ApplicationServices; }
+        }
+
+        public IServiceProvider LocalServices
+        {
+            get { return _context.RequestServices; }
         }
     }
 }

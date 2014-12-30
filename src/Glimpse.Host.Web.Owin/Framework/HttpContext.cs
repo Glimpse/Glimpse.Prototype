@@ -10,14 +10,16 @@ namespace Glimpse.Host.Web.Owin
         private readonly Microsoft.Owin.IOwinContext _context;
         private readonly IHttpRequest _request;
         private readonly IHttpResponse _response;
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider _globalServices;
+        private readonly IServiceProvider _localServices;
 
-        public HttpContext(IDictionary<string, object> environement, IServiceProvider serviceProvider)
+        public HttpContext(IDictionary<string, object> environement, IServiceProvider globalServices, IServiceProvider localServices)
         {
             _context = new Microsoft.Owin.OwinContext(environement);
             _request = new HttpRequest(_context.Request);
             _response = new HttpResponse(_context.Response);
-            _serviceProvider = serviceProvider;
+            _globalServices = globalServices;
+            _localServices = localServices; 
         }
 
         public IHttpRequest Request
@@ -45,10 +47,15 @@ namespace Glimpse.Host.Web.Owin
                 return result;
             }
         }
-
-        public IServiceProvider ApplicationServices
+         
+        public IServiceProvider GlobalServices
         {
-            get { return _serviceProvider; }
+            get { return _globalServices; }
+        }
+
+        public IServiceProvider LocalServices
+        {
+            get { return _localServices; }
         }
     }
 }
