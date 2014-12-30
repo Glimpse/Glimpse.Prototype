@@ -6,12 +6,12 @@ namespace Glimpse.Server.Infrastructure
 {
     public class CorsRequestRuntime : IRequestRuntime
     {
-        public async Task Begin(IContext newContext)
+        public async Task Begin(IHttpContext newContext)
         {
             newContext.Response.SetHeader("Access-Control-Allow-Origin", "*");
         }
 
-        public async Task End(IContext newContext)
+        public async Task End(IHttpContext newContext)
         {
         }
     }

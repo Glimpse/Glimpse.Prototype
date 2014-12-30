@@ -7,12 +7,12 @@ namespace Glimpse.Server.Resources
 {
     public class HelloGlimpseResource : IRequestHandler
     {
-        public bool WillHandle(IContext context)
+        public bool WillHandle(IHttpContext context)
         {
             return context.Request.Path == "/Glimpse";
         }
 
-        public async Task Handle(IContext context)
+        public async Task Handle(IHttpContext context)
         {
             var response = context.Response;
 

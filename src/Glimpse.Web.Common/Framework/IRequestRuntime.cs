@@ -5,8 +5,8 @@ namespace Glimpse.Web
 {
     public interface IRequestRuntime
     {
-        Task Begin(IContext newContext);
+        Task Begin(IHttpContext newContext);
 
-        Task End(IContext newContext);
+        Task End(IHttpContext newContext);
     }
 }

@@ -4,7 +4,7 @@ using Glimpse.Web;
 
 namespace Glimpse.Host.Web.Owin
 {
-    public class HttpContext : IContext
+    public class HttpContext : IHttpContext
     {
         private readonly string _itemsKey = "glimpse.RequestStore";
         private readonly Microsoft.Owin.IOwinContext _context;

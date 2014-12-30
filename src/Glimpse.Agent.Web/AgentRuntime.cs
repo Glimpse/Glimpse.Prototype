@@ -21,7 +21,7 @@ namespace Glimpse.Agent.Web
             //// TODO: This is a REALLY bad place for this, not sure where else to put it
         }
 
-        public async Task Begin(IContext newContext)
+        public async Task Begin(IHttpContext newContext)
         {
             var requestId = Guid.NewGuid();
 
@@ -34,7 +34,7 @@ namespace Glimpse.Agent.Web
             await _messageBus.SendMessage(message);
         }
 
-        public async Task End(IContext newContext)
+        public async Task End(IHttpContext newContext)
         {
             var requestId = (Guid)newContext.Items[_requestIdKey];
 

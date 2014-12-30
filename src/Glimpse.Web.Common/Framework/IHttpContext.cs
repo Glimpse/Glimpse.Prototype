@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Glimpse.Web
 {
-    public interface IContext
+    public interface IHttpContext
     {
         IHttpRequest Request { get; }
 

@@ -16,12 +16,12 @@ namespace Glimpse.Server.Resources
             _messageServerBus = messageServerBus;
         }
 
-        public bool WillHandle(IContext context)
+        public bool WillHandle(IHttpContext context)
         {
             return context.Request.Path.StartsWith("/Glimpse/Agent");
         }
 
-        public async Task Handle(IContext context)
+        public async Task Handle(IHttpContext context)
         {
             var envelope = ReadMessage(context.Request);
 

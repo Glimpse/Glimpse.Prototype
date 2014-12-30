@@ -5,8 +5,8 @@ namespace Glimpse.Web
 {
     public interface IRequestHandler
     {
-        bool WillHandle(IContext context);
+        bool WillHandle(IHttpContext context);
 
-        Task Handle(IContext context);
+        Task Handle(IHttpContext context);
     }
 }

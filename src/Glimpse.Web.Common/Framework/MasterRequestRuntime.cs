@@ -19,7 +19,7 @@ namespace Glimpse.Web
             _requestHandlers.Discover();
         }
 
-        public async Task Begin(IContext context)
+        public async Task Begin(IHttpContext context)
         {
             foreach (var requestRuntime in _requestRuntimes)
             {
@@ -27,7 +27,7 @@ namespace Glimpse.Web
             }
         }
 
-        public bool TryGetHandle(IContext context, out IRequestHandler handeler)
+        public bool TryGetHandle(IHttpContext context, out IRequestHandler handeler)
         {
             foreach (var requestHandler in _requestHandlers)
             {
@@ -42,7 +42,7 @@ namespace Glimpse.Web
             return false;
         }
 
-        public async Task End(IContext context)
+        public async Task End(IHttpContext context)
         {
             foreach (var requestRuntime in _requestRuntimes)
             {
