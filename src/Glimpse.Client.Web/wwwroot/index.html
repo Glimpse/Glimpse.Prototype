@@ -78,7 +78,7 @@
                 }
             });
         
-        var RequestItem = React.createClass({
+        var ContextItem = React.createClass({
                 render: function() {
                     var request = this.props.request,
                         messages = request.messages;
@@ -86,7 +86,7 @@
                     return (
                             <div className="request-item">
                                 <div className="request-item-header">
-                                    <div className="request-item-title">{request.uri}</div>
+                                    <div className="request-item-title">{request.type}</div>
                                     <div className="request-item-id">{request.id}</div>
                                 </div> 
                                 <MessagesList messages={messages} />
@@ -95,14 +95,14 @@
                 }
             });
         
-        var RequestList = React.createClass({
+        var ContextList = React.createClass({
                 render: function() {
                     var requests = this.props.requests,
                         items = {};
 
                     for (var key in requests) {
                         var request = requests[key];
-                        items[request.id] = <RequestItem request={request} />
+                        items[request.id] = <ContextItem request={request} />
                     }
         
                     return  <div>{items}</div>;
@@ -119,8 +119,8 @@
                                 <h1>Glimpse Client</h1>
                                 Shows a list of messages that are being recieved by the client:
 
-                                <h2>Request</h2>
-                                <RequestList requests={requests} />
+                                <h2>Context</h2>
+                                <ContextList requests={requests} />
 
                                 <h2>Messages</h2>
                                 <MessagesList messages={messages} />
@@ -139,13 +139,37 @@
                             if (a.payload.timeLong > b.payload.timeLong) { return 1; }
                             return 0;
                         },
-                        processMessage = function (message) {
-                            message.type = message.Type;
-                            delete message.Type;
+                        hackPropeties = (function() {
+                            // TODO: Hack because of problem with Signalr not using correct 
+                            //       JSON.NET formatter
 
-                            message.payload = message.Payload;
-                            delete message.Payload;
+                            var adjustCasing = function(input) {
+                                    if (input.length <= 1) {
+                                        input = input.toLowerCase();
+                                    } else {
+                                        input = input.substring(0, 1).toLowerCase() + input.substring(1);
+                                    }
 
+                                    return input;
+                                },
+                                adjustValues = function (value) {
+                                    if ($.isPlainObject(value)) {
+                                        return hackPropeties(value);
+                                    }
+
+                                    return value;
+                                };
+
+                            return function(message) {
+                                    var newMessage = {}
+                                    for (var key in message) {
+                                        newMessage[adjustCasing(key)] = adjustValues(message[key]);
+                                    }
+                                    
+                                    return newMessage;
+                                };
+                        })(),
+                        processMessage = function(message) {
                             message.payload = JSON.parse(message.payload);
 
                             var payload = message.payload;
@@ -159,16 +183,18 @@
                         },
                         processRequest = function(message) {
                             var payload = message.payload,
-                                request = requests[payload.requestId];
+                                context = message.context,
+                                request = requests[context.id];
 
                             if (!request) {
                                 request = {
                                         uri: payload.uri,
-                                        id: payload.requestId,
+                                        id: context.id,
+                                        type: context.type,
                                         messages: []
                                     };
 
-                                requests[payload.requestId] = request;
+                                requests[context.id] = request;
                             }
 
                             request.messages.push(message);
@@ -177,6 +203,8 @@
 
                     return {
                         insert: function (data) {
+                            data = hackPropeties(data);
+
                             processMessage(data);
                             processRequest(data);
 

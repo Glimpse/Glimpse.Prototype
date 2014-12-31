@@ -9,15 +9,20 @@ namespace Glimpse.Host.Web.AspNet
     {
         private readonly RequestDelegate _innerNext;
         private readonly MasterRequestRuntime _runtime;
+        private readonly IContextData<MessageContext> _contextData;
 
         public GlimpseMiddleware(RequestDelegate innerNext, IServiceProvider serviceProvider)
         {
             _innerNext = innerNext;
             _runtime = new MasterRequestRuntime(serviceProvider);
+            _contextData = new ContextData<MessageContext>();
         }
 
         public async Task Invoke(Microsoft.AspNet.Http.HttpContext context)
         {
+            // TODO: This is the wrong place for this, AgentRuntime isn't garenteed to execute first
+            _contextData.Value = new MessageContext { Id = Guid.NewGuid(), Type = "Request" };
+
             var newContext = new HttpContext(context);
 
             await _runtime.Begin(newContext);

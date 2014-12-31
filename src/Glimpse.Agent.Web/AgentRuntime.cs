@@ -22,12 +22,8 @@ namespace Glimpse.Agent.Web
         }
 
         public async Task Begin(IHttpContext newContext)
-        {
-            var requestId = Guid.NewGuid();
-
-            newContext.Items.Add(_requestIdKey, requestId);
-
-            var message = new BeginRequestMessage(requestId, newContext.Request);
+        { 
+            var message = new BeginRequestMessage(Guid.Empty, newContext.Request);
 
             // TODO: Full out message more
 
@@ -35,10 +31,8 @@ namespace Glimpse.Agent.Web
         }
 
         public async Task End(IHttpContext newContext)
-        {
-            var requestId = (Guid)newContext.Items[_requestIdKey];
-
-            var message = new EndRequestMessage(requestId, newContext.Request);
+        { 
+            var message = new EndRequestMessage(Guid.Empty, newContext.Request);
 
             // TODO: Full out message more
 

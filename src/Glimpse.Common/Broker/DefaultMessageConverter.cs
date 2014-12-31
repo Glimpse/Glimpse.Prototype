@@ -9,22 +9,20 @@ namespace Glimpse
     public class DefaultMessageConverter : IMessageConverter
     {
         private readonly JsonSerializer _jsonSerializer;
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IContextData<MessageContext> _contextData;
 
-        public DefaultMessageConverter(JsonSerializer jsonSerializer, IServiceProvider serviceProvider)
+        public DefaultMessageConverter(JsonSerializer jsonSerializer, IContextData<MessageContext> contextData)
         {
             _jsonSerializer = jsonSerializer;
-            _serviceProvider = serviceProvider;
+            _contextData = contextData;
         }
 
         public IMessageEnvelope ConvertMessage(IMessage message)
-        {
-            //var context = (MessageContext)_serviceProvider.GetService(typeof(MessageContext));
-
+        { 
             var newMessage = new MessageEnvelope();
             newMessage.Type = message.GetType().FullName;
             newMessage.Payload = Serialize(message);
-            //newMessage.Context = context;
+            newMessage.Context = _contextData.Value;
             
             return newMessage;
         }

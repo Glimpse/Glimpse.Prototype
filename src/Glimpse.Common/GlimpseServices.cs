@@ -19,7 +19,7 @@ namespace Glimpse
         public static IEnumerable<IServiceDescriptor> GetDefaultServices(IConfiguration configuration)
         {
             var describe = new ServiceDescriber(configuration);
-
+            
             //
             // Discovery & Reflection.
             //
@@ -29,6 +29,11 @@ namespace Glimpse
             yield return describe.Transient<ITypeService, DefaultTypeService>();
             yield return describe.Transient(typeof(IDiscoverableCollection<>), typeof(ReflectionDiscoverableCollection<>));
             // TODO: consider making above singleton 
+
+            //
+            // Context.
+            //
+            yield return describe.Transient(typeof(IContextData<>), typeof(ContextData<>)); 
 
             //
             // Messages.
