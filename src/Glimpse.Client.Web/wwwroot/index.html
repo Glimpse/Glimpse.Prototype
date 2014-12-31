@@ -27,6 +27,15 @@
             float: right;
             font-style: italic;
         }
+        .request-item-details {
+            margin-top: 5px;
+            margin-bottom: 20px;
+            font-size: 80%;
+        }
+        .request-item-details li {
+            margin-right: 40px;
+            display: inline;
+        }
         .message-item {
             width: 100%;
         }
@@ -44,6 +53,28 @@
     <script src="./scripts/reactjs/JSXTransformer.js"></script>
 
     <script type="text/jsx">
+        var blackList = { timeServer: true, id:true, time: true, timeLong: true };
+
+        var MessagesDetails = React.createClass({
+                render: function() {
+                    var message = this.props.message,
+                        payload = message.payload,
+                        items = [];
+
+                    for (var key in payload) {
+                        if (!blackList[key]) {
+                            var value = payload[key];
+                            items.push(<li><strong>{key}:</strong> <span>{value}</span></li>);
+                        }
+                    }
+                    
+                    if (items.length > 0) {
+                        items = <tr><td colspan="3"><ul className="request-item-details">{items}</ul></td></tr>;
+                    }
+
+                    return items;
+                }
+            });
 
         var MessagesItem = React.createClass({
                 render: function() {
@@ -57,6 +88,7 @@
                                     <td>{payload.timeServer}</td>
                                     <td>{payload.id}</td>
                                 </tr>
+                                <MessagesDetails message={message} />
                             </table>
                         );
                 }
