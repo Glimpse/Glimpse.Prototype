@@ -23,7 +23,7 @@ namespace Glimpse.Agent.Web
 
         public async Task Begin(IHttpContext newContext)
         { 
-            var message = new BeginRequestMessage(Guid.Empty, newContext.Request);
+            var message = new BeginRequestMessage(newContext.Request);
 
             // TODO: Full out message more
 
@@ -32,7 +32,7 @@ namespace Glimpse.Agent.Web
 
         public async Task End(IHttpContext newContext)
         { 
-            var message = new EndRequestMessage(Guid.Empty, newContext.Request);
+            var message = new EndRequestMessage(newContext.Request);
 
             // TODO: Full out message more
 
