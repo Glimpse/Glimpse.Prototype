@@ -13,8 +13,8 @@
         "Glimpse.Host.Web.AspNet": "",
         "Glimpse.Server.Web": "",
         "Glimpse.Agent.Web": "",
-        "Microsoft.AspNet.Server.IIS": "1.0.0-beta1",
-        "Microsoft.AspNet.Diagnostics": "1.0.0-beta1"
+        "Microsoft.AspNet.Server.IIS": "1.0.0-beta2",
+        "Microsoft.AspNet.Diagnostics": "1.0.0-beta2"
     },
     "frameworks" : {
         "aspnet50" : { },
