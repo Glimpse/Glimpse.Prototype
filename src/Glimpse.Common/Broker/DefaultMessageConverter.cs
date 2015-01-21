@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Globalization;
 using System.IO;
@@ -13,6 +14,8 @@ namespace Glimpse
 
         public DefaultMessageConverter(JsonSerializer jsonSerializer, IContextData<MessageContext> contextData)
         {
+            jsonSerializer.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
             _jsonSerializer = jsonSerializer;
             _contextData = contextData;
         }

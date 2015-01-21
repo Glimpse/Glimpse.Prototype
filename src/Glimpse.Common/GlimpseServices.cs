@@ -2,7 +2,6 @@
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using System;
 using System.Reflection;
@@ -43,10 +42,7 @@ namespace Glimpse
             //
             // JSON.Net.
             //
-            yield return describe.Singleton<JsonSerializer>(x => new JsonSerializer
-                {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                });
+            yield return describe.Transient<JsonSerializer, JsonSerializer>();
         }
     }
 }
