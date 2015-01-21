@@ -48,7 +48,7 @@
     <div id="container"></div>
 
     <script src="./scripts/jquery/jquery-2.1.1.js"></script>
-    <script src="./scripts/signalr/jquery.signalR-2.1.2.js"></script>
+    <script src="./scripts/signalr/jquery.signalR-2.2.0.js"></script>
     <script src="./scripts/reactjs/react.js"></script>
     <script src="./scripts/reactjs/JSXTransformer.js"></script>
 
@@ -266,7 +266,9 @@
         });
         connection.start({ withCredentials: false })
             .done(function () { console.log('Now connected, connection ID=' + connection.id); })
-            .fail(function () { console.log('Could not connect'); });
+            .fail(function (test) {
+            	console.log('Could not connect');
+            });
     </script>
 </body>
 </html>
