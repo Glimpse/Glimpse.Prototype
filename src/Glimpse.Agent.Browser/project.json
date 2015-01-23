@@ -1,0 +1,19 @@
+﻿{
+	"version": "1.0.0-*",
+	"dependencies": {
+		"Glimpse.Web.Common": ""
+	},
+	"resources": "Resources/Embed/**/*.*",
+    "frameworks" : {
+        "aspnet50" : { 
+            "dependencies": {
+            }
+        },
+        "aspnetcore50" : { 
+            "dependencies": {
+                "System.Runtime": "4.0.20-beta-22416",
+				"System.Resources.ResourceManager": "4.0.0-beta-22416"
+            }
+        }
+    }
+}
