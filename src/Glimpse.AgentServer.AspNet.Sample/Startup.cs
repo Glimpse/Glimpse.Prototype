@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Http;
 using Glimpse.Host.Web.AspNet;
 using Microsoft.Framework.DependencyInjection;
 
-namespace Glimpse.AgentServer.AspNet.Sample
+namespace Glimpse.AspNet.Sample
 {
     public class Startup
     {
@@ -22,7 +23,18 @@ namespace Glimpse.AgentServer.AspNet.Sample
             //       registration is aspnet5 specific.
             app.UseSignalR("/glimpse/stream");
 
+            app.Use(next => new SamplePage().Invoke);
+            /*
+            app.Use(async (context, next) => {
+                        var response = context.Response;
+
+                        response.Headers.Set("Content-Type", "text/plain");
+
+                        await response.WriteAsync("TEST!");
+                    });
+            */
             app.UseWelcomePage();
+
         }
     }
 }
