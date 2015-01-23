@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Glimpse.Web
@@ -31,5 +32,7 @@ namespace Glimpse.Web
         Task WriteAsync(string text);
 
         Task WriteAsync(byte[] data);
+
+        Stream Body { get; }
     }
 }

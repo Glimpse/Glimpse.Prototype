@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
 using Glimpse.Web;
 using System;
+using System.IO;
 
 namespace Glimpse.Host.Web.AspNet
 {
@@ -81,6 +82,11 @@ namespace Glimpse.Host.Web.AspNet
         public Task WriteAsync(byte[] data)
         {
             return _response.Body.WriteAsync(data, 0, data.Length);
+        } 
+
+        public Stream Body
+        {
+            get { return _response.Body; }
         }
     }
 }

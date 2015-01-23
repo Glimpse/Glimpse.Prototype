@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Glimpse.Web;
+using System.IO;
 
 namespace Glimpse.Host.Web.Owin
 {
@@ -80,6 +81,11 @@ namespace Glimpse.Host.Web.Owin
         public Task WriteAsync(byte[] data)
         {
             return _response.Body.WriteAsync(data, 0, data.Length);
+        }
+
+        public Stream Body
+        {
+            get { return _response.Body; }
         }
     }
 }
