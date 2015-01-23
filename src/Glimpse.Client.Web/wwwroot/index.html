@@ -42,6 +42,10 @@
         .request-item-messages {
             margin: 10px 0 30px;
         }
+
+		div:target {
+			background-color: red;
+		}
     </style>
 </head>
 <body>
@@ -116,7 +120,7 @@
                         messages = request.messages;
 
                     return (
-                            <div className="request-item">
+                            <div className="request-item" id={request.id}>
                                 <div className="request-item-header">
                                     <div className="request-item-title">{request.type}</div>
                                     <div className="request-item-id">{request.id}</div>
