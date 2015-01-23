@@ -26,12 +26,12 @@ namespace Glimpse
             }
         }
 #else
-        private readonly AsyncLocal<T> _serviceProvider = new AsyncLocal<T>();
+        private readonly AsyncLocal<T> _storage = new AsyncLocal<T>();
 
-        public IServiceProvider ServiceProvider
+        public T Value
         {
-            get { return _serviceProvider.Value; }
-            set { _serviceProvider.Value = value; }
+            get { return _storage.Value; }
+            set { _storage.Value = value; }
         }
 #endif
     }
