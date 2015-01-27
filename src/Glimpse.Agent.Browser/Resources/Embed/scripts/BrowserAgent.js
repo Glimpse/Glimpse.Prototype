@@ -36,6 +36,10 @@
                     if (!message.time) {
                         message.time = getCurrentTime();
                     }
+
+                    // TODO: Probably shouldn't be here. Just not
+                    //       sure if it should be in every message
+                    message.uri = document.URL;
                 };
 
             return function(type, payload, proxy) {
