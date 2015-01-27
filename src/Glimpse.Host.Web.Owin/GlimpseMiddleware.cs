@@ -12,6 +12,7 @@ namespace Glimpse.Host.Web.Owin
         private readonly Func<IDictionary<string, object>, Task> _innerNext;
         private readonly IServiceProvider _globalServices;
         private readonly MasterRequestRuntime _runtime;
+        private readonly ISettings _settings;
         private readonly IContextData<MessageContext> _contextData;
 
         public GlimpseMiddleware(Func<IDictionary<string, object>, Task> innerNext, IServiceProvider globalServices)
@@ -26,10 +27,10 @@ namespace Glimpse.Host.Web.Owin
         {
             using (var localServiceScope = CreateLocalServiceScope())
             {
+                var newContext = new HttpContext(environment, _globalServices, localServiceScope.ServiceProvider, _settings);
+                
                 // TODO: This is the wrong place for this, AgentRuntime isn't garenteed to execute first
                 _contextData.Value = new MessageContext { Id = Guid.NewGuid(), Type = "Request" };
-
-                var newContext = new HttpContext(environment, _globalServices, localServiceScope.ServiceProvider);
 
                 await _runtime.Begin(newContext);
 

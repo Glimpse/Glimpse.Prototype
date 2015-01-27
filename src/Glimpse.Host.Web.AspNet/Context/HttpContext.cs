@@ -10,12 +10,14 @@ namespace Glimpse.Host.Web.AspNet
         private readonly Microsoft.AspNet.Http.HttpContext _context;
         private readonly IHttpRequest _request;
         private readonly IHttpResponse _response;
+        private readonly ISettings _settings;
 
-        public HttpContext(Microsoft.AspNet.Http.HttpContext context)
+        public HttpContext(Microsoft.AspNet.Http.HttpContext context, ISettings settings)
         {
             _context = context;
             _request = new HttpRequest(context.Request);
             _response = new HttpResponse(context.Response);
+            _settings = settings;
         }
 
         public IHttpRequest Request
@@ -52,6 +54,11 @@ namespace Glimpse.Host.Web.AspNet
         public IServiceProvider LocalServices
         {
             get { return _context.RequestServices; }
+        }
+
+        public ISettings Settings
+        {
+            get { return _settings; }
         }
     }
 }

@@ -7,5 +7,7 @@ namespace Glimpse
         IServiceProvider GlobalServices { get; }
 
         IServiceProvider LocalServices { get; }
+
+        ISettings Settings { get; }
     }
 }
