@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Agent.Web
 {
-    public class AgentRuntime : IRequestRuntime
+    public class AgentProfiler : IRequestProfiler
     {
         private readonly string _requestIdKey = "RequestId";
         private readonly IMessageAgentBus _messageBus;
 
-        public AgentRuntime(IMessageAgentBus messageBus, ILoggerFactory loggingFactory)
+        public AgentProfiler(IMessageAgentBus messageBus, ILoggerFactory loggingFactory)
         {
             _messageBus = messageBus;
 
