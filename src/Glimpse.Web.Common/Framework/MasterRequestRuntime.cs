@@ -12,6 +12,7 @@ namespace Glimpse.Web
 
         public MasterRequestRuntime(IServiceProvider serviceProvider)
         {
+            // TODO: Switch these over to being injected and doing the serviceProvider resolve in the middleware
             _requestRuntimes = serviceProvider.GetService<IDiscoverableCollection<IRequestRuntime>>();
             _requestRuntimes.Discover();
 
