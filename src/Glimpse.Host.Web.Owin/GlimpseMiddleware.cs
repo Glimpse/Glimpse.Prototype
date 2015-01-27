@@ -35,6 +35,7 @@ namespace Glimpse.Host.Web.Owin
             _settings = settings;
         }
 
+        // TODO: Look at pushing the workings of this into MasterRequestRuntime
         public async Task Invoke(IDictionary<string, object> environment)
         {
             using (var localServiceScope = CreateLocalServiceScope())

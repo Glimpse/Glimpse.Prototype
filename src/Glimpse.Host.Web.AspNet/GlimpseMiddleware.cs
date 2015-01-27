@@ -32,6 +32,7 @@ namespace Glimpse.Host.Web.AspNet
             _settings = settings;
         }
 
+        // TODO: Look at pushing the workings of this into MasterRequestRuntime
         public async Task Invoke(Microsoft.AspNet.Http.HttpContext context)
         {
             var newContext = new HttpContext(context, _settings);
