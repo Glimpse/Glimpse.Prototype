@@ -13,10 +13,23 @@ namespace Glimpse.Host.Web.AspNet
         private readonly IContextData<MessageContext> _contextData;
 
         public GlimpseMiddleware(RequestDelegate innerNext, IServiceProvider serviceProvider)
+            : this(innerNext, serviceProvider, null)
+        {
+        }
+
+        public GlimpseMiddleware(RequestDelegate innerNext, IServiceProvider serviceProvider, Func<IHttpContext, bool> shouldRun)
         {
             _innerNext = innerNext;
             _runtime = new MasterRequestRuntime(serviceProvider);
             _contextData = new ContextData<MessageContext>();
+
+            // TODO: Need to find a way/better place for 
+            var settings = new Settings();
+            if (shouldRun != null)
+            {
+                settings.ShouldProfile = context => shouldRun((HttpContext)context);
+            }
+            _settings = settings;
         }
 
         public async Task Invoke(Microsoft.AspNet.Http.HttpContext context)

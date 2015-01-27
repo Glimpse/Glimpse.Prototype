@@ -15,12 +15,24 @@ namespace Glimpse.Host.Web.Owin
         private readonly ISettings _settings;
         private readonly IContextData<MessageContext> _contextData;
 
-        public GlimpseMiddleware(Func<IDictionary<string, object>, Task> innerNext, IServiceProvider globalServices)
+        public GlimpseMiddleware(Func<IDictionary<string, object>, Task> innerNext, IServiceProvider serviceProvider)
+            : this(innerNext, serviceProvider, null)
+        {
+        }
+
+        public GlimpseMiddleware(Func<IDictionary<string, object>, Task> innerNext, IServiceProvider globalServices, Func<IHttpContext, bool> shouldRun)
         {
             _innerNext = innerNext;
             _globalServices = globalServices;
             _runtime = new MasterRequestRuntime(globalServices);
             _contextData = new ContextData<MessageContext>();
+
+            // TODO: Need to find a way/better place for 
+            var settings = new Settings();
+            if (shouldRun != null) {
+                settings.ShouldProfile = context => shouldRun((HttpContext)context);
+            }
+            _settings = settings;
         }
 
         public async Task Invoke(IDictionary<string, object> environment)
