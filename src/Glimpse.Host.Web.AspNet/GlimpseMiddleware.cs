@@ -39,7 +39,7 @@ namespace Glimpse.Host.Web.AspNet
                 await _innerNext(context);
             }
 
-            // TODO: This doesn't work correctly :(
+            // TODO: This doesn't work correctly :( (headers)
             await _runtime.End(newContext);
         }
     }
