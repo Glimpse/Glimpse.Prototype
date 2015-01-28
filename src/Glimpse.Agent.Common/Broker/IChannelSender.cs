@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Agent
 {
-    public interface IMessagePublisher
+    public interface IChannelSender
     {
         Task PublishMessage(IMessage message);
     }

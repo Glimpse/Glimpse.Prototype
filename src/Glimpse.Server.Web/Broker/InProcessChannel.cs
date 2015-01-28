@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Server
 {
-    public class LocalMessagePublisher : IMessagePublisher
+    public class InProcessChannel : IChannelSender
     {
-        private readonly IMessageServerBus _messageBus;
+        private readonly IServerBroker _messageBus;
         private readonly IMessageConverter _messageConverter;
 
-        public LocalMessagePublisher(IMessageServerBus messageBus, IMessageConverter messageConverter)
+        public InProcessChannel(IServerBroker messageBus, IMessageConverter messageConverter)
         {
             _messageBus = messageBus;
             _messageConverter = messageConverter;

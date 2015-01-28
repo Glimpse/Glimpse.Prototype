@@ -264,7 +264,7 @@
     </script>
     <script>
         var connection = $.hubConnection("http://localhost:15999/glimpse/stream", { useDefaultPath: false });
-        var messageClientPublisherHubProxy = connection.createHubProxy('remoteStreamMessageClientPublisherResource');
+        var messageClientPublisherHubProxy = connection.createHubProxy('webSocketClientChannelSender');
         messageClientPublisherHubProxy.on('recieveMessage', function (message) {
             messageApp.recieveMessage(message);
         });

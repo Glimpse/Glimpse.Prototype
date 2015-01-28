@@ -20,7 +20,7 @@ namespace Glimpse
             //
             // Broker
             //
-            yield return describe.Singleton<IMessageAgentBus, DefaultMessageAgentBus>();
+            yield return describe.Singleton<IAgentBroker, DefaultAgentBroker>();
         }
     }
 }

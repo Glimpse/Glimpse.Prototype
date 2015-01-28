@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Agent
 { 
-    public class DefaultMessageAgentBus : IMessageAgentBus
+    public class DefaultAgentBroker : IAgentBroker
     {
         private readonly ISubject<IMessage> _subject;
 
         // TODO: Review if we care about unifying which thread message is published on
         //       and which thread it is recieved on. If so need to use IScheduler.
 
-        public DefaultMessageAgentBus(IMessagePublisher currentMessagePublisher)
+        public DefaultAgentBroker(IChannelSender currentMessagePublisher)
         {
             _subject = new BehaviorSubject<IMessage>(null);
 

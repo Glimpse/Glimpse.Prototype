@@ -39,8 +39,7 @@ namespace Glimpse.Host.Web.AspNet
             
             // TODO: This is the wrong place for this, AgentRuntime isn't garenteed to execute first
             _contextData.Value = new MessageContext { Id = Guid.NewGuid(), Type = "Request" };
-
-
+            
             await _runtime.Begin(newContext);
 
             var handler = (IRequestHandler)null;

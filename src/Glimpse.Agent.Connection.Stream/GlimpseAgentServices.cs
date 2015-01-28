@@ -21,8 +21,8 @@ namespace Glimpse
             //
             // Broker
             //
-            //yield return describe.Singleton<IMessagePublisher, RemoteStreamMessagePublisher>();
-            yield return describe.Singleton<IMessagePublisher, MessagePublisher>();
+            //yield return describe.Singleton<IChannelSender, RemoteStreamMessagePublisher>();
+            yield return describe.Singleton<IChannelSender, WebSocketChannelSender>();
 
             //
             // Connection

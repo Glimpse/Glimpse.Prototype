@@ -6,9 +6,9 @@ namespace Glimpse.Agent
 
     public class DefaultLoggerProvider : ILoggerProvider
     {
-        private readonly IMessageAgentBus _messageBus;
+        private readonly IAgentBroker _messageBus;
 
-        public DefaultLoggerProvider(IMessageAgentBus messageBus)
+        public DefaultLoggerProvider(IAgentBroker messageBus)
         {
             _messageBus = messageBus;
         }

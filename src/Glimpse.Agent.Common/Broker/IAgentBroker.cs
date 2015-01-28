@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Agent
 {
-    public interface IMessageAgentBus
+    public interface IAgentBroker
     {
         IObservable<T> Listen<T>()
             where T : IMessage;

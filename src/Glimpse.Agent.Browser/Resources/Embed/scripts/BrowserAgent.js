@@ -63,7 +63,7 @@
 
     (function() {
         var connection = $.hubConnection("http://localhost:15999/glimpse/stream", { useDefaultPath: false });
-        var messagePublisherHubProxy = connection.createHubProxy('remoteStreamMessagePublisherResource');
+        var messagePublisherHubProxy = connection.createHubProxy('webSocketChannelReceiver');
 
         connection.start({ withCredentials: false })
             .done(function() {

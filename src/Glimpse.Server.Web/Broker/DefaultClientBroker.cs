@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Server
 {
-    public class DefaultMessageClientPublisher : IMessageClientPublisher
+    public class DefaultClientBroker : IClientBroker
     {
         private readonly IConnectionManager _connectionManager;
 
-        public DefaultMessageClientPublisher(IConnectionManager connectionManager)
+        public DefaultClientBroker(IConnectionManager connectionManager)
         {
             _connectionManager = connectionManager;
         }
@@ -18,7 +18,7 @@ namespace Glimpse.Server
         {
             return Task.Run(() =>
             {
-                var hubContext = _connectionManager.GetHubContext<RemoteStreamMessageClientPublisherResource>();
+                var hubContext = _connectionManager.GetHubContext<WebSocketClientChannelSender>();
                 hubContext.Clients.All.recieveMessage(message);
             });
         }

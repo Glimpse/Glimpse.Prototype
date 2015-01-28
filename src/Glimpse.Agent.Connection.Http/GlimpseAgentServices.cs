@@ -20,7 +20,7 @@ namespace Glimpse
             //
             // Broker
             //
-            yield return describe.Singleton<IMessagePublisher, RemoteHttpMessagePublisher>();
+            yield return describe.Singleton<IChannelSender, HttpChannelSender>();
         }
     }
 }

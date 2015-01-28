@@ -8,9 +8,9 @@ namespace Glimpse.Agent.Web
     public class AgentProfiler : IRequestProfiler
     {
         private readonly string _requestIdKey = "RequestId";
-        private readonly IMessageAgentBus _messageBus;
+        private readonly IAgentBroker _messageBus;
 
-        public AgentProfiler(IMessageAgentBus messageBus, ILoggerFactory loggingFactory)
+        public AgentProfiler(IAgentBroker messageBus, ILoggerFactory loggingFactory)
         {
             _messageBus = messageBus;
 

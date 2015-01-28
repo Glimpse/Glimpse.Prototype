@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Server.Resources
 {
-    public class RemoteStreamMessagePublisherResource : Hub // Temp dont want this to be public
+    public class WebSocketChannelReceiver : Hub // Temp dont want this to be public
     {
-        private readonly IMessageServerBus _messageServerBus;
+        private readonly IServerBroker _messageServerBus;
 
-        public RemoteStreamMessagePublisherResource(IMessageServerBus messageServerBus)
+        public WebSocketChannelReceiver(IServerBroker messageServerBus)
         {
             _messageServerBus = messageServerBus;
         }

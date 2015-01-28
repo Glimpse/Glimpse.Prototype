@@ -3,8 +3,7 @@ using System;
 
 namespace Glimpse.Server.Resources
 {
-    public class RemoteStreamMessageClientPublisherResource : Hub
+    public class WebSocketClientChannelSender : Hub
     {
-
     }
 }

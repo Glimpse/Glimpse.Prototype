@@ -20,8 +20,8 @@ namespace Glimpse
             //
             // Broker
             //
-            yield return describe.Singleton<IMessageServerBus, DefaultMessageServerBus>();
-            yield return describe.Singleton<IMessageClientPublisher, DefaultMessageClientPublisher>();
+            yield return describe.Singleton<IServerBroker, DefaultServerBroker>();
+            yield return describe.Singleton<IClientBroker, DefaultClientBroker>();
         }
 
         public static IEnumerable<IServiceDescriptor> GetPublisherServices()
@@ -36,7 +36,7 @@ namespace Glimpse
             //
             // Broker
             //
-            yield return describe.Singleton<IMessagePublisher, LocalMessagePublisher>();
+            yield return describe.Singleton<IChannelSender, InProcessChannel>();
         }
     }
 }

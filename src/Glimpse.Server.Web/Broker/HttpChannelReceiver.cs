@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Server.Resources
 {
-    public class RemoteHttpMessagePublisherResource : IRequestHandler
+    public class HttpChannelReceiver : IRequestHandler
     {
-        private readonly IMessageServerBus _messageServerBus;
+        private readonly IServerBroker _messageServerBus;
 
-        public RemoteHttpMessagePublisherResource(IMessageServerBus messageServerBus)
+        public HttpChannelReceiver(IServerBroker messageServerBus)
         {
             _messageServerBus = messageServerBus;
         }

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Server
 {
-    public class DefaultMessageServerBus : IMessageServerBus
+    public class DefaultServerBroker : IServerBroker
     {
         private readonly ISubject<IMessageEnvelope> _subject;
-        private readonly IMessageClientPublisher _currentMessagePublisher;
+        private readonly IClientBroker _currentMessagePublisher;
 
         // TODO: Review if we care about unifying which thread message is published on
         //       and which thread it is recieved on. If so need to use IScheduler.
@@ -18,7 +18,7 @@ namespace Glimpse.Server
         // TODO: Review how we think people will want to filter on these messages given 
         //       the lack of structure 
 
-        public DefaultMessageServerBus(IMessageClientPublisher currentMessagePublisher)
+        public DefaultServerBroker(IClientBroker currentMessagePublisher)
         {
             _subject = new BehaviorSubject<IMessageEnvelope>(null);
 

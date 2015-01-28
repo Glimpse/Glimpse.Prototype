@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Agent
 {
-    public class MessagePublisher : IMessagePublisher
+    public class WebSocketChannelSender : IChannelSender
     {
         private readonly IMessageConverter _messageConverter;
         private readonly IStreamHubProxyFactory _streamHubProxyFactory;
         private IStreamHubProxy _streamHubProxy;
 
-        public MessagePublisher(IMessageConverter messageConverter, IStreamHubProxyFactory streamHubProxyFactory)
+        public WebSocketChannelSender(IMessageConverter messageConverter, IStreamHubProxyFactory streamHubProxyFactory)
         {
             _messageConverter = messageConverter;
             _streamHubProxyFactory = streamHubProxyFactory;

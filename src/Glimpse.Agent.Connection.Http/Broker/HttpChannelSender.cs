@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Agent
 {
-    public class RemoteHttpMessagePublisher : IMessagePublisher, IDisposable
+    public class HttpChannelSender : IChannelSender, IDisposable
     {
         private readonly HttpClient _httpClient;
         private readonly HttpClientHandler _httpHandler;
         private readonly IMessageConverter _messageConverter;
 
-        public RemoteHttpMessagePublisher(IMessageConverter messageConverter)
+        public HttpChannelSender(IMessageConverter messageConverter)
         {
             _httpHandler = new HttpClientHandler();
             _httpClient = new HttpClient(_httpHandler);
