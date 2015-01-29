@@ -22,6 +22,11 @@ namespace Glimpse
             //
             yield return describe.Singleton<IServerBroker, DefaultServerBroker>();
             yield return describe.Singleton<IClientBroker, DefaultClientBroker>();
+
+            //
+            // Store
+            //
+            yield return describe.Singleton<IStoragePublisher, InProcessMessageStore>();
         }
 
         public static IEnumerable<IServiceDescriptor> GetPublisherServices()

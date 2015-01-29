@@ -18,12 +18,15 @@ namespace Glimpse.Server
         // TODO: Review how we think people will want to filter on these messages given 
         //       the lack of structure 
 
-        public DefaultServerBroker(IClientBroker currentMessagePublisher)
+        public DefaultServerBroker(IClientBroker currentMessagePublisher, IStoragePublisher storagePublisher)
         {
             _subject = new BehaviorSubject<IMessageEnvelope>(null);
 
             // TODO: This probably shouldn't be here but don't want to setup more infrasture atm
-            ListenAll().Subscribe(async msg => await currentMessagePublisher.PublishMessage(msg));
+            ListenAll().Subscribe(async msg => {
+                await currentMessagePublisher.PublishMessage(msg);
+                await storagePublisher.StoreMessage(msg);
+            });
         }
 
         public IObservable<T> Listen<T>()
