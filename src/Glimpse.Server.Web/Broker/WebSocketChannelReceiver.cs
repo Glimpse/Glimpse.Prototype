@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Glimpse.Server.Resources
+namespace Glimpse.Server
 {
     public class WebSocketChannelReceiver : Hub // Temp dont want this to be public
     {

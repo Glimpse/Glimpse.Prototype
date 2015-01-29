@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Glimpse.Server.Resources
+namespace Glimpse.Server
 {
     public class HttpChannelReceiver : IRequestHandler
     {
