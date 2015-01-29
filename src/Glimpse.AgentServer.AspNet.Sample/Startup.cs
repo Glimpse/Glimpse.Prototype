@@ -21,7 +21,7 @@ namespace Glimpse.AspNet.Sample
 
             // TODO: Nedd to find a better way of registering this. Problem is that this
             //       registration is aspnet5 specific.
-            app.UseSignalR("/glimpse/stream");
+            app.UseSignalR("/Glimpse/Data/Stream");
 
             app.Use(next => new SamplePage().Invoke);
             /*

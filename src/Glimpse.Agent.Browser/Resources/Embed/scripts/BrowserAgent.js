@@ -62,7 +62,7 @@
         };
 
     (function() {
-        var connection = $.hubConnection("http://localhost:15999/glimpse/stream", { useDefaultPath: false });
+        var connection = $.hubConnection("http://localhost:15999/Glimpse/Data/Stream", { useDefaultPath: false });
         var messagePublisherHubProxy = connection.createHubProxy('webSocketChannelReceiver');
 
         connection.start({ withCredentials: false })
