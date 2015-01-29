@@ -43,9 +43,9 @@
             margin: 10px 0 30px;
         }
 
-		div:target {
-			background-color: red;
-		}
+        div:target {
+            background-color: red;
+        }
     </style>
 </head>
 <body>
@@ -263,15 +263,25 @@
         })();
     </script>
     <script>
+        $(function() {
+            $.ajax("http://localhost:15999/Glimpse/Data/History")
+                .done(function(data) {
+                    for (var i = 0; i <= data.length; i++) {
+                        messageApp.recieveMessage(data[i]);
+                    }
+                }); 
+        });
+    </script>
+    <script>
         var connection = $.hubConnection("http://localhost:15999/glimpse/stream", { useDefaultPath: false });
         var messageClientPublisherHubProxy = connection.createHubProxy('webSocketClientChannelSender');
-        messageClientPublisherHubProxy.on('recieveMessage', function (message) {
+        messageClientPublisherHubProxy.on('recieveMessage', function(message) { 
             messageApp.recieveMessage(message);
         });
         connection.start({ withCredentials: false })
             .done(function () { console.log('Now connected, connection ID=' + connection.id); })
             .fail(function (test) {
-            	console.log('Could not connect');
+                console.log('Could not connect');
             });
     </script>
 </body>
