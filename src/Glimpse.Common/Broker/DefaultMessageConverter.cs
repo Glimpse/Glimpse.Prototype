@@ -26,8 +26,19 @@ namespace Glimpse
             newMessage.Type = message.GetType().FullName;
             newMessage.Payload = _jsonSerializer.Serialize(message);
             newMessage.Context = _contextData.Value;
-            
+
+            ProcessTags(message, newMessage);
+
             return newMessage;
         } 
+
+        private void ProcessTags(IMessage message, MessageEnvelope newMessage)
+        {
+            var tagMessage = message as IMessageTag;
+            if (tagMessage != null)
+            {
+                newMessage.Tags = tagMessage.Tags;
+            }
+        }
     }
 }
