@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Glimpse
 {
@@ -10,5 +11,7 @@ namespace Glimpse
         public string Payload { get; set; }
 
         public MessageContext Context { get; set; }
+
+        public IEnumerable<string> Tags { get; set; }
     }
 }
