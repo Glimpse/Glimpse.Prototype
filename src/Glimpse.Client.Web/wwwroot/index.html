@@ -23,6 +23,20 @@
             width: 50%;
             float: left;
         }
+        .request-tags {
+            clear: both;
+            margin-bottom: 10px;
+        }
+        .request-tags span {
+            float: left;
+            font-size: 125%;
+            margin-right: 10px;
+        }
+        .request-tags div {
+            float: left;
+            margin-right: 20px;
+            margin-top: 3px;
+        }
         .request-item-id {
             float: right;
             font-style: italic;
@@ -117,7 +131,17 @@
         var ContextItem = React.createClass({
                 render: function() {
                     var request = this.props.request,
-                        messages = request.messages;
+                        messages = request.messages,
+                        tags = [];
+
+                    if (request.tags.length > 0) {
+                        for (var i = 0; i < request.tags.length; i++) {
+                            tags.push(<div>{request.tags[i]}</div>);
+                        }
+                        tags = <div className="request-tags">Tags: {tags}</div>;
+                    }
+
+                    console.log(request.tags.length);
 
                     return (
                             <div className="request-item" id={request.id}>
@@ -125,6 +149,7 @@
                                     <div className="request-item-title">{request.type}</div>
                                     <div className="request-item-id">{request.id}</div>
                                 </div> 
+                                {tags}
                                 <MessagesList messages={messages} />
                             </div>
                         );
@@ -227,11 +252,18 @@
                                         uri: payload.uri,
                                         id: context.id,
                                         type: context.type,
+                                        tags: [],
                                         messages: []
                                     };
 
                                 requests[context.id] = request;
                             }
+ 
+                            if (message.tags) {
+                                for (var i = 0; i < message.tags.length; i++) {
+                                    request.tags.push(message.tags[i]);
+                                }
+                            } 
 
                             request.messages.push(message);
                             request.messages.sort(sortMessages);
