@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Glimpse;
 using Glimpse.Web;
 
 namespace Glimpse.Agent.Web
 {
-    public class EndRequestMessage : BaseMessage
+    public class EndRequestMessage : BaseMessage, IMessageTag
     {
         public EndRequestMessage(IHttpRequest request)
         {
@@ -12,5 +13,10 @@ namespace Glimpse.Agent.Web
         }
 
         public string Uri { get; }
+
+        public IEnumerable<string> Tags
+        {
+            get { return new List<string> { "Test" }; }
+        }
     }
 }
