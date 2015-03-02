@@ -298,7 +298,7 @@
         $(function() {
             $.ajax("http://localhost:15999/Glimpse/Data/History")
                 .done(function(data) {
-                    for (var i = 0; i <= data.length; i++) {
+                    for (var i = 0; i < data.length; i++) {
                         messageApp.recieveMessage(data[i]);
                     }
                 }); 
