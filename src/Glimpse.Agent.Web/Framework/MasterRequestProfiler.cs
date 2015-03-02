@@ -47,8 +47,8 @@ namespace Glimpse.Agent.Web
 
             // TODO: Hack for favicon atm. Can't be here
 
-            if (context.Request.Path.IndexOf("/Glimpse", StringComparison.InvariantCultureIgnoreCase) > -1
-                || context.Request.Path.IndexOf("favicon.ico", StringComparison.InvariantCultureIgnoreCase) > -1)
+            if (context.Request.Path.IndexOf("/Glimpse", StringComparison.OrdinalIgnoreCase) > -1
+                || context.Request.Path.IndexOf("favicon.ico", StringComparison.OrdinalIgnoreCase) > -1)
             {
                 return false;
             }
