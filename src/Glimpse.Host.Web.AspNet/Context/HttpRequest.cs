@@ -21,7 +21,12 @@ namespace Glimpse.Host.Web.AspNet
 
         public string Accept 
         {
-            get { return _request.Accept; }
+            get
+            {
+                // TODO: This needs to be fixed
+                return "";
+                //return _request.Accept;
+            }
         }
 
         public string Method
