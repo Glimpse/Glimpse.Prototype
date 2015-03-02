@@ -3,8 +3,8 @@
     "dependencies": {
         "Rx-Linq": "2.2.5", 
         "Newtonsoft.Json": "6.0.6",
-        "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta2",
-        "Microsoft.Framework.DependencyInjection": "1.0.0-beta2"
+        "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta3",
+        "Microsoft.Framework.DependencyInjection": "1.0.0-beta3"
     },
     "frameworks" : {
         "aspnet50" : { 
@@ -13,8 +13,8 @@
         },
         "aspnetcore50" : { 
             "dependencies": {
-                "System.Threading": "4.0.0-beta-22416",
-                "System.Runtime": "4.0.20-beta-22416"
+                "System.Threading": "4.0.10-beta-22605",
+                "System.Runtime": "4.0.20-beta-22605"
             }
         }
     }

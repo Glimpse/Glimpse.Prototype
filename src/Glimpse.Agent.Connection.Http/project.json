@@ -13,8 +13,7 @@
         },
         "aspnetcore50" : { 
             "dependencies": {
-                "System.Runtime": "4.0.20-beta-22416",
-                "System.Net.Http": "4.0.0-beta-22416"
+                "System.Net.Http": "4.0.0-beta-22605"
             }
         }
     }

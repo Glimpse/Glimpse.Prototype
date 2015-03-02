@@ -14,8 +14,8 @@
         "Glimpse.Agent.Web": "",
         "Glimpse.Agent.Connection.Stream": "",
         //"Glimpse.Agent.Connection.Http": "",
-        "Microsoft.AspNet.Server.IIS": "1.0.0-beta2",
-        "Microsoft.AspNet.Diagnostics": "1.0.0-beta2"
+        "Microsoft.AspNet.Server.IIS": "1.0.0-beta3",
+        "Microsoft.AspNet.Diagnostics": "1.0.0-beta3"
     },
     "frameworks" : {
         "aspnet50" : { },

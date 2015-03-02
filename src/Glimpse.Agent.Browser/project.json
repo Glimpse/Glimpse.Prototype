@@ -11,8 +11,7 @@
         },
         "aspnetcore50" : { 
             "dependencies": {
-                "System.Runtime": "4.0.20-beta-22416",
-				"System.Resources.ResourceManager": "4.0.0-beta-22416"
+				"System.Resources.ResourceManager": "4.0.0-beta-22605"
             }
         }
     }
