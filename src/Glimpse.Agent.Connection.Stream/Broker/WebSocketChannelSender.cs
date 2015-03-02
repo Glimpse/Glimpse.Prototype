@@ -14,7 +14,7 @@ namespace Glimpse.Agent
         {
             _messageConverter = messageConverter;
             _streamHubProxyFactory = streamHubProxyFactory;
-            _streamHubProxyFactory.Register("RemoteStreamMessagePublisherResource", x => _streamHubProxy = x);
+            _streamHubProxyFactory.Register("WebSocketChannelReceiver", x => _streamHubProxy = x);
         }
 
         public async Task PublishMessage(IMessage message)
