@@ -2,7 +2,8 @@
     "version": "1.0.0-*",
     "dependencies": {
         "Glimpse.Common": "",
-        "Microsoft.Framework.Logging": "1.0.0-beta3"
+		"Microsoft.Framework.Logging": "1.0.0-beta3",
+		"Microsoft.Framework.OptionsModel": "1.0.0-beta3"
     },
     "frameworks" : {
         "aspnet50" : { 
