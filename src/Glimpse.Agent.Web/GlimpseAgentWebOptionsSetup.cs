@@ -1,4 +1,5 @@
 ﻿using System;
+using Glimpse.Agent.Web.Options;
 using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse.Agent.Web
@@ -12,7 +13,8 @@ namespace Glimpse.Agent.Web
 
         public static void ConfigureGlimpseAgentWebOptions(GlimpseAgentWebOptions options)
         {
-            // TODO: Setup anything that is order dependent 
+            // Set up IgnoredUris
+            options.IgnoredUris.Add("__browserLink/requestData");
         }
     }
 }

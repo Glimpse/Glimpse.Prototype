@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Glimpse.Agent.Web.Options;
 
 namespace Glimpse.Agent.Web
 {
@@ -6,7 +9,9 @@ namespace Glimpse.Agent.Web
     {
         public GlimpseAgentWebOptions()
         {
-            // TODO: ONLY init objects here
+            IgnoredUris = new List<IgnoredUrisDescriptor>();
         }
+
+        public IList<IgnoredUrisDescriptor> IgnoredUris { get; } 
     }
 }
