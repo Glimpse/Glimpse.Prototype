@@ -12,6 +12,7 @@ namespace Glimpse.AspNet.Sample
             services.AddGlimpse()
                     .WithLocalAgent()
                     .RunningAgent()
+                        .ForWeb()
                     .RunningServer();
         }
 
