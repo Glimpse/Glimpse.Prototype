@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Server
 {
-    public class InProcessMessageStore : IStoragePublisher
+    public class InProcessMessageStore : IStorage
     {
         private readonly IList<IMessageEnvelope> _store;
 

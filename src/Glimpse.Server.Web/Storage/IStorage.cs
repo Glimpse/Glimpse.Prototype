@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Server
 {
-    public interface IStoragePublisher
+    public interface IStorage
     {
         Task StoreMessage(IMessageEnvelope message);
     }

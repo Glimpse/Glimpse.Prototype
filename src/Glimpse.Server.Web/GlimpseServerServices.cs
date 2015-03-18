@@ -26,7 +26,7 @@ namespace Glimpse
             //
             // Store
             //
-            yield return describe.Singleton<IStoragePublisher, InProcessMessageStore>();
+            yield return describe.Singleton<IStorage, InProcessMessageStore>();
         }
 
         public static IEnumerable<IServiceDescriptor> GetPublisherServices()

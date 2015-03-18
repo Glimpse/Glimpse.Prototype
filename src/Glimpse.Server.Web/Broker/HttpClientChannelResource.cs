@@ -12,7 +12,7 @@ namespace Glimpse.Server
         private readonly InProcessMessageStore _store;
         private readonly JsonSerializer _jsonSerializer;
 
-        public HttpClientChannelResource(IStoragePublisher storage, JsonSerializer jsonSerializer)
+        public HttpClientChannelResource(IStorage storage, JsonSerializer jsonSerializer)
         {
             // TODO: This hack is needed to get around signalr problem
             jsonSerializer.ContractResolver = new CamelCasePropertyNamesContractResolver();
