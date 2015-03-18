@@ -8,12 +8,18 @@ namespace Glimpse
     {
         public static IServiceCollection ForWeb(this IServiceCollection services)
         {
-            return services.Add(GlimpseAgentWebServices.GetDefaultServices());
+            return ForWeb(services, null);
         }
 
         public static IServiceCollection ForWeb(this IServiceCollection services, IConfiguration configuration)
         {
+            ConfigureDefaultServices(services, configuration);
             return services.Add(GlimpseAgentWebServices.GetDefaultServices(configuration));
+        }
+
+        private static void ConfigureDefaultServices(IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddOptions(configuration);
         }
     }
 }
