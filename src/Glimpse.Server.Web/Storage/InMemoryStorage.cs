@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Server
 {
-    public class InProcessMessageStore : IStorage
+    public class InMemoryStorage : IStorage
     {
         private readonly IList<IMessageEnvelope> _store;
 
-        public InProcessMessageStore()
+        public InMemoryStorage()
         {
             _store = new List<IMessageEnvelope>();
         }

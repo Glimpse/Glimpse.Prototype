@@ -9,7 +9,7 @@ namespace Glimpse.Server
 {
     public class HttpClientChannelResource : IRequestHandler
     {
-        private readonly InProcessMessageStore _store;
+        private readonly InMemoryStorage _store;
         private readonly JsonSerializer _jsonSerializer;
 
         public HttpClientChannelResource(IStorage storage, JsonSerializer jsonSerializer)
@@ -18,7 +18,7 @@ namespace Glimpse.Server
             jsonSerializer.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             // TODO: Really shouldn't be here 
-            _store = (InProcessMessageStore)storage;
+            _store = (InMemoryStorage)storage;
             _jsonSerializer = jsonSerializer;
         }
 
