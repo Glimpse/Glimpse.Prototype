@@ -11,10 +11,13 @@ namespace Glimpse.Agent.Web
         {
             IgnoredUris = new List<IgnoredUrisDescriptor>();
             StatusCodes = new List<IgnoredStatusCodeDescriptor>();
+            ContentTypes = new List<IgnoredContentTypeDescriptor>();
         }
 
         public IList<IgnoredUrisDescriptor> IgnoredUris { get; }
 
         public IList<IgnoredStatusCodeDescriptor> StatusCodes { get; }
+
+        public IList<IgnoredContentTypeDescriptor> ContentTypes { get; }
     }
 }
