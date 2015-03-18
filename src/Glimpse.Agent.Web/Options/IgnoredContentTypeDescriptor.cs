@@ -1,8 +1,8 @@
 ﻿namespace Glimpse.Agent.Web.Options
 {
-    public class IgnoreContentTypeDescriptor
+    public class IgnoredContentTypeDescriptor
     {
-        public IgnoreContentTypeDescriptor(string contentType)
+        public IgnoredContentTypeDescriptor(string contentType)
         {
             ContentType = contentType;
         }
