@@ -13,7 +13,7 @@ namespace Glimpse.Server
             _store = new List<IMessageEnvelope>();
         }
 
-        public async Task StoreMessage(IMessageEnvelope message)
+        public async Task Persist(IMessageEnvelope message)
         {
             await Task.Run(() => _store.Add(message));
         }

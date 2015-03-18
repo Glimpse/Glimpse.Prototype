@@ -25,7 +25,7 @@ namespace Glimpse.Server
             // TODO: This probably shouldn't be here but don't want to setup more infrasture atm
             ListenAll().Subscribe(async msg => {
                 await currentMessagePublisher.PublishMessage(msg);
-                await storage.StoreMessage(msg);
+                await storage.Persist(msg);
             });
         }
 

@@ -5,6 +5,6 @@ namespace Glimpse.Server
 {
     public interface IStorage
     {
-        Task StoreMessage(IMessageEnvelope message);
+        Task Persist(IMessageEnvelope message);
     }
 }
