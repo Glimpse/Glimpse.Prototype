@@ -25,6 +25,8 @@ namespace Glimpse
             //
             yield return describe.Transient<IConfigureOptions<GlimpseAgentWebOptions>, GlimpseAgentWebOptionsSetup>();
             yield return describe.Singleton<IIgnoredUrisProvider, DefaultIgnoredUrisProvider>();
+            yield return describe.Singleton<IIgnoredStatusCodeProvider, DefaultIgnoredStatusCodeProvider>();
+            yield return describe.Singleton<IIgnoredContentTypeProvider, DefaultIgnoredContentTypeProvider>();
         }
     }
 }
