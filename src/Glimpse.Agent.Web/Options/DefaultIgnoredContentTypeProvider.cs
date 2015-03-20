@@ -13,6 +13,6 @@ namespace Glimpse.Agent.Web.Options
             ContentTypes = contentTypes.ToList();
         }
 
-        public IReadOnlyList<IgnoredContentTypeDescriptor> ContentTypes { get; }
+        public IReadOnlyList<string> ContentTypes { get; }
     }
 }

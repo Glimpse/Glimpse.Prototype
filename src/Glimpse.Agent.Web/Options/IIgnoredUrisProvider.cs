@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Glimpse.Agent.Web.Options
 {
     public interface IIgnoredUrisProvider
     {
-        IReadOnlyList<IgnoredUrisDescriptor> IgnoredUris { get; }
+        IReadOnlyList<Regex> IgnoredUris { get; }
     }
 }

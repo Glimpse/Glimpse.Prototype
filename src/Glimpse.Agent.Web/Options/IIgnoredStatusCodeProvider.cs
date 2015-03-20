@@ -4,6 +4,6 @@ namespace Glimpse.Agent.Web.Options
 {
     public interface IIgnoredStatusCodeProvider
     {
-        IReadOnlyList<IgnoredStatusCodeDescriptor> StatusCodes { get; }
+        IReadOnlyList<int> StatusCodes { get; }
     }
 }

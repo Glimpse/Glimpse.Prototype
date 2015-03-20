@@ -13,6 +13,6 @@ namespace Glimpse.Agent.Web.Options
             StatusCodes = statusCodes.ToList();
         }
 
-        public IReadOnlyList<IgnoredStatusCodeDescriptor> StatusCodes { get; } 
+        public IReadOnlyList<int> StatusCodes { get; } 
     }
 }

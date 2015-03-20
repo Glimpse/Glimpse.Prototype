@@ -4,6 +4,6 @@ namespace Glimpse.Agent.Web.Options
 {
     public interface IIgnoredContentTypeProvider
     {
-        IReadOnlyList<IgnoredContentTypeDescriptor> ContentTypes { get; }
+        IReadOnlyList<string> ContentTypes { get; }
     }
 }

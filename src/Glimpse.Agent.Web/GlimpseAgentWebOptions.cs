@@ -9,15 +9,15 @@ namespace Glimpse.Agent.Web
     {
         public GlimpseAgentWebOptions()
         {
-            IgnoredUris = new List<IgnoredUrisDescriptor>();
-            StatusCodes = new List<IgnoredStatusCodeDescriptor>();
-            ContentTypes = new List<IgnoredContentTypeDescriptor>();
+            IgnoredUris = new List<Regex>();
+            StatusCodes = new List<int>();
+            ContentTypes = new List<string>();
         }
 
-        public IList<IgnoredUrisDescriptor> IgnoredUris { get; }
+        public IList<Regex> IgnoredUris { get; }
 
-        public IList<IgnoredStatusCodeDescriptor> StatusCodes { get; }
+        public IList<int> StatusCodes { get; }
 
-        public IList<IgnoredContentTypeDescriptor> ContentTypes { get; }
+        public IList<string> ContentTypes { get; }
     }
 }
