@@ -14,9 +14,9 @@ namespace Glimpse.Agent.Web
         public static void ConfigureGlimpseAgentWebOptions(GlimpseAgentWebOptions options)
         {
             // Set up IgnoredUris
-            options.IgnoredUris.Add("^/__browserLink/requestData");
-            options.IgnoredUris.Add("^/Glimpse");
-            options.IgnoredUris.Add("^/favicon.ico");
+            options.IgnoredUris.AddUri("^/__browserLink/requestData");
+            options.IgnoredUris.AddUri("^/Glimpse");
+            options.IgnoredUris.AddUri("^/favicon.ico");
         }
     }
 }
