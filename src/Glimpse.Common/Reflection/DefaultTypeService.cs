@@ -19,7 +19,7 @@ namespace Glimpse
 
         public IEnumerable<object> Resolve(string coreLibrary, Type targetType)
         {
-            var types = DiscoverTypes(coreLibrary, targetType);
+            var types = ResolveTypes(coreLibrary, targetType);
             var instances = _typesActivator.CreateInstances(types);
 
             return instances;
@@ -27,18 +27,50 @@ namespace Glimpse
 
         public IEnumerable<T> Resolve<T>(string coreLibrary)
         {
-            var types = DiscoverTypes(coreLibrary, typeof(T));
+            var types = ResolveTypes<T>(coreLibrary);
             var instances = _typesActivator.CreateInstances<T>(types);
 
             return instances;
         }
 
-        private IEnumerable<TypeInfo> DiscoverTypes(string coreLibrary, Type targetType)
+        public IEnumerable<object> Resolve(IEnumerable<Assembly> assemblies, Type targetType)
+        {
+            var types = ResolveTypes(assemblies, targetType);
+            var instances = _typesActivator.CreateInstances(types);
+
+            return instances;
+        }
+
+        public IEnumerable<T> Resolve<T>(IEnumerable<Assembly> assemblies)
+        {
+            var types = ResolveTypes<T>(assemblies);
+            var instances = _typesActivator.CreateInstances<T>(types);
+
+            return instances;
+        }
+
+        public IEnumerable<TypeInfo> ResolveTypes(string coreLibrary, Type targetType)
         {
             var assemblies = _assemblyProvider.GetCandidateAssemblies(coreLibrary);
+
+            return ResolveTypes(assemblies, targetType);
+        }
+
+        public IEnumerable<TypeInfo> ResolveTypes<T>(string coreLibrary)
+        {
+            return ResolveTypes(coreLibrary, typeof(T));
+        }
+
+        public IEnumerable<TypeInfo> ResolveTypes(IEnumerable<Assembly> assemblies, Type targetType)
+        {
             var types = _typeDiscovery.FindTypes(assemblies, targetType.GetTypeInfo());
 
             return types;
+        }
+
+        public IEnumerable<TypeInfo> ResolveTypes<T>(IEnumerable<Assembly> assemblies)
+        {
+            return ResolveTypes(assemblies, typeof(T));
         }
     }
 }
