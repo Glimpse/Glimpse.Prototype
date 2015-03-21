@@ -1,9 +1,10 @@
 ﻿using System;
+using Glimpse.Web;
 
 namespace Glimpse.Agent.Web
 {
     public interface IIgnoredRequestPolicy
     {
-        bool ShouldIgnore(IContext context);
+        bool ShouldIgnore(IHttpContext context);
     }
 }
