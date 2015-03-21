@@ -10,7 +10,7 @@ namespace Glimpse.Agent.Web.Framework
 
         public StatusCodeIgnoredRequestPolicy(IOptions<GlimpseAgentWebOptions> optionsAccessor)
         {
-            _statusCodes = optionsAccessor.Options.StatusCodes;
+            _statusCodes = optionsAccessor.Options.IgnoredStatusCodes;
         }
 
         public bool ShouldIgnore(IHttpContext context)

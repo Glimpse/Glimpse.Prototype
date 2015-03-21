@@ -10,14 +10,14 @@ namespace Glimpse.Agent.Web
         public GlimpseAgentWebOptions()
         {
             IgnoredUris = new List<Regex>();
-            StatusCodes = new List<int>();
-            ContentTypes = new List<string>();
+            IgnoredStatusCodes = new List<int>();
+            IgnoredContentTypes = new List<string>();
         }
 
         public IList<Regex> IgnoredUris { get; }
 
-        public IList<int> StatusCodes { get; }
+        public IList<int> IgnoredStatusCodes { get; }
 
-        public IList<string> ContentTypes { get; }
+        public IList<string> IgnoredContentTypes { get; }
     }
 }

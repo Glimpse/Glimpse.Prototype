@@ -9,7 +9,7 @@ namespace Glimpse.Agent.Web.Options
     {
         public DefaultIgnoredStatusCodeProvider(IOptions<GlimpseAgentWebOptions> optionsAccessor)
         {
-            var statusCodes = optionsAccessor.Options.StatusCodes;
+            var statusCodes = optionsAccessor.Options.IgnoredStatusCodes;
             StatusCodes = statusCodes.ToList();
         }
 

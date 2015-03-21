@@ -10,7 +10,7 @@ namespace Glimpse.Agent.Web.Framework
 
         public ContentTypeIgnoredRequestPolicy(IOptions<GlimpseAgentWebOptions> optionsAccessor)
         {
-            _contextType = optionsAccessor.Options.ContentTypes;
+            _contextType = optionsAccessor.Options.IgnoredContentTypes;
         }
 
         public bool ShouldIgnore(IHttpContext context)
