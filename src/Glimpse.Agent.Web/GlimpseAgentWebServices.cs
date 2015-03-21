@@ -27,6 +27,7 @@ namespace Glimpse
             yield return describe.Singleton<IIgnoredUrisProvider, DefaultIgnoredUrisProvider>();
             yield return describe.Singleton<IIgnoredStatusCodeProvider, DefaultIgnoredStatusCodeProvider>();
             yield return describe.Singleton<IIgnoredContentTypeProvider, DefaultIgnoredContentTypeProvider>();
+            yield return describe.Singleton<IIgnoredRequestProvider, DefaultIgnoredRequestProvider>();
         }
     }
 }
