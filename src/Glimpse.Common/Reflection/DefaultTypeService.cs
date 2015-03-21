@@ -9,14 +9,30 @@ namespace Glimpse
         private readonly ITypeActivator _typesActivator;
         private readonly ITypeSelector _typeDiscovery;
         private readonly IAssemblyProvider _assemblyProvider;
+        private readonly string _defaultLibrary;
 
         public DefaultTypeService(ITypeActivator typesActivator, ITypeSelector typeDiscovery, IAssemblyProvider assemblyProvider)
+            : this(typesActivator, typeDiscovery, assemblyProvider, "Glimpse.Common")
+        { 
+        }
+
+        public DefaultTypeService(ITypeActivator typesActivator, ITypeSelector typeDiscovery, IAssemblyProvider assemblyProvider, string defaultLibrary)
         {
             _typesActivator = typesActivator;
             _typeDiscovery = typeDiscovery;
             _assemblyProvider = assemblyProvider;
         }
+        
+        public IEnumerable<object> Resolve(Type targetType)
+        {
+            return Resolve(_defaultLibrary, targetType);
+        }
 
+        public IEnumerable<T> Resolve<T>()
+        {
+            return Resolve<T>(_defaultLibrary);
+        }
+        
         public IEnumerable<object> Resolve(string coreLibrary, Type targetType)
         {
             var types = ResolveTypes(coreLibrary, targetType);
@@ -47,6 +63,16 @@ namespace Glimpse
             var instances = _typesActivator.CreateInstances<T>(types);
 
             return instances;
+        }
+
+        public IEnumerable<TypeInfo> ResolveTypes(Type targetType)
+        {
+            return ResolveTypes(_defaultLibrary, targetType);
+        }
+
+        public IEnumerable<TypeInfo> ResolveTypes<T>()
+        {
+            return ResolveTypes<T>(_defaultLibrary);
         }
 
         public IEnumerable<TypeInfo> ResolveTypes(string coreLibrary, Type targetType)
