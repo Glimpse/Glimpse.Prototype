@@ -2,8 +2,8 @@
 
 namespace Glimpse.Agent.Web
 {
-    public class IIgnoredRequestPolicy
+    public interface IIgnoredRequestPolicy
     {
-
+        bool ShouldIgnore(IContext context);
     }
 }
