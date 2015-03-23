@@ -11,7 +11,8 @@ namespace Glimpse.Agent.Web.Options
         private readonly ITypeService _typeService;
 
         public DefaultIgnoredRequestProvider(ITypeService typeService)
-        { 
+        {
+            _typeService = typeService;
         }
 
         public IEnumerable<IIgnoredRequestPolicy> Policies
