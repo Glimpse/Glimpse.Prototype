@@ -8,5 +8,9 @@ namespace Glimpse.Web
         { 
             return $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}";
         }
+        public static string UriAbsolute(this IHttpRequest request)
+        {
+            return $"{request.Path}{request.QueryString}";
+        }
     }
 }
