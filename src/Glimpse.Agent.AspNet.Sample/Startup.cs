@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Builder;
+﻿using Glimpse.Agent.Web;
+using Microsoft.AspNet.Builder;
 using Glimpse.Host.Web.AspNet;
 using Microsoft.Framework.DependencyInjection;
 
@@ -11,6 +12,10 @@ namespace Glimpse.Agent.AspNet.Sample
             services.AddGlimpse()
                 .RunningAgent()
                     .ForWeb()
+                        .Configure<GlimpseAgentWebOptions>(options =>
+                        {
+                            //options.IgnoredStatusCodes.Add(200);
+                        })
                 .WithRemoteStreamAgent();
                 //.WithRemoteHttpAgent();
         }
