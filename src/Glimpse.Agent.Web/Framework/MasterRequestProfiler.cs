@@ -57,29 +57,5 @@ namespace Glimpse.Agent.Web
 
             return true;
         }
-        
-        public bool ShouldProfileOld(IHttpContext context)
-        {
-            // TODO: confirm that we want on by default. I'm
-            //       thinking yes since they can easily exclude
-            //       Glimpse middleware if they want.
-
-            // TODO: Propbably should be hardcoded to ignore
-            //       own requests here.
-
-            // TODO: Hack for favicon atm. Can't be here
-
-            if (context.Request.Path.IndexOf("/Glimpse", StringComparison.OrdinalIgnoreCase) > -1
-                || context.Request.Path.IndexOf("favicon.ico", StringComparison.OrdinalIgnoreCase) > -1)
-            {
-                return false;
-            }
-            else if (context.Settings.ShouldProfile != null)
-            {
-                return context.Settings.ShouldProfile(context);
-            }
-
-            return true;
-        }
     }
 }
