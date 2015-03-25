@@ -11,6 +11,6 @@ namespace Glimpse.Server.Options
             AllowRemote = optionsAccessor.Options.AllowRemote; 
         }
         
-        public bool AllowRemote { get; private set; }
+        public bool AllowRemote { get; }
     }
 }
