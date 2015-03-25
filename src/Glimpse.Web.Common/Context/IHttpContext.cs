@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace Glimpse.Web
 {
@@ -9,6 +10,8 @@ namespace Glimpse.Web
 
         IHttpResponse Response { get; }
 
-        IDictionary<string, object> Items { get; } 
+        IDictionary<string, object> Items { get; }
+
+        ClaimsPrincipal User { get; }
     }
 }

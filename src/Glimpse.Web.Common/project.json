@@ -3,7 +3,7 @@
     "dependencies": {
         "Glimpse.Common": "",
         "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta3",
-        "Microsoft.Framework.DependencyInjection": "1.0.0-beta3"
+		"Microsoft.Framework.DependencyInjection": "1.0.0-beta3"
     },
     "frameworks": {
         "aspnet50": {
@@ -12,6 +12,7 @@
         },
         "aspnetcore50": {
             "dependencies": { 
+				"System.Security.Claims": "4.0.0-beta-22605"
             }
         }
     }

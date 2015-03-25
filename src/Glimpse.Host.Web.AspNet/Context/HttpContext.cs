@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using Glimpse.Web;
 
 namespace Glimpse.Host.Web.AspNet
@@ -44,6 +45,11 @@ namespace Glimpse.Host.Web.AspNet
 
                 return result;
             }
+        }
+        
+        public ClaimsPrincipal User
+        {
+            get { return _context.User; }
         }
 
         public IServiceProvider GlobalServices

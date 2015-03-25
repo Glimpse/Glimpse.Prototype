@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using Glimpse.Web;
 
 namespace Glimpse.Host.Web.Owin
@@ -49,7 +50,12 @@ namespace Glimpse.Host.Web.Owin
                 return result;
             }
         }
-         
+
+        public ClaimsPrincipal User
+        {
+            get { return _context.Authentication.User; }
+        }
+        
         public IServiceProvider GlobalServices
         {
             get { return _globalServices; }
