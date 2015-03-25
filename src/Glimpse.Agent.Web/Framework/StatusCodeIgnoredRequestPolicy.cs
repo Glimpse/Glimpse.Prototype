@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Glimpse.Agent.Web.Options;
 using Glimpse.Web;
 using Microsoft.Framework.OptionsModel;
 
@@ -6,11 +8,11 @@ namespace Glimpse.Agent.Web.Framework
 {
     public class StatusCodeIgnoredRequestPolicy : IIgnoredRequestPolicy
     {
-        private readonly IList<int> _statusCodes;
+        private readonly IReadOnlyCollection<int> _statusCodes;
 
-        public StatusCodeIgnoredRequestPolicy(IOptions<GlimpseAgentWebOptions> optionsAccessor)
+        public StatusCodeIgnoredRequestPolicy(IIgnoredStatusCodeProvider ignoredStatusCodeProvider)
         {
-            _statusCodes = optionsAccessor.Options.IgnoredStatusCodes;
+            _statusCodes = ignoredStatusCodeProvider.StatusCodes;
         }
 
         public bool ShouldIgnore(IHttpContext context)

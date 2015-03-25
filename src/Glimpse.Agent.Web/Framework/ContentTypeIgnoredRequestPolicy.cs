@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Glimpse.Agent.Web.Options;
 using Glimpse.Web;
 using Microsoft.Framework.OptionsModel;
 
@@ -6,11 +8,11 @@ namespace Glimpse.Agent.Web.Framework
 {
     public class ContentTypeIgnoredRequestPolicy : IIgnoredRequestPolicy
     {
-        private readonly IList<string> _contextType;
+        private readonly IReadOnlyCollection<string> _contextType;
 
-        public ContentTypeIgnoredRequestPolicy(IOptions<GlimpseAgentWebOptions> optionsAccessor)
+        public ContentTypeIgnoredRequestPolicy(IIgnoredContentTypeProvider ignoredContentTypeProvider)
         {
-            _contextType = optionsAccessor.Options.IgnoredContentTypes;
+            _contextType = ignoredContentTypeProvider.ContentTypes;
         }
 
         public bool ShouldIgnore(IHttpContext context)

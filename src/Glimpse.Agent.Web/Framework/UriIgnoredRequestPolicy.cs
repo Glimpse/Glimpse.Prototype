@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Glimpse.Agent.Web.Options;
 using Glimpse.Web;
 using Microsoft.Framework.OptionsModel;
 
@@ -9,11 +10,11 @@ namespace Glimpse.Agent.Web.Framework
 {
     public class UriIgnoredRequestPolicy : IIgnoredRequestPolicy
     {
-        private readonly IList<Regex> _ignoredUris;
+        private readonly IReadOnlyCollection<Regex> _ignoredUris;
 
-        public UriIgnoredRequestPolicy(IOptions<GlimpseAgentWebOptions> optionsAccessor)
+        public UriIgnoredRequestPolicy(IIgnoredUrisProvider ignoredUrisProvider)
         {
-            _ignoredUris = optionsAccessor.Options.IgnoredUris;
+            _ignoredUris = ignoredUrisProvider.IgnoredUris;
         }
 
         public bool ShouldIgnore(IHttpContext context)
