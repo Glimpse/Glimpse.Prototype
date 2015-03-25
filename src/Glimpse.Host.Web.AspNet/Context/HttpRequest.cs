@@ -39,24 +39,12 @@ namespace Glimpse.Host.Web.AspNet
 
         public string RemoteIpAddress
         {
-            get
-            {
-                //return _request.RemoteIpAddress;
-
-                // TODO: Need to fix
-                throw new NotImplementedException("Not supported yet");
-            }
+            get { return _connectionFeature.RemoteIpAddress.ToString(); }
         }
 
         public int? RemotePort
         {
-            get
-            {
-                //return _request.RemotePort;
-
-                // TODO: Need to fix
-                throw new NotImplementedException("Not supported yet");
-            }
+            get { return _connectionFeature.RemotePort; }
         }
 
         public bool IsLocal
