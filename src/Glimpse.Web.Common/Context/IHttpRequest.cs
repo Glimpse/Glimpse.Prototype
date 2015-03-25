@@ -16,6 +16,8 @@ namespace Glimpse.Web
 
         int? RemotePort { get; }
 
+        bool IsLocal { get; }
+
         string Scheme { get; }
 
         string Host { get; }
