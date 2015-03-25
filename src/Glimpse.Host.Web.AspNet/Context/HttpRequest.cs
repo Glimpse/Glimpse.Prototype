@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using Glimpse.Web;
 using System.IO;
+using Microsoft.AspNet.Http.Interfaces;
 
 namespace Glimpse.Host.Web.AspNet
 {
     public class HttpRequest : IHttpRequest
     {
         private readonly Microsoft.AspNet.Http.HttpRequest _request;
+        private readonly IHttpConnectionFeature _connectionFeature;
 
-        public HttpRequest(Microsoft.AspNet.Http.HttpRequest request)
+        public HttpRequest(Microsoft.AspNet.Http.HttpRequest request, IHttpConnectionFeature connectionFeature)
         {
             _request = request;
+            _connectionFeature = connectionFeature;
         }
 
         public Stream Body
@@ -54,6 +57,11 @@ namespace Glimpse.Host.Web.AspNet
                 // TODO: Need to fix
                 throw new NotImplementedException("Not supported yet");
             }
+        }
+
+        public bool IsLocal
+        {
+            get { return _connectionFeature.IsLocal; }
         }
 
         public string Scheme

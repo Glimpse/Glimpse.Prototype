@@ -39,6 +39,11 @@ namespace Glimpse.Host.Web.Owin
             get { return _request.RemotePort; }
         }
 
+        public bool IsLocal
+        {
+            get { throw new NotImplementedException("Not supported yet"); }
+        }
+
         public string Scheme
         {
             get { return _request.Scheme; }
