@@ -4,7 +4,7 @@ using Glimpse.Web;
 
 namespace Glimpse.Server.Framework
 {
-    public class AllowRemoteSecureRequestPolicy : ISecureRequestPolicy
+    public class AllowRemoteSecureRequestPolicy : IRequestAuthorizer
     {
         private readonly IAllowRemoteProvider _allowRemoteProvider;
 

@@ -7,16 +7,14 @@ namespace Glimpse
     public static class GlimpseServerServiceCollectionExtensions
     {
         public static IServiceCollection RunningServer(this IServiceCollection services)
-        {
-            services.Add(GlimpseServerServices.GetDefaultServices()); 
-
-            UseSignalR(services, null);
-
-            return services;
+        {  
+            return RunningServer(services, null);
         }
 
         public static IServiceCollection RunningServer(this IServiceCollection services, IConfiguration configuration)
         {
+            ConfigureDefaultServices(services, configuration);
+
             services.Add(GlimpseServerServices.GetDefaultServices(configuration));
 
             UseSignalR(services, configuration);
@@ -26,7 +24,7 @@ namespace Glimpse
 
         public static IServiceCollection WithLocalAgent(this IServiceCollection services)
         {
-            return services.Add(GlimpseServerServices.GetPublisherServices());
+            return WithLocalAgent(services, null);
         }
 
         public static IServiceCollection WithLocalAgent(this IServiceCollection services, IConfiguration configuration)
@@ -42,6 +40,11 @@ namespace Glimpse
                 {
                     options.Hubs.EnableDetailedErrors = true;
                 });
+        }
+
+        private static void ConfigureDefaultServices(IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddOptions(configuration);
         }
     }
 }
