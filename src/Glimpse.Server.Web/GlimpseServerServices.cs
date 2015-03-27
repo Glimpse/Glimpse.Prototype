@@ -3,6 +3,8 @@ using Glimpse.Server;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using System.Collections.Generic;
+using Glimpse.Server.Options;
+using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse
 {
@@ -10,7 +12,7 @@ namespace Glimpse
     {
         public static IEnumerable<IServiceDescriptor> GetDefaultServices()
         {
-            return GetDefaultServices(new Configuration());
+            return GetDefaultServices(null);
         }
 
         public static IEnumerable<IServiceDescriptor> GetDefaultServices(IConfiguration configuration)
@@ -27,6 +29,12 @@ namespace Glimpse
             // Store
             //
             yield return describe.Singleton<IStorage, InMemoryStorage>();
+
+            //
+            // Options
+            //
+            yield return describe.Transient<IConfigureOptions<GlimpseServerWebOptions>, GlimpseServerWebOptionsSetup>();
+            yield return describe.Singleton<IAllowRemoteProvider, DefaultAllowRemoteProvider>();
         }
 
         public static IEnumerable<IServiceDescriptor> GetPublisherServices()
