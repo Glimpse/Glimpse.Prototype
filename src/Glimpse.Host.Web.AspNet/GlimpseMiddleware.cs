@@ -36,24 +36,31 @@ namespace Glimpse.Host.Web.AspNet
         public async Task Invoke(Microsoft.AspNet.Http.HttpContext context)
         {
             var newContext = new HttpContext(context, _settings);
-            
-            // TODO: This is the wrong place for this, AgentRuntime isn't garenteed to execute first
-            _contextData.Value = new MessageContext { Id = Guid.NewGuid(), Type = "Request" };
-            
-            await _runtime.Begin(newContext);
 
-            var handler = (IRequestHandler)null;
-            if (_runtime.TryGetHandle(newContext, out handler))
+            if (_runtime.Authorized(newContext))
             {
-                await handler.Handle(newContext);
+                // TODO: This is the wrong place for this, AgentRuntime isn't garenteed to execute first
+                _contextData.Value = new MessageContext {Id = Guid.NewGuid(), Type = "Request"};
+
+                await _runtime.Begin(newContext);
+
+                var handler = (IRequestHandler) null;
+                if (_runtime.TryGetHandle(newContext, out handler))
+                {
+                    await handler.Handle(newContext);
+                }
+                else
+                {
+                    await _innerNext(context);
+                }
+
+                // TODO: This doesn't work correctly :( (headers)
+                await _runtime.End(newContext);
             }
             else
             {
                 await _innerNext(context);
             }
-
-            // TODO: This doesn't work correctly :( (headers)
-            await _runtime.End(newContext);
         }
     }
 }
