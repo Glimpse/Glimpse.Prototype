@@ -41,23 +41,30 @@ namespace Glimpse.Host.Web.Owin
             using (var localServiceScope = CreateLocalServiceScope())
             {
                 var newContext = new HttpContext(environment, _globalServices, localServiceScope.ServiceProvider, _settings);
-                
-                // TODO: This is the wrong place for this, AgentRuntime isn't garenteed to execute first
-                _contextData.Value = new MessageContext { Id = Guid.NewGuid(), Type = "Request" };
 
-                await _runtime.Begin(newContext);
-
-                var handler = (IRequestHandler)null;
-                if (_runtime.TryGetHandle(newContext, out handler))
+                if (_runtime.Authorized(newContext))
                 {
-                    await handler.Handle(newContext);
+                    // TODO: This is the wrong place for this, AgentRuntime isn't garenteed to execute first
+                    _contextData.Value = new MessageContext {Id = Guid.NewGuid(), Type = "Request"};
+
+                    await _runtime.Begin(newContext);
+
+                    var handler = (IRequestHandler) null;
+                    if (_runtime.TryGetHandle(newContext, out handler))
+                    {
+                        await handler.Handle(newContext);
+                    }
+                    else
+                    {
+                        await _innerNext(environment);
+                    }
+
+                    await _runtime.End(newContext);
                 }
                 else
                 {
                     await _innerNext(environment);
                 }
-
-                await _runtime.End(newContext);
             }
         }
 
