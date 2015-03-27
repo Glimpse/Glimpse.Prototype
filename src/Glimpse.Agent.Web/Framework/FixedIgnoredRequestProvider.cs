@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Glimpse.Agent.Web.Options
+namespace Glimpse.Agent.Web
 {
     public class FixedIgnoredRequestProvider : IIgnoredRequestProvider
     {

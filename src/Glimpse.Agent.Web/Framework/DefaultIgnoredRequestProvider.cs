@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Remoting.Messaging;
+using System.Linq; 
 
-namespace Glimpse.Agent.Web.Options
+namespace Glimpse.Agent.Web
 {
     public class DefaultIgnoredRequestProvider : IIgnoredRequestProvider
     {
