@@ -22,9 +22,11 @@ namespace Glimpse.Host.Web.Owin
 
         public GlimpseMiddleware(Func<IDictionary<string, object>, Task> innerNext, IServiceProvider globalServices, Func<IHttpContext, bool> shouldRun)
         {
+            var typeActivator = globalServices.GetService<ITypeActivator>();
+             
             _innerNext = innerNext;
             _globalServices = globalServices;
-            _runtime = new MasterRequestRuntime(globalServices);
+            _runtime = typeActivator.CreateInstance<MasterRequestRuntime>();
             _contextData = new ContextData<MessageContext>();
 
             // TODO: Need to find a way/better place for 

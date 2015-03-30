@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Builder;
 using Glimpse.Web;
 using System;
+using Microsoft.Framework.DependencyInjection;
 
 namespace Glimpse.Host.Web.AspNet
 {
@@ -20,7 +21,10 @@ namespace Glimpse.Host.Web.AspNet
         public GlimpseMiddleware(RequestDelegate innerNext, IServiceProvider serviceProvider, Func<IHttpContext, bool> shouldRun)
         {
             _innerNext = innerNext;
-            _runtime = new MasterRequestRuntime(serviceProvider);
+
+            var typeActivator = serviceProvider.GetService<ITypeActivator>();
+
+            _runtime = typeActivator.CreateInstance<MasterRequestRuntime>(); 
             _contextData = new ContextData<MessageContext>();
 
             // TODO: Need to find a way/better place for 

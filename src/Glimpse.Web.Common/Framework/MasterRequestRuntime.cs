@@ -11,16 +11,15 @@ namespace Glimpse.Web
         private readonly IDiscoverableCollection<IRequestHandler> _requestHandlers;
         private readonly IDiscoverableCollection<IRequestAuthorizer> _requestAuthorizers;
 
-        public MasterRequestRuntime(IServiceProvider serviceProvider)
+        public MasterRequestRuntime(IDiscoverableCollection<IRequestAuthorizer> requestAuthorizers, IDiscoverableCollection<IRequestRuntime> requestRuntimes, IDiscoverableCollection<IRequestHandler> requestHandlers)
         {
-            // TODO: Switch these over to being injected and doing the serviceProvider resolve in the middleware
-            _requestAuthorizers = serviceProvider.GetService<IDiscoverableCollection<IRequestAuthorizer>>();
+            _requestAuthorizers = requestAuthorizers;
             _requestAuthorizers.Discover();
 
-            _requestRuntimes = serviceProvider.GetService<IDiscoverableCollection<IRequestRuntime>>();
+            _requestRuntimes = requestRuntimes;
             _requestRuntimes.Discover();
 
-            _requestHandlers = serviceProvider.GetService<IDiscoverableCollection<IRequestHandler>>();
+            _requestHandlers = requestHandlers;
             _requestHandlers.Discover();
         }
 
