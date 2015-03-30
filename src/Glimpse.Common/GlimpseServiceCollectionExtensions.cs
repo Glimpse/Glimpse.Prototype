@@ -6,14 +6,11 @@ namespace Glimpse
 {
     public static class GlimpseServiceCollectionExtensions
     {
-        public static IServiceCollection AddGlimpse(this IServiceCollection services)
+        public static GlimpseServiceCollectionBuilder AddGlimpse(this IServiceCollection services)
         {
-            return services.Add(GlimpseServices.GetDefaultServices());
-        }
+            services.TryAdd(GlimpseServices.GetDefaultServices());
 
-        public static IServiceCollection AddGlimpse(this IServiceCollection services, IConfiguration configuration)
-        {
-            return services.Add(GlimpseServices.GetDefaultServices(configuration));
-        }
+            return new GlimpseServiceCollectionBuilder(services);
+        } 
     }
 }

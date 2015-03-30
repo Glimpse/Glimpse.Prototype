@@ -10,12 +10,13 @@ namespace Glimpse.AgentServer.Owin.Sample
         public void Configuration(IAppBuilder app)
         {
             var serviceDescriptors = new ServiceCollection();
+            /*
             serviceDescriptors.AddGlimpse()
                     .WithLocalAgent()
                     .RunningAgent()
                         .ForWeb()
                     .RunningServer();
-
+            */
             var serviceProvider = serviceDescriptors.BuildServiceProvider();
 
             app.Use<GlimpseMiddleware>(serviceProvider);

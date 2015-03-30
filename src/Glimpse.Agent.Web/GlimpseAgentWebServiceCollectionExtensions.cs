@@ -1,25 +1,33 @@
 ﻿using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using System;
+using Glimpse.Agent.Web;
 
 namespace Glimpse
 {
     public static class GlimpseAgentWebServiceCollectionExtensions
     {
-        public static IServiceCollection ForWeb(this IServiceCollection services)
+        public static GlimpseAgentServiceCollectionBuilder RunningAgentWeb(this GlimpseServiceCollectionBuilder services)
+        { 
+            ConfigureDefaultServices(services);
+
+            services.TryAdd(GlimpseAgentServices.GetDefaultServices());
+            services.TryAdd(GlimpseWebServices.GetDefaultServices());
+            services.TryAdd(GlimpseAgentWebServices.GetDefaultServices());
+
+            return new GlimpseAgentServiceCollectionBuilder(services);
+        }
+         
+        public static GlimpseAgentServiceCollectionBuilder ConfigureAgentWeb(this GlimpseAgentServiceCollectionBuilder services, Action<GlimpseAgentWebOptions> setupAction)
         {
-            return ForWeb(services, null);
+            services.Configure(setupAction);
+
+            return services;
         }
 
-        public static IServiceCollection ForWeb(this IServiceCollection services, IConfiguration configuration)
+        private static void ConfigureDefaultServices(IServiceCollection services)
         {
-            ConfigureDefaultServices(services, configuration);
-            return services.Add(GlimpseAgentWebServices.GetDefaultServices(configuration));
-        }
-
-        private static void ConfigureDefaultServices(IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddOptions(configuration);
+            services.AddOptions();
         }
     }
 }

@@ -11,23 +11,20 @@ namespace Glimpse
 {
     public class GlimpseAgentWebServices
     {
-        public static IEnumerable<IServiceDescriptor> GetDefaultServices()
+        public static IServiceCollection GetDefaultServices()
         {
-            return GetDefaultServices(null);
-        }
-
-        public static IEnumerable<IServiceDescriptor> GetDefaultServices(IConfiguration configuration)
-        {
-            var describe = new ServiceDescriber(configuration);
+            var services = new ServiceCollection();
 
             //
             // Options
             //
-            yield return describe.Transient<IConfigureOptions<GlimpseAgentWebOptions>, GlimpseAgentWebOptionsSetup>();
-            yield return describe.Singleton<IIgnoredUrisProvider, DefaultIgnoredUrisProvider>();
-            yield return describe.Singleton<IIgnoredStatusCodeProvider, DefaultIgnoredStatusCodeProvider>();
-            yield return describe.Singleton<IIgnoredContentTypeProvider, DefaultIgnoredContentTypeProvider>();
-            yield return describe.Singleton<IIgnoredRequestProvider, DefaultIgnoredRequestProvider>();
+            services.AddTransient<IConfigureOptions<GlimpseAgentWebOptions>, GlimpseAgentWebOptionsSetup>();
+            services.AddSingleton<IIgnoredUrisProvider, DefaultIgnoredUrisProvider>();
+            services.AddSingleton<IIgnoredStatusCodeProvider, DefaultIgnoredStatusCodeProvider>();
+            services.AddSingleton<IIgnoredContentTypeProvider, DefaultIgnoredContentTypeProvider>();
+            services.AddSingleton<IIgnoredRequestProvider, DefaultIgnoredRequestProvider>();
+
+            return services;
         }
     }
 }

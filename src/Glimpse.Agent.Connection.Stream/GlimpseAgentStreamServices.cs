@@ -7,28 +7,25 @@ using System.Collections.Generic;
 
 namespace Glimpse
 {
-    public class GlimpseAgentServices
+    public class GlimpseAgentStreamServices
     {
-        public static IEnumerable<IServiceDescriptor> GetDefaultServices()
+        public static IServiceCollection GetDefaultServices()
         {
-            return GetDefaultServices(new Configuration());
-        }
-
-        public static IEnumerable<IServiceDescriptor> GetDefaultServices(IConfiguration configuration)
-        {
-            var describe = new ServiceDescriber(configuration);
+            var services = new ServiceCollection();
 
             //
             // Broker
             //
             //yield return describe.Singleton<IChannelSender, RemoteStreamMessagePublisher>();
-            yield return describe.Singleton<IChannelSender, WebSocketChannelSender>();
+            services.AddSingleton<IChannelSender, WebSocketChannelSender>();
 
             //
             // Connection
             //
             //yield return describe.Singleton<IStreamProxy, DefaultStreamProxy>();
-            yield return describe.Singleton<IStreamHubProxyFactory, SignalrStreamHubProxyFactory>();
+            services.AddSingleton<IStreamHubProxyFactory, SignalrStreamHubProxyFactory>();
+
+            return services;
         }
     }
 }

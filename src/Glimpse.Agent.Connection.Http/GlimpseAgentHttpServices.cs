@@ -6,16 +6,17 @@ using System.Collections.Generic;
 
 namespace Glimpse
 {
-    public class GlimpseAgentServices
+    public class GlimpseAgentHttpServices
     {
         public static IServiceCollection GetDefaultServices()
-        {
+        { 
             var services = new ServiceCollection();
 
             //
             // Broker
             //
-            services.AddSingleton<IAgentBroker, DefaultAgentBroker>();
+            services.AddSingleton<IChannelSender, HttpChannelSender>();
+
 
             return services;
         }

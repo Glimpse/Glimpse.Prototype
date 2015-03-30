@@ -12,37 +12,34 @@ namespace Glimpse
     {
         public static IEnumerable<IServiceDescriptor> GetDefaultServices()
         {
-            return GetDefaultServices(new Configuration());
-        }
+            var services = new ServiceCollection();
 
-        public static IEnumerable<IServiceDescriptor> GetDefaultServices(IConfiguration configuration)
-        {
-            var describe = new ServiceDescriber(configuration);
-            
             //
             // Discovery & Reflection.
             //
-            yield return describe.Transient<ITypeActivator, DefaultTypeActivator>();
-            yield return describe.Transient<ITypeSelector, DefaultTypeSelector>();
-            yield return describe.Transient<IAssemblyProvider, DefaultAssemblyProvider>();
-            yield return describe.Transient<ITypeService, DefaultTypeService>();
-            yield return describe.Transient(typeof(IDiscoverableCollection<>), typeof(ReflectionDiscoverableCollection<>));
+            services.AddTransient<ITypeActivator, DefaultTypeActivator>();
+            services.AddTransient<ITypeSelector, DefaultTypeSelector>();
+            services.AddTransient<IAssemblyProvider, DefaultAssemblyProvider>();
+            services.AddTransient<ITypeService, DefaultTypeService>();
+            services.AddTransient(typeof(IDiscoverableCollection<>), typeof(ReflectionDiscoverableCollection<>));
             // TODO: consider making above singleton 
 
             //
             // Context.
             //
-            yield return describe.Transient(typeof(IContextData<>), typeof(ContextData<>)); 
+            services.AddTransient(typeof(IContextData<>), typeof(ContextData<>)); 
 
             //
             // Messages.
             //
-            yield return describe.Singleton<IMessageConverter, DefaultMessageConverter>();
+            services.AddSingleton<IMessageConverter, DefaultMessageConverter>();
 
             //
             // JSON.Net.
             //
-            yield return describe.Transient<JsonSerializer, JsonSerializer>();
+            services.AddTransient<JsonSerializer, JsonSerializer>();
+
+            return services;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Glimpse.Server.AspNet.Sample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGlimpse()
-                    .RunningServer();
+                    .RunningServerWeb();
         }
 
         public void Configure(IApplicationBuilder app)

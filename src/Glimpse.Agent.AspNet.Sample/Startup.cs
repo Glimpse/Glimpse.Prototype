@@ -35,14 +35,12 @@ namespace Glimpse.Agent.AspNet.Sample
             */
 
             services.AddGlimpse()
-                .RunningAgent()
-                    .ForWeb()
-                        .Configure<GlimpseAgentWebOptions>(options =>
+                .RunningAgentWeb()
+                        .ConfigureAgentWeb(options =>
                         {
                             //options.IgnoredStatusCodes.Add(200);
-                        })
-                .WithRemoteStreamAgent();
-                //.WithRemoteHttpAgent(); 
+                        }) 
+                    .WithRemoteStreamAgent(); 
         }
 
         public void Configure(IApplicationBuilder app)

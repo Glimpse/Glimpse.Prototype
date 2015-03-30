@@ -8,12 +8,11 @@ namespace Glimpse.AspNet.Sample
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddGlimpse()
-                    .WithLocalAgent()
-                    .RunningAgent()
-                        .ForWeb()
-                    .RunningServer();
+        { 
+            services.AddGlimpse() 
+                    .RunningAgentWeb()
+                    .RunningServerWeb()
+                        .WithLocalAgent(); 
         }
 
         public void Configure(IApplicationBuilder app)
