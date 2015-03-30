@@ -8,6 +8,8 @@ namespace Glimpse
     {
         object CreateInstance(Type instanceType, params object[] parameters);
 
+        T CreateInstance<T>(params object[] parameters);
+
         IEnumerable<object> CreateInstances(IEnumerable<TypeInfo> types);
 
         IEnumerable<T> CreateInstances<T>(IEnumerable<TypeInfo> types);

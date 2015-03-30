@@ -23,6 +23,13 @@ namespace Glimpse
             return activated;
         }
 
+        public T CreateInstance<T>(params object[] parameters)
+        {
+            var activated = _typeActivator.CreateInstance(_serviceProvider, typeof(T), parameters);
+
+            return (T)activated;
+        }
+
         public IEnumerable<object> CreateInstances(IEnumerable<TypeInfo> types)
         {
             var activated = types.Select(t => CreateInstance(t));
