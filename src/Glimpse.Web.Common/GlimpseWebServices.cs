@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Glimpse.Web;
+using Glimpse.Web; 
 using Microsoft.Framework.DependencyInjection;
 
 namespace Glimpse
@@ -12,7 +12,8 @@ namespace Glimpse
             var services = new ServiceCollection();
              
             services.AddTransient<IRequestAuthorizerProvider, DefaultRequestAuthorizerProvider>();
-
+            services.AddTransient<IRequestHandlerProvider, DefaultRequestHandlerProvider>();
+             
             return services;
         }
     }
