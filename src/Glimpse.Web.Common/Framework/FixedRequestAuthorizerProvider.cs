@@ -12,11 +12,11 @@ namespace Glimpse.Web
 
         public FixedRequestAuthorizerProvider(IEnumerable<IRequestAuthorizer> controllerTypes)
         {
-            Policies = new List<IRequestAuthorizer>(controllerTypes);
+            Authorizers = new List<IRequestAuthorizer>(controllerTypes);
         }
         
-        public IList<IRequestAuthorizer> Policies { get; }
+        public IList<IRequestAuthorizer> Authorizers { get; }
 
-        IEnumerable<IRequestAuthorizer> IRequestAuthorizerProvider.Authorizers => Policies;
+        IEnumerable<IRequestAuthorizer> IRequestAuthorizerProvider.Authorizers => Authorizers;
     }
 }
