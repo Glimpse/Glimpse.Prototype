@@ -9,12 +9,11 @@ namespace Glimpse.Web
     {
         private readonly IDiscoverableCollection<IRequestRuntime> _requestRuntimes;
         private readonly IDiscoverableCollection<IRequestHandler> _requestHandlers;
-        private readonly IDiscoverableCollection<IRequestAuthorizer> _requestAuthorizers;
+        private readonly IEnumerable<IRequestAuthorizer> _requestAuthorizers;
 
-        public MasterRequestRuntime(IDiscoverableCollection<IRequestAuthorizer> requestAuthorizers, IDiscoverableCollection<IRequestRuntime> requestRuntimes, IDiscoverableCollection<IRequestHandler> requestHandlers)
+        public MasterRequestRuntime(IRequestAuthorizerProvider requestAuthorizerProvider, IDiscoverableCollection<IRequestRuntime> requestRuntimes, IDiscoverableCollection<IRequestHandler> requestHandlers)
         {
-            _requestAuthorizers = requestAuthorizers;
-            _requestAuthorizers.Discover();
+            _requestAuthorizers = requestAuthorizerProvider.Authorizers;
 
             _requestRuntimes = requestRuntimes;
             _requestRuntimes.Discover();
