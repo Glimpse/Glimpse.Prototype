@@ -23,6 +23,7 @@ namespace Glimpse
             services.AddSingleton<IIgnoredStatusCodeProvider, DefaultIgnoredStatusCodeProvider>();
             services.AddSingleton<IIgnoredContentTypeProvider, DefaultIgnoredContentTypeProvider>();
             services.AddSingleton<IIgnoredRequestProvider, DefaultIgnoredRequestProvider>();
+            services.AddSingleton<IRequestProfilerProvider, DefaultRequestProfilerProvider>();
 
             return services;
         }
