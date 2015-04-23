@@ -8,14 +8,12 @@ namespace Glimpse.Agent.Web
 {
     public class MasterRequestProfiler : IRequestRuntime
     {
-        private readonly IDiscoverableCollection<IRequestProfiler> _requestProfiliers;
+        private readonly IEnumerable<IRequestProfiler> _requestProfiliers;
         private readonly IEnumerable<IIgnoredRequestPolicy> _ignoredRequestPolicies;
 
-        public MasterRequestProfiler(IDiscoverableCollection<IRequestProfiler> requestProfiliers, IIgnoredRequestProvider ignoredRequestProvider)
+        public MasterRequestProfiler(IRequestProfilerProvider requestProfilerProvider, IIgnoredRequestProvider ignoredRequestProvider)
         {
-            _requestProfiliers = requestProfiliers;
-            _requestProfiliers.Discover();
-
+            _requestProfiliers = requestProfilerProvider.Profilers; 
             _ignoredRequestPolicies = ignoredRequestProvider.Policies;
         }
 
