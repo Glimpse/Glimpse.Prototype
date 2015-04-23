@@ -7,17 +7,14 @@ namespace Glimpse.Web
 {
     public class MasterRequestRuntime
     {
-        private readonly IDiscoverableCollection<IRequestRuntime> _requestRuntimes;
+        private readonly IEnumerable<IRequestRuntime> _requestRuntimes;
         private readonly IEnumerable<IRequestHandler> _requestHandlers;
         private readonly IEnumerable<IRequestAuthorizer> _requestAuthorizers;
 
-        public MasterRequestRuntime(IRequestAuthorizerProvider requestAuthorizerProvider, IDiscoverableCollection<IRequestRuntime> requestRuntimes, IRequestHandlerProvider requestHandlersProvider)
+        public MasterRequestRuntime(IRequestAuthorizerProvider requestAuthorizerProvider, IRequestRuntimeProvider requestRuntimesProvider, IRequestHandlerProvider requestHandlersProvider)
         {
-            _requestAuthorizers = requestAuthorizerProvider.Authorizers;
-
-            _requestRuntimes = requestRuntimes;
-            _requestRuntimes.Discover();
-
+            _requestAuthorizers = requestAuthorizerProvider.Authorizers; 
+            _requestRuntimes = requestRuntimesProvider.Runtimes; 
             _requestHandlers = requestHandlersProvider.Handlers; 
         }
 
