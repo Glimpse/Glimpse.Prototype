@@ -13,7 +13,8 @@ namespace Glimpse
              
             services.AddTransient<IRequestAuthorizerProvider, DefaultRequestAuthorizerProvider>();
             services.AddTransient<IRequestHandlerProvider, DefaultRequestHandlerProvider>();
-             
+            services.AddTransient<IRequestRuntimeProvider, DefaultRequestRuntimeProvider>();
+
             return services;
         }
     }
