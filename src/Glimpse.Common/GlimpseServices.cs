@@ -21,7 +21,6 @@ namespace Glimpse
             services.AddTransient<ITypeSelector, DefaultTypeSelector>();
             services.AddTransient<IAssemblyProvider, DefaultAssemblyProvider>();
             services.AddTransient<ITypeService, DefaultTypeService>();
-            services.AddTransient(typeof(IDiscoverableCollection<>), typeof(ReflectionDiscoverableCollection<>));
             // TODO: consider making above singleton 
 
             //
