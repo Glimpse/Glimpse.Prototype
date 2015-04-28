@@ -13,9 +13,9 @@ namespace Glimpse.Agent.Web
             _typeService = typeService;
         }
 
-        public IEnumerable<IIgnoredRequestPolicy> Policies
+        public IEnumerable<IRequestIgnorePolicy> Policies
         {
-            get { return _typeService.Resolve<IIgnoredRequestPolicy>().ToArray(); }
+            get { return _typeService.Resolve<IRequestIgnorePolicy>().ToArray(); }
         }
     }
 }

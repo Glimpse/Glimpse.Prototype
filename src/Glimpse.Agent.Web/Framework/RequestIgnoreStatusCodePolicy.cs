@@ -6,11 +6,11 @@ using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse.Agent.Web.Framework
 {
-    public class IgnoredStatusCodeRequestPolicy : IIgnoredRequestPolicy
+    public class RequestIgnoreStatusCodePolicy : IRequestIgnorePolicy
     {
         private readonly IReadOnlyCollection<int> _statusCodes;
 
-        public IgnoredStatusCodeRequestPolicy(IIgnoredStatusCodeProvider ignoredStatusCodeProvider)
+        public RequestIgnoreStatusCodePolicy(IIgnoredStatusCodeProvider ignoredStatusCodeProvider)
         {
             _statusCodes = ignoredStatusCodeProvider.StatusCodes;
         }

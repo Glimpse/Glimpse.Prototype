@@ -3,7 +3,7 @@ using Glimpse.Web;
 
 namespace Glimpse.Agent.Web
 {
-    public interface IIgnoredRequestPolicy
+    public interface IRequestIgnorePolicy
     {
         bool ShouldIgnore(IHttpContext context);
     }

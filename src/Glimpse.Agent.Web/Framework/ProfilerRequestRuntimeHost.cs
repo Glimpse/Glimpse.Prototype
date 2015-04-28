@@ -9,12 +9,12 @@ namespace Glimpse.Agent.Web
     public class ProfilerRequestRuntimeHost : IRequestRuntime
     {
         private readonly IEnumerable<IRequestProfiler> _requestProfiliers;
-        private readonly IEnumerable<IIgnoredRequestPolicy> _ignoredRequestPolicies;
-
+        private readonly IEnumerable<IRequestIgnorePolicy> _requestIgnorePolicies;
+        
         public ProfilerRequestRuntimeHost(IRequestProfilerProvider requestProfilerProvider, IIgnoredRequestPolicyProvider ignoredRequestPolicyProvider)
         {
             _requestProfiliers = requestProfilerProvider.Profilers; 
-            _ignoredRequestPolicies = ignoredRequestPolicyProvider.Policies;
+            _requestIgnorePolicies = ignoredRequestPolicyProvider.Policies;
         }
 
         public async Task Begin(IHttpContext context)
@@ -41,9 +41,9 @@ namespace Glimpse.Agent.Web
 
         public bool ShouldProfile(IHttpContext context)
         {
-            if (_ignoredRequestPolicies.Any())
+            if (_requestIgnorePolicies.Any())
             {
-                foreach (var policy in _ignoredRequestPolicies)
+                foreach (var policy in _requestIgnorePolicies)
                 {
                     if (policy.ShouldIgnore(context))
                     {

@@ -6,17 +6,17 @@ namespace Glimpse.Agent.Web
     public class FixedIgnoredRequestPolicyProvider : IIgnoredRequestPolicyProvider
     {
         public FixedIgnoredRequestPolicyProvider()
-            : this(Enumerable.Empty<IIgnoredRequestPolicy>())
+            : this(Enumerable.Empty<IRequestIgnorePolicy>())
         {
         }
 
-        public FixedIgnoredRequestPolicyProvider(IEnumerable<IIgnoredRequestPolicy> controllerTypes)
+        public FixedIgnoredRequestPolicyProvider(IEnumerable<IRequestIgnorePolicy> controllerTypes)
         {
-            Policies = new List<IIgnoredRequestPolicy>(controllerTypes);
+            Policies = new List<IRequestIgnorePolicy>(controllerTypes);
         }
         
-        public IList<IIgnoredRequestPolicy> Policies { get; }
+        public IList<IRequestIgnorePolicy> Policies { get; }
 
-        IEnumerable<IIgnoredRequestPolicy> IIgnoredRequestPolicyProvider.Policies => Policies;
+        IEnumerable<IRequestIgnorePolicy> IIgnoredRequestPolicyProvider.Policies => Policies;
     }
 }

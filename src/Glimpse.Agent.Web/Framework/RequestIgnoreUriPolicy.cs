@@ -8,11 +8,11 @@ using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse.Agent.Web.Framework
 {
-    public class IgnoredUriRequestPolicy : IIgnoredRequestPolicy
+    public class RequestIgnoreUriPolicy : IRequestIgnorePolicy
     {
         private readonly IReadOnlyCollection<Regex> _ignoredUris;
 
-        public IgnoredUriRequestPolicy(IIgnoredUriProvider ignoredUriProvider)
+        public RequestIgnoreUriPolicy(IIgnoredUriProvider ignoredUriProvider)
         {
             _ignoredUris = ignoredUriProvider.IgnoredUris;
         }
