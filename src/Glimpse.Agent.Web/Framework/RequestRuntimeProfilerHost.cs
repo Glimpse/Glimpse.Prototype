@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Agent.Web
 {
-    public class MasterRequestProfiler : IRequestRuntime
+    public class MasterRequestRuntimeProfiler : IRequestRuntime
     {
         private readonly IEnumerable<IRequestProfiler> _requestProfiliers;
         private readonly IEnumerable<IIgnoredRequestPolicy> _ignoredRequestPolicies;
 
-        public MasterRequestProfiler(IRequestProfilerProvider requestProfilerProvider, IIgnoredRequestProvider ignoredRequestProvider)
+        public MasterRequestRuntimeProfiler(IRequestProfilerProvider requestProfilerProvider, IIgnoredRequestProvider ignoredRequestProvider)
         {
             _requestProfiliers = requestProfilerProvider.Profilers; 
             _ignoredRequestPolicies = ignoredRequestProvider.Policies;
