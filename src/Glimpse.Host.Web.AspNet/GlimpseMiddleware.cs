@@ -9,7 +9,7 @@ namespace Glimpse.Host.Web.AspNet
     public class GlimpseMiddleware
     {
         private readonly RequestDelegate _innerNext;
-        private readonly MasterRequestRuntime _runtime;
+        private readonly RequestRuntimeHost _runtime;
         private readonly ISettings _settings;
         private readonly IContextData<MessageContext> _contextData;
 
@@ -24,7 +24,7 @@ namespace Glimpse.Host.Web.AspNet
 
             var typeActivator = serviceProvider.GetService<ITypeActivator>();
 
-            _runtime = typeActivator.CreateInstance<MasterRequestRuntime>(); 
+            _runtime = typeActivator.CreateInstance<RequestRuntimeHost>(); 
             _contextData = new ContextData<MessageContext>();
 
             // TODO: Need to find a way/better place for 

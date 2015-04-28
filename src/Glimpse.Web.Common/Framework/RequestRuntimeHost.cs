@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Web
 {
-    public class MasterRequestRuntime
+    public class RequestRuntimeHost
     {
         private readonly IEnumerable<IRequestRuntime> _requestRuntimes;
         private readonly IEnumerable<IRequestHandler> _requestHandlers;
         private readonly IEnumerable<IRequestAuthorizer> _requestAuthorizers;
 
-        public MasterRequestRuntime(IRequestAuthorizerProvider requestAuthorizerProvider, IRequestRuntimeProvider requestRuntimesProvider, IRequestHandlerProvider requestHandlersProvider)
+        public RequestRuntimeHost(IRequestAuthorizerProvider requestAuthorizerProvider, IRequestRuntimeProvider requestRuntimesProvider, IRequestHandlerProvider requestHandlersProvider)
         {
             _requestAuthorizers = requestAuthorizerProvider.Authorizers; 
             _requestRuntimes = requestRuntimesProvider.Runtimes; 

@@ -11,7 +11,7 @@ namespace Glimpse.Host.Web.Owin
     {
         private readonly Func<IDictionary<string, object>, Task> _innerNext;
         private readonly IServiceProvider _globalServices;
-        private readonly MasterRequestRuntime _runtime;
+        private readonly RequestRuntimeHost _runtime;
         private readonly ISettings _settings;
         private readonly IContextData<MessageContext> _contextData;
 
@@ -26,7 +26,7 @@ namespace Glimpse.Host.Web.Owin
              
             _innerNext = innerNext;
             _globalServices = globalServices;
-            _runtime = typeActivator.CreateInstance<MasterRequestRuntime>();
+            _runtime = typeActivator.CreateInstance<RequestRuntimeHost>();
             _contextData = new ContextData<MessageContext>();
 
             // TODO: Need to find a way/better place for 
