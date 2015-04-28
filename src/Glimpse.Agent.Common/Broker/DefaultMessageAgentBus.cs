@@ -18,7 +18,10 @@ namespace Glimpse.Agent
         {
             _subject = new BehaviorSubject<IMessage>(null);
 
-            // TODO: This probably shouldn't be here but don't want to setup more infrasture atm
+            // TODO: This probably shouldn't be here but don't want to setup 
+            //       more infrasture atm. Deciding whether it should be users 
+            //       code which instantiates listners or if we provider infrasturcture
+            //       which starts them up and triggers the subscription. 
             ListenAll().Subscribe(async msg => await channelSender.PublishMessage(msg));
         }
 
