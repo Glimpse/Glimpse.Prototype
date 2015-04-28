@@ -10,7 +10,7 @@ namespace Glimpse.Agent.Web
         private readonly string _requestIdKey = "RequestId";
         private readonly IAgentBroker _messageBus;
 
-        public AgentProfiler(IAgentBroker messageBus, ILoggerFactory loggingFactory)
+        public AgentProfiler(IAgentBroker messageBus)
         {
             _messageBus = messageBus;
         }
