@@ -19,7 +19,7 @@ namespace Glimpse
             // Options
             //
             services.AddTransient<IConfigureOptions<GlimpseAgentWebOptions>, GlimpseAgentWebOptionsSetup>();
-            services.AddSingleton<IIgnoredUrisProvider, DefaultIgnoredUrisProvider>();
+            services.AddSingleton<IIgnoredUriProvider, DefaultIgnoredUriProvider>();
             services.AddSingleton<IIgnoredStatusCodeProvider, DefaultIgnoredStatusCodeProvider>();
             services.AddSingleton<IIgnoredContentTypeProvider, DefaultIgnoredContentTypeProvider>();
             services.AddSingleton<IIgnoredRequestPolicyProvider, DefaultIgnoredRequestPolicyProvider>();
