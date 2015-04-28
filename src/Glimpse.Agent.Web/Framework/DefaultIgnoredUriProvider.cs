@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Framework.OptionsModel;
 
-namespace Glimpse.Agent.Web.Options
+namespace Glimpse.Agent.Web
 {
     public class DefaultIgnoredUriProvider : IIgnoredUriProvider
     { 

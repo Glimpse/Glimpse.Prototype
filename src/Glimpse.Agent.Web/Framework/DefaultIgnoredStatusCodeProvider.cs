@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Framework.OptionsModel;
 
-namespace Glimpse.Agent.Web.Options
+namespace Glimpse.Agent.Web
 {
     public class DefaultIgnoredStatusCodeProvider : IIgnoredStatusCodeProvider
     {

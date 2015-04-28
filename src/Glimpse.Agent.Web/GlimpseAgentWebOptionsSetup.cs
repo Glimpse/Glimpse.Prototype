@@ -1,5 +1,5 @@
 ﻿using System;
-using Glimpse.Agent.Web.Options;
+using Glimpse.Agent.Web;
 using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse.Agent.Web

@@ -4,7 +4,7 @@ using Microsoft.Framework.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using Glimpse.Agent.Web;
-using Glimpse.Agent.Web.Options;
+using Glimpse.Agent.Web;
 using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse

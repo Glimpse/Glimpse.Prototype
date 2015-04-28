@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using Glimpse.Agent.Web;
-using Glimpse.Agent.Web.Framework;
-using Glimpse.Agent.Web.Options;
 using Microsoft.AspNet.Builder;
 using Glimpse.Host.Web.AspNet;
 using Microsoft.Framework.DependencyInjection;

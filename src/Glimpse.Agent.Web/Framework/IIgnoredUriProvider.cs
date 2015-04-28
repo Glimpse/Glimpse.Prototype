@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Glimpse.Agent.Web.Options
+namespace Glimpse.Agent.Web
 {
     public interface IIgnoredUriProvider
     {
