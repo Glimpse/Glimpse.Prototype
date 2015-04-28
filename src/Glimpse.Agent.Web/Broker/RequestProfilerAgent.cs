@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Agent.Web
 {
-    public class AgentProfiler : IRequestProfiler
+    public class RequestProfilerAgent : IRequestProfiler
     {
         private readonly string _requestIdKey = "RequestId";
         private readonly IAgentBroker _messageBus;
 
-        public AgentProfiler(IAgentBroker messageBus)
+        public RequestProfilerAgent(IAgentBroker messageBus)
         {
             _messageBus = messageBus;
         }
