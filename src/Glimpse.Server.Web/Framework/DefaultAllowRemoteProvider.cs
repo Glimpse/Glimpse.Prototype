@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Framework.OptionsModel;
 
-namespace Glimpse.Server.Options
+namespace Glimpse.Server
 {
     public class DefaultAllowRemoteProvider : IAllowRemoteProvider
     {

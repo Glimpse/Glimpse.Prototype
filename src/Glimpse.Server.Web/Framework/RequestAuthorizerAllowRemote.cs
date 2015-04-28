@@ -1,8 +1,7 @@
-﻿using System;
-using Glimpse.Server.Options;
+﻿using System; 
 using Glimpse.Web;
 
-namespace Glimpse.Server.Framework
+namespace Glimpse.Server
 {
     public class RequestAuthorizerAllowRemote : IRequestAuthorizer
     {

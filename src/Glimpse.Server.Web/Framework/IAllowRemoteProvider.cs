@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Glimpse.Server.Options
+namespace Glimpse.Server
 {
     public interface IAllowRemoteProvider
     {

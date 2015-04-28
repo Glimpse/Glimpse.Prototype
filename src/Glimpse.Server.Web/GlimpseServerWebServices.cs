@@ -2,8 +2,7 @@
 using Glimpse.Server;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
-using System.Collections.Generic;
-using Glimpse.Server.Options;
+using System.Collections.Generic; 
 using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse
