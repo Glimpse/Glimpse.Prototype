@@ -9,12 +9,12 @@ namespace Glimpse.Agent.Web
     public class ProfilerRequestRuntimeHost : IRequestRuntime
     {
         private readonly IEnumerable<IRequestProfiler> _requestProfiliers;
-        private readonly IEnumerable<IRequestIgnorePolicy> _requestIgnorePolicies;
+        private readonly IEnumerable<IRequestIgnorer> _requestIgnorePolicies;
         
-        public ProfilerRequestRuntimeHost(IRequestProfilerProvider requestProfilerProvider, IIgnoredRequestPolicyProvider ignoredRequestPolicyProvider)
+        public ProfilerRequestRuntimeHost(IRequestProfilerProvider requestProfilerProvider, IRequestIgnorerProvider requestIgnorerProvider)
         {
             _requestProfiliers = requestProfilerProvider.Profilers; 
-            _requestIgnorePolicies = ignoredRequestPolicyProvider.Policies;
+            _requestIgnorePolicies = requestIgnorerProvider.Policies;
         }
 
         public async Task Begin(IHttpContext context)

@@ -6,13 +6,13 @@ using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse.Agent.Web.Framework
 {
-    public class RequestIgnoreContentTypePolicy : IRequestIgnorePolicy
+    public class RequestIgnorerContentType : IRequestIgnorer
     {
         private readonly IReadOnlyCollection<string> _contextType;
 
-        public RequestIgnoreContentTypePolicy(IIgnoredContentTypeProvider ignoredContentTypeProvider)
+        public RequestIgnorerContentType(IRequestIgnorerContentTypeProvider requestIgnorerContentTypeProvider)
         {
-            _contextType = ignoredContentTypeProvider.ContentTypes;
+            _contextType = requestIgnorerContentTypeProvider.ContentTypes;
         }
 
         public bool ShouldIgnore(IHttpContext context)

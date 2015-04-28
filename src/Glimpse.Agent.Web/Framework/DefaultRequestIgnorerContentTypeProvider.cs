@@ -5,9 +5,9 @@ using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse.Agent.Web
 { 
-    public class DefaultIgnoredContentTypeProvider : IIgnoredContentTypeProvider
+    public class DefaultRequestIgnorerContentTypeProvider : IRequestIgnorerContentTypeProvider
     {
-        public DefaultIgnoredContentTypeProvider(IOptions<GlimpseAgentWebOptions> optionsAccessor)
+        public DefaultRequestIgnorerContentTypeProvider(IOptions<GlimpseAgentWebOptions> optionsAccessor)
         {
             var contentTypes = optionsAccessor.Options.IgnoredContentTypes;
             ContentTypes = contentTypes.ToList();

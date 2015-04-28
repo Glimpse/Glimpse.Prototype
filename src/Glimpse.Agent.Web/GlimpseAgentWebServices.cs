@@ -19,10 +19,10 @@ namespace Glimpse
             // Options
             //
             services.AddTransient<IConfigureOptions<GlimpseAgentWebOptions>, GlimpseAgentWebOptionsSetup>();
-            services.AddSingleton<IIgnoredUriProvider, DefaultIgnoredUriProvider>();
-            services.AddSingleton<IIgnoredStatusCodeProvider, DefaultIgnoredStatusCodeProvider>();
-            services.AddSingleton<IIgnoredContentTypeProvider, DefaultIgnoredContentTypeProvider>();
-            services.AddSingleton<IIgnoredRequestPolicyProvider, DefaultIgnoredRequestPolicyProvider>();
+            services.AddSingleton<IRequestIgnorerUriProvider, DefaultRequestIgnorerUriProvider>();
+            services.AddSingleton<IRequestIgnorerStatusCodeProvider, DefaultRequestIgnorerStatusCodeProvider>();
+            services.AddSingleton<IRequestIgnorerContentTypeProvider, DefaultRequestIgnorerContentTypeProvider>();
+            services.AddSingleton<IRequestIgnorerProvider, DefaultRequestIgnorerProvider>();
             services.AddSingleton<IRequestProfilerProvider, DefaultRequestProfilerProvider>();
 
             return services;

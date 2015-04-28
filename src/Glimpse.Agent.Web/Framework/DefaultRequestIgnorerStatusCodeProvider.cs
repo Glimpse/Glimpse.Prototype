@@ -5,9 +5,9 @@ using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse.Agent.Web
 {
-    public class DefaultIgnoredStatusCodeProvider : IIgnoredStatusCodeProvider
+    public class DefaultRequestIgnorerStatusCodeProvider : IRequestIgnorerStatusCodeProvider
     {
-        public DefaultIgnoredStatusCodeProvider(IOptions<GlimpseAgentWebOptions> optionsAccessor)
+        public DefaultRequestIgnorerStatusCodeProvider(IOptions<GlimpseAgentWebOptions> optionsAccessor)
         {
             var statusCodes = optionsAccessor.Options.IgnoredStatusCodes;
             StatusCodes = statusCodes.ToList();

@@ -2,7 +2,7 @@
 
 namespace Glimpse.Agent.Web
 {
-    public interface IIgnoredStatusCodeProvider
+    public interface IRequestIgnorerStatusCodeProvider
     {
         IReadOnlyList<int> StatusCodes { get; }
     }

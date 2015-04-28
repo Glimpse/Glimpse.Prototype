@@ -8,13 +8,13 @@ using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse.Agent.Web.Framework
 {
-    public class RequestIgnoreUriPolicy : IRequestIgnorePolicy
+    public class RequestIgnorerUri : IRequestIgnorer
     {
         private readonly IReadOnlyCollection<Regex> _ignoredUris;
 
-        public RequestIgnoreUriPolicy(IIgnoredUriProvider ignoredUriProvider)
+        public RequestIgnorerUri(IRequestIgnorerUriProvider requestIgnorerUriProvider)
         {
-            _ignoredUris = ignoredUriProvider.IgnoredUris;
+            _ignoredUris = requestIgnorerUriProvider.IgnoredUris;
         }
 
         public bool ShouldIgnore(IHttpContext context)

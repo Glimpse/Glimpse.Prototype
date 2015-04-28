@@ -6,9 +6,9 @@ using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse.Agent.Web
 {
-    public class DefaultIgnoredUriProvider : IIgnoredUriProvider
+    public class DefaultRequestIgnorerUriProvider : IRequestIgnorerUriProvider
     { 
-        public DefaultIgnoredUriProvider(IOptions<GlimpseAgentWebOptions> optionsAccessor)
+        public DefaultRequestIgnorerUriProvider(IOptions<GlimpseAgentWebOptions> optionsAccessor)
         {
             var ignoredUris = optionsAccessor.Options.IgnoredUris;
             IgnoredUris = ignoredUris.ToList(); 

@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Glimpse.Agent.Web
 {
-    public interface IIgnoredUriProvider
+    public interface IRequestIgnorerUriProvider
     {
         IReadOnlyList<Regex> IgnoredUris { get; }
     }

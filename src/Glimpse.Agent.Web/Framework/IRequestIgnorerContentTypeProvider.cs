@@ -2,7 +2,7 @@
 
 namespace Glimpse.Agent.Web
 {
-    public interface IIgnoredContentTypeProvider
+    public interface IRequestIgnorerContentTypeProvider
     {
         IReadOnlyList<string> ContentTypes { get; }
     }
