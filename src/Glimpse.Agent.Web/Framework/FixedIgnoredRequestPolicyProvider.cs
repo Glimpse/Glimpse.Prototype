@@ -3,20 +3,20 @@ using System.Linq;
 
 namespace Glimpse.Agent.Web
 {
-    public class FixedIgnoredRequestProvider : IIgnoredRequestProvider
+    public class FixedIgnoredRequestPolicyProvider : IIgnoredRequestPolicyProvider
     {
-        public FixedIgnoredRequestProvider()
+        public FixedIgnoredRequestPolicyProvider()
             : this(Enumerable.Empty<IIgnoredRequestPolicy>())
         {
         }
 
-        public FixedIgnoredRequestProvider(IEnumerable<IIgnoredRequestPolicy> controllerTypes)
+        public FixedIgnoredRequestPolicyProvider(IEnumerable<IIgnoredRequestPolicy> controllerTypes)
         {
             Policies = new List<IIgnoredRequestPolicy>(controllerTypes);
         }
         
         public IList<IIgnoredRequestPolicy> Policies { get; }
 
-        IEnumerable<IIgnoredRequestPolicy> IIgnoredRequestProvider.Policies => Policies;
+        IEnumerable<IIgnoredRequestPolicy> IIgnoredRequestPolicyProvider.Policies => Policies;
     }
 }

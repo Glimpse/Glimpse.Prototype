@@ -2,7 +2,7 @@
 
 namespace Glimpse.Agent.Web
 {
-    public interface IIgnoredRequestProvider
+    public interface IIgnoredRequestPolicyProvider
     {
         IEnumerable<IIgnoredRequestPolicy> Policies { get; }
     }
