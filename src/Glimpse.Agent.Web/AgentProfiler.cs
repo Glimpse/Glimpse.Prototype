@@ -13,12 +13,6 @@ namespace Glimpse.Agent.Web
         public AgentProfiler(IAgentBroker messageBus, ILoggerFactory loggingFactory)
         {
             _messageBus = messageBus;
-
-            //// TODO: This is a REALLY bad place for this, not sure where else to put it
-            //loggingFactory.AddProvider(new DefaultLoggerProvider(messageBus));
-            //var test = loggingFactory.Create("test");
-            //test.Write(LogLevel.Information, 123, new { Test = "test" }, null, (x, y) => { return ""; });
-            //// TODO: This is a REALLY bad place for this, not sure where else to put it
         }
 
         public async Task Begin(IHttpContext newContext)
