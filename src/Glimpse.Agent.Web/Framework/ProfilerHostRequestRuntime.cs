@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Agent.Web
 {
-    public class MasterRequestRuntimeProfiler : IRequestRuntime
+    public class ProfilerHostRequestRuntime : IRequestRuntime
     {
         private readonly IEnumerable<IRequestProfiler> _requestProfiliers;
         private readonly IEnumerable<IIgnoredRequestPolicy> _ignoredRequestPolicies;
 
-        public MasterRequestRuntimeProfiler(IRequestProfilerProvider requestProfilerProvider, IIgnoredRequestProvider ignoredRequestProvider)
+        public ProfilerHostRequestRuntime(IRequestProfilerProvider requestProfilerProvider, IIgnoredRequestPolicyProvider ignoredRequestPolicyProvider)
         {
             _requestProfiliers = requestProfilerProvider.Profilers; 
-            _ignoredRequestPolicies = ignoredRequestProvider.Policies;
+            _ignoredRequestPolicies = ignoredRequestPolicyProvider.Policies;
         }
 
         public async Task Begin(IHttpContext context)
