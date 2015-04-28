@@ -14,12 +14,12 @@ namespace Glimpse.Agent
         // TODO: Review if we care about unifying which thread message is published on
         //       and which thread it is recieved on. If so need to use IScheduler.
 
-        public DefaultAgentBroker(IChannelSender currentMessagePublisher)
+        public DefaultAgentBroker(IChannelSender channelSender)
         {
             _subject = new BehaviorSubject<IMessage>(null);
 
             // TODO: This probably shouldn't be here but don't want to setup more infrasture atm
-            ListenAll().Subscribe(async msg => await currentMessagePublisher.PublishMessage(msg));
+            ListenAll().Subscribe(async msg => await channelSender.PublishMessage(msg));
         }
 
         public IObservable<T> Listen<T>()
