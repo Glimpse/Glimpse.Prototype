@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Server.Infrastructure
 {
-    public class CorsRequestRuntime : IRequestRuntime
+    public class RequestRuntimeCors : IRequestRuntime
     {
         public async Task Begin(IHttpContext newContext)
         {
