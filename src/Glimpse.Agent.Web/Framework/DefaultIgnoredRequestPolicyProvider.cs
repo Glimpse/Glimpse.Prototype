@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace Glimpse.Agent.Web
 {
-    public class DefaultIgnoredRequestProvider : IIgnoredRequestProvider
+    public class DefaultIgnoredRequestPolicyProvider : IIgnoredRequestPolicyProvider
     {
         private readonly ITypeService _typeService;
 
-        public DefaultIgnoredRequestProvider(ITypeService typeService)
+        public DefaultIgnoredRequestPolicyProvider(ITypeService typeService)
         {
             _typeService = typeService;
         }
