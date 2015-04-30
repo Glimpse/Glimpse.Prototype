@@ -56,9 +56,15 @@
         })();
 
     var processRUM = function(proxy) {
-            var timingsRaw = (window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {}).timing;
+            var timingsRaw = (window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {}).timing,
+                timings = {};
 
-            publishMessage('browser.rum', timingsRaw, proxy);
+            // TODO: temp hack to work around JSON.stringify not picking up properties
+            for (var key in timingsRaw) {
+	            timings[key] = timingsRaw[key];
+            };
+
+            publishMessage('browser.rum', timings, proxy);
         },
         insertUI = function() {
             $(function() {
