@@ -6,16 +6,16 @@ namespace Glimpse.Server
 {
     public class WebSocketChannelReceiver : Hub // Temp dont want this to be public
     {
-        private readonly IServerBroker _messageServerBus;
+        private readonly IServerBroker _serverBroker;
 
-        public WebSocketChannelReceiver(IServerBroker messageServerBus)
+        public WebSocketChannelReceiver(IServerBroker serverBroker)
         {
-            _messageServerBus = messageServerBus;
+            _serverBroker = serverBroker;
         }
 
         public async Task HandleMessage(MessageEnvelope envelope)
         {
-            await _messageServerBus.SendMessage(envelope); 
+            await _serverBroker.SendMessage(envelope); 
         }
     }
 }
