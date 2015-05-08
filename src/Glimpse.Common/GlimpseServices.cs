@@ -10,7 +10,7 @@ namespace Glimpse
 {
     public class GlimpseServices
     {
-        public static IEnumerable<IServiceDescriptor> GetDefaultServices()
+        public static IEnumerable<ServiceDescriptor> GetDefaultServices()
         {
             var services = new ServiceCollection();
 

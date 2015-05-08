@@ -29,10 +29,7 @@ namespace Glimpse.Agent.Connection.Stream.Connection
  
         public void Dispose()
         {
-            if (_connection != null)
-            {
-                _connection.Dispose();
-            }
+            _connection?.Dispose();
         }
 
         protected async Task InnerStart()

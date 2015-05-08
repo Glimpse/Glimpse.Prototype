@@ -36,7 +36,8 @@ namespace Glimpse.Agent.AspNet.Sample
                         .ConfigureAgentWeb(options =>
                         {
                             //options.IgnoredStatusCodes.Add(200);
-                        }) 
+                        })
+                    //.WithRemoteHttpAgent();
                     .WithRemoteStreamAgent(); 
         }
 

@@ -1,5 +1,5 @@
 ﻿using System;
-#if ASPNET50
+#if DNX451
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting;
 #else
@@ -9,8 +9,8 @@ using System.Threading;
 namespace Glimpse
 {
     public class ContextData<T> : IContextData<T>
-    { 
-#if ASPNET50
+    {
+#if DNX451
         private static string Key = typeof(ContextData<T>).FullName;
 
         public T Value

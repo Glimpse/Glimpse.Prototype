@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Glimpse.Web;
 using System.IO;
-using Microsoft.AspNet.Http.Interfaces;
+using Microsoft.AspNet.Http;
 
 namespace Glimpse.Host.Web.AspNet
 {

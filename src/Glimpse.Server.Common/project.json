@@ -2,17 +2,17 @@
     "version": "1.0.0-*",
     "dependencies": {
         "Glimpse.Common": "",
-        "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta3",
-		"Microsoft.Framework.DependencyInjection": "1.0.0-beta3"
+        "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta4",
+		"Microsoft.Framework.DependencyInjection": "1.0.0-beta4"
     },
     "frameworks": {
-        "aspnet50": {
+        "dnx451": {
             "dependencies": {
             }
         },
-        "aspnetcore50": {
+        "dnxcore50": {
             "dependencies": { 
-				"System.Security.Claims": "4.0.0-beta-22605"
+				"System.Security.Claims": "4.0.0-beta-22816"
             }
         }
     }

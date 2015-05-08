@@ -5,15 +5,15 @@
         "Glimpse.Agent.Common": ""
     },
     "frameworks" : {
-        "aspnet50" : {
+        "dnx451": {
             "frameworkAssemblies": {
                 "System.Net.Http": "",
                 "System.Net.Http.Formatting":  ""
             }
         },
-        "aspnetcore50" : { 
+        "dnxcore50": { 
             "dependencies": {
-                "System.Net.Http": "4.0.0-beta-22605"
+                "System.Net.Http": "4.0.0-beta-22816"
             }
         }
     }

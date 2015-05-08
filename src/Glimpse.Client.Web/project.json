@@ -10,12 +10,12 @@
         "**.vspscc"
     ],
     "dependencies": {
-        "Microsoft.AspNet.Server.IIS": "1.0.0-beta3",
-        "Microsoft.AspNet.StaticFiles": "1.0.0-beta3",
+        "Microsoft.AspNet.Server.IIS": "1.0.0-beta4",
+        "Microsoft.AspNet.StaticFiles": "1.0.0-beta4",
         "Microsoft.AspNet.SignalR.JS": "2.2.0"
     },
     "frameworks" : {
-        "aspnet50" : { },
-        "aspnetcore50" : { }
+        "dnx451": { },
+        "dnxcore50": { }
     }
 }

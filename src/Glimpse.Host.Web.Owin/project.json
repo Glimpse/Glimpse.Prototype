@@ -7,7 +7,7 @@
     },
 
     "frameworks" : {
-        "aspnet50" : { 
+        "dnx451": { 
             "dependencies": {
             }
         }

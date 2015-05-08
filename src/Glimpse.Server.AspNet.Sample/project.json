@@ -12,11 +12,11 @@
     "dependencies": {
         "Glimpse.Host.Web.AspNet": "",
         "Glimpse.Server.Web": "",
-        "Microsoft.AspNet.Server.IIS": "1.0.0-beta3",
-        "Microsoft.AspNet.Diagnostics": "1.0.0-beta3"
+        "Microsoft.AspNet.Server.IIS": "1.0.0-beta4",
+        "Microsoft.AspNet.Diagnostics": "1.0.0-beta4"
     },
     "frameworks" : {
-        "aspnet50" : { },
-        "aspnetcore50" : { }
+        "dnx451": { },
+        "dnxcore50": { }
     }
 }

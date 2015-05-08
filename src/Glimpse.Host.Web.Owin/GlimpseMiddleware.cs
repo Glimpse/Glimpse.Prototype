@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Glimpse.Web;
-using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.DependencyInjection.Fallback;
+using Microsoft.Framework.DependencyInjection; 
 
 namespace Glimpse.Host.Web.Owin
 {

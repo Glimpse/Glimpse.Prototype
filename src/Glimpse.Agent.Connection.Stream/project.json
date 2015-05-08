@@ -1,18 +1,18 @@
 ﻿{
-	"version": "1.0.0-*",
-	"dependencies": {
-		"Glimpse.Common": "",
-		"Glimpse.Agent.Common": "",
-		"Microsoft.AspNet.SignalR.Client": "2.2.0"
-	},
-	"frameworks": {
-		"aspnet50": {
-			"dependencies": {
-			}
-		},
-		"aspnetcore50": {
-			"dependencies": {
-			}
-		}
-	}
+    "version": "1.0.0-*",
+    "dependencies": {
+        "Glimpse.Common": "",
+        "Glimpse.Agent.Common": "",
+        "Microsoft.AspNet.SignalR.Client": "2.2.0"
+    },
+    "frameworks": {
+        "dnx451": {
+            "dependencies": {
+            }
+        },
+        "dnxcore50": {
+            "dependencies": {
+            }
+        }
+    }
 }

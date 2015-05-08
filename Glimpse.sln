@@ -12,41 +12,41 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{765C6BCD-09AD-47F2-8001-598EBD7C9948}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Host.Web.AspNet", "src\Glimpse.Host.Web.AspNet\Glimpse.Host.Web.AspNet.kproj", "{2FB534CA-388A-4371-8402-79A3D8BD2967}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Host.Web.AspNet", "src\Glimpse.Host.Web.AspNet\Glimpse.Host.Web.AspNet.xproj", "{2FB534CA-388A-4371-8402-79A3D8BD2967}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Host.Web.Owin", "src\Glimpse.Host.Web.Owin\Glimpse.Host.Web.Owin.kproj", "{5DD46DF4-1D41-48BE-A7F2-974871D258FD}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Host.Web.Owin", "src\Glimpse.Host.Web.Owin\Glimpse.Host.Web.Owin.xproj", "{5DD46DF4-1D41-48BE-A7F2-974871D258FD}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Web.Common", "src\Glimpse.Web.Common\Glimpse.Web.Common.kproj", "{FBB2B201-FD6A-4518-AF46-DAA1B0D63C0C}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Web.Common", "src\Glimpse.Web.Common\Glimpse.Web.Common.xproj", "{FBB2B201-FD6A-4518-AF46-DAA1B0D63C0C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.Web", "src\Glimpse.Agent.Web\Glimpse.Agent.Web.kproj", "{06F2EF61-61D8-40C9-8BEE-EBF64352DE6F}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.Web", "src\Glimpse.Agent.Web\Glimpse.Agent.Web.xproj", "{06F2EF61-61D8-40C9-8BEE-EBF64352DE6F}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Common", "src\Glimpse.Common\Glimpse.Common.kproj", "{C0FB7983-E851-4567-8540-153F9B7EC42D}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Common", "src\Glimpse.Common\Glimpse.Common.xproj", "{C0FB7983-E851-4567-8540-153F9B7EC42D}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Server.Web", "src\Glimpse.Server.Web\Glimpse.Server.Web.kproj", "{C6EFFA30-9D16-412C-8FD7-C87B909E030E}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Server.Web", "src\Glimpse.Server.Web\Glimpse.Server.Web.xproj", "{C6EFFA30-9D16-412C-8FD7-C87B909E030E}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.AgentServer.AspNet.Sample", "src\Glimpse.AgentServer.AspNet.Sample\Glimpse.AgentServer.AspNet.Sample.kproj", "{6AADF4A7-990A-463F-A137-D957EC3230D5}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.AgentServer.AspNet.Sample", "src\Glimpse.AgentServer.AspNet.Sample\Glimpse.AgentServer.AspNet.Sample.xproj", "{6AADF4A7-990A-463F-A137-D957EC3230D5}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.AgentServer.Owin.Sample", "src\Glimpse.AgentServer.Owin.Sample\Glimpse.AgentServer.Owin.Sample.kproj", "{07C1D6CC-1082-420D-92F1-4CC8A80E1A4F}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.AgentServer.Owin.Sample", "src\Glimpse.AgentServer.Owin.Sample\Glimpse.AgentServer.Owin.Sample.xproj", "{07C1D6CC-1082-420D-92F1-4CC8A80E1A4F}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.AspNet.Sample", "src\Glimpse.Agent.AspNet.Sample\Glimpse.Agent.AspNet.Sample.kproj", "{3178090F-78DC-49D6-BFC6-C8DF38F5D671}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.AspNet.Sample", "src\Glimpse.Agent.AspNet.Sample\Glimpse.Agent.AspNet.Sample.xproj", "{3178090F-78DC-49D6-BFC6-C8DF38F5D671}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Server.AspNet.Sample", "src\Glimpse.Server.AspNet.Sample\Glimpse.Server.AspNet.Sample.kproj", "{24B423F4-4E7F-4DBA-B998-3F5CB510CAFE}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Server.AspNet.Sample", "src\Glimpse.Server.AspNet.Sample\Glimpse.Server.AspNet.Sample.xproj", "{24B423F4-4E7F-4DBA-B998-3F5CB510CAFE}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.Device", "src\Glimpse.Agent.Device\Glimpse.Agent.Device.kproj", "{2B9E66C2-CB44-4CB9-937F-4C167F1352DD}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.Device", "src\Glimpse.Agent.Device\Glimpse.Agent.Device.xproj", "{2B9E66C2-CB44-4CB9-937F-4C167F1352DD}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.Connection.Stream", "src\Glimpse.Agent.Connection.Stream\Glimpse.Agent.Connection.Stream.kproj", "{E0C25E85-389E-483D-837D-1B8582404147}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.Connection.Stream", "src\Glimpse.Agent.Connection.Stream\Glimpse.Agent.Connection.Stream.xproj", "{E0C25E85-389E-483D-837D-1B8582404147}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.Connection.Http", "src\Glimpse.Agent.Connection.Http\Glimpse.Agent.Connection.Http.kproj", "{D3212C0C-B545-4E0F-AF1D-DFFE3A8EE326}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.Connection.Http", "src\Glimpse.Agent.Connection.Http\Glimpse.Agent.Connection.Http.xproj", "{D3212C0C-B545-4E0F-AF1D-DFFE3A8EE326}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.Common", "src\Glimpse.Agent.Common\Glimpse.Agent.Common.kproj", "{E8596850-7AD0-4433-A2FB-29761AA74EC5}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.Common", "src\Glimpse.Agent.Common\Glimpse.Agent.Common.xproj", "{E8596850-7AD0-4433-A2FB-29761AA74EC5}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Client.Web", "src\Glimpse.Client.Web\Glimpse.Client.Web.kproj", "{0ABE752B-1074-4A17-B97A-EA8AC800736D}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Client.Web", "src\Glimpse.Client.Web\Glimpse.Client.Web.xproj", "{0ABE752B-1074-4A17-B97A-EA8AC800736D}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.Browser", "src\Glimpse.Agent.Browser\Glimpse.Agent.Browser.kproj", "{1DCB0304-343B-4234-B793-E24C639A0B83}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.Browser", "src\Glimpse.Agent.Browser\Glimpse.Agent.Browser.xproj", "{1DCB0304-343B-4234-B793-E24C639A0B83}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Storage.DocumentDb", "src\Glimpse.Storage.DocumentDb\Glimpse.Storage.DocumentDb.kproj", "{A7E671CC-B67D-4F47-B6B7-34282D22C5C2}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Storage.DocumentDb", "src\Glimpse.Storage.DocumentDb\Glimpse.Storage.DocumentDb.xproj", "{A7E671CC-B67D-4F47-B6B7-34282D22C5C2}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Server.Common", "src\Glimpse.Server.Common\Glimpse.Server.Common.kproj", "{E9743C4E-CDB8-4D90-B0AC-5E04F578582F}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Server.Common", "src\Glimpse.Server.Common\Glimpse.Server.Common.xproj", "{E9743C4E-CDB8-4D90-B0AC-5E04F578582F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,30 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Framework.DependencyInjection;
 
 namespace Glimpse
 {
     public class DefaultTypeActivator : ITypeActivator
     {
-        private readonly Microsoft.Framework.DependencyInjection.ITypeActivator _typeActivator;
         private readonly IServiceProvider _serviceProvider;
 
-        public DefaultTypeActivator(IServiceProvider serviceProvider, Microsoft.Framework.DependencyInjection.ITypeActivator typeActivator)
+        public DefaultTypeActivator(IServiceProvider serviceProvider)
         {
-            _typeActivator = typeActivator;
             _serviceProvider = serviceProvider;
         }
 
         public object CreateInstance(Type instanceType, params object[] parameters)
-        {
-            var activated = _typeActivator.CreateInstance(_serviceProvider, instanceType, parameters);
+        { 
+            var activated = ActivatorUtilities.CreateInstance(_serviceProvider, instanceType, parameters);
 
             return activated;
         }
 
         public T CreateInstance<T>(params object[] parameters)
         {
-            var activated = _typeActivator.CreateInstance(_serviceProvider, typeof(T), parameters);
+            var activated = ActivatorUtilities.CreateInstance(_serviceProvider, typeof(T), parameters);
 
             return (T)activated;
         }
@@ -46,7 +45,7 @@ namespace Glimpse
 
         private object CreateInstance(TypeInfo type)
         {
-            return _typeActivator.CreateInstance(_serviceProvider, type.AsType());
+            return ActivatorUtilities.CreateInstance(_serviceProvider, type.AsType());
         }
     }
 }

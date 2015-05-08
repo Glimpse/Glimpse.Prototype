@@ -51,11 +51,14 @@ namespace Glimpse.Server
         {
             return Task.Factory.StartNew<IEnumerable<IMessageEnvelope>>(() =>
             {
+                /*
                 var query = _indices.AsQueryable();
 
                 foreach (var filter in filters) query.Where(filter);
 
                 return query.Join(_store, i => i.Id, m => m.Context.Id, (i, m) => m);
+                */
+                return null;
             });
         }
 

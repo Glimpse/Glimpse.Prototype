@@ -5,11 +5,11 @@
         "Glimpse.Agent.Common": ""
     },
     "frameworks" : {
-        "aspnet50" : { 
+        "dnx451": { 
             "dependencies": {
             }
         },
-        "aspnetcore50" : { 
+        "dnxcore50": { 
             "dependencies": {
             }
         }
