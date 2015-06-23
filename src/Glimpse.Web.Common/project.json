@@ -2,8 +2,8 @@
     "version": "1.0.0-*",
     "dependencies": {
         "Glimpse.Common": "",
-        "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta4",
-		"Microsoft.Framework.DependencyInjection": "1.0.0-beta4"
+        "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta5",
+        "Microsoft.Framework.DependencyInjection": "1.0.0-beta5"
     },
     "frameworks": {
         "dnx451": {
@@ -12,7 +12,7 @@
         },
         "dnxcore50": {
             "dependencies": { 
-				"System.Security.Claims": "4.0.0-beta-22816"
+                "System.Security.Claims": "4.0.0-beta-23019"
             }
         }
     }

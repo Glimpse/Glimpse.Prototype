@@ -4,7 +4,7 @@
         "Glimpse.Host.Web.Owin": "",
         "Glimpse.Server.Web": "",
         "Glimpse.Agent.Web": "",
-        "Microsoft.Framework.DependencyInjection": "1.0.0-beta4",
+        "Microsoft.Framework.DependencyInjection": "1.0.0-beta5",
         "Microsoft.Owin": "3.0.0",
         "Microsoft.Owin.Diagnostics": "3.0.0",
         "Microsoft.Owin.Host.HttpListener": "3.0.0",

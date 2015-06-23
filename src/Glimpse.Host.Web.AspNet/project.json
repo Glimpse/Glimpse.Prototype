@@ -2,9 +2,9 @@
     "version": "1.0.0-*",
     "dependencies": {
         "Glimpse.Web.Common": "",
-		"Microsoft.AspNet.Http": "1.0.0-beta4",
-		"Microsoft.AspNet.Http.Extensions": "1.0.0-beta4",
-		"Microsoft.AspNet.Http.Interfaces": "1.0.0-beta4"
+		"Microsoft.AspNet.Http": "1.0.0-beta5",
+		"Microsoft.AspNet.Http.Extensions": "1.0.0-beta5",
+		"Microsoft.AspNet.Http.Interfaces": "1.0.0-beta5"
     },
     "frameworks" : {
         "dnx451": { 

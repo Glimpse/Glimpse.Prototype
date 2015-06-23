@@ -5,14 +5,8 @@
         "Glimpse.Agent.Common": "",
         "Microsoft.AspNet.SignalR.Client": "2.2.0"
     },
-    "frameworks": {
-        "dnx451": {
-            "dependencies": {
-            }
-        }//,
-        //"dnxcore50": {
-        //    "dependencies": {
-        //    }
-        //}
+    "frameworks" : {
+        "dnx451": { }, 
+        "dnxcore50": { }
     }
 }

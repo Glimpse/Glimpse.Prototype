@@ -1,9 +1,9 @@
 ﻿{
-	"version": "1.0.0-*",
-	"dependencies": {
-		"Glimpse.Web.Common": ""
-	},
-	"resource": "Resources/Embed/**/*.*",
+    "version": "1.0.0-*",
+    "dependencies": {
+        "Glimpse.Web.Common": ""
+    },
+    "resource": "Resources/Embed/**/*.*",
     "frameworks" : {
         "dnx451": { 
             "dependencies": {
@@ -11,7 +11,7 @@
         },
         "dnxcore50": { 
             "dependencies": {
-				"System.Resources.ResourceManager": "4.0.0-beta-22816"
+                "System.Resources.ResourceManager": "4.0.0-beta-23019"
             }
         }
     }

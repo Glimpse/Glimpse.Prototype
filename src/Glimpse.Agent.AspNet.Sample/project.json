@@ -10,15 +10,14 @@
         "**.vspscc"
     ],
     "dependencies": {
-        "Glimpse.Host.Web.AspNet": "",
-        "Glimpse.Agent.Web": "",
+        "Glimpse.Agent.Web": "", 
+        "Glimpse.Host.Web.AspNet": "", 
         "Glimpse.Agent.Connection.Stream": "",
-        //"Glimpse.Agent.Connection.Http": "",
-        "Microsoft.AspNet.Server.IIS": "1.0.0-beta4",
-        "Microsoft.AspNet.Diagnostics": "1.0.0-beta4"
+        "Microsoft.AspNet.Server.IIS": "1.0.0-beta5",
+        "Microsoft.AspNet.Diagnostics": "1.0.0-beta5"
     },
     "frameworks" : {
-        "dnx451": { }//,
-        //"dnxcore50": { }
+        "dnx451": { }, 
+        "dnxcore50": { }
     }
 }

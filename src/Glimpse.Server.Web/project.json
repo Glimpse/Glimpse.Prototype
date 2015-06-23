@@ -4,7 +4,7 @@
         "Glimpse.Web.Common": "",
         "Glimpse.Agent.Common": "",
         "Glimpse.Server.Common": "",
-        "Microsoft.AspNet.SignalR.Server": "3.0.0-beta4"
+        "Microsoft.AspNet.SignalR.Server": "3.0.0-beta5"
     },
     "frameworks": {
         "dnx451": {

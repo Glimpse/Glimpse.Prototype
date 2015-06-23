@@ -1,5 +1,4 @@
-﻿using Microsoft.Framework.ConfigurationModel;
-using Microsoft.Framework.DependencyInjection;
+﻿using Microsoft.Framework.DependencyInjection;
 using System;
 using Glimpse.Agent.Web;
 

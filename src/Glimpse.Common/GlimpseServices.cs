@@ -1,5 +1,4 @@
 ﻿using Glimpse;
-using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using Newtonsoft.Json;
 using System.Collections.Generic;
