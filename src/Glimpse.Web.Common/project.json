@@ -2,7 +2,7 @@
     "version": "1.0.0-*",
     "dependencies": {
         "Glimpse.Common": "",
-        "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta5",
+        "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta5",
         "Microsoft.Framework.DependencyInjection": "1.0.0-beta5"
     },
     "frameworks": {

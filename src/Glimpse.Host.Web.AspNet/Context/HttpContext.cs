@@ -16,7 +16,7 @@ namespace Glimpse.Host.Web.AspNet
         public HttpContext(Microsoft.AspNet.Http.HttpContext context, ISettings settings)
         {
             _context = context;
-            _request = new HttpRequest(context.Request, context.GetFeature<Microsoft.AspNet.Http.IHttpConnectionFeature>());
+            _request = new HttpRequest(context.Request, context.GetFeature<Microsoft.AspNet.Http.Features.IHttpConnectionFeature>());
             _response = new HttpResponse(context.Response);
             _settings = settings;
         }

@@ -1,6 +1,5 @@
 ﻿using Glimpse.Agent;
 using Glimpse.Agent.Connection.Stream.Connection;
-using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using System;
 using System.Collections.Generic;

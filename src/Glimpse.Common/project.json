@@ -3,7 +3,7 @@
     "dependencies": {
         "Rx-Linq": "2.2.5",
         "Newtonsoft.Json": "6.0.6",
-        "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta5",
+        "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta5",
         "Microsoft.Framework.DependencyInjection": "1.0.0-beta5"
     },
     "frameworks": {

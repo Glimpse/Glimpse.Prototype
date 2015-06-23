@@ -9,9 +9,9 @@ namespace Glimpse.Host.Web.AspNet
     public class HttpRequest : IHttpRequest
     {
         private readonly Microsoft.AspNet.Http.HttpRequest _request;
-        private readonly IHttpConnectionFeature _connectionFeature;
+        private readonly Microsoft.AspNet.Http.Features.IHttpConnectionFeature _connectionFeature;
 
-        public HttpRequest(Microsoft.AspNet.Http.HttpRequest request, IHttpConnectionFeature connectionFeature)
+        public HttpRequest(Microsoft.AspNet.Http.HttpRequest request, Microsoft.AspNet.Http.Features.IHttpConnectionFeature connectionFeature)
         {
             _request = request;
             _connectionFeature = connectionFeature;

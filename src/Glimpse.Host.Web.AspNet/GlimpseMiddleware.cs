@@ -23,7 +23,7 @@ namespace Glimpse.Host.Web.AspNet
             _innerNext = innerNext;
 
             var typeActivator = serviceProvider.GetService<ITypeActivator>();
-
+             
             _runtime = typeActivator.CreateInstance<RequestRuntimeHost>(); 
             _contextData = new ContextData<MessageContext>();
 
