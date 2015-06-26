@@ -14,8 +14,8 @@
         "Glimpse.Server.Web": "",
         "Glimpse.Agent.Web": "",
         "Glimpse.Agent.Browser": "",
-        "Microsoft.AspNet.Server.IIS": "1.0.0-beta5",
-        "Microsoft.AspNet.Diagnostics": "1.0.0-beta5"
+        "Microsoft.AspNet.Server.IIS": "1.0.0-*",
+        "Microsoft.AspNet.Diagnostics": "1.0.0-*"
     },
     "frameworks" : {
         "dnx451": { },
