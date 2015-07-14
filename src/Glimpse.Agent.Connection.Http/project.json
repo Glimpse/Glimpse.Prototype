@@ -2,13 +2,13 @@
     "version": "1.0.0-*",
     "dependencies": {
         "Glimpse.Common": "",
-        "Glimpse.Agent.Common": ""
+        "Glimpse.Agent.Common": "",
+        "Microsoft.AspNet.WebApi.Client": "5.2.2"
     },
     "frameworks" : {
         "dnx451": {
             "frameworkAssemblies": {
-                "System.Net.Http": "",
-                "System.Net.Http.Formatting":  ""
+                "System.Net.Http": ""
             }
         }
     }
