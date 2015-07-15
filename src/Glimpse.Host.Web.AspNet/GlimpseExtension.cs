@@ -1,9 +1,9 @@
 ﻿
-using Glimpse.Web;
-using Microsoft.AspNet.Builder;
 using System;
+using Glimpse.Web;
+using Glimpse.Host.Web.AspNet;
 
-namespace Glimpse.Host.Web.AspNet
+namespace Microsoft.AspNet.Builder
 {
     public static class GlimpseExtension
     {
