@@ -13,7 +13,7 @@ namespace Glimpse.Agent
     {
         private readonly IChannelSender _channelSender;
         private readonly IMessageConverter _messageConverter;
-        private readonly ISubject<IMessage> _subject;
+        private readonly ISubject<MessageListenerOptions> _subject;
         private readonly BlockingCollection<IMessage> _queue;
 
         // TODO: Review if we care about unifying which thread message is published on
@@ -23,7 +23,7 @@ namespace Glimpse.Agent
         {
             _channelSender = channelSender;
             _messageConverter = messageConverter;
-            _subject = new BehaviorSubject<IMessage>(null);
+            _subject = new BehaviorSubject<MessageListenerOptions>(null);
             _queue = new BlockingCollection<IMessage>();
             
             new Thread(ReadMessages) { IsBackground = true }.Start();
@@ -42,31 +42,33 @@ namespace Glimpse.Agent
                 var message = _queue.Take();
 
                 // run through all listeners
-                 _subject.OnNext(message);
+                var notificationOptions = new MessageListenerOptions(message);
 
-                // TODO: Implement isCancelled at this point
-                ////if (!message.IsCancelled)
-                _channelSender.PublishMessage(message);
+                 _subject.OnNext(notificationOptions);
+
+                if (!notificationOptions.IsCancelled)
+                {
+                    _channelSender.PublishMessage(message);
+                }
             }
         }
 
-        public IObservable<T> Listen<T>() 
+        public IObservable<MessageListenerOptions> Listen<T>() 
         {
             return ListenIncludeLatest<T>().Skip(1);
         }
 
-        public IObservable<T> ListenIncludeLatest<T>() 
+        public IObservable<MessageListenerOptions> ListenIncludeLatest<T>() 
         {
             return _subject
-                .Where(msg => typeof(T).GetTypeInfo().IsAssignableFrom(msg.Payload.GetType().GetTypeInfo()))
-                .Select(msg => (T)msg);
+                .Where(opts => typeof(T).GetTypeInfo().IsAssignableFrom(opts.Message.Payload.GetType().GetTypeInfo()));
         }
-        public IObservable<IMessage> ListenAll()
+        public IObservable<MessageListenerOptions> ListenAll()
         {
             return ListenAllIncludeLatest().Skip(1);
         }
 
-        public IObservable<IMessage> ListenAllIncludeLatest()
+        public IObservable<MessageListenerOptions> ListenAllIncludeLatest()
         {
             return _subject;
         }
