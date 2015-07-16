@@ -17,14 +17,14 @@ namespace Glimpse.Agent
             _messageConverter = messageConverter;
         }
 
-        public async Task PublishMessage(IMessage message)
+        public async Task PublishMessage(object payload)
         {
             // TODO: Needs error handelling
             // TODO: Find out what happened to System.Net.Http.Formmating - PostAsJsonAsync
 
-            var newMessage = _messageConverter.ConvertMessage(message);
+            var message = _messageConverter.ConvertMessage(payload);
 
-            var response = await _httpClient.PostAsJsonAsync("http://localhost:15999/Glimpse/Agent", newMessage);
+            var response = await _httpClient.PostAsJsonAsync("http://localhost:15999/Glimpse/Agent", message);
   
             // Check that response was successful or throw exception
             response.EnsureSuccessStatusCode();

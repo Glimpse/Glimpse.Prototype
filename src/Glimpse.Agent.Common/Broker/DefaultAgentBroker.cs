@@ -9,14 +9,14 @@ namespace Glimpse.Agent
 { 
     public class DefaultAgentBroker : IAgentBroker
     {
-        private readonly ISubject<IMessage> _subject;
+        private readonly ISubject<object> _subject;
 
         // TODO: Review if we care about unifying which thread message is published on
         //       and which thread it is recieved on. If so need to use IScheduler.
 
         public DefaultAgentBroker(IChannelSender channelSender)
         {
-            _subject = new BehaviorSubject<IMessage>(null);
+            _subject = new BehaviorSubject<object>(null);
 
             // TODO: This probably shouldn't be here but don't want to setup 
             //       more infrasture atm. Deciding whether it should be users 
@@ -25,32 +25,30 @@ namespace Glimpse.Agent
             ListenAll().Subscribe(async msg => await channelSender.PublishMessage(msg));
         }
 
-        public IObservable<T> Listen<T>()
-            where T : IMessage
+        public IObservable<T> Listen<T>() 
         {
             return ListenIncludeLatest<T>().Skip(1);
         }
 
-        public IObservable<T> ListenIncludeLatest<T>()
-            where T : IMessage
+        public IObservable<T> ListenIncludeLatest<T>() 
         {
             return _subject
                 .Where(msg => typeof(T).GetTypeInfo().IsAssignableFrom(msg.GetType().GetTypeInfo()))
                 .Select(msg => (T)msg);
         }
-        public IObservable<IMessage> ListenAll()
+        public IObservable<object> ListenAll()
         {
             return ListenAllIncludeLatest().Skip(1);
         }
 
-        public IObservable<IMessage> ListenAllIncludeLatest()
+        public IObservable<object> ListenAllIncludeLatest()
         {
             return _subject;
         }
 
-        public async Task SendMessage(IMessage message)
+        public async Task SendMessage(object payload)
         {
-            await Task.Run(() => _subject.OnNext(message));
+            await Task.Run(() => _subject.OnNext(payload));
         }
     }
 }

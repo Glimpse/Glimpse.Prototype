@@ -17,14 +17,14 @@ namespace Glimpse.Agent
             _streamHubProxyFactory.Register("WebSocketChannelReceiver", x => _streamHubProxy = x);
         }
 
-        public async Task PublishMessage(IMessage message)
+        public async Task PublishMessage(object payload)
         {
             // TODO: Probably not the best place to put this
             await _streamHubProxyFactory.Start();
 
-            var newMessage = _messageConverter.ConvertMessage(message);
+            var message = _messageConverter.ConvertMessage(payload);
 
-            await _streamHubProxy.Invoke("HandleMessage", newMessage);
+            await _streamHubProxy.Invoke("HandleMessage", message);
         }
     }
 }

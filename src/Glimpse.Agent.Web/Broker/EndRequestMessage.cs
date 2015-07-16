@@ -5,7 +5,7 @@ using Glimpse.Web;
 
 namespace Glimpse.Agent.Web
 {
-    public class EndRequestMessage : BaseMessage, IMessageTag
+    public class EndRequestMessage : IMessageTag
     {
         public EndRequestMessage(IHttpRequest request)
         {

@@ -237,6 +237,7 @@
                             if (payload.time) {
                                 payload.timeServer = payload.time;
                                 payload.time = new Date(payload.time);
+                                payload.timeLong = payload.time.getTime();
                             }
 
                             messages.push(message);

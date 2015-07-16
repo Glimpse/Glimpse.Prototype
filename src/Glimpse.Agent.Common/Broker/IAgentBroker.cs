@@ -5,12 +5,10 @@ namespace Glimpse.Agent
 {
     public interface IAgentBroker
     {
-        IObservable<T> Listen<T>()
-            where T : IMessage;
+        IObservable<T> Listen<T>();
 
-        IObservable<T> ListenIncludeLatest<T>()
-            where T : IMessage;
+        IObservable<T> ListenIncludeLatest<T>();
 
-        Task SendMessage(IMessage message);
+        Task SendMessage(object message);
     }
 }

@@ -15,11 +15,11 @@ namespace Glimpse.Server
             _messageConverter = messageConverter;
         }
 
-        public async Task PublishMessage(IMessage message)
+        public async Task PublishMessage(object payload)
         {
-            var newMessage = _messageConverter.ConvertMessage(message);
+            var message = _messageConverter.ConvertMessage(payload);
 
-            await _messageBus.SendMessage(newMessage);
+            await _messageBus.SendMessage(message);
         }
     }
 }
