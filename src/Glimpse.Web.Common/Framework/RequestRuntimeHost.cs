@@ -32,11 +32,11 @@ namespace Glimpse.Web
             return true;
         }
 
-        public async Task Begin(IHttpContext context)
+        public void Begin(IHttpContext context)
         {
             foreach (var requestRuntime in _requestRuntimes)
             {
-                await requestRuntime.Begin(context);
+                requestRuntime.Begin(context);
             }
         }
 
@@ -55,11 +55,11 @@ namespace Glimpse.Web
             return false;
         }
 
-        public async Task End(IHttpContext context)
+        public void End(IHttpContext context)
         {
             foreach (var requestRuntime in _requestRuntimes)
             {
-                await requestRuntime.End(context);
+                requestRuntime.End(context);
             }
         }
     }

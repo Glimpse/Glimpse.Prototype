@@ -6,8 +6,8 @@ namespace Glimpse.Agent.Web
 {
     public interface IRequestProfiler
     {
-        Task Begin(IHttpContext newContext);
+        void Begin(IHttpContext newContext);
 
-        Task End(IHttpContext newContext);
+        void End(IHttpContext newContext);
     }
 }

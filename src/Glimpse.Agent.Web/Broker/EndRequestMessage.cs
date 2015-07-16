@@ -10,6 +10,7 @@ namespace Glimpse.Agent.Web
         public EndRequestMessage(IHttpRequest request, Timing timing)
         {
             Uri = request.Uri();
+            Timing = timing;
         }
 
         public Timing Timing { get; }

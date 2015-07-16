@@ -48,7 +48,7 @@ namespace Glimpse.Host.Web.Owin
                     // TODO: This is the wrong place for this, AgentRuntime isn't garenteed to execute first
                     _contextData.Value = new MessageContext {Id = Guid.NewGuid(), Type = "Request"};
 
-                    await _runtime.Begin(newContext);
+                    _runtime.Begin(newContext);
 
                     var handler = (IRequestHandler) null;
                     if (_runtime.TryGetHandle(newContext, out handler))
@@ -60,7 +60,7 @@ namespace Glimpse.Host.Web.Owin
                         await _innerNext(environment);
                     }
 
-                    await _runtime.End(newContext);
+                    _runtime.End(newContext);
                 }
                 else
                 {

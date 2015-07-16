@@ -17,24 +17,24 @@ namespace Glimpse.Agent.Web
             _requestIgnorePolicies = requestIgnorerProvider.Policies;
         }
 
-        public async Task Begin(IHttpContext context)
+        public void Begin(IHttpContext context)
         {
             if (ShouldProfile(context))
             {
                 foreach (var requestRuntime in _requestProfiliers)
                 {
-                    await requestRuntime.Begin(context);
+                    requestRuntime.Begin(context);
                 }
             }
         }
 
-        public async Task End(IHttpContext context)
+        public void End(IHttpContext context)
         {
             if (ShouldProfile(context))
             {
                 foreach (var requestRuntime in _requestProfiliers)
                 {
-                    await requestRuntime.End(context);
+                    requestRuntime.End(context);
                 }
             }
         }

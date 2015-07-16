@@ -15,7 +15,7 @@ namespace Glimpse.Agent.Web
             _messageBus = messageBus;
         }
 
-        public async Task Begin(IHttpContext newContext)
+        public void Begin(IHttpContext newContext)
         { 
             var message = new BeginRequestMessage(newContext.Request);
 
@@ -24,7 +24,7 @@ namespace Glimpse.Agent.Web
             _messageBus.BeginLogicalOperation(message);
         }
 
-        public async Task End(IHttpContext newContext)
+        public void End(IHttpContext newContext)
         {
             var timing = _messageBus.EndLogicalOperation<BeginRequestMessage>().Timing;
             var message = new EndRequestMessage(newContext.Request, timing);
