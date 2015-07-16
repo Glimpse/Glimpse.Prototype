@@ -14,5 +14,7 @@ namespace Glimpse.Agent
         IObservable<MessageListenerOptions> ListenAllIncludeLatest();
 
         void SendMessage(object message);
+
+        MessageContext Context { get; }
     }
 }

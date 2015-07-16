@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Linq;
-using System.Threading.Tasks;
+using Glimpse.Agent.AspNet.Mvc.Messages;
+using Glimpse.Agent.AspNet.Mvc.Proxies;
 using Microsoft.AspNet.Routing.Template;
 using Microsoft.Framework.Notification;
 
@@ -24,43 +24,40 @@ namespace Glimpse.Agent.AspNet.Mvc
         {
             var realRouter = routeData.Routers[routeData.Routers.Count - 2] as TemplateRoute;
 
-
-            _broker.SendMessage(new ActionSelectedMessage()
+            var message = new ActionSelectedMessage()
             {
-                DisplayName = actionDescriptor.DisplayName,
                 ActionId = actionDescriptor.Id,
+                DisplayName = actionDescriptor.DisplayName,
                 RouteData = new RouteData()
                 {
                     Name = realRouter.Name,
                     Pattern = realRouter.RouteTemplate,
-                    Data = routeData.Values.Select(kvp => new RouteResolutionData() { Tag = kvp.Key, Match = kvp.Value.ToString() }).ToList(),
+                    Data = routeData.Values.Select(kvp => new RouteResolutionData()
+                    {
+                        Tag = kvp.Key,
+                        Match = kvp.Value.ToString()
+                    }).ToList(),
                 }
-            });
+            };
+
+
+            _broker.BeginLogicalOperation(message);
+        }
+
+        [NotificationName("Microsoft.AspNet.Mvc.ActionInvoked")]
+        public void OnActionInvoked(
+            IActionDescriptor actionDescriptor,
+            IHttpContext httpContext)
+        {
+            var timing = _broker.EndLogicalOperation<ActionSelectedMessage>().Timing;
+            var message = new ActionInvokedMessage()
+            {
+                ActionId = actionDescriptor.Id,
+                DisplayName = actionDescriptor.DisplayName,
+                Timing = timing
+            };
+
+            _broker.SendMessage(message);
         }
     }
-
-    public interface IActionDescriptor
-    {
-        string Id { get; }
-        string DisplayName { get; }
-    }
-
-    public interface IHttpContext
-    {
-
-    }
-
-    public interface IRouteData
-    {
-        IReadOnlyList<object> Routers { get; }
-        IDictionary<string, object> DataTokens { get; }
-        IDictionary<string, object> Values { get; }
-    }
-
-    //public interface IRouter
-    //{
-    //    string Name { get; }
-
-    //    string Template { get; }
-    //}
 }
