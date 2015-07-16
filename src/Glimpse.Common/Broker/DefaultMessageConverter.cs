@@ -20,19 +20,19 @@ namespace Glimpse
             _contextData = contextData;
         }
 
-        public IMessageEnvelope ConvertMessage(object payload)
+        public IMessage ConvertMessage(object payload)
         { 
-            var newMessage = new MessageEnvelope();
-            newMessage.Type = payload.GetType().FullName;
-            newMessage.Payload = _jsonSerializer.Serialize(payload);
-            newMessage.Context = _contextData.Value;
+            var message = new Message();
+            message.Type = payload.GetType().FullName;
+            message.Payload = _jsonSerializer.Serialize(payload);
+            message.Context = _contextData.Value;
 
-            ProcessTags(payload, newMessage);
+            ProcessTags(payload, message);
 
-            return newMessage;
+            return message;
         } 
 
-        private void ProcessTags(object payload, MessageEnvelope newMessage)
+        private void ProcessTags(object payload, Message newMessage)
         {
             var tagMessage = payload as IMessageTag;
             if (tagMessage != null)

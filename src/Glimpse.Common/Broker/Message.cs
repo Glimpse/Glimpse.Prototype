@@ -5,11 +5,11 @@ using System.Collections.ObjectModel;
 namespace Glimpse
 {
 
-    public class MessageEnvelope : IMessageEnvelope
+    public class Message : IMessage
     {
         private readonly IDictionary<string, object> _indices;
 
-        public MessageEnvelope()
+        public Message()
         {
             _indices = new Dictionary<string, object>();
         }

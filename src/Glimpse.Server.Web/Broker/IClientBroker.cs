@@ -5,6 +5,6 @@ namespace Glimpse.Server
 {
     public interface IClientBroker
     {
-        Task PublishMessage(IMessageEnvelope message);
+        Task PublishMessage(IMessage message);
     }
 }

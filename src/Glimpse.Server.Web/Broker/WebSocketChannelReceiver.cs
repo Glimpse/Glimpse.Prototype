@@ -13,9 +13,9 @@ namespace Glimpse.Server
             _serverBroker = serverBroker;
         }
 
-        public async Task HandleMessage(MessageEnvelope envelope)
+        public async Task HandleMessage(Message message)
         {
-            await _serverBroker.SendMessage(envelope); 
+            await _serverBroker.SendMessage(message); 
         }
     }
 }

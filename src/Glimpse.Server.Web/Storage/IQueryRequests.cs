@@ -16,9 +16,9 @@ namespace Glimpse.Server
 
         T FilterByStatusCode(int min = 0, int max = int.MaxValue);
 
-        Task<IEnumerable<IMessageEnvelope>> Query(IEnumerable<T> filters);
+        Task<IEnumerable<IMessage>> Query(IEnumerable<T> filters);
 
-        Task<IEnumerable<IMessageEnvelope>> QueryWith(params T[] filters);
+        Task<IEnumerable<IMessage>> QueryWith(params T[] filters);
     }
 
     public abstract class QueryRequests<T> : IQueryRequests<T>
@@ -36,9 +36,9 @@ namespace Glimpse.Server
 
         public abstract T FilterByStatusCode(int min = 0, int max = int.MaxValue);
 
-        public abstract Task<IEnumerable<IMessageEnvelope>> Query(IEnumerable<T> filters);
+        public abstract Task<IEnumerable<IMessage>> Query(IEnumerable<T> filters);
 
-        public async Task<IEnumerable<IMessageEnvelope>> QueryWith(params T[] filters)
+        public async Task<IEnumerable<IMessage>> QueryWith(params T[] filters)
         {
             return await Query(filters);
         }

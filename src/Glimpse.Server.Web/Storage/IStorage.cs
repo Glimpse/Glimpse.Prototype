@@ -6,8 +6,8 @@ namespace Glimpse.Server
 {
     public interface IStorage
     {
-        Task Persist(IMessageEnvelope message);
+        Task Persist(IMessage message);
 
-        Task<IEnumerable<IMessageEnvelope>> RetrieveBy(Guid id);
+        Task<IEnumerable<IMessage>> RetrieveBy(Guid id);
     }
 }

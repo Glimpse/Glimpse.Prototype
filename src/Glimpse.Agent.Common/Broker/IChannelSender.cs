@@ -5,6 +5,6 @@ namespace Glimpse.Agent
 {
     public interface IChannelSender
     {
-        Task PublishMessage(IMessageEnvelope message);
+        Task PublishMessage(IMessage message);
     }
 }

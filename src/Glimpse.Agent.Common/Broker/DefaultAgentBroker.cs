@@ -13,8 +13,8 @@ namespace Glimpse.Agent
     {
         private readonly IChannelSender _channelSender;
         private readonly IMessageConverter _messageConverter;
-        private readonly ISubject<IMessageEnvelope> _subject;
-        private readonly BlockingCollection<IMessageEnvelope> _queue;
+        private readonly ISubject<IMessage> _subject;
+        private readonly BlockingCollection<IMessage> _queue;
 
         // TODO: Review if we care about unifying which thread message is published on
         //       and which thread it is recieved on. If so need to use IScheduler.
@@ -23,8 +23,8 @@ namespace Glimpse.Agent
         {
             _channelSender = channelSender;
             _messageConverter = messageConverter;
-            _subject = new BehaviorSubject<IMessageEnvelope>(null);
-            _queue = new BlockingCollection<IMessageEnvelope>();
+            _subject = new BehaviorSubject<IMessage>(null);
+            _queue = new BlockingCollection<IMessage>();
             
             new Thread(ReadMessages) { IsBackground = true }.Start();
 
@@ -61,12 +61,12 @@ namespace Glimpse.Agent
                 .Where(msg => typeof(T).GetTypeInfo().IsAssignableFrom(msg.Payload.GetType().GetTypeInfo()))
                 .Select(msg => (T)msg);
         }
-        public IObservable<IMessageEnvelope> ListenAll()
+        public IObservable<IMessage> ListenAll()
         {
             return ListenAllIncludeLatest().Skip(1);
         }
 
-        public IObservable<IMessageEnvelope> ListenAllIncludeLatest()
+        public IObservable<IMessage> ListenAllIncludeLatest()
         {
             return _subject;
         }

@@ -37,12 +37,12 @@ namespace Glimpse.Server
             // TEST CODE ONLY!!!!
         }
 
-        private MessageEnvelope ReadMessage(IHttpRequest request)
+        private Message ReadMessage(IHttpRequest request)
         {
             var reader = new StreamReader(request.Body);
             var text = reader.ReadToEnd();
 
-            var message = JsonConvert.DeserializeObject<MessageEnvelope>(text);
+            var message = JsonConvert.DeserializeObject<Message>(text);
 
             return message;
         }

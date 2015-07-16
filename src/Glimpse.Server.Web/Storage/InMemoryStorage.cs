@@ -7,22 +7,22 @@ namespace Glimpse.Server
 {
     public class InMemoryStorage : QueryRequests<Func<RequestIndices, bool>>, IStorage
     {
-        private readonly IList<IMessageEnvelope> _store;
+        private readonly IList<IMessage> _store;
         private readonly IList<RequestIndices> _indices;
 
         public InMemoryStorage()
         {
-            _store = new List<IMessageEnvelope>();
+            _store = new List<IMessage>();
             _indices = new List<RequestIndices>();
         }
 
-        public async Task Persist(IMessageEnvelope message)
+        public async Task Persist(IMessage message)
         {
             _indices.Add(new RequestIndices(message));
             await Task.Run(() => _store.Add(message));
         }
 
-        public Task<IEnumerable<IMessageEnvelope>> RetrieveBy(Guid id)
+        public Task<IEnumerable<IMessage>> RetrieveBy(Guid id)
         {
             return Task.Run(() => _store.Where(m => m.Context.Id == id));
         }
@@ -47,9 +47,9 @@ namespace Glimpse.Server
             return i => i.StatusCode.HasValue && i.StatusCode.Value >= min && i.StatusCode.Value <= max;
         }
 
-        public override Task<IEnumerable<IMessageEnvelope>> Query(IEnumerable<Func<RequestIndices, bool>> filters)
+        public override Task<IEnumerable<IMessage>> Query(IEnumerable<Func<RequestIndices, bool>> filters)
         {
-            return Task.Factory.StartNew<IEnumerable<IMessageEnvelope>>(() =>
+            return Task.Factory.StartNew<IEnumerable<IMessage>>(() =>
             {
                 /*
                 var query = _indices.AsQueryable();
@@ -62,7 +62,7 @@ namespace Glimpse.Server
             });
         }
 
-        public IEnumerable<IMessageEnvelope> AllMessages
+        public IEnumerable<IMessage> AllMessages
         {
             get { return _store; }
         }
@@ -76,7 +76,7 @@ namespace Glimpse.Server
         private readonly int? _statusCode;
         private readonly Guid _id;
 
-        public RequestIndices(IMessageEnvelope message)
+        public RequestIndices(IMessage message)
         {
             _id = message.Context.Id;
 

@@ -14,7 +14,7 @@ namespace Glimpse.Server
             _connectionManager = connectionManager;
         }
 
-        public Task PublishMessage(IMessageEnvelope message)
+        public Task PublishMessage(IMessage message)
         {
             return Task.Run(() =>
             {

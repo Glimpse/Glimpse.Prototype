@@ -9,7 +9,7 @@ namespace Glimpse.Server
 {
     public class DefaultServerBroker : IServerBroker
     {
-        private readonly ISubject<IMessageEnvelope> _subject;
+        private readonly ISubject<IMessage> _subject;
         private readonly IClientBroker _currentMessagePublisher;
 
         // TODO: Review if we care about unifying which thread message is published on
@@ -20,7 +20,7 @@ namespace Glimpse.Server
 
         public DefaultServerBroker(IClientBroker currentMessagePublisher, IStorage storage)
         {
-            _subject = new BehaviorSubject<IMessageEnvelope>(null);
+            _subject = new BehaviorSubject<IMessage>(null);
 
             // TODO: This probably shouldn't be here but don't want to setup more infrasture atm
             ListenAll().Subscribe(async msg => {
@@ -30,29 +30,29 @@ namespace Glimpse.Server
         }
 
         public IObservable<T> Listen<T>()
-            where T : IMessageEnvelope
+            where T : IMessage
         {
             return ListenIncludeLatest<T>().Skip(1);
         }
 
         public IObservable<T> ListenIncludeLatest<T>()
-            where T : IMessageEnvelope
+            where T : IMessage
         {
             return _subject
                 .Where(msg => typeof(T).GetTypeInfo().IsAssignableFrom(msg.GetType().GetTypeInfo()))
                 .Select(msg => (T)msg);
         }
-        public IObservable<IMessageEnvelope> ListenAll()
+        public IObservable<IMessage> ListenAll()
         {
             return ListenAllIncludeLatest().Skip(1);
         }
 
-        public IObservable<IMessageEnvelope> ListenAllIncludeLatest()
+        public IObservable<IMessage> ListenAllIncludeLatest()
         {
             return _subject;
         }
 
-        public async Task SendMessage(IMessageEnvelope message)
+        public async Task SendMessage(IMessage message)
         {
             await Task.Run(() => _subject.OnNext(message));
         }

@@ -9,11 +9,11 @@ namespace Glimpse.Server
     public interface IServerBroker
     {
         IObservable<T> Listen<T>()
-            where T : IMessageEnvelope;
+            where T : IMessage;
 
         IObservable<T> ListenIncludeLatest<T>()
-            where T : IMessageEnvelope;
+            where T : IMessage;
 
-        Task SendMessage(IMessageEnvelope message);
+        Task SendMessage(IMessage message);
     }
 }

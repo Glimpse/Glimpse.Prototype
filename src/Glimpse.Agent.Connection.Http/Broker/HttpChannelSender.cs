@@ -15,7 +15,7 @@ namespace Glimpse.Agent
             _httpClient = new HttpClient(_httpHandler);
         }
 
-        public async Task PublishMessage(IMessageEnvelope message)
+        public async Task PublishMessage(IMessage message)
         {
             // TODO: Needs error handelling
             // TODO: Find out what happened to System.Net.Http.Formmating - PostAsJsonAsync

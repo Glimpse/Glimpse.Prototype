@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Glimpse
 {
-    public interface IMessageEnvelope
+    public interface IMessage
     {
         string Type { get; }
 
