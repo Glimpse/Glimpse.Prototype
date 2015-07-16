@@ -8,12 +8,10 @@ namespace Glimpse.Server
 
     public interface IServerBroker
     {
-        IObservable<T> Listen<T>()
-            where T : IMessage;
+        IObservable<MessageListenerOptions> ListenAll();
 
-        IObservable<T> ListenIncludeLatest<T>()
-            where T : IMessage;
+        IObservable<MessageListenerOptions> ListenAllIncludeLatest();
 
-        Task SendMessage(IMessage message);
+        void SendMessage(IMessage message);
     }
 }

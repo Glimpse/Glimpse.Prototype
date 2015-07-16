@@ -16,10 +16,10 @@ namespace Glimpse.Server
             _indices = new List<RequestIndices>();
         }
 
-        public async Task Persist(IMessage message)
+        public void Persist(IMessage message)
         {
             _indices.Add(new RequestIndices(message));
-            await Task.Run(() => _store.Add(message));
+            _store.Add(message);
         }
 
         public Task<IEnumerable<IMessage>> RetrieveBy(Guid id)

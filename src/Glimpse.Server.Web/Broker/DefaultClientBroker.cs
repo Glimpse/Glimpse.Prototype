@@ -14,13 +14,10 @@ namespace Glimpse.Server
             _connectionManager = connectionManager;
         }
 
-        public Task PublishMessage(IMessage message)
-        {
-            return Task.Run(() =>
-            {
-                var hubContext = _connectionManager.GetHubContext<WebSocketClientChannelSender>();
-                hubContext.Clients.All.recieveMessage(message);
-            });
+        public void PublishMessage(IMessage message)
+        { 
+            var hubContext = _connectionManager.GetHubContext<WebSocketClientChannelSender>();
+            hubContext.Clients.All.recieveMessage(message);
         }
     }
 }

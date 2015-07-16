@@ -9,8 +9,9 @@ namespace Glimpse.Server
 {
     public class DefaultServerBroker : IServerBroker
     {
-        private readonly ISubject<IMessage> _subject;
+        private readonly ISubject<MessageListenerOptions> _subject;
         private readonly IClientBroker _currentMessagePublisher;
+        private readonly IStorage _storage;
 
         // TODO: Review if we care about unifying which thread message is published on
         //       and which thread it is recieved on. If so need to use IScheduler.
@@ -20,41 +21,38 @@ namespace Glimpse.Server
 
         public DefaultServerBroker(IClientBroker currentMessagePublisher, IStorage storage)
         {
-            _subject = new BehaviorSubject<IMessage>(null);
+            _subject = new BehaviorSubject<MessageListenerOptions>(null);
+            _currentMessagePublisher = currentMessagePublisher;
+            _storage = storage;
 
-            // TODO: This probably shouldn't be here but don't want to setup more infrasture atm
-            ListenAll().Subscribe(async msg => {
-                await currentMessagePublisher.PublishMessage(msg);
-                await storage.Persist(msg);
-            });
+            //// TODO: This probably shouldn't be here but don't want to setup more infrasture atm
+            //ListenAll().Subscribe(async msg => {
+            //    await currentMessagePublisher.PublishMessage(msg);
+            //    await storage.Persist(msg);
+            //});
         }
-
-        public IObservable<T> Listen<T>()
-            where T : IMessage
-        {
-            return ListenIncludeLatest<T>().Skip(1);
-        }
-
-        public IObservable<T> ListenIncludeLatest<T>()
-            where T : IMessage
-        {
-            return _subject
-                .Where(msg => typeof(T).GetTypeInfo().IsAssignableFrom(msg.GetType().GetTypeInfo()))
-                .Select(msg => (T)msg);
-        }
-        public IObservable<IMessage> ListenAll()
+        
+        public IObservable<MessageListenerOptions> ListenAll()
         {
             return ListenAllIncludeLatest().Skip(1);
         }
 
-        public IObservable<IMessage> ListenAllIncludeLatest()
+        public IObservable<MessageListenerOptions> ListenAllIncludeLatest()
         {
             return _subject;
         }
 
-        public async Task SendMessage(IMessage message)
+        public void SendMessage(IMessage message)
         {
-            await Task.Run(() => _subject.OnNext(message));
+            var notificationOptions = new MessageListenerOptions(message);
+
+            _subject.OnNext(notificationOptions);
+
+            if (!notificationOptions.IsCancelled)
+            {
+                _currentMessagePublisher.PublishMessage(message);
+                _storage.Persist(message);
+            }
         }
     }
 }

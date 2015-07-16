@@ -6,7 +6,7 @@ namespace Glimpse.Server
 {
     public interface IStorage
     {
-        Task Persist(IMessage message);
+        void Persist(IMessage message);
 
         Task<IEnumerable<IMessage>> RetrieveBy(Guid id);
     }

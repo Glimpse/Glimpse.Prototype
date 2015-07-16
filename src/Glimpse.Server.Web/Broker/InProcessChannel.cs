@@ -13,9 +13,9 @@ namespace Glimpse.Server
             _messageBus = messageBus;
         }
 
-        public async Task PublishMessage(IMessage message)
+        public void PublishMessage(IMessage message)
         {
-            await _messageBus.SendMessage(message);
+            _messageBus.SendMessage(message);
         }
     }
 }
