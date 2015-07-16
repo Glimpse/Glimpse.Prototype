@@ -19,7 +19,9 @@ namespace Glimpse.Agent.AspNet.Mvc
     internal class RouteData
     {
         public string Name { get; set; }
+
         public string Pattern { get; set; }
+
         public IList<RouteResolutionData> Data { get; set; }
     }
 
