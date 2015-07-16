@@ -15,12 +15,19 @@ namespace Glimpse.Agent
             _streamHubProxyFactory.Register("WebSocketChannelReceiver", x => _streamHubProxy = x);
         }
 
-        public async Task PublishMessage(IMessage message)
-        {
-            // TODO: Probably not the best place to put this
-            await _streamHubProxyFactory.Start();
+        public async void PublishMessage(IMessage message)
+        { 
+            // TODO: This is wrong, need to fix it
+            try
+            {
+                await _streamHubProxyFactory.Start();
             
-            await _streamHubProxy.Invoke("HandleMessage", message);
+                await _streamHubProxy.Invoke("HandleMessage", message);
+            }
+            catch (Exception e)
+            {
+                // TODO: Bad thing happened
+            }
         }
     }
 }
