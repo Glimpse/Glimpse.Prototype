@@ -9,6 +9,10 @@ namespace Glimpse.Agent
 
         IObservable<MessageListenerOptions> ListenIncludeLatest<T>();
 
+        IObservable<MessageListenerOptions> ListenAll();
+
+        IObservable<MessageListenerOptions> ListenAllIncludeLatest();
+
         void SendMessage(object message);
     }
 }
