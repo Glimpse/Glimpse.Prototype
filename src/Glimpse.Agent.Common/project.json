@@ -12,6 +12,8 @@
         },
         "dnxcore50": { 
             "dependencies": {
+                "System.Collections.Concurrent": "4.0.10-beta-*",
+                "System.Threading.Thread": "4.0.0-beta-*"
             }
         }
     }

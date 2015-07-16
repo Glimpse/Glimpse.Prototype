@@ -8,22 +8,18 @@ namespace Glimpse.Agent
     {
         private readonly HttpClient _httpClient;
         private readonly HttpClientHandler _httpHandler;
-        private readonly IMessageConverter _messageConverter;
 
-        public HttpChannelSender(IMessageConverter messageConverter)
+        public HttpChannelSender()
         {
             _httpHandler = new HttpClientHandler();
             _httpClient = new HttpClient(_httpHandler);
-            _messageConverter = messageConverter;
         }
 
-        public async Task PublishMessage(object payload)
+        public async Task PublishMessage(IMessageEnvelope message)
         {
             // TODO: Needs error handelling
             // TODO: Find out what happened to System.Net.Http.Formmating - PostAsJsonAsync
-
-            var message = _messageConverter.ConvertMessage(payload);
-
+            
             var response = await _httpClient.PostAsJsonAsync("http://localhost:15999/Glimpse/Agent", message);
   
             // Check that response was successful or throw exception

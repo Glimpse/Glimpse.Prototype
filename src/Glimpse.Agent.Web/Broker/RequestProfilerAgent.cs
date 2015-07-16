@@ -21,7 +21,7 @@ namespace Glimpse.Agent.Web
 
             // TODO: Full out message more
 
-            await _messageBus.SendMessage(message);
+            _messageBus.SendMessage(message);
         }
 
         public async Task End(IHttpContext newContext)
@@ -30,7 +30,7 @@ namespace Glimpse.Agent.Web
 
             // TODO: Full out message more
 
-            await _messageBus.SendMessage(message);
+            _messageBus.SendMessage(message);
         }
     }
 }
