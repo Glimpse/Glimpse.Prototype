@@ -25,14 +25,8 @@ namespace Glimpse.Agent
             _messageConverter = messageConverter;
             _subject = new BehaviorSubject<MessageListenerOptions>(null);
             _queue = new BlockingCollection<IMessage>();
-            
-            new Thread(ReadMessages) { IsBackground = true }.Start();
-
-            // TODO: This probably shouldn't be here but don't want to setup 
-            //       more infrasture atm. Deciding whether it should be users 
-            //       code which instantiates listners or if we provider infrasturcture
-            //       which starts them up and triggers the subscription. 
-            //ListenAll().Subscribe(async msg => await channelSender.PublishMessage(msg));
+             
+            Task.Run(() => ReadMessages());
         }
 
         private void ReadMessages()
