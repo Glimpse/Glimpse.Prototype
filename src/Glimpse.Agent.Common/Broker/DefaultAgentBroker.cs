@@ -31,10 +31,8 @@ namespace Glimpse.Agent
 
         private void ReadMessages()
         {
-            while (true)
+            foreach (var message in _queue.GetConsumingEnumerable())
             {
-                var message = _queue.Take();
-
                 // run through all listeners
                 var notificationOptions = new MessageListenerOptions(message);
 
