@@ -8,13 +8,14 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace Glimpse.Agent
-{ 
+{
     public class DefaultAgentBroker : IAgentBroker
     {
         private readonly IChannelSender _channelSender;
         private readonly IMessageConverter _messageConverter;
         private readonly ISubject<MessageListenerOptions> _subject;
         private readonly BlockingCollection<IMessage> _queue;
+        private readonly IContextData<MessageContext> _context;
 
         // TODO: Review if we care about unifying which thread message is published on
         //       and which thread it is recieved on. If so need to use IScheduler.
@@ -25,9 +26,11 @@ namespace Glimpse.Agent
             _messageConverter = messageConverter;
             _subject = new BehaviorSubject<MessageListenerOptions>(null);
             _queue = new BlockingCollection<IMessage>();
-             
+
             Task.Run(() => ReadMessages());
         }
+
+        public MessageContext Context => _context.Value;
 
         private void ReadMessages()
         {
@@ -50,11 +53,12 @@ namespace Glimpse.Agent
             return ListenIncludeLatest<T>().Skip(1);
         }
 
-        public IObservable<MessageListenerOptions> ListenIncludeLatest<T>() 
+        public IObservable<MessageListenerOptions> ListenIncludeLatest<T>()
         {
             return _subject
                 .Where(opts => typeof(T).GetTypeInfo().IsAssignableFrom(opts.Message.Payload.GetType().GetTypeInfo()));
         }
+
         public IObservable<MessageListenerOptions> ListenAll()
         {
             return ListenAllIncludeLatest().Skip(1);

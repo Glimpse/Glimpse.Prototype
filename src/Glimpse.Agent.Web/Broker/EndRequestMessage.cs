@@ -7,10 +7,13 @@ namespace Glimpse.Agent.Web
 {
     public class EndRequestMessage : IMessageTag
     {
-        public EndRequestMessage(IHttpRequest request)
+        public EndRequestMessage(IHttpRequest request, Timing timing)
         {
             Uri = request.Uri();
+            Timing = timing;
         }
+
+        public Timing Timing { get; }
 
         public string Uri { get; }
 
