@@ -24,6 +24,8 @@ namespace Glimpse.Agent
         {
             _channelSender = channelSender;
             _messageConverter = messageConverter;
+
+            _context = new ContextData<MessageContext>();
             _subject = new BehaviorSubject<MessageListenerOptions>(null);
             _queue = new BlockingCollection<IMessage>();
 
