@@ -17,7 +17,7 @@ namespace Glimpse
         public IEnumerable<Assembly> GetCandidateAssemblies(string coreLibrary)
         {
             var libraries = _manager.GetReferencingLibraries(coreLibrary);
-            var assemblyNames = libraries.SelectMany(l => l.LoadableAssemblies);
+            var assemblyNames = libraries.SelectMany(l => l.Assemblies);
             var assemblies = assemblyNames.Select(x => Assembly.Load(x));
 
             return assemblies;
