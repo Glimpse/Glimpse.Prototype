@@ -5,6 +5,6 @@ namespace Glimpse
 {
     public interface IMessageTag
     {
-        IEnumerable<string> Tags { get; }
+        IEnumerable<string> Tags { get; set; }
     }
 }

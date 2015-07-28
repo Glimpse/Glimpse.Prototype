@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
-using System.Globalization;
-using System.IO;
-using System.Text;
 
 namespace Glimpse
 {
@@ -27,17 +24,29 @@ namespace Glimpse
             message.Payload = _jsonSerializer.Serialize(payload);
             message.Context = _contextData.Value;
 
+            ProcessIndices(payload, message);
             ProcessTags(payload, message);
 
             return message;
         } 
 
-        private void ProcessTags(object payload, Message newMessage)
+        private void ProcessIndices(object payload, Message message)
+        {
+            var indicesMessage = payload as IMessageIndices;
+            if (indicesMessage?.Indices != null)
+            {
+                message.Indices = indicesMessage.Indices;
+                indicesMessage.Indices = null;
+            } 
+        }
+
+        private void ProcessTags(object payload, Message message)
         {
             var tagMessage = payload as IMessageTag;
-            if (tagMessage != null)
+            if (tagMessage?.Tags != null)
             {
-                newMessage.Tags = tagMessage.Tags;
+                message.Tags = tagMessage.Tags;
+                tagMessage.Tags = null;
             }
         }
     }
