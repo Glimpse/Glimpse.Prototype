@@ -5,21 +5,33 @@ using Glimpse.Web;
 
 namespace Glimpse.Agent.Web
 {
-    public class EndRequestMessage : IMessageTag
+    public class EndRequestMessage : IMessageIndices
     {
         public EndRequestMessage(IHttpRequest request, Timing timing)
         {
-            Uri = request.Uri();
-            Timing = timing;
+            Url = request.Uri();
+            StartTime = timing.Start;
+            EndTime = timing.End;
+            Duration = timing.Elapsed.TotalMilliseconds;
+            Method = request.Method;
+
+            Indices = new Dictionary<string, object> {
+                { "request.duration", Duration },
+                { "request.method", Method },
+                { "request.url", Url }
+            };
         }
 
-        public Timing Timing { get; }
+        public IReadOnlyDictionary<string, object> Indices { get; set; }
 
-        public string Uri { get; }
+        public double Duration { get; }
 
-        public IEnumerable<string> Tags
-        {
-            get { return new List<string> { "Test" }; }
-        }
+        public DateTime StartTime { get; }
+
+        public DateTime EndTime { get; }
+
+        public string Url { get; }
+
+        public string Method { get; }
     }
 }
