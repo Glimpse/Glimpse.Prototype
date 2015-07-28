@@ -81,11 +81,11 @@ namespace Glimpse.Server
             _id = message.Context.Id;
 
             var indices = message.Indices;
-            _duration = indices.GetValueOrDefault("request.duration") as float?;
-            _statusCode = indices.GetValueOrDefault("request.statuscode") as int?;
-            _url = indices.GetValueOrDefault("request.url") as string;
-            _method = indices.GetValueOrDefault("request.method") as string;
-            _statusCode = indices.GetValueOrDefault("request.statuscode") as int?;
+            _duration = indices?.GetValueOrDefault("request.duration") as float?;
+            _statusCode = indices?.GetValueOrDefault("request.statuscode") as int?;
+            _url = indices?.GetValueOrDefault("request.url") as string;
+            _method = indices?.GetValueOrDefault("request.method") as string;
+            _statusCode = indices?.GetValueOrDefault("request.statuscode") as int?;
         }
 
         public float? Duration
