@@ -6,7 +6,9 @@ namespace Glimpse
 {
 
     public class Message : IMessage
-    { 
+    {
+        public Guid Id { get; set; }
+
         public string Type { get; set; }
 
         public string Payload { get; set; }

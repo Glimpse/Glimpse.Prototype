@@ -20,6 +20,7 @@ namespace Glimpse
         public IMessage ConvertMessage(object payload)
         { 
             var message = new Message();
+            message.Id = Guid.NewGuid();
             message.Type = payload.GetType().FullName;
             message.Payload = _jsonSerializer.Serialize(payload);
             message.Context = _contextData.Value;
