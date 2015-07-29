@@ -33,21 +33,24 @@ namespace Glimpse
 
         private void ProcessIndices(object payload, Message message)
         {
-            var indicesMessage = payload as IMessageIndices;
-            if (indicesMessage?.Indices != null)
+            var indicesPayload = payload as IMessageIndices;
+            if (indicesPayload?.Indices != null)
             {
-                message.Indices = indicesMessage.Indices;
-                indicesMessage.Indices = null;
+                message.Indices = indicesPayload.Indices;
+                // TODO: longer term these props need to be not seralized at all
+                indicesPayload.Indices = null;  
             } 
         }
 
         private void ProcessTags(object payload, Message message)
         {
-            var tagMessage = payload as IMessageTag;
-            if (tagMessage?.Tags != null)
+            var tagPayload = payload as IMessageTag;
+            if (tagPayload?.Tags != null)
             {
-                message.Tags = tagMessage.Tags;
-                tagMessage.Tags = null;
+                message.Tags = tagPayload.Tags;
+                // TODO: longer term these props need to be not seralized at all
+                // TODO: this should be hanging off indices
+                tagPayload.Tags = null;
             }
         }
     }
