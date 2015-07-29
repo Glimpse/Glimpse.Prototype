@@ -20,14 +20,13 @@ namespace Glimpse
         public IMessage ConvertMessage(object payload)
         { 
             var message = new Message();
-
-            ProcessIndices(payload, message);
-            ProcessTags(payload, message);
-
             message.Id = Guid.NewGuid();
             message.Type = payload.GetType().FullName;
             message.Payload = _jsonSerializer.Serialize(payload);
             message.Context = _contextData.Value;
+
+            ProcessIndices(payload, message);
+            ProcessTags(payload, message);
 
             return message;
         } 
@@ -38,8 +37,6 @@ namespace Glimpse
             if (indicesPayload?.Indices != null)
             {
                 message.Indices = indicesPayload.Indices;
-                // TODO: longer term these props need to be not seralized at all
-                indicesPayload.Indices = null;  
             } 
         }
 
@@ -48,10 +45,8 @@ namespace Glimpse
             var tagPayload = payload as IMessageTag;
             if (tagPayload?.Tags != null)
             {
-                message.Tags = tagPayload.Tags;
-                // TODO: longer term these props need to be not seralized at all
                 // TODO: this should be hanging off indices
-                tagPayload.Tags = null;
+                message.Tags = tagPayload.Tags;
             }
         }
     }
