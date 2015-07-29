@@ -20,13 +20,14 @@ namespace Glimpse
         public IMessage ConvertMessage(object payload)
         { 
             var message = new Message();
+
+            ProcessIndices(payload, message);
+            ProcessTags(payload, message);
+
             message.Id = Guid.NewGuid();
             message.Type = payload.GetType().FullName;
             message.Payload = _jsonSerializer.Serialize(payload);
             message.Context = _contextData.Value;
-
-            ProcessIndices(payload, message);
-            ProcessTags(payload, message);
 
             return message;
         } 
