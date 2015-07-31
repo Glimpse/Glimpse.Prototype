@@ -9,11 +9,15 @@
         "**.user",
         "**.vspscc"
     ],
+    "commands": {
+        "web": "Microsoft.AspNet.Hosting --config hosting.ini"
+    },
     "dependencies": {
         "Glimpse.Host.Web.AspNet": "",
         "Glimpse.Server.Web": "",
         "Glimpse.Agent.Web": "",
         "Glimpse.Agent.Browser": "",
+        "Glimpse.Client.Web.Simple": "",
         "Microsoft.AspNet.Server.IIS": "1.0.0-*",
         "Microsoft.AspNet.Diagnostics": "1.0.0-*"
     },
