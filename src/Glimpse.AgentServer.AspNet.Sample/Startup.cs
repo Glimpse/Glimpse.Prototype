@@ -8,16 +8,18 @@ namespace Glimpse.AspNet.Sample
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
-        { 
-            services.AddGlimpse() 
-                    .RunningAgentWeb()
-                    .RunningServerWeb()
-                        .WithLocalAgent(); 
+        {
+            services
+                .AddGlimpse()
+                .RunningAgentWeb()
+                .RunningServerWeb()
+                .WithLocalAgent();
         }
 
         public void Configure(IApplicationBuilder app)
         {
             app.UseGlimpse();
+            app.UseGlimpseUI();
 
             // TODO: Nedd to find a better way of registering this. Problem is that this
             //       registration is aspnet5 specific.
