@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Mvc.Razor;
 using Microsoft.AspNet.Mvc.Razor.Directives;
-using Microsoft.AspNet.Razor.Generator.Compiler;
+using Microsoft.AspNet.Razor.Chunks;
 
-namespace Glimpse.Host.Web.AspNet
+namespace Glimpse.Web.Common
 {
     public class GlimpseRazorHost : MvcRazorHost
     {
-        public GlimpseRazorHost(ICodeTreeCache codeTreeCache) : base(codeTreeCache)
+        public GlimpseRazorHost(IChunkTreeCache codeTreeCache) : base(codeTreeCache)
         {
         }
 
@@ -28,7 +28,7 @@ namespace Glimpse.Host.Web.AspNet
 
                 newArray[original.Length] = new AddTagHelperChunk
                 {
-                    LookupText = "*, Glimpse.Host.Web.AspNet"
+                    LookupText = "*, Glimpse.Web.Common"
                 };
 
                 _overriddenChunks = newArray;
