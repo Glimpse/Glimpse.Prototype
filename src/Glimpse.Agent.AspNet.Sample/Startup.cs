@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using Microsoft.AspNet.Builder;
-using Glimpse.Host.Web.AspNet;
+﻿using Microsoft.AspNet.Builder;
 using Microsoft.Framework.DependencyInjection;
 
 namespace Glimpse.Agent.AspNet.Sample

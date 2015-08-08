@@ -1,15 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNet.Http;
 using System.Collections.Generic;
-using Glimpse;
-using Glimpse.Web;
 
 namespace Glimpse.Agent.Web
 {
     public class BeginRequestMessage : IMessageIndices
     {
-        public BeginRequestMessage(IHttpRequest request)
+        public BeginRequestMessage(HttpRequest request)
         {
-            Url = request.Uri();
+            // TODO: check if there is a better way of doing this
+            Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}";
 
             Indices = new Dictionary<string, object> { { "request.url", Url } };
         }

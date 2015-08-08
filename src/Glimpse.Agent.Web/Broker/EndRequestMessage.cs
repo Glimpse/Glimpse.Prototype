@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Glimpse;
-using Glimpse.Web;
+using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent.Web
 {
     public class EndRequestMessage : IMessageIndices
     {
-        public EndRequestMessage(IHttpRequest request, Timing timing)
+        public EndRequestMessage(HttpRequest request, Timing timing)
         {
-            Url = request.Uri();
+            Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}";
             StartTime = timing.Start;
             EndTime = timing.End;
             Duration = timing.Elapsed.TotalMilliseconds;

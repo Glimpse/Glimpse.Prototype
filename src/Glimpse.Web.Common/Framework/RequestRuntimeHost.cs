@@ -1,7 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Http;
 using System.Collections.Generic;
-using Microsoft.Framework.DependencyInjection;
-using System.Threading.Tasks;
 
 namespace Glimpse.Web
 {
@@ -18,7 +16,7 @@ namespace Glimpse.Web
             _requestHandlers = requestHandlersProvider.Handlers; 
         }
 
-        public bool Authorized(IHttpContext context)
+        public bool Authorized(HttpContext context)
         {
             foreach (var requestAuthorizer in _requestAuthorizers)
             {
@@ -32,7 +30,7 @@ namespace Glimpse.Web
             return true;
         }
 
-        public void Begin(IHttpContext context)
+        public void Begin(HttpContext context)
         {
             foreach (var requestRuntime in _requestRuntimes)
             {
@@ -40,7 +38,7 @@ namespace Glimpse.Web
             }
         }
 
-        public bool TryGetHandle(IHttpContext context, out IRequestHandler handeler)
+        public bool TryGetHandle(HttpContext context, out IRequestHandler handeler)
         {
             foreach (var requestHandler in _requestHandlers)
             {
@@ -55,7 +53,7 @@ namespace Glimpse.Web
             return false;
         }
 
-        public void End(IHttpContext context)
+        public void End(HttpContext context)
         {
             foreach (var requestRuntime in _requestRuntimes)
             {

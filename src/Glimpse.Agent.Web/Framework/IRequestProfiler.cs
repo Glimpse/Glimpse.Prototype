@@ -1,13 +1,11 @@
-﻿using Glimpse.Web;
-using System;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent.Web
 {
     public interface IRequestProfiler
     {
-        void Begin(IHttpContext newContext);
+        void Begin(HttpContext newContext);
 
-        void End(IHttpContext newContext);
+        void End(HttpContext newContext);
     }
 }

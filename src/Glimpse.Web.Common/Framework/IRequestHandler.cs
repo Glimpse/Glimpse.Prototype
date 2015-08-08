@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNet.Http;
 using System.Threading.Tasks;
 
 namespace Glimpse.Web
 {
     public interface IRequestHandler
     {
-        bool WillHandle(IHttpContext context);
+        bool WillHandle(HttpContext context);
 
-        Task Handle(IHttpContext context);
+        Task Handle(HttpContext context);
     }
 }

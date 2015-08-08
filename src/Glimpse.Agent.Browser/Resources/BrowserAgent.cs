@@ -1,5 +1,5 @@
 ﻿using Glimpse.Web;
-using System;
+using Microsoft.AspNet.Http;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -9,16 +9,16 @@ namespace Glimpse.Agent.Browser.Resources
 {
     public class BrowserAgent : IRequestHandler
     {
-        public bool WillHandle(IHttpContext context)
+        public bool WillHandle(HttpContext context)
         {
             return context.Request.Path == "/Glimpse/Browser/Agent";
         }
 
-        public async Task Handle(IHttpContext context)
+        public async Task Handle(HttpContext context)
         {
             var response = context.Response;
-
-            response.SetHeader("Content-Type", "application/javascript");
+            
+            response.Headers.Set("Content-Type", "application/javascript");
 
             var assembly = typeof(BrowserAgent).GetTypeInfo().Assembly;
 

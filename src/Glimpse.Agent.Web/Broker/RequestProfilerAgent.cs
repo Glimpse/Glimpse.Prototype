@@ -1,7 +1,4 @@
-﻿using Glimpse.Web;
-using Microsoft.Framework.Logging;
-using System;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent.Web
 {
@@ -15,7 +12,7 @@ namespace Glimpse.Agent.Web
             _messageBus = messageBus;
         }
 
-        public void Begin(IHttpContext newContext)
+        public void Begin(HttpContext newContext)
         { 
             var message = new BeginRequestMessage(newContext.Request);
 
@@ -24,7 +21,7 @@ namespace Glimpse.Agent.Web
             _messageBus.BeginLogicalOperation(message);
         }
 
-        public void End(IHttpContext newContext)
+        public void End(HttpContext newContext)
         {
             var timing = _messageBus.EndLogicalOperation<BeginRequestMessage>().Timing;
             var message = new EndRequestMessage(newContext.Request, timing);

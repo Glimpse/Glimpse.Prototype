@@ -3,8 +3,9 @@ using Microsoft.AspNet.Builder;
 using Glimpse.Web;
 using System;
 using Microsoft.Framework.DependencyInjection;
+using Microsoft.AspNet.Http;
 
-namespace Glimpse.Host.Web.AspNet
+namespace Glimpse.Web.Common
 {
     public class GlimpseMiddleware
     {
@@ -18,7 +19,7 @@ namespace Glimpse.Host.Web.AspNet
         {
         }
 
-        public GlimpseMiddleware(RequestDelegate innerNext, IServiceProvider serviceProvider, Func<IHttpContext, bool> shouldRun)
+        public GlimpseMiddleware(RequestDelegate innerNext, IServiceProvider serviceProvider, Func<bool> shouldRun)
         {
             _innerNext = innerNext;
 
@@ -31,27 +32,25 @@ namespace Glimpse.Host.Web.AspNet
             var settings = new Settings();
             if (shouldRun != null)
             {
-                settings.ShouldProfile = context => shouldRun((HttpContext)context);
+                settings.ShouldProfile = shouldRun;
             }
             _settings = settings;
         }
 
         // TODO: Look at pushing the workings of this into MasterRequestRuntime
-        public async Task Invoke(Microsoft.AspNet.Http.HttpContext context)
+        public async Task Invoke(HttpContext context)
         {
-            var newContext = new HttpContext(context, _settings);
-
-            if (_runtime.Authorized(newContext))
+            if (_runtime.Authorized(context))
             {
                 // TODO: This is the wrong place for this, AgentRuntime isn't garenteed to execute first
                 _contextData.Value = new MessageContext { Id = Guid.NewGuid(), Type = "Request" };
 
-                _runtime.Begin(newContext);
+                _runtime.Begin(context);
 
                 var handler = (IRequestHandler)null;
-                if (_runtime.TryGetHandle(newContext, out handler))
+                if (_runtime.TryGetHandle(context, out handler))
                 {
-                    await handler.Handle(newContext);
+                    await handler.Handle(context);
                 }
                 else
                 {
@@ -59,7 +58,7 @@ namespace Glimpse.Host.Web.AspNet
                 }
 
                 // TODO: This doesn't work correctly :( (headers)
-                _runtime.End(newContext);
+                _runtime.End(context);
             }
             else
             {
