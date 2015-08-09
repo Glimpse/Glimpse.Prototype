@@ -37,7 +37,7 @@ namespace Glimpse.Agent.Connection.Stream.Connection
             try
             {
                 // TODO: This needs to get out of config
-                var hubConnection = new HubConnection("http://localhost:5250/Glimpse/Data/Stream");
+                var hubConnection = new HubConnection("http://localhost:5210/Glimpse/Data/Stream");
 
                 SetupHubProxies(hubConnection);
 
