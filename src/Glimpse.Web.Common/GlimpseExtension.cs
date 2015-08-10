@@ -1,7 +1,6 @@
 ﻿
+using Glimpse.Web.Common;
 using System;
-using Glimpse.Web;
-using Glimpse.Host.Web.AspNet;
 
 namespace Microsoft.AspNet.Builder
 {
@@ -17,7 +16,7 @@ namespace Microsoft.AspNet.Builder
             return app.Use(next => new GlimpseMiddleware(next, app.ApplicationServices).Invoke);
         }
 
-        public static IApplicationBuilder UseGlimpse(this IApplicationBuilder app, Func<IHttpContext, bool> shouldRun)
+        public static IApplicationBuilder UseGlimpse(this IApplicationBuilder app, Func<bool> shouldRun)
         {
             return app.Use(next => new GlimpseMiddleware(next, app.ApplicationServices, shouldRun).Invoke);
         }

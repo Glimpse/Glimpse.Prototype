@@ -1,8 +1,7 @@
 ﻿using Glimpse.Web;
-using System;
+using Microsoft.AspNet.Http;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Glimpse.Agent.Web
 {
@@ -17,7 +16,7 @@ namespace Glimpse.Agent.Web
             _requestIgnorePolicies = requestIgnorerProvider.Policies;
         }
 
-        public void Begin(IHttpContext context)
+        public void Begin(HttpContext context)
         {
             if (ShouldProfile(context))
             {
@@ -28,7 +27,7 @@ namespace Glimpse.Agent.Web
             }
         }
 
-        public void End(IHttpContext context)
+        public void End(HttpContext context)
         {
             if (ShouldProfile(context))
             {
@@ -39,7 +38,7 @@ namespace Glimpse.Agent.Web
             }
         }
 
-        public bool ShouldProfile(IHttpContext context)
+        public bool ShouldProfile(HttpContext context)
         {
             if (_requestIgnorePolicies.Any())
             {

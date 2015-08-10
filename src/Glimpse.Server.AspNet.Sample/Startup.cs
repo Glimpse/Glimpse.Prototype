@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.AspNet.Builder;
-using Glimpse.Host.Web.AspNet;
 using Microsoft.Framework.DependencyInjection;
 
 namespace Glimpse.Server.AspNet.Sample

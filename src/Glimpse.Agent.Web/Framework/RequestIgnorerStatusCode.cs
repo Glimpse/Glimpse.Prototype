@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Glimpse.Agent.Web;
-using Glimpse.Web;
-using Microsoft.Framework.OptionsModel;
+using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent.Web.Framework
 {
@@ -15,7 +13,7 @@ namespace Glimpse.Agent.Web.Framework
             _statusCodes = requestIgnorerStatusCodeProvider.StatusCodes;
         }
 
-        public bool ShouldIgnore(IHttpContext context)
+        public bool ShouldIgnore(HttpContext context)
         {
             return _statusCodes.Contains(context.Response.StatusCode);
         }

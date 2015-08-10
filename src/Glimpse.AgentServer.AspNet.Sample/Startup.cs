@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
-using Glimpse.Host.Web.AspNet;
 using Microsoft.Framework.DependencyInjection;
 
 namespace Glimpse.AspNet.Sample

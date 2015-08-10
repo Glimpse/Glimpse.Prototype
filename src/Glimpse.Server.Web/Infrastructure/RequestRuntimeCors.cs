@@ -1,17 +1,16 @@
 ﻿using Glimpse.Web;
-using System;
-using System.Threading.Tasks;
+using Microsoft.AspNet.Http;
 
 namespace Glimpse.Server.Infrastructure
 {
     public class RequestRuntimeCors : IRequestRuntime
     {
-        public void Begin(IHttpContext newContext)
+        public void Begin(HttpContext newContext)
         {
-            newContext.Response.SetHeader("Access-Control-Allow-Origin", "*");
+            newContext.Response.Headers.Set("Access-Control-Allow-Origin", "*");
         }
 
-        public void End(IHttpContext newContext)
+        public void End(HttpContext newContext)
         {
         }
     }

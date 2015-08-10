@@ -6,6 +6,6 @@ namespace Glimpse
     //       and not just HttpContext.
     public interface ISettings
     {
-        Func<IContext, bool> ShouldProfile { get; }
+        Func<bool> ShouldProfile { get; }
     }
 }

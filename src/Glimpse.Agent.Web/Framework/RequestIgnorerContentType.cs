@@ -1,8 +1,6 @@
+using Microsoft.AspNet.Http;
 using System.Collections.Generic;
 using System.Linq;
-using Glimpse.Agent.Web;
-using Glimpse.Web;
-using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse.Agent.Web.Framework
 {
@@ -15,7 +13,7 @@ namespace Glimpse.Agent.Web.Framework
             _contextType = requestIgnorerContentTypeProvider.ContentTypes;
         }
 
-        public bool ShouldIgnore(IHttpContext context)
+        public bool ShouldIgnore(HttpContext context)
         {
             return _contextType.Contains(context.Response.ContentType);
         }

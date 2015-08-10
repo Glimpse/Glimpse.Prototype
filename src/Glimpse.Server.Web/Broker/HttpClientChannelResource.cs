@@ -1,8 +1,7 @@
 ﻿using Glimpse.Web;
+using Microsoft.AspNet.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Glimpse.Server
@@ -22,16 +21,16 @@ namespace Glimpse.Server
             _jsonSerializer = jsonSerializer;
         }
 
-        public bool WillHandle(IHttpContext context)
+        public bool WillHandle(HttpContext context)
         {
             return context.Request.Path == "/Glimpse/Data/History";
         }
 
-        public async Task Handle(IHttpContext context)
+        public async Task Handle(HttpContext context)
         {
             var response = context.Response;
 
-            response.SetHeader("Content-Type", "application/json");
+            response.Headers.Set("Content-Type", "application/json");
 
             var list = _store.AllMessages;
             var output = _jsonSerializer.Serialize(list); 

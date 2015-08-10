@@ -1,5 +1,5 @@
 ﻿using Glimpse.Web;
-using System;
+using Microsoft.AspNet.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -7,19 +7,19 @@ namespace Glimpse.Server.Resources
 {
     public class HelloGlimpseResource : IRequestHandler
     {
-        public bool WillHandle(IHttpContext context)
+        public bool WillHandle(HttpContext context)
         {
             return context.Request.Path == "/Glimpse";
         }
 
-        public async Task Handle(IHttpContext context)
+        public async Task Handle(HttpContext context)
         {
             var response = context.Response;
 
-            response.SetHeader("Content-Type", "text/plain");
+            response.Headers.Set("Content-Type", "text/plain");
 
             var data = Encoding.UTF8.GetBytes("Hello world, Glimpse!");
-            await response.WriteAsync(data);
+            await response.Body.WriteAsync(data, 0, data.Length);
         }
     }
 }

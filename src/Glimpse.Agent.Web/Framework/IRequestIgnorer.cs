@@ -1,10 +1,9 @@
-﻿using System;
-using Glimpse.Web;
+﻿using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent.Web
 {
     public interface IRequestIgnorer
     {
-        bool ShouldIgnore(IHttpContext context);
+        bool ShouldIgnore(HttpContext context);
     }
 }

@@ -1,5 +1,6 @@
-﻿using System; 
-using Glimpse.Web;
+﻿using Glimpse.Web;
+using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Http.Features;
 
 namespace Glimpse.Server
 {
@@ -12,9 +13,10 @@ namespace Glimpse.Server
             _allowRemoteProvider = allowRemoteProvider;
         }
 
-        public bool AllowUser(IHttpContext context)
+        public bool AllowUser(HttpContext context)
         {
-            return _allowRemoteProvider.AllowRemote || context.Request.IsLocal;
+            var connectionFeature = context.GetFeature<IHttpConnectionFeature>();
+            return _allowRemoteProvider.AllowRemote || (connectionFeature != null && connectionFeature.IsLocal);
         }
     }
 }
