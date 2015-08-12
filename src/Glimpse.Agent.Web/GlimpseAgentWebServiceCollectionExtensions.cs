@@ -1,4 +1,5 @@
 ﻿using Microsoft.Framework.DependencyInjection;
+using Microsoft.Framework.DependencyInjection.Extensions;
 using System;
 using Glimpse.Agent.Web;
 
