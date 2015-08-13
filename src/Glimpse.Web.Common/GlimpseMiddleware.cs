@@ -9,21 +9,29 @@ namespace Glimpse.Web.Common
 {
     public class GlimpseMiddleware
     {
-        private readonly RequestDelegate _innerNext;
+        private readonly RequestDelegate _next;
+        private readonly RequestDelegate _branch;
         private readonly RequestRuntimeHost _runtime;
         private readonly ISettings _settings;
         private readonly IContextData<MessageContext> _contextData;
 
-        public GlimpseMiddleware(RequestDelegate innerNext, IServiceProvider serviceProvider)
-            : this(innerNext, serviceProvider, null)
+        public GlimpseMiddleware(RequestDelegate next, IApplicationBuilder branchBuilder)
+            : this(next, branchBuilder, null)
         {
         }
 
-        public GlimpseMiddleware(RequestDelegate innerNext, IServiceProvider serviceProvider, Func<bool> shouldRun)
+        public GlimpseMiddleware(RequestDelegate next, IApplicationBuilder branchBuilder, Func<bool> shouldRun)
         {
-            _innerNext = innerNext;
+            _next = next;
+            
+            // this is registered at the end of the pipeline
+            branchBuilder.Use(subNext => { return async ctx => await next(ctx); });
 
-            var typeActivator = serviceProvider.GetService<ITypeActivator>();
+            _branch = branchBuilder.Build();
+
+
+
+            var typeActivator = branchBuilder.ApplicationServices.GetService<ITypeActivator>();
              
             _runtime = typeActivator.CreateInstance<RequestRuntimeHost>(); 
             _contextData = new ContextData<MessageContext>();
@@ -44,7 +52,8 @@ namespace Glimpse.Web.Common
             {
                 // TODO: This is the wrong place for this, AgentRuntime isn't garenteed to execute first
                 _contextData.Value = new MessageContext { Id = Guid.NewGuid(), Type = "Request" };
-
+                
+                    /*
                 _runtime.Begin(context);
 
                 var handler = (IRequestHandler)null;
@@ -54,15 +63,18 @@ namespace Glimpse.Web.Common
                 }
                 else
                 {
-                    await _innerNext(context);
+                    await _next(context);
                 }
 
                 // TODO: This doesn't work correctly :( (headers)
                 _runtime.End(context);
+                */
+
+                await _branch(context);
             }
             else
             {
-                await _innerNext(context);
+                await _next(context);
             }
 
             /*
@@ -97,7 +109,7 @@ namespace Glimpse.Web.Common
 
             if (!handeled)
             { 
-                await _innerNext(context);
+                await _next(context);
             }
             */
         }
