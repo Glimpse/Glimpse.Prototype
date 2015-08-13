@@ -8,17 +8,12 @@ namespace Glimpse.Web
     public class RequestRuntimeHost
     {
         private readonly IEnumerable<IRequestAuthorizer> _requestAuthorizers;
-        private readonly IEnumerable<ILogicMiddlewareComposer> _logicMiddlewareContainers;
-        private readonly IEnumerable<IResourceMiddlewareComposer> _resourceMiddlewareContainers;
         //private readonly IEnumerable<IRequestRuntime> _requestRuntimes;
         //private readonly IEnumerable<IRequestHandler> _requestHandlers;
 
-        public RequestRuntimeHost(IRequestAuthorizerProvider requestAuthorizerProvider, ITypeService typeService) //, IRequestRuntimeProvider requestRuntimesProvider, IRequestHandlerProvider requestHandlersProvider)
+        public RequestRuntimeHost(IRequestAuthorizerProvider requestAuthorizerProvider) //, IRequestRuntimeProvider requestRuntimesProvider, IRequestHandlerProvider requestHandlersProvider)
         {
             _requestAuthorizers = requestAuthorizerProvider.Authorizers;
-            // TODO: needs to be switched over to using providers
-            _logicMiddlewareContainers = typeService.Resolve<ILogicMiddlewareComposer>();
-            _resourceMiddlewareContainers = typeService.Resolve<IResourceMiddlewareComposer>();
             //_requestRuntimes = requestRuntimesProvider.Runtimes; 
             //_requestHandlers = requestHandlersProvider.Handlers; 
         }
@@ -36,28 +31,7 @@ namespace Glimpse.Web
 
             return true;
         }
-
-        public IApplicationBuilder BuildBranchBuilder(IApplicationBuilder appBuilder)
-        {
-            // create new pipeline
-            var branchBuilder = appBuilder.New();
-            // run through logic
-            foreach (var logicContainer in _logicMiddlewareContainers)
-            {
-                logicContainer.Register(branchBuilder);
-            }
-            // run through resource
-            branchBuilder.MapUse("/glimpse", innerApp =>
-            {
-                foreach (var resourceContainer in _resourceMiddlewareContainers)
-                {
-                    resourceContainer.Register(innerApp);
-                }
-            });
-
-            return branchBuilder;
-        }
-
+        
         //public void Begin(HttpContext context)
         //{
         //    foreach (var requestRuntime in _requestRuntimes)
