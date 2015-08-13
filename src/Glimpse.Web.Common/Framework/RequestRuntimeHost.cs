@@ -8,8 +8,8 @@ namespace Glimpse.Web
     public class RequestRuntimeHost
     {
         private readonly IEnumerable<IRequestAuthorizer> _requestAuthorizers;
-        private readonly IEnumerable<ILogicMiddleware> _logicMiddlewareContainers;
-        private readonly IEnumerable<IResourceMiddleware> _resourceMiddlewareContainers;
+        private readonly IEnumerable<ILogicMiddlewareComposer> _logicMiddlewareContainers;
+        private readonly IEnumerable<IResourceMiddlewareComposer> _resourceMiddlewareContainers;
         //private readonly IEnumerable<IRequestRuntime> _requestRuntimes;
         //private readonly IEnumerable<IRequestHandler> _requestHandlers;
 
@@ -17,8 +17,8 @@ namespace Glimpse.Web
         {
             _requestAuthorizers = requestAuthorizerProvider.Authorizers;
             // TODO: needs to be switched over to using providers
-            _logicMiddlewareContainers = typeService.Resolve<ILogicMiddleware>();
-            _resourceMiddlewareContainers = typeService.Resolve<IResourceMiddleware>();
+            _logicMiddlewareContainers = typeService.Resolve<ILogicMiddlewareComposer>();
+            _resourceMiddlewareContainers = typeService.Resolve<IResourceMiddlewareComposer>();
             //_requestRuntimes = requestRuntimesProvider.Runtimes; 
             //_requestHandlers = requestHandlersProvider.Handlers; 
         }
@@ -96,27 +96,27 @@ namespace Glimpse.Web
 
 
 
-    public interface IDynamicMiddleware
+    public interface IDynamicMiddlewareComposer
     {
         void Register(IApplicationBuilder applicationBuilder);
     }
 
-    public interface IResourceMiddleware : IDynamicMiddleware
+    public interface IResourceMiddlewareComposer : IDynamicMiddlewareComposer
     {
     }
 
-    public interface ILogicMiddleware : IDynamicMiddleware
+    public interface ILogicMiddlewareComposer : IDynamicMiddlewareComposer
     {
     }
 
-    public class TestResourceMiddleware : IResourceMiddleware
+    public class TestResourceMiddlewareComposer : IResourceMiddlewareComposer
     {
         public void Register(IApplicationBuilder appBuilder)
         {
             appBuilder.Map("/test", newAppBuilder => newAppBuilder.Run(async context => await context.Response.WriteAsync("Agent!")));
         }
     }
-    public class HeaderLogicMiddleware : ILogicMiddleware
+    public class HeaderLogicMiddlewareComposer : ILogicMiddlewareComposer
     {
         public void Register(IApplicationBuilder appBuilder)
         {

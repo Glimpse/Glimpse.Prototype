@@ -18,11 +18,27 @@ namespace Microsoft.AspNet.Builder
 
         public static IApplicationBuilder UseGlimpse(this IApplicationBuilder app, Func<bool> shouldRun)
         {
-            var typeActivator = app.ApplicationServices.GetService<ITypeActivator>(); 
+            var typeService = app.ApplicationServices.GetService<ITypeService>();
 
-            var host = typeActivator.CreateInstance<RequestRuntimeHost>();
-            var branchBuilder = host.BuildBranchBuilder(app);
-            
+            var logicMiddlewareComposers = typeService.Resolve<ILogicMiddlewareComposer>();
+            var resourceMiddlewareComposers = typeService.Resolve<IResourceMiddlewareComposer>();
+
+            // create new pipeline
+            var branchBuilder = app.New();
+            // run through logic
+            foreach (var logicComposer in logicMiddlewareComposers)
+            {
+                logicComposer.Register(branchBuilder);
+            }
+            // run through resource
+            branchBuilder.MapUse("/glimpse", innerApp =>
+            {
+                foreach (var resourceComposer in resourceMiddlewareComposers)
+                {
+                    resourceComposer.Register(innerApp);
+                }
+            });
+
             return app.Use(next => new GlimpseMiddleware(next, branchBuilder, shouldRun).Invoke);
         }
     }
