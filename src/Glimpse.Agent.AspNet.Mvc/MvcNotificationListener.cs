@@ -16,14 +16,13 @@ namespace Glimpse.Agent.AspNet.Mvc
             _broker = broker;
         }
 
+        // Note: This event is the start of the action pipeline. The action has been selected, the route
+        //       has been selected but no filters have run and model binding hasn't occured.
         [NotificationName("Microsoft.AspNet.Mvc.ActionSelected")]
-        public void OnActionSelected(
-            IActionDescriptor actionDescriptor,
-            IHttpContext httpContext,
-            IRouteData routeData)
+        public void OnActionSelected(IActionDescriptor actionDescriptor, IHttpContext httpContext, IRouteData routeData)
         {
             var realRouter = routeData.Routers[routeData.Routers.Count - 2] as TemplateRoute;
-
+            
             var message = new ActionSelectedMessage()
             {
                 ActionId = actionDescriptor.Id,
