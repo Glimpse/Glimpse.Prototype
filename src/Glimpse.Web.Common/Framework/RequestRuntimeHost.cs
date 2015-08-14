@@ -8,14 +8,10 @@ namespace Glimpse.Web
     public class RequestRuntimeHost
     {
         private readonly IEnumerable<IRequestAuthorizer> _requestAuthorizers;
-        //private readonly IEnumerable<IRequestRuntime> _requestRuntimes;
-        //private readonly IEnumerable<IRequestHandler> _requestHandlers;
 
-        public RequestRuntimeHost(IRequestAuthorizerProvider requestAuthorizerProvider) //, IRequestRuntimeProvider requestRuntimesProvider, IRequestHandlerProvider requestHandlersProvider)
+        public RequestRuntimeHost(IRequestAuthorizerProvider requestAuthorizerProvider)
         {
-            _requestAuthorizers = requestAuthorizerProvider.Authorizers;
-            //_requestRuntimes = requestRuntimesProvider.Runtimes; 
-            //_requestHandlers = requestHandlersProvider.Handlers; 
+            _requestAuthorizers = requestAuthorizerProvider.Authorizers; 
         }
 
         public bool Authorized(HttpContext context)
@@ -31,66 +27,22 @@ namespace Glimpse.Web
 
             return true;
         }
-        
-        //public void Begin(HttpContext context)
-        //{
-        //    foreach (var requestRuntime in _requestRuntimes)
-        //    {
-        //        requestRuntime.Begin(context);
-        //    }
-        //}
-
-        //public bool TryGetHandle(HttpContext context, out IRequestHandler handeler)
-        //{
-        //    foreach (var requestHandler in _requestHandlers)
-        //    {
-        //        if (requestHandler.WillHandle(context))
-        //        {
-        //            handeler = requestHandler;
-        //            return true;
-        //        }
-        //    }
-
-        //    handeler = null;
-        //    return false;
-        //}
-
-        //public void End(HttpContext context)
-        //{
-        //    foreach (var requestRuntime in _requestRuntimes)
-        //    {
-        //        requestRuntime.End(context);
-        //    }
-        //}
     }
 
 
 
 
 
-
-
-    public interface IDynamicMiddlewareComposer
-    {
-        void Register(IApplicationBuilder applicationBuilder);
-    }
-
-    public interface IResourceMiddlewareComposer : IDynamicMiddlewareComposer
-    {
-    }
-
-    public interface ILogicMiddlewareComposer : IDynamicMiddlewareComposer
-    {
-    }
-
-    public class TestResourceMiddlewareComposer : IResourceMiddlewareComposer
+    /*
+     
+    public class TestResourceMiddlewareComposer : IMiddlewareResourceComposer
     {
         public void Register(IApplicationBuilder appBuilder)
         {
             appBuilder.Map("/test", newAppBuilder => newAppBuilder.Run(async context => await context.Response.WriteAsync("Agent!")));
         }
     }
-    public class HeaderLogicMiddlewareComposer : ILogicMiddlewareComposer
+    public class HeaderLogicMiddlewareComposer : IMiddlewareLogicComposer
     {
         public void Register(IApplicationBuilder appBuilder)
         {
@@ -101,4 +53,5 @@ namespace Glimpse.Web
             });
         }
     }
+    */
 }

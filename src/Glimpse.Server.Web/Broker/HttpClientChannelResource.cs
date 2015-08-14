@@ -3,10 +3,11 @@ using Microsoft.AspNet.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Builder;
 
 namespace Glimpse.Server
 {
-    public class HttpClientChannelResource : IRequestHandler
+    public class HttpClientChannelResource : IMiddlewareResourceComposer
     {
         private readonly InMemoryStorage _store;
         private readonly JsonSerializer _jsonSerializer;
@@ -20,22 +21,20 @@ namespace Glimpse.Server
             _store = (InMemoryStorage)storage;
             _jsonSerializer = jsonSerializer;
         }
-
-        public bool WillHandle(HttpContext context)
+        
+        public void Register(IApplicationBuilder appBuilder)
         {
-            return context.Request.Path == "/Glimpse/Data/History";
-        }
+            appBuilder.Map("/data/history", chuldApp => chuldApp.Run(async context =>
+            {
+                var response = context.Response;
 
-        public async Task Handle(HttpContext context)
-        {
-            var response = context.Response;
+                response.Headers.Set("Content-Type", "application/json");
 
-            response.Headers.Set("Content-Type", "application/json");
+                var list = _store.AllMessages;
+                var output = _jsonSerializer.Serialize(list);
 
-            var list = _store.AllMessages;
-            var output = _jsonSerializer.Serialize(list); 
-             
-            await response.WriteAsync(output);
+                await response.WriteAsync(output);
+            }));
         }
     }
 }

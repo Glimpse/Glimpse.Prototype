@@ -5,12 +5,12 @@ using System.Linq;
 
 namespace Glimpse.Agent.Web
 {
-    public class RequestRuntimeProfilerHost : IRequestRuntime
+    public class MiddlewareResourceComposerProfilerHost //: IMiddlewareResourceComposer
     {
         private readonly IEnumerable<IRequestProfiler> _requestProfiliers;
         private readonly IEnumerable<IRequestIgnorer> _requestIgnorePolicies;
         
-        public RequestRuntimeProfilerHost(IRequestProfilerProvider requestProfilerProvider, IRequestIgnorerProvider requestIgnorerProvider)
+        public MiddlewareResourceComposerProfilerHost(IRequestProfilerProvider requestProfilerProvider, IRequestIgnorerProvider requestIgnorerProvider)
         {
             _requestProfiliers = requestProfilerProvider.Profilers; 
             _requestIgnorePolicies = requestIgnorerProvider.Policies;
