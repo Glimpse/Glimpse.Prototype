@@ -18,26 +18,7 @@ namespace Microsoft.AspNet.Builder
 
         public static IApplicationBuilder UseGlimpse(this IApplicationBuilder app, Func<bool> shouldRun)
         {
-            var middlewareLogicComposers = app.ApplicationServices.GetService<IMiddlewareLogicComposerProvider>().Logic;
-            var middlewareResourceComposers = app.ApplicationServices.GetService<IMiddlewareResourceComposerProvider>().Resources;
-            
-            // create new pipeline
-            var branchBuilder = app.New();
-            branchBuilder.Map("/glimpse", innerApp =>
-            {
-                // run through logic
-                foreach (var middlewareLogic in middlewareLogicComposers)
-                {
-                    middlewareLogic.Register(innerApp);
-                }
-                // run through resource
-                foreach (var middlewareResource in middlewareResourceComposers)
-                {
-                    middlewareResource.Register(innerApp);
-                }
-            }); 
-
-            return app.Use(next => new GlimpseMiddleware(next, branchBuilder, shouldRun).Invoke);
+            return app.UseMiddleware<GlimpseMiddleware>(app);
         }
     } 
 }

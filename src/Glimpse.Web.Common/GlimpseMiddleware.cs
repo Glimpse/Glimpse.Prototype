@@ -1,9 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
-using Glimpse.Web;
 using System;
 using System.Collections.Generic;
-using Microsoft.Framework.DependencyInjection;
 using Microsoft.AspNet.Http;
 
 namespace Glimpse.Web.Common
@@ -15,35 +13,21 @@ namespace Glimpse.Web.Common
         private readonly ISettings _settings;
         private readonly IContextData<MessageContext> _contextData;
         private readonly IEnumerable<IRequestAuthorizer> _requestAuthorizers;
-
-        public GlimpseMiddleware(RequestDelegate next, IApplicationBuilder branchBuilder)
-            : this(next, branchBuilder, null)
+        
+        public GlimpseMiddleware(
+            RequestDelegate next, 
+            IApplicationBuilder app,
+            IContextData<MessageContext> contextData,
+            IRequestAuthorizerProvider requestAuthorizerProvider,
+            IMiddlewareLogicComposerProvider middlewareLogicComposersProvider,
+            IMiddlewareResourceComposerProvider middlewareResourceComposerProvider)
+            //Func<bool> shouldRun)
         {
-        }
-
-        public GlimpseMiddleware(RequestDelegate next, IApplicationBuilder branchBuilder, Func<bool> shouldRun)
-        {
-            _next = next;
-            
-            // this is registered at the end of the pipeline
-            branchBuilder.Use(subNext => { return async ctx => await next(ctx); });
-
-            _branch = branchBuilder.Build();
-
-
-
-            _requestAuthorizers = branchBuilder.ApplicationServices.GetService<IRequestAuthorizerProvider>().Authorizers; 
-
-
-            _contextData = new ContextData<MessageContext>();
-
-            // TODO: Need to find a way/better place for 
-            var settings = new Settings();
-            if (shouldRun != null)
-            {
-                settings.ShouldProfile = shouldRun;
-            }
-            _settings = settings;
+            _contextData =contextData;
+            _next = next; 
+            _branch = BuildPipeline(next, app, middlewareLogicComposersProvider, middlewareResourceComposerProvider);
+            //_settings = BuildSettings(shouldRun);
+            _requestAuthorizers = requestAuthorizerProvider.Authorizers;  
         }
 
         // TODO: Look at pushing the workings of this into MasterRequestRuntime
@@ -60,6 +44,44 @@ namespace Glimpse.Web.Common
             {
                 await _next(context);
             }
+        }
+
+        private RequestDelegate BuildPipeline(
+            RequestDelegate next, 
+            IApplicationBuilder app, 
+            IMiddlewareLogicComposerProvider middlewareLogicComposersProvider,
+            IMiddlewareResourceComposerProvider middlewareResourceComposerProvider)
+        {
+            // create new pipeline
+            var branchBuilder = app.New();
+            branchBuilder.Map("/glimpse", innerApp =>
+            {
+                // run through logic
+                foreach (var middlewareLogic in middlewareLogicComposersProvider.Logic)
+                {
+                    middlewareLogic.Register(innerApp);
+                }
+                // run through resource
+                foreach (var middlewareResource in middlewareResourceComposerProvider.Resources)
+                {
+                    middlewareResource.Register(innerApp);
+                }
+            });
+            branchBuilder.Use(subNext => { return async ctx => await next(ctx); });
+
+            return branchBuilder.Build();
+        }
+
+        private ISettings BuildSettings(Func<bool> shouldRun)
+        {
+            // TODO: Need to find a way/better place for 
+            var settings = new Settings();
+            if (shouldRun != null)
+            {
+                settings.ShouldProfile = shouldRun;
+            }
+
+            return settings;
         }
 
         private bool ShouldExecute(HttpContext context)
