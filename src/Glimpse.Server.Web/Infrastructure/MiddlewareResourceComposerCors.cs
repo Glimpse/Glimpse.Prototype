@@ -4,7 +4,7 @@ using Microsoft.AspNet.Http;
 
 namespace Glimpse.Server.Infrastructure
 {
-    public class MiddlewareResourceComposerCors : IMiddlewareResourceComposer
+    public class MiddlewareResourceComposerCors : IMiddlewareLogicComposer
     { 
         public void Register(IApplicationBuilder appBuilder)
         {
