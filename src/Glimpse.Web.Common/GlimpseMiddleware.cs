@@ -17,16 +17,15 @@ namespace Glimpse.Web.Common
         public GlimpseMiddleware(
             RequestDelegate next, 
             IApplicationBuilder app,
-            IContextData<MessageContext> contextData,
             IRequestAuthorizerProvider requestAuthorizerProvider,
             IMiddlewareLogicComposerProvider middlewareLogicComposersProvider,
             IMiddlewareResourceComposerProvider middlewareResourceComposerProvider)
-            //Func<bool> shouldRun)
+            //Func<bool> userHasAccess)
         {
             _contextData =contextData;
             _next = next; 
             _branch = BuildPipeline(next, app, middlewareLogicComposersProvider, middlewareResourceComposerProvider);
-            //_settings = BuildSettings(shouldRun);
+            //_settings = BuildSettings(userHasAccess);
             _requestAuthorizers = requestAuthorizerProvider.Authorizers;  
         }
 
@@ -34,10 +33,7 @@ namespace Glimpse.Web.Common
         public async Task Invoke(HttpContext context)
         {
             if (ShouldExecute(context))
-            {
-                // TODO: This is the wrong place for this, AgentRuntime isn't garenteed to execute first
-                _contextData.Value = new MessageContext { Id = Guid.NewGuid(), Type = "Request" };
-                
+            { 
                 await _branch(context);
             }
             else
@@ -72,13 +68,13 @@ namespace Glimpse.Web.Common
             return branchBuilder.Build();
         }
 
-        private ISettings BuildSettings(Func<bool> shouldRun)
+        private ISettings BuildSettings(Func<bool> userHasAccess)
         {
             // TODO: Need to find a way/better place for 
             var settings = new Settings();
-            if (shouldRun != null)
+            if (userHasAccess != null)
             {
-                settings.ShouldProfile = shouldRun;
+                settings.ShouldProfile = userHasAccess;
             }
 
             return settings;
