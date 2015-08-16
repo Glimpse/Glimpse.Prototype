@@ -1,10 +1,7 @@
-﻿using Glimpse.Web;
-using Microsoft.AspNet.Http;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Microsoft.AspNet.Builder;
 
-namespace Glimpse.Server.Resources
+namespace Glimpse.Server.Web
 {
     public class HelloGlimpseResource : IMiddlewareResourceComposer
     { 

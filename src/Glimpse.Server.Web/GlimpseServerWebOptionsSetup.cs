@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.Framework.OptionsModel;
+﻿using Microsoft.Framework.OptionsModel;
 
-namespace Glimpse.Server
+namespace Glimpse.Server.Web
 {
     public class GlimpseServerWebOptionsSetup : ConfigureOptions<GlimpseServerWebOptions>
     {

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Glimpse.Server.Web;
 using Microsoft.AspNet.Builder;
 using Microsoft.Framework.DependencyInjection;
 
@@ -14,13 +14,13 @@ namespace Glimpse.Server.AspNet.Sample
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseGlimpse();
-            app.UseGlimpseUI();
-
             // TODO: Nedd to find a better way of registering this. Problem is that this
             //       registration is aspnet5 specific.
             app.UseSignalR("/Glimpse/Data/Stream");
 
+            app.UseGlimpseServer();
+            app.UseGlimpseUI();
+            
             app.UseWelcomePage();
         }
     }

@@ -1,7 +1,6 @@
 ﻿using Glimpse.Agent;
-using Glimpse.Server;
 using Microsoft.Framework.DependencyInjection;
-using System.Collections.Generic; 
+using Glimpse.Server.Web;
 using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse
@@ -27,6 +26,9 @@ namespace Glimpse
             // Options
             //
             services.AddTransient<IConfigureOptions<GlimpseServerWebOptions>, GlimpseServerWebOptionsSetup>();
+            services.AddTransient<IRequestAuthorizerProvider, DefaultRequestAuthorizerProvider>();
+            services.AddTransient<IMiddlewareResourceComposerProvider, DefaultMiddlewareResourceComposerProvider>();
+            services.AddTransient<IMiddlewareLogicComposerProvider, DefaultMiddlewareLogicComposerProvider>();
             services.AddSingleton<IAllowRemoteProvider, DefaultAllowRemoteProvider>();
 
             return services;

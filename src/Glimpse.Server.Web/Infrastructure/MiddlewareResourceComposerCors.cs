@@ -1,8 +1,6 @@
-﻿using Glimpse.Web;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNet.Builder;
 
-namespace Glimpse.Server.Infrastructure
+namespace Glimpse.Server.Web
 {
     public class MiddlewareResourceComposerCors : IMiddlewareLogicComposer
     { 

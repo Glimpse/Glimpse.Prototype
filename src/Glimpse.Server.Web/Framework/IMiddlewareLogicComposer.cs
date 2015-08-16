@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNet.Http;
-using System.Threading.Tasks;
+﻿using Glimpse.Web;
 
-namespace Glimpse.Web
+namespace Glimpse.Server.Web
 {
     public interface IMiddlewareLogicComposer : IDynamicMiddlewareComposer
     {

@@ -4,16 +4,16 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNet.Http;
 
-namespace Glimpse.Web.Common
+namespace Glimpse.Server.Web
 {
-    public class GlimpseMiddleware
+    public class GlimpseServerWebMiddleware
     {
         private readonly RequestDelegate _next;
         private readonly RequestDelegate _branch; 
         private readonly ISettings _settings;
         private readonly IEnumerable<IRequestAuthorizer> _requestAuthorizers;
         
-        public GlimpseMiddleware(RequestDelegate next, IApplicationBuilder app, IRequestAuthorizerProvider requestAuthorizerProvider,  IMiddlewareLogicComposerProvider middlewareLogicComposersProvider, IMiddlewareResourceComposerProvider middlewareResourceComposerProvider)
+        public GlimpseServerWebMiddleware(RequestDelegate next, IApplicationBuilder app, IRequestAuthorizerProvider requestAuthorizerProvider,  IMiddlewareLogicComposerProvider middlewareLogicComposersProvider, IMiddlewareResourceComposerProvider middlewareResourceComposerProvider)
         {
             _next = next; 
             //_settings = BuildSettings(userHasAccess);

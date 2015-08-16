@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Glimpse.Web
+namespace Glimpse.Server.Web
 {
     public interface IMiddlewareResourceComposerProvider
     {

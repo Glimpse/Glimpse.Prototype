@@ -1,11 +1,9 @@
-﻿using Glimpse.Web;
-using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNet.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 
-namespace Glimpse.Server
+namespace Glimpse.Server.Web
 {
     public class HttpClientChannelResource : IMiddlewareResourceComposer
     {

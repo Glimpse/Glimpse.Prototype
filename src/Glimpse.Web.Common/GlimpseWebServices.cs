@@ -13,9 +13,6 @@ namespace Glimpse
         {
             var services = new ServiceCollection();
              
-            services.AddTransient<IRequestAuthorizerProvider, DefaultRequestAuthorizerProvider>();
-            services.AddTransient<IMiddlewareResourceComposerProvider, DefaultMiddlewareResourceComposerProvider>();
-            services.AddTransient<IMiddlewareLogicComposerProvider, DefaultMiddlewareLogicComposerProvider>();
             services.AddTransient<IMvcRazorHost, GlimpseRazorHost>(); //TODO: This probably doesn't belong here.
 
             return services;

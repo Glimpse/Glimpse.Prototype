@@ -1,10 +1,10 @@
 ﻿using Glimpse.Web;
+using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
+using Glimpse.Server.Web;
 
 namespace Glimpse.Agent.Browser.Resources
 {

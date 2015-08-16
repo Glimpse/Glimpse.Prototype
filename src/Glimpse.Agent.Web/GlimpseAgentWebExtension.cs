@@ -3,7 +3,7 @@ using Microsoft.AspNet.Builder;
 
 namespace Glimpse.Agent.Web
 {
-    public static class GlimpseAgentWeb
+    public static class GlimpseAgentWebExtension
     {
         public static IApplicationBuilder UseGlimpseAgent(this IApplicationBuilder app)
         {

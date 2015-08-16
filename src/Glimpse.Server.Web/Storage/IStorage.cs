@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Glimpse.Server
+namespace Glimpse.Server.Web
 {
     public interface IStorage
     {

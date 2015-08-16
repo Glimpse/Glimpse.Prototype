@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using Microsoft.AspNet.Builder;
 
-namespace Glimpse.Server
+namespace Glimpse.Server.Web
 {
     public class HttpChannelReceiver : IMiddlewareResourceComposer
     {

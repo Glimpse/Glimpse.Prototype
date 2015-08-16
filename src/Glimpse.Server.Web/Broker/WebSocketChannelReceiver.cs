@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
-using System;
-using System.Threading.Tasks;
 
-namespace Glimpse.Server
+namespace Glimpse.Server.Web
 {
     public class WebSocketChannelReceiver : Hub // Temp dont want this to be public
     {
