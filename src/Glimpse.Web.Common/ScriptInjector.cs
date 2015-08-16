@@ -23,7 +23,7 @@ namespace Glimpse.Web.Common
                 InnerHtml = new HtmlString(js.ToString()),
             };
 
-            output.PostContent.Append(tag.ToHtmlContent(TagRenderMode.Normal));
+            output.PostContent.Append(tag);
         }
     }
 }
