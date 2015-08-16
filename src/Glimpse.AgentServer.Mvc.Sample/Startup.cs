@@ -1,6 +1,6 @@
 ﻿using Glimpse.Agent.AspNet.Mvc;
+using Glimpse.Agent.Web;
 using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Mvc.Razor;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Notification;
 
@@ -26,6 +26,7 @@ namespace Glimpse.AgentServer.Mvc.Sample
             app.ApplicationServices.GetRequiredService<INotifier>().EnlistTarget(app.ApplicationServices.GetRequiredService<MvcNotificationListener>());
 
             app.UseGlimpse();
+            app.UseGlimpseAgent();
             app.UseGlimpseUI();
 
             // TODO: Nedd to find a better way of registering this. Problem is that this

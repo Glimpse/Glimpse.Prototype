@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Builder;
+﻿using Glimpse.Agent.Web;
+using Microsoft.AspNet.Builder;
 using Microsoft.Framework.DependencyInjection;
 
 namespace Glimpse.AspNet.Sample
@@ -17,6 +18,8 @@ namespace Glimpse.AspNet.Sample
         public void Configure(IApplicationBuilder app)
         {
             app.UseGlimpse();
+            app.UseGlimpseAgent();
+
             app.UseGlimpseUI();
 
             // TODO: Nedd to find a better way of registering this. Problem is that this

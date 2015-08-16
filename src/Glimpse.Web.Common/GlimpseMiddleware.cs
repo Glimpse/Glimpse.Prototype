@@ -11,43 +11,14 @@ namespace Glimpse.Web.Common
         private readonly RequestDelegate _next;
         private readonly RequestDelegate _branch; 
         private readonly ISettings _settings;
-        private readonly IContextData<MessageContext> _contextData;
         private readonly IEnumerable<IRequestAuthorizer> _requestAuthorizers;
         
-        public GlimpseMiddleware(
-            RequestDelegate next, 
-            IApplicationBuilder app,
-            IRequestAuthorizerProvider requestAuthorizerProvider,
-            IMiddlewareLogicComposerProvider middlewareLogicComposersProvider,
-            IMiddlewareResourceComposerProvider middlewareResourceComposerProvider)
-            //Func<bool> userHasAccess)
+        public GlimpseMiddleware(RequestDelegate next, IApplicationBuilder app, IRequestAuthorizerProvider requestAuthorizerProvider,  IMiddlewareLogicComposerProvider middlewareLogicComposersProvider, IMiddlewareResourceComposerProvider middlewareResourceComposerProvider)
         {
-            _contextData =contextData;
             _next = next; 
-            _branch = BuildPipeline(next, app, middlewareLogicComposersProvider, middlewareResourceComposerProvider);
             //_settings = BuildSettings(userHasAccess);
-            _requestAuthorizers = requestAuthorizerProvider.Authorizers;  
-        }
-
-        // TODO: Look at pushing the workings of this into MasterRequestRuntime
-        public async Task Invoke(HttpContext context)
-        {
-            if (ShouldExecute(context))
-            { 
-                await _branch(context);
-            }
-            else
-            {
-                await _next(context);
-            }
-        }
-
-        private RequestDelegate BuildPipeline(
-            RequestDelegate next, 
-            IApplicationBuilder app, 
-            IMiddlewareLogicComposerProvider middlewareLogicComposersProvider,
-            IMiddlewareResourceComposerProvider middlewareResourceComposerProvider)
-        {
+            _requestAuthorizers = requestAuthorizerProvider.Authorizers;
+            
             // create new pipeline
             var branchBuilder = app.New();
             branchBuilder.Map("/glimpse", innerApp =>
@@ -65,9 +36,22 @@ namespace Glimpse.Web.Common
             });
             branchBuilder.Use(subNext => { return async ctx => await next(ctx); });
 
-            return branchBuilder.Build();
+            _branch = branchBuilder.Build();
         }
 
+        // TODO: Look at pushing the workings of this into MasterRequestRuntime
+        public async Task Invoke(HttpContext context)
+        {
+            if (ShouldExecute(context))
+            { 
+                await _branch(context);
+            }
+            else
+            {
+                await _next(context);
+            }
+        }
+        
         private ISettings BuildSettings(Func<bool> userHasAccess)
         {
             // TODO: Need to find a way/better place for 
