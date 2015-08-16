@@ -42,7 +42,6 @@ namespace Glimpse.Agent.Web
         {
             if (ShouldProfile(context))
             {
-                // TODO: This is the wrong place for this, AgentRuntime isn't garenteed to execute first
                 _contextData.Value = new MessageContext { Id = Guid.NewGuid(), Type = "Request" };
 
                 await _branch(context);
