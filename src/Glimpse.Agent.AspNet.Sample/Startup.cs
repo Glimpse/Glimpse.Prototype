@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Builder;
+﻿using Glimpse.Agent.Web;
+using Microsoft.AspNet.Builder;
 using Microsoft.Framework.DependencyInjection;
 
 namespace Glimpse.Agent.AspNet.Sample
@@ -39,7 +40,7 @@ namespace Glimpse.Agent.AspNet.Sample
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseGlimpse();
+            app.UseGlimpseAgent();
 
             app.UseWelcomePage();
         }

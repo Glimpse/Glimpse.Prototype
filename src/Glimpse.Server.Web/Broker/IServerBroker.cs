@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 
-namespace Glimpse.Server
+namespace Glimpse.Server.Web
 {
     // TODO: Review how we think people will want to filter on these messages given 
     //       the lack of structure

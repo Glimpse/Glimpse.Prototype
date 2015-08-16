@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Glimpse.Server
+namespace Glimpse.Server.Web
 {
     public class InMemoryStorage : QueryRequests<Func<RequestIndices, bool>>, IStorage
     {

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq; 
+﻿using System.Collections.Generic;
+using System.Linq;
 
-namespace Glimpse.Web
+namespace Glimpse.Server.Web
 {
     public class DefaultRequestAuthorizerProvider : IRequestAuthorizerProvider
     {

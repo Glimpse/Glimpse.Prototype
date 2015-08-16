@@ -1,9 +1,6 @@
-﻿using Glimpse.Server.Resources;
-using Microsoft.AspNet.SignalR.Infrastructure;
-using System;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNet.SignalR.Infrastructure;
 
-namespace Glimpse.Server
+namespace Glimpse.Server.Web
 {
     public class DefaultClientBroker : IClientBroker
     {

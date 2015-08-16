@@ -1,25 +1,21 @@
-﻿using Glimpse.Web;
-using Microsoft.AspNet.Http;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
+using Microsoft.AspNet.Builder;
 
-namespace Glimpse.Server.Resources
+namespace Glimpse.Server.Web
 {
-    public class HelloGlimpseResource : IRequestHandler
-    {
-        public bool WillHandle(HttpContext context)
+    public class HelloGlimpseResource : IMiddlewareResourceComposer
+    { 
+        public void Register(IApplicationBuilder appBuilder)
         {
-            return context.Request.Path == "/Glimpse";
-        }
+            appBuilder.Map("/test", chuldApp => chuldApp.Run(async context =>
+            {
+                var response = context.Response;
 
-        public async Task Handle(HttpContext context)
-        {
-            var response = context.Response;
+                response.Headers.Set("Content-Type", "text/plain");
 
-            response.Headers.Set("Content-Type", "text/plain");
-
-            var data = Encoding.UTF8.GetBytes("Hello world, Glimpse!");
-            await response.Body.WriteAsync(data, 0, data.Length);
+                var data = Encoding.UTF8.GetBytes("Hello world, Glimpse!");
+                await response.Body.WriteAsync(data, 0, data.Length);
+            }));
         }
     }
 }

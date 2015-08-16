@@ -18,7 +18,7 @@ namespace Glimpse
             services.AddSingleton<IRequestIgnorerStatusCodeProvider, DefaultRequestIgnorerStatusCodeProvider>();
             services.AddSingleton<IRequestIgnorerContentTypeProvider, DefaultRequestIgnorerContentTypeProvider>();
             services.AddSingleton<IRequestIgnorerProvider, DefaultRequestIgnorerProvider>();
-            services.AddSingleton<IRequestProfilerProvider, DefaultRequestProfilerProvider>();
+            services.AddSingleton<IMiddlewareProfilerComposerProvider, DefaultMiddlewareProfilerComposerProvider>();
 
             return services;
         }

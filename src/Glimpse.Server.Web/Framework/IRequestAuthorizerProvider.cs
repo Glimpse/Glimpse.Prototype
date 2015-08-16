@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Glimpse.Web
+namespace Glimpse.Server.Web
 {
     public interface IRequestAuthorizerProvider
     {

@@ -1,8 +1,6 @@
 ﻿using Glimpse.Agent;
-using System;
-using System.Threading.Tasks;
 
-namespace Glimpse.Server
+namespace Glimpse.Server.Web
 {
     public class InProcessChannel : IChannelSender
     {

@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Reflection;
-using System.Threading.Tasks;
 
-namespace Glimpse.Server
+namespace Glimpse.Server.Web
 {
     public class DefaultServerBroker : IServerBroker
     {

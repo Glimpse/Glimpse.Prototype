@@ -1,7 +1,8 @@
 ﻿{
     "version": "1.0.0-*",
     "dependencies": {
-        "Glimpse.Web.Common": ""
+        "Glimpse.Web.Common": "",
+        "Glimpse.Server.Web": ""
     },
     "resource": "Resources/Embed/**/*.*",
     "frameworks" : {

@@ -3,11 +3,11 @@ using Microsoft.AspNet.Http;
 using Newtonsoft.Json;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNet.Builder;
 
-namespace Glimpse.Server
+namespace Glimpse.Server.Web
 {
-    public class HttpChannelReceiver : IRequestHandler
+    public class HttpChannelReceiver : IMiddlewareResourceComposer
     {
         private readonly IServerBroker _messageServerBus;
 
@@ -15,26 +15,24 @@ namespace Glimpse.Server
         {
             _messageServerBus = messageServerBus;
         }
-
-        public bool WillHandle(HttpContext context)
+        
+        public void Register(IApplicationBuilder appBuilder)
         {
-            return context.Request.Path.StartsWithSegments("/Glimpse/Agent");
-        }
+            appBuilder.Map("/agent", chuldApp => chuldApp.Run(async context =>
+            {
+                var envelope = ReadMessage(context.Request);
 
-        public async Task Handle(HttpContext context)
-        {
-            var envelope = ReadMessage(context.Request);
+                _messageServerBus.SendMessage(envelope);
 
-            _messageServerBus.SendMessage(envelope);
+                // TEST CODE ONLY!!!!
+                var response = context.Response;
 
-            // TEST CODE ONLY!!!!
-            var response = context.Response;
+                response.Headers.Set("Content-Type", "text/plain");
 
-            response.Headers.Set("Content-Type", "text/plain");
-
-            var data = Encoding.UTF8.GetBytes(envelope.Payload);
-            await response.Body.WriteAsync(data, 0, data.Length);
-            // TEST CODE ONLY!!!!
+                var data = Encoding.UTF8.GetBytes(envelope.Payload);
+                await response.Body.WriteAsync(data, 0, data.Length);
+                // TEST CODE ONLY!!!!
+            }));
         }
 
         private Message ReadMessage(HttpRequest request)

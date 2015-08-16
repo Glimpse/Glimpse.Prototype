@@ -1,8 +1,7 @@
-﻿using Glimpse.Web;
-using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Http.Features;
 
-namespace Glimpse.Server
+namespace Glimpse.Server.Web
 {
     public class RequestAuthorizerAllowRemote : IRequestAuthorizer
     {

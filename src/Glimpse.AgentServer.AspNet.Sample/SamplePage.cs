@@ -21,7 +21,7 @@ namespace Glimpse.AspNet.Sample
 
             response.Headers.Set("Content-Type", "text/html");
              
-            await response.WriteAsync($"<html><body><h1>Agent Test</h1><script src='/Glimpse/Browser/Agent' id='glimpse' data-glimpse-id='{_context.Value.Id}'></script></body></html>");
+            await response.WriteAsync($"<html><body><h1>Agent Test</h1><script src='/Glimpse/Browser/Agent' id='glimpse' data-glimpse-id='{_context?.Value?.Id}'></script></body></html>");
         }
     }
 }

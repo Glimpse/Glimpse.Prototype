@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Http;
 
-namespace Glimpse.Web
+namespace Glimpse.Server.Web
 {
     public interface IRequestAuthorizer
     {

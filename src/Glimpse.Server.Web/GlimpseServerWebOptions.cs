@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Glimpse.Server
+﻿namespace Glimpse.Server.Web
 {
     public class GlimpseServerWebOptions
     {
