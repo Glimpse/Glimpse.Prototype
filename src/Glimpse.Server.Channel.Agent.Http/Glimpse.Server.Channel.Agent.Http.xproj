@@ -6,8 +6,8 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>cf95c725-cc1a-4cfe-a829-82afd970b234</ProjectGuid>
-    <RootNamespace>Glimpse.Server.Connection.Inbound.Stream</RootNamespace>
+    <ProjectGuid>2007ff32-5f95-493c-9a5f-cd814f5ff3d5</ProjectGuid>
+    <RootNamespace>Glimpse.Server.Channel.Agent.Http</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\..\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">..\..\artifacts\bin\$(MSBuildProjectName)\</OutputPath>
   </PropertyGroup>

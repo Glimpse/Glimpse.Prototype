@@ -51,9 +51,9 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.AspNet.Mvc", 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Client.Web.Simple", "src\Glimpse.Client.Web.Simple\Glimpse.Client.Web.Simple.xproj", "{0ABE752B-1074-4A17-B97A-EA8AC800736A}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Server.Connection.Inbound.Stream", "src\Glimpse.Server.Connection.Inbound.Stream\Glimpse.Server.Connection.Inbound.Stream.xproj", "{CF95C725-CC1A-4CFE-A829-82AFD970B234}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Server.Channel.Agent.Stream", "src\Glimpse.Server.Channel.Agent.Stream\Glimpse.Server.Channel.Agent.Stream.xproj", "{CF95C725-CC1A-4CFE-A829-82AFD970B234}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Server.Connection.Inbound.Http", "src\Glimpse.Server.Connection.Inbound.Http\Glimpse.Server.Connection.Inbound.Http.xproj", "{2007FF32-5F95-493C-9A5F-CD814F5FF3D5}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Server.Channel.Agent.Http", "src\Glimpse.Server.Channel.Agent.Http\Glimpse.Server.Channel.Agent.Http.xproj", "{2007FF32-5F95-493C-9A5F-CD814F5FF3D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
