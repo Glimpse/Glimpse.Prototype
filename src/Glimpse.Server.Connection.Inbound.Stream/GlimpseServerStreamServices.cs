@@ -9,8 +9,12 @@ namespace Glimpse
         public static IServiceCollection GetDefaultServices()
         {
             var services = new ServiceCollection();
-
-            // TODO: Any registrations here
+            
+            // TODO: Config isn't currently being handled - https://github.com/aspnet/SignalR-Server/issues/51
+            services.AddSignalR(options =>
+            {
+                options.Hubs.EnableDetailedErrors = true;
+            });
 
             return services;
         }

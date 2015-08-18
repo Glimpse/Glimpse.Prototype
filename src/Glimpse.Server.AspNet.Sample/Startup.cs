@@ -15,10 +15,6 @@ namespace Glimpse.Server.AspNet.Sample
 
         public void Configure(IApplicationBuilder app)
         {
-            // TODO: Nedd to find a better way of registering this. Problem is that this
-            //       registration is aspnet5 specific.
-            app.UseSignalR("/Glimpse/Data/Stream");
-
             app.UseGlimpseServer();
             app.UseGlimpseUI();
             

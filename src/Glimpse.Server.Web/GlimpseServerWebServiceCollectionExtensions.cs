@@ -12,7 +12,6 @@ namespace Glimpse
             services.TryAdd(GlimpseWebServices.GetDefaultServices());
             services.TryAdd(GlimpseServerServices.GetDefaultServices());
             services.TryAdd(GlimpseServerWebServices.GetDefaultServices()); 
-            UseSignalR(services);
 
             return new GlimpseServerServiceCollectionBuilder(services);
         }
@@ -21,17 +20,7 @@ namespace Glimpse
         { 
             return services.Add(GlimpseServerWebServices.GetLocalAgentServices());
         }
-
-        // TODO: Confirm that this is where this should be registered
-        private static void UseSignalR(IServiceCollection services)
-        {
-            // TODO: Config isn't currently being handled - https://github.com/aspnet/SignalR-Server/issues/51
-            services.AddSignalR(options =>
-                {
-                    options.Hubs.EnableDetailedErrors = true;
-                });
-        }
-
+        
         private static void ConfigureDefaultServices(IServiceCollection services)
         {
             services.AddOptions();
