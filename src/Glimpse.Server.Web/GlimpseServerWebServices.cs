@@ -15,7 +15,6 @@ namespace Glimpse
             // Broker
             //
             services.AddSingleton<IServerBroker, DefaultServerBroker>();
-            services.AddSingleton<IClientBroker, DefaultClientBroker>();
 
             //
             // Store

@@ -1,0 +1,18 @@
+﻿{
+    "version": "1.0.0-*",
+    "dependencies": {
+        "Glimpse.Common": "",
+        "Glimpse.Server.Common": "",
+        "Glimpse.Server.Web": ""
+    },
+    "frameworks": {
+        "dnx451": {
+            "dependencies": {
+            }
+        },
+        "dnxcore50": {
+            "dependencies": {
+            }
+        }
+    } 
+}
