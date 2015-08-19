@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Glimpse.Agent.Connection.Stream.Connection
+namespace Glimpse.Agent.Channel.Server.Stream.Connection
 {
     public interface IStreamHubProxy
     {

@@ -1,6 +1,5 @@
-﻿using Glimpse.Agent.Connection.Stream.Connection;
+﻿using Glimpse.Agent.Channel.Server.Stream.Connection;
 using System;
-using System.Threading.Tasks;
 
 namespace Glimpse.Agent
 {
