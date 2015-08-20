@@ -7,7 +7,7 @@ namespace Glimpse.Server.Web
     { 
         public void Register(IApplicationBuilder appBuilder)
         {
-            appBuilder.Map("/test", chuldApp => chuldApp.Run(async context =>
+            appBuilder.Map("/test", childApp => childApp.Run(async context =>
             {
                 var response = context.Response;
 

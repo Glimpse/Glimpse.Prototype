@@ -22,7 +22,7 @@ namespace Glimpse.Server.Web
         
         public void Register(IApplicationBuilder appBuilder)
         {
-            appBuilder.Map("/data/history", chuldApp => chuldApp.Run(async context =>
+            appBuilder.Map("/data/history", childApp => childApp.Run(async context =>
             {
                 var response = context.Response;
 
