@@ -18,20 +18,18 @@ namespace Glimpse.Server.Web
         
         public void Register(IApplicationBuilder appBuilder)
         {
-            appBuilder.Map("/agent", chuldApp => chuldApp.Run(async context =>
+            appBuilder.Map("/agent", childApp => childApp.Run(async context =>
             {
                 var envelope = ReadMessage(context.Request);
 
                 _messageServerBus.SendMessage(envelope);
 
-                // TEST CODE ONLY!!!!
+                // TODO: Really should do something better
                 var response = context.Response;
-
                 response.Headers.Set("Content-Type", "text/plain");
 
-                var data = Encoding.UTF8.GetBytes(envelope.Payload);
+                var data = Encoding.UTF8.GetBytes("OK");
                 await response.Body.WriteAsync(data, 0, data.Length);
-                // TEST CODE ONLY!!!!
             }));
         }
 
