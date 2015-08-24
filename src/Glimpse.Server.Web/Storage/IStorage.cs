@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Glimpse.Server.Web
@@ -8,6 +7,6 @@ namespace Glimpse.Server.Web
     {
         void Persist(IMessage message);
 
-        Task<IEnumerable<IMessage>> RetrieveBy(Guid id);
+        Task<IEnumerable<IMessage>> RetrieveByType(params string[] types);
     }
 }

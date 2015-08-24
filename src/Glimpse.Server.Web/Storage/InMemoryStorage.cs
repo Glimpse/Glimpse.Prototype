@@ -5,111 +5,99 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Server.Web
 {
-    public class InMemoryStorage : QueryRequests<Func<RequestIndices, bool>>, IStorage
+    public class InMemoryStorage : IQueryRequests<Func<RequestIndices, bool>>, IStorage
     {
         private readonly IList<IMessage> _store;
-        private readonly IList<RequestIndices> _indices;
+        private readonly IDictionary<Guid, RequestIndices> _indices;
 
         public InMemoryStorage()
         {
             _store = new List<IMessage>();
-            _indices = new List<RequestIndices>();
+            _indices = new Dictionary<Guid, RequestIndices>();
         }
 
         public void Persist(IMessage message)
         {
-            _indices.Add(new RequestIndices(message));
             _store.Add(message);
+
+            if (!message.Context.Type.Equals("request")) // TODO: Should this be case insensitive?
+                return;
+
+            var requestId = message.Context.Id;
+
+            if (_indices.ContainsKey(requestId))
+            {
+                _indices[requestId].Update(message);
+            }
+            else
+            {
+                _indices.Add(requestId, new RequestIndices(message));
+            }
         }
 
-        public Task<IEnumerable<IMessage>> RetrieveBy(Guid id)
+        public Task<IEnumerable<IMessage>> RetrieveByType(params string[] types)
+        {
+            if (types == null || types.Length == 0)
+                throw new ArgumentException("At least one type must be specified.", "types");
+
+            return Task.Run(() => _store.Where(m => m.Types.Intersect(types).Any()));
+        }
+
+        public ICollection<Func<RequestIndices, bool>> CreateFilterCollection()
+        {
+            return new List<Func<RequestIndices, bool>>();
+        }
+
+        public Task<IEnumerable<IMessage>> GetByRequestId(Guid id)
         {
             return Task.Run(() => _store.Where(m => m.Context.Id == id));
         }
 
-        public override Func<RequestIndices, bool> FilterByDuration(float min = 0, float max = float.MaxValue)
+        public Func<RequestIndices, bool> FilterByDuration(float min = 0, float max = float.MaxValue)
         {
             return i => i.Duration.HasValue && i.Duration.Value >= min && i.Duration.Value <= max;
         }
 
-        public override Func<RequestIndices, bool> FilterByUrl(string contains)
+        public Func<RequestIndices, bool> FilterByUrl(string contains)
         {
             return i => !string.IsNullOrWhiteSpace(i.Url) && i.Url.Contains(contains);
         }
 
-        public override Func<RequestIndices, bool> FilterByMethod(params string[] methods)
+        public Func<RequestIndices, bool> FilterByMethod(params string[] methods)
         {
             return i => !string.IsNullOrWhiteSpace(i.Method) && methods.Contains(i.Method);
         }
 
-        public override Func<RequestIndices, bool> FilterByStatusCode(int min = 0, int max = int.MaxValue)
+        public Func<RequestIndices, bool> FilterByTag(params string[] tags)
+        {
+            return i => i.Tags.Intersect(tags).Any();
+        }
+
+        public Func<RequestIndices, bool> FilterByStatusCode(int min = 0, int max = int.MaxValue)
         {
             return i => i.StatusCode.HasValue && i.StatusCode.Value >= min && i.StatusCode.Value <= max;
         }
 
-        public override Task<IEnumerable<IMessage>> Query(IEnumerable<Func<RequestIndices, bool>> filters)
+        public Task<IEnumerable<IMessage>> Query(params Func<RequestIndices, bool>[] filters)
         {
-            return Task.Factory.StartNew<IEnumerable<IMessage>>(() =>
+            return Query(filters, null);
+        }
+
+        public Task<IEnumerable<IMessage>> Query(IEnumerable<Func<RequestIndices, bool>> filters, params string[] types)
+        {
+            return Task.Run(() =>
             {
-                /*
-                var query = _indices.AsQueryable();
+                var query = _indices.Values.AsEnumerable();
 
-                foreach (var filter in filters) query.Where(filter);
+                foreach (var filter in filters)
+                    query = query.Where(filter);
 
-                return query.Join(_store, i => i.Id, m => m.Context.Id, (i, m) => m);
-                */
-                return null;
+                return query.Join(
+                    types == null ? _store : _store.Where(m => m.Types.Intersect(types).Any()), // only filter by type if types are specified
+                    i => i.Id, 
+                    m => m.Context.Id, 
+                    (i, m) => m);
             });
-        }
-
-        public IEnumerable<IMessage> AllMessages
-        {
-            get { return _store; }
-        }
-    }
-
-    public struct RequestIndices
-    {
-        private readonly float? _duration;
-        private readonly string _url;
-        private readonly string _method;
-        private readonly int? _statusCode;
-        private readonly Guid _id;
-
-        public RequestIndices(IMessage message)
-        {
-            _id = message.Context.Id;
-
-            var indices = message.Indices;
-            _duration = indices?.GetValueOrDefault("request.duration") as float?;
-            _statusCode = indices?.GetValueOrDefault("request.statuscode") as int?;
-            _url = indices?.GetValueOrDefault("request.url") as string;
-            _method = indices?.GetValueOrDefault("request.method") as string;
-            _statusCode = indices?.GetValueOrDefault("request.statuscode") as int?;
-        }
-
-        public float? Duration
-        {
-            get { return _duration; }
-        }
-
-        public string Url
-        {
-            get{ return _url; }
-        }
-
-        public string Method
-        {
-            get { return _method; }
-        }
-        public int? StatusCode
-        {
-            get { return _statusCode; }
-        }
-
-        public Guid Id
-        {
-            get { return _id; }
         }
     }
 }

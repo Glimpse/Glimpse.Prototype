@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Glimpse.Server.Web
 {
+    // URI Template for this interface: {?min,max,url,methods,statuscodes,tags}
     public interface IQueryRequests<T>
     {
         ICollection<T> CreateFilterCollection();
+
+        Task<IEnumerable<IMessage>> GetByRequestId(Guid id);
 
         T FilterByDuration(float min = 0, float max = float.MaxValue);
 
@@ -15,31 +19,10 @@ namespace Glimpse.Server.Web
 
         T FilterByStatusCode(int min = 0, int max = int.MaxValue);
 
-        Task<IEnumerable<IMessage>> Query(IEnumerable<T> filters);
+        T FilterByTag(params string[] tags);
 
-        Task<IEnumerable<IMessage>> QueryWith(params T[] filters);
-    }
+        Task<IEnumerable<IMessage>> Query(params T[] filters);
 
-    public abstract class QueryRequests<T> : IQueryRequests<T>
-    {
-        public ICollection<T> CreateFilterCollection()
-        {
-            return new List<T>();
-        }
-
-        public abstract T FilterByDuration(float min = 0, float max = float.MaxValue);
-
-        public abstract T FilterByUrl(string contains);
-
-        public abstract T FilterByMethod(params string[] methods);
-
-        public abstract T FilterByStatusCode(int min = 0, int max = int.MaxValue);
-
-        public abstract Task<IEnumerable<IMessage>> Query(IEnumerable<T> filters);
-
-        public async Task<IEnumerable<IMessage>> QueryWith(params T[] filters)
-        {
-            return await Query(filters);
-        }
+        Task<IEnumerable<IMessage>> Query(IEnumerable<T> filters, params string[] types);
     }
 }
