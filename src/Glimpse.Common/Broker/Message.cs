@@ -9,9 +9,11 @@ namespace Glimpse
     {
         public Guid Id { get; set; }
 
-        public string Type { get; set; }
+        public IEnumerable<string> Types { get; set; }
 
         public string Payload { get; set; }
+
+        public int Ordinal { get; set; }
 
         public MessageContext Context { get; set; }
 

@@ -11,6 +11,8 @@ namespace Glimpse
 
         string Payload { get; }
 
+        int Ordinal { get; }
+
         MessageContext Context { get; }
         
         IReadOnlyDictionary<string, object> Indices { get; }

@@ -19,7 +19,7 @@ namespace Glimpse
         { 
             var message = new Message();
             message.Id = Guid.NewGuid();
-            message.Type = payload.GetType().FullName;
+            message.Types = new [] { payload.GetType().FullName }; // TODO: Get all types, not just one
             message.Payload = _jsonSerializer.Serialize(payload);
             message.Context = context;
 
