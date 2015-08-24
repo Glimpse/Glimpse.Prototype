@@ -20,7 +20,7 @@ namespace Glimpse.Server.Web
         {
             _store.Add(message);
 
-            if (!message.Context.Type.Equals("request")) // TODO: Should this be case insensitive?
+            if (!message.Context.Type.Equals("request", StringComparison.OrdinalIgnoreCase))
                 return;
 
             var requestId = message.Context.Id;
