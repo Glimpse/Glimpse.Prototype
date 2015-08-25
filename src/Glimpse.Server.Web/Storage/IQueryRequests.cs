@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Server.Web
 {
-    // URI Template for this interface: {?min,max,url,methods,statuscodes,tags}
+    // URI Template for this interface: {?min,max,url,methods,statuscodes,tags,before}
     public interface IQueryRequests<T>
     {
         ICollection<T> CreateFilterCollection();
@@ -20,6 +20,8 @@ namespace Glimpse.Server.Web
         T FilterByStatusCode(int min = 0, int max = int.MaxValue);
 
         T FilterByTag(params string[] tags);
+
+        T FilterByDateTime(DateTime before);
 
         Task<IEnumerable<IMessage>> Query(params T[] filters);
 

@@ -26,6 +26,8 @@ namespace Glimpse.Server.Web
 
         public Guid Id { get; }
 
+        public DateTime? DateTime { get; private set; }
+
         public IEnumerable<string> Tags => _tags;
 
         public void Update(IMessage message)
@@ -43,6 +45,7 @@ namespace Glimpse.Server.Web
             Url = indices.GetValueOrDefault("request-url") as string;
             Method = indices.GetValueOrDefault("request-method") as string;
             StatusCode = indices.GetValueOrDefault("request-statuscode") as int?;
+            DateTime = indices.GetValueOrDefault("request-datetime") as DateTime?;
 
             var messageTags = indices.GetValueOrDefault("request-tags") as IEnumerable<string> ?? Enumerable.Empty<string>();
             _tags.AddRange(messageTags);

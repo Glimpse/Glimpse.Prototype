@@ -7,18 +7,20 @@ namespace Glimpse.Server.Web
 {
     public class InMemoryStorage : IQueryRequests<Func<RequestIndices, bool>>, IStorage
     {
-        private readonly IList<IMessage> _store;
+        public const int RequestsPerPage = 50;
+
+        private readonly IList<IMessage> _messages;
         private readonly IDictionary<Guid, RequestIndices> _indices;
 
         public InMemoryStorage()
         {
-            _store = new List<IMessage>();
+            _messages = new List<IMessage>();
             _indices = new Dictionary<Guid, RequestIndices>();
         }
 
         public void Persist(IMessage message)
         {
-            _store.Add(message);
+            _messages.Add(message);
 
             if (!message.Context.Type.Equals("request", StringComparison.OrdinalIgnoreCase))
                 return;
@@ -40,7 +42,7 @@ namespace Glimpse.Server.Web
             if (types == null || types.Length == 0)
                 throw new ArgumentException("At least one type must be specified.", "types");
 
-            return Task.Run(() => _store.Where(m => m.Types.Intersect(types).Any()));
+            return Task.Run(() => _messages.Where(m => m.Types.Intersect(types).Any()));
         }
 
         public ICollection<Func<RequestIndices, bool>> CreateFilterCollection()
@@ -50,7 +52,7 @@ namespace Glimpse.Server.Web
 
         public Task<IEnumerable<IMessage>> GetByRequestId(Guid id)
         {
-            return Task.Run(() => _store.Where(m => m.Context.Id == id));
+            return Task.Run(() => _messages.Where(m => m.Context.Id == id));
         }
 
         public Func<RequestIndices, bool> FilterByDuration(float min = 0, float max = float.MaxValue)
@@ -78,6 +80,11 @@ namespace Glimpse.Server.Web
             return i => i.StatusCode.HasValue && i.StatusCode.Value >= min && i.StatusCode.Value <= max;
         }
 
+        public Func<RequestIndices, bool> FilterByDateTime(DateTime before)
+        {
+            return i => i.DateTime.HasValue && i.DateTime.Value < before;
+        }
+
         public Task<IEnumerable<IMessage>> Query(params Func<RequestIndices, bool>[] filters)
         {
             return Query(filters, null);
@@ -92,12 +99,15 @@ namespace Glimpse.Server.Web
                 foreach (var filter in filters)
                     query = query.Where(filter);
 
-                return query.Join(
-                    types == null ? _store : _store.Where(m => m.Types.Intersect(types).Any()), // only filter by type if types are specified
-                    i => i.Id, 
-                    m => m.Context.Id, 
-                    (i, m) => m);
-            });
+                return query
+                    .OrderByDescending(i => i.DateTime)
+                    .Take(RequestsPerPage)
+                    .Join(
+                        types == null ? _messages : _messages.Where(m => m.Types.Intersect(types).Any()), // only filter by type if types are specified
+                        i => i.Id, 
+                        m => m.Context.Id, 
+                        (i, m) => m);
+                });
         }
     }
 }
