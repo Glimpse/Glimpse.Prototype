@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Glimpse.Agent.Connection.Stream.Connection
+namespace Glimpse.Agent.Channel.Server.Stream.Connection
 {
     internal class SignalrStreamHubProxy : IStreamHubProxy, IDisposable
     {

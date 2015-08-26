@@ -1,8 +1,6 @@
 ﻿using Glimpse.Agent;
-using Glimpse.Agent.Connection.Stream.Connection;
+using Glimpse.Agent.Channel.Server.Stream.Connection;
 using Microsoft.Framework.DependencyInjection;
-using System;
-using System.Collections.Generic;
 
 namespace Glimpse
 {

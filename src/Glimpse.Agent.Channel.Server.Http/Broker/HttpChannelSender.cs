@@ -25,9 +25,6 @@ namespace Glimpse.Agent
 
                 // Check that response was successful or throw exception
                 response.EnsureSuccessStatusCode();
-
-                // Read response asynchronously as JsonValue and write out top facts for each country
-                var result = await response.Content.ReadAsStringAsync();
             }
             catch (Exception e)
             {

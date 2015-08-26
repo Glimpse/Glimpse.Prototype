@@ -1,5 +1,4 @@
 ﻿using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.DependencyInjection.Extensions;
 
 namespace Glimpse
 {

@@ -2,11 +2,11 @@
 
 namespace Glimpse.Server.Web
 {
-    public class DefaultClientBroker : IClientBroker
+    public class StreamClientBroker : IClientBroker
     {
         private readonly IConnectionManager _connectionManager;
 
-        public DefaultClientBroker(IConnectionManager connectionManager)
+        public StreamClientBroker(IConnectionManager connectionManager)
         {
             _connectionManager = connectionManager;
         }

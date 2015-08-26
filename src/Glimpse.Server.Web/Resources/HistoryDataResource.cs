@@ -5,12 +5,12 @@ using Microsoft.AspNet.Builder;
 
 namespace Glimpse.Server.Web
 {
-    public class HttpClientChannelResource : IMiddlewareResourceComposer
+    public class HistoryDataResource : IMiddlewareResourceComposer
     {
         private readonly InMemoryStorage _store;
         private readonly JsonSerializer _jsonSerializer;
 
-        public HttpClientChannelResource(IStorage storage, JsonSerializer jsonSerializer)
+        public HistoryDataResource(IStorage storage, JsonSerializer jsonSerializer)
         {
             // TODO: This hack is needed to get around signalr problem
             jsonSerializer.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -22,7 +22,7 @@ namespace Glimpse.Server.Web
         
         public void Register(IApplicationBuilder appBuilder)
         {
-            appBuilder.Map("/data/history", chuldApp => chuldApp.Run(async context =>
+            appBuilder.Map("/data/history", childApp => childApp.Run(async context =>
             {
                 var response = context.Response;
 

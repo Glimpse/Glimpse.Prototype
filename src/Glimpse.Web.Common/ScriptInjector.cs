@@ -20,10 +20,10 @@ namespace Glimpse.Web.Common
 
             var tag = new TagBuilder("script")
             {
-                InnerHtml = new HtmlString(js.ToString()),
+                InnerHtml = js.ToString(),
             };
 
-            output.PostContent.Append(tag);
+            output.PostContent.Append(tag.InnerHtml);
         }
     }
 }

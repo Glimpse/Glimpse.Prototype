@@ -1,7 +1,5 @@
 ﻿using Glimpse.Agent;
 using Microsoft.Framework.DependencyInjection;
-using System;
-using System.Collections.Generic;
 
 namespace Glimpse
 {

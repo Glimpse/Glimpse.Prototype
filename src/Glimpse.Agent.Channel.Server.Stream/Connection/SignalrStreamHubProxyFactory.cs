@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic; 
 using System.Threading.Tasks;
 
-namespace Glimpse.Agent.Connection.Stream.Connection
+namespace Glimpse.Agent.Channel.Server.Stream.Connection
 {
     internal class SignalrStreamHubProxyFactory : IStreamHubProxyFactory, IDisposable
     {

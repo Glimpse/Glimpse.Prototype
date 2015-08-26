@@ -12,7 +12,7 @@ namespace Glimpse.Agent.Browser.Resources
     {
         public void Register(IApplicationBuilder appBuilder)
         {
-            appBuilder.Map("/browser/agent", chuldApp => chuldApp.Run(async context =>
+            appBuilder.Map("/browser/agent", childApp => childApp.Run(async context =>
             {
                 var response = context.Response;
 

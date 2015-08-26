@@ -34,8 +34,7 @@ namespace Glimpse.Agent.AspNet.Sample
                         {
                             //options.IgnoredStatusCodes.Add(200);
                         })
-                    //.WithRemoteHttpAgent();
-                    .WithRemoteStreamAgent(); 
+                    .WithRemoteHttpAgent();
         }
 
         public void Configure(IApplicationBuilder app)
