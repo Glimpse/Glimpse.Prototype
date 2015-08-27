@@ -8,7 +8,7 @@ namespace Glimpse.Agent.Web
     public interface IInspectorBuilder
     {
         IApplicationBuilder AppBuilder { get; }
-        
-        IInspectorBuilder Use(Func<RequestDelegate, RequestDelegate> middleware);
+
+        IInspectorBuilder Use(Func<HttpContext, Func<Task>, Task> middleware);
     }
 }

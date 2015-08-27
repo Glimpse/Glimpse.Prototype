@@ -13,14 +13,14 @@ namespace Glimpse.Agent.Web
 
         public void Configure(IInspectorBuilder builder)
         {
-            builder.Use(next => async context =>
+            builder.Use(async (context, next) =>
             {
                 foreach (var inspector in _inspectors)
                 {
                     await inspector.Before(context);
                 }
 
-                await next(context);
+                await next();
 
                 foreach (var inspector in _inspectors)
                 {

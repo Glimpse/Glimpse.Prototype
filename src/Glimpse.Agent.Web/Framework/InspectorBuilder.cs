@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Builder;
 
 namespace Glimpse.Agent.Web
 {
@@ -14,7 +15,7 @@ namespace Glimpse.Agent.Web
 
         public IApplicationBuilder AppBuilder { get; }
         
-        public IInspectorBuilder Use(Func<RequestDelegate, RequestDelegate> middleware)
+        public IInspectorBuilder Use(Func<HttpContext, Func<Task>, Task> middleware)
         {
             return new InspectorBuilder(AppBuilder.Use(middleware));
         }
