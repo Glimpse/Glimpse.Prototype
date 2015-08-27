@@ -19,7 +19,7 @@ namespace Glimpse.Agent.Web
         // requestProfilerProvider, 
         //IRequestIgnorerProvider requestIgnorerProvider
 
-        public GlimpseAgentWebMiddleware(RequestDelegate next, IApplicationBuilder app, IContextData<MessageContext> contextData, IRequestIgnorerProvider requestIgnorerProvider, IMiddlewareProfilerComposerProvider middlewareProfilerComposerProvider)
+        public GlimpseAgentWebMiddleware(RequestDelegate next, IApplicationBuilder app, IContextData<MessageContext> contextData, IRequestIgnorerProvider requestIgnorerProvider, IInspectorStartupProvider inspectorStartupProvider)
         {
             _contextData = contextData;
             _next = next;
@@ -28,9 +28,9 @@ namespace Glimpse.Agent.Web
             
             // create new pipeline
             var branchBuilder = app.New();
-            foreach (var middlewareProfiler in middlewareProfilerComposerProvider.Profilers)
+            foreach (var middlewareProfiler in inspectorStartupProvider.Startups)
             {
-                middlewareProfiler.Register(branchBuilder);
+                middlewareProfiler.Configure(new InspectorBuilder(branchBuilder));
             }
             branchBuilder.Use(subNext => { return async ctx => await next(ctx); });
 

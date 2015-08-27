@@ -3,7 +3,7 @@ using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent.Web
 {
-    public class RequestAgentProfiler : IMiddlewareProfilerComposer
+    public class RequestAgentProfiler : IInspectorStartup
     {
         private readonly IAgentBroker _messageBus;
 
@@ -12,9 +12,9 @@ namespace Glimpse.Agent.Web
             _messageBus = messageBus;
         }
         
-        public void Register(IApplicationBuilder appBuilder)
+        public void Configure(IInspectorBuilder inspectorBuilder)
         {
-            appBuilder.Use(async (context, next) =>
+            inspectorBuilder.Use(async (context, next) =>
             {
                 var beginMessage = new BeginRequestMessage(context.Request);
                 _messageBus.BeginLogicalOperation(beginMessage);
@@ -22,7 +22,7 @@ namespace Glimpse.Agent.Web
                 await next();
 
                 var timing = _messageBus.EndLogicalOperation<BeginRequestMessage>().Timing;
-                var endMessage = new EndRequestMessage(context.Request, timing); 
+                var endMessage = new EndRequestMessage(context.Request, timing);
                 _messageBus.SendMessage(endMessage);
             });
         }
