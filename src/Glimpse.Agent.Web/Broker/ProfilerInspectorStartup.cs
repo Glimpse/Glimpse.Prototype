@@ -1,10 +1,10 @@
 ﻿namespace Glimpse.Agent.Web
 {
-    public class RequestAgentProfiler : IInspectorStartup
+    public class ProfilerInspectorStartup : IInspectorStartup
     {
         private readonly IAgentBroker _messageBus;
 
-        public RequestAgentProfiler(IAgentBroker messageBus)
+        public ProfilerInspectorStartup(IAgentBroker messageBus)
         {
             _messageBus = messageBus;
         }
