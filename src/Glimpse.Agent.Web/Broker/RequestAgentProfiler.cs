@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
-
-namespace Glimpse.Agent.Web
+﻿namespace Glimpse.Agent.Web
 {
     public class RequestAgentProfiler : IInspectorStartup
     {
