@@ -14,7 +14,7 @@ namespace Glimpse.Agent.Web
 
         public IApplicationBuilder AppBuilder { get; }
         
-        public IInspectorBuilder Use(Func<HttpContext, Func<Task>, Task> middleware)
+        public IInspectorBuilder Use(Func<RequestDelegate, RequestDelegate> middleware)
         {
             return new InspectorBuilder(AppBuilder.Use(middleware));
         }
