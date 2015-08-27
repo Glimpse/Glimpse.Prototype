@@ -19,6 +19,7 @@ namespace Glimpse
             services.AddSingleton<IRequestIgnorerContentTypeProvider, DefaultRequestIgnorerContentTypeProvider>();
             services.AddSingleton<IRequestIgnorerProvider, DefaultRequestIgnorerProvider>();
             services.AddSingleton<IInspectorStartupProvider, DefaultInspectorStartupProvider>();
+            services.AddSingleton<IInspectorProvider, DefaultInspectorProvider>();
 
             return services;
         }
