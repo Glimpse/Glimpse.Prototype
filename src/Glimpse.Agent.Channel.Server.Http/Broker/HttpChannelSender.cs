@@ -21,7 +21,7 @@ namespace Glimpse.Agent
             // TODO: Find out what happened to System.Net.Http.Formmating - PostAsJsonAsync
             try
             {
-                var response = await _httpClient.PostAsJsonAsync("http://localhost:5210/Glimpse/Agent", message);
+                var response = await _httpClient.PostAsJsonAsync("http://localhost:5210/Glimpse/AgentMessage", message);
 
                 // Check that response was successful or throw exception
                 response.EnsureSuccessStatusCode();

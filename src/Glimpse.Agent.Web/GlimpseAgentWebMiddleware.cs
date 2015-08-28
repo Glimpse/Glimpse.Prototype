@@ -15,29 +15,15 @@ namespace Glimpse.Agent.Web
         private readonly IContextData<MessageContext> _contextData;
         private readonly IEnumerable<IRequestIgnorer> _requestIgnorePolicies;
 
-
-        // requestProfilerProvider, 
-        //IRequestIgnorerProvider requestIgnorerProvider
-
         public GlimpseAgentWebMiddleware(RequestDelegate next, IApplicationBuilder app, IContextData<MessageContext> contextData, IRequestIgnorerProvider requestIgnorerProvider, IInspectorStartupProvider inspectorStartupProvider)
         {
             _contextData = contextData;
             _next = next;
             //_settings = BuildSettings(shouldIgnoreRequest);
             _requestIgnorePolicies = requestIgnorerProvider.Policies;
-            
-            // create new pipeline
-            var branchBuilder = app.New();
-            foreach (var middlewareProfiler in inspectorStartupProvider.Startups)
-            {
-                middlewareProfiler.Configure(new InspectorBuilder(branchBuilder));
-            }
-            branchBuilder.Use(subNext => { return async ctx => await next(ctx); });
-
-            _branch = branchBuilder.Build(); 
+            _branch = BuildBranch(app, inspectorStartupProvider);
         }
-
-        // TODO: Look at pushing the workings of this into MasterRequestRuntime
+        
         public async Task Invoke(HttpContext context)
         {
             if (ShouldProfile(context))
@@ -51,7 +37,20 @@ namespace Glimpse.Agent.Web
                 await _next(context);
             }
         }
-        
+
+        private RequestDelegate BuildBranch(IApplicationBuilder app, IInspectorStartupProvider inspectorStartupProvider)
+        {
+            // create new pipeline
+            var branchBuilder = app.New();
+            foreach (var middlewareProfiler in inspectorStartupProvider.Startups)
+            {
+                middlewareProfiler.Configure(new InspectorBuilder(branchBuilder));
+            }
+            branchBuilder.Use(subNext => { return async ctx => await _next(ctx); });
+
+            return branchBuilder.Build();
+        }
+
         private ISettings BuildSettings(Func<bool> shouldIgnoreRequest)
         {
             // TODO: Need to find a way/better place for 
@@ -64,7 +63,7 @@ namespace Glimpse.Agent.Web
             return settings;
         }
         
-        public bool ShouldProfile(HttpContext context)
+        private bool ShouldProfile(HttpContext context)
         {
             if (_requestIgnorePolicies.Any())
             {

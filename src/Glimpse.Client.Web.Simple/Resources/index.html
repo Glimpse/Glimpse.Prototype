@@ -297,7 +297,7 @@
     </script>
     <script>
         $(function() {
-            $.ajax("/Glimpse/Data/History")
+            $.ajax("/Glimpse/MessageHistory")
                 .done(function(data) {
                     for (var i = 0; i < data.length; i++) {
                         messageApp.recieveMessage(data[i]);
@@ -306,7 +306,7 @@
         });
     </script>
     <script>
-        var connection = $.hubConnection("/Glimpse/Data/Stream", { useDefaultPath: false });
+        var connection = $.hubConnection("/Glimpse/MessageStream", { useDefaultPath: false });
         var messageClientPublisherHubProxy = connection.createHubProxy('webSocketClientChannelSender');
         messageClientPublisherHubProxy.on('recieveMessage', function(message) { 
             messageApp.recieveMessage(message);
