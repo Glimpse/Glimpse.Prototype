@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Glimpse.Web;
-using Glimpse.Web.Common;
+﻿using Glimpse.Web;
 using Microsoft.AspNet.Mvc.Razor;
 using Microsoft.Framework.DependencyInjection;
 

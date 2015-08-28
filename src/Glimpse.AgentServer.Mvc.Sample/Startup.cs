@@ -16,16 +16,18 @@ namespace Glimpse.AgentServer.Mvc.Sample
                 .AddGlimpse()
                 .RunningAgentWeb()
                 .RunningServerWeb()
-                .WithLocalAgent();
+                    .WithRemoteHttpClient()
+                    .WithLocalAgent();
 
             services.AddMvc();
-            services.AddTransient<MvcNotificationListener>();
+
+            //services.AddTransient<MvcNotificationListener>();
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            app.ApplicationServices.GetRequiredService<INotifier>().EnlistTarget(app.ApplicationServices.GetRequiredService<MvcNotificationListener>());
-            
+            //app.ApplicationServices.GetRequiredService<INotifier>().EnlistTarget(app.ApplicationServices.GetRequiredService<MvcNotificationListener>());
+
             app.UseGlimpseServer();
             app.UseGlimpseAgent();
             app.UseGlimpseUI();

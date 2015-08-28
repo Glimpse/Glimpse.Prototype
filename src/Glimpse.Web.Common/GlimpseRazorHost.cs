@@ -4,7 +4,7 @@ using Microsoft.AspNet.Mvc.Razor;
 using Microsoft.AspNet.Mvc.Razor.Directives;
 using Microsoft.AspNet.Razor.Chunks;
 
-namespace Glimpse.Web.Common
+namespace Glimpse.Web
 {
     public class GlimpseRazorHost : MvcRazorHost
     {

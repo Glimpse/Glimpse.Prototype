@@ -13,7 +13,7 @@ namespace Glimpse.AspNet.Sample
                 .AddGlimpse()
                 .RunningAgentWeb()
                 .RunningServerWeb()
-                .WithLocalAgent();
+                    .WithLocalAgent();
         }
 
         public void Configure(IApplicationBuilder app)
