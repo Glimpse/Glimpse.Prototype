@@ -34,13 +34,12 @@ namespace Glimpse
             message.Types = new [] { payload.GetType().FullName }; // TODO: Get all types, not just one
             message.Payload = _jsonSerializer.Serialize(payload);
             message.Context = context;
-
-            ProcessIndices(payload, message);
+            message.Indices = GetIndices(payload);
 
             return message;
         } 
 
-        private void ProcessIndices(object payload, Message message)
+        private static IReadOnlyDictionary<string, object> GetIndices(object payload)
         {
             var payloadType = payload.GetType();
             Func<object, IReadOnlyDictionary<string, object>> indicesCreator;
@@ -55,7 +54,7 @@ namespace Glimpse
                 _methodCache.Add(payloadType, indicesCreator);
             }
 
-            message.Indices = indicesCreator(payload);
+            return indicesCreator(payload);
         }
 
         private static Func<object, IReadOnlyDictionary<string, object>> GenerateIndicesCreator(Type messageType)
