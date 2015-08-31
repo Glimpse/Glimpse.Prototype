@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Glimpse.Common.Extensions;
 
 namespace Glimpse
 {
@@ -19,6 +20,8 @@ namespace Glimpse
         private readonly static ConstructorInfo _constructorInfo = typeof(ReadOnlyDictionary<string, object>).GetConstructor(new [] { _dictionaryType });
         private readonly static IDictionary<Type, Func<object, IReadOnlyDictionary<string, object>>> _methodCache = new Dictionary<Type, Func<object, IReadOnlyDictionary<string, object>>>();
 
+        private readonly static Type[] _exclusions = { typeof(object) };
+
 
         public DefaultMessageConverter(JsonSerializer jsonSerializer)
         {
@@ -28,16 +31,28 @@ namespace Glimpse
         }
 
         public IMessage ConvertMessage(object payload, MessageContext context)
-        { 
-            var message = new Message();
-            message.Id = Guid.NewGuid();
-            message.Types = new [] { payload.GetType().FullName }; // TODO: Get all types, not just one
-            message.Payload = _jsonSerializer.Serialize(payload);
-            message.Context = context;
-            message.Indices = GetIndices(payload);
+        {
+            var message = new Message
+            {
+                Id = Guid.NewGuid(),
+                Types = GetTypes(payload),
+                Payload = _jsonSerializer.Serialize(payload),
+                Context = context,
+                Indices = GetIndices(payload)
+            };
 
             return message;
-        } 
+        }
+
+        private static IEnumerable<string> GetTypes(object payload)
+        {
+            var typeInfo = payload.GetType().GetTypeInfo();
+
+            return typeInfo.BaseTypes(includeSelf: true)
+                .Concat(typeInfo.ImplementedInterfaces)
+                .Except(_exclusions)
+                .Select(t => t.KebabCase());
+        }
 
         private static IReadOnlyDictionary<string, object> GetIndices(object payload)
         {
