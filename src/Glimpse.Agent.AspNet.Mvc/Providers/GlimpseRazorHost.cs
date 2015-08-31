@@ -4,7 +4,7 @@ using Microsoft.AspNet.Mvc.Razor;
 using Microsoft.AspNet.Mvc.Razor.Directives;
 using Microsoft.AspNet.Razor.Chunks;
 
-namespace Glimpse.Web
+namespace Glimpse.Agent.AspNet.Mvc
 {
     public class GlimpseRazorHost : MvcRazorHost
     {
@@ -28,7 +28,7 @@ namespace Glimpse.Web
 
                 newArray[original.Length] = new AddTagHelperChunk
                 {
-                    LookupText = "*, Glimpse.Web.Common"
+                    LookupText = "*, Glimpse.Agent.AspNet.Mvc"
                 };
 
                 _overriddenChunks = newArray;

@@ -14,6 +14,7 @@ namespace Glimpse.AgentServer.Mvc.Sample
             services
                 .AddGlimpse()
                 .RunningAgentWeb()
+                    .WithMvcInspectors()
                 .RunningServerWeb()
                     .WithLocalAgent();
 
