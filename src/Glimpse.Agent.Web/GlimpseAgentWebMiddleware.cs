@@ -15,13 +15,13 @@ namespace Glimpse.Agent.Web
         private readonly IContextData<MessageContext> _contextData;
         private readonly IEnumerable<IRequestIgnorer> _requestIgnorePolicies;
 
-        public GlimpseAgentWebMiddleware(RequestDelegate next, IApplicationBuilder app, IContextData<MessageContext> contextData, IRequestIgnorerProvider requestIgnorerProvider, IInspectorStartupProvider inspectorStartupProvider)
+        public GlimpseAgentWebMiddleware(RequestDelegate next, IApplicationBuilder app, IContextData<MessageContext> contextData, IExtensionProvider<IRequestIgnorer> requestIgnorerProvider, IExtensionProvider<IInspectorStartup> inspectorStartupProvider)
         {
             _contextData = contextData;
             _next = next;
             //_settings = BuildSettings(shouldIgnoreRequest);
-            _requestIgnorePolicies = requestIgnorerProvider.Policies;
-            _branch = BuildBranch(app, inspectorStartupProvider);
+            _requestIgnorePolicies = requestIgnorerProvider.Instances;
+            _branch = BuildBranch(app, inspectorStartupProvider.Instances);
         }
         
         public async Task Invoke(HttpContext context)
@@ -38,11 +38,11 @@ namespace Glimpse.Agent.Web
             }
         }
 
-        private RequestDelegate BuildBranch(IApplicationBuilder app, IInspectorStartupProvider inspectorStartupProvider)
+        private RequestDelegate BuildBranch(IApplicationBuilder app, IEnumerable<IInspectorStartup> inspectorStartupProvider)
         {
             // create new pipeline
             var branchBuilder = app.New();
-            foreach (var middlewareProfiler in inspectorStartupProvider.Startups)
+            foreach (var middlewareProfiler in inspectorStartupProvider)
             {
                 middlewareProfiler.Configure(new InspectorBuilder(branchBuilder));
             }

@@ -6,9 +6,9 @@ namespace Glimpse.Agent.Web
     {
         private readonly IEnumerable<IInspector> _inspectors;
 
-        public InspectorsInspectorStartup(IInspectorProvider inspectorProvider)
+        public InspectorsInspectorStartup(IExtensionProvider<IInspector> inspectorProvider)
         {
-            _inspectors = inspectorProvider.Inspectors;
+            _inspectors = inspectorProvider.Instances;
         }
 
         public void Configure(IInspectorBuilder builder)
