@@ -7,9 +7,9 @@ namespace Glimpse.Server.Web
     {
         private readonly IEnumerable<IResource> _resources;
 
-        public ResourcesResourceStartup(IResourceProvider resourceProvider)
+        public ResourcesResourceStartup(IExtensionProvider<IResource> resourceProvider)
         {
-            _resources = resourceProvider.Resources;
+            _resources = resourceProvider.Instances;
         }
         
         public void Configure(IResourceBuilder builder)
