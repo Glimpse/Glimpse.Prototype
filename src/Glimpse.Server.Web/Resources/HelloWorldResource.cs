@@ -2,6 +2,7 @@
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
+using Microsoft.Net.Http.Headers;
 
 namespace Glimpse.Server.Web
 {
@@ -11,7 +12,7 @@ namespace Glimpse.Server.Web
         {
             var response = context.Response;
 
-            response.Headers.Set("Content-Type", "text/plain");
+            response.Headers[HeaderNames.ContentType] = "text/plain";
 
             var data = Encoding.UTF8.GetBytes("Hello world, Glimpse!");
             await response.Body.WriteAsync(data, 0, data.Length);
