@@ -9,9 +9,12 @@ namespace Glimpse.Server.Web
     public class InMemoryStorage : IQueryRequests<Func<RequestIndices, bool>>, IStorage
     {
         public const int RequestsPerPage = 50;
+        public const int MaxRequests = 500; // TODO: Make this configurable
 
-        private readonly IList<IMessage> _messages;
+        private readonly List<IMessage> _messages;
         private readonly ConcurrentDictionary<Guid, RequestIndices> _indices;
+
+        private static readonly object _locker = new object(); // HACK :(
 
         public InMemoryStorage()
         {
@@ -28,11 +31,29 @@ namespace Glimpse.Server.Web
 
             var requestId = message.Context.Id;
 
-            _indices.AddOrUpdate(requestId, new RequestIndices(message), (id, indices) =>
+            _indices.AddOrUpdate(requestId, 
+                new RequestIndices(message), 
+                (id, indices) =>
+                {
+                    indices.Update(message);
+                    return indices;
+                });
+
+            // TODO: There's probably a better data structure for all of this, but not that I could find
+            if (_indices.Count > MaxRequests)
             {
-                indices.Update(message);
-                return indices;
-            });
+                lock (_locker) // Hack - I know, I know...
+                {
+                    var toRemove = MaxRequests/10;
+                    RequestIndices removed;
+                    for (int i = 0; i < toRemove; i++)
+                    {
+                        var idToRemove = _messages.Last().Context.Id;
+                        _messages.RemoveAll(m => m.Context.Id == idToRemove);
+                        _indices.TryRemove(idToRemove, out removed);
+                    }
+                }
+            }
         }
 
         public Task<IEnumerable<IMessage>> RetrieveByType(params string[] types)
