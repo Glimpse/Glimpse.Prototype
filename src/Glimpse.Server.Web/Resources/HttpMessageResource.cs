@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using Glimpse.Web;
-using Microsoft.AspNet.Http;
-using Newtonsoft.Json;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Http;
+using Microsoft.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace Glimpse.Server.Web
 {
@@ -26,7 +25,7 @@ namespace Glimpse.Server.Web
 
             // TODO: Really should do something better
             var response = context.Response;
-            response.Headers.Set("Content-Type", "text/plain");
+            response.Headers[HeaderNames.ContentType] = "text/plain";
 
             var data = Encoding.UTF8.GetBytes("OK");
             await response.Body.WriteAsync(data, 0, data.Length);

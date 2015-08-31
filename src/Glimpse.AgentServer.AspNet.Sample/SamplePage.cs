@@ -1,8 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using System.Text;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
+using Microsoft.Net.Http.Headers;
 
 namespace Glimpse.AspNet.Sample
 {
@@ -19,8 +17,8 @@ namespace Glimpse.AspNet.Sample
         {
             var response = context.Response;
 
-            response.Headers.Set("Content-Type", "text/html");
-             
+            response.Headers[HeaderNames.ContentType] = "text/html";
+
             await response.WriteAsync($"<html><body><h1>Agent Test</h1><script src='/Glimpse/Browser/Agent' id='glimpse' data-glimpse-id='{_context?.Value?.Id}'></script></body></html>");
         }
     }

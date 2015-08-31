@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using Glimpse.Web;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Glimpse.Server.Web;
+using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Http;
+using Microsoft.Net.Http.Headers;
 
 namespace Glimpse.Agent.Browser.Resources
 {
@@ -18,7 +18,7 @@ namespace Glimpse.Agent.Browser.Resources
             {
                 var response = context.Response;
 
-                response.Headers.Set("Content-Type", "application/javascript");
+                response.Headers[HeaderNames.ContentType] = "application/javascript";
 
                 var assembly = typeof(BrowserAgentResource).GetTypeInfo().Assembly;
 
@@ -40,7 +40,7 @@ namespace Glimpse.Agent.Browser.Resources
         {
             var response = context.Response;
 
-            response.Headers.Set("Content-Type", "application/javascript");
+            response.Headers[HeaderNames.ContentType] = "application/javascript";
 
             var assembly = typeof(BrowserAgentResource).GetTypeInfo().Assembly;
 
