@@ -11,7 +11,6 @@ namespace Glimpse.Server.AspNet.Sample
             services
                 .AddGlimpse()
                 .RunningServerWeb()
-                    .WithRemoteHttpAgent()
                     .WithRemoteHttpClient();
         }
 
