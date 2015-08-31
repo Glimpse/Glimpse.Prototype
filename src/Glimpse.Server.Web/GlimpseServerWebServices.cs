@@ -30,6 +30,7 @@ namespace Glimpse
             services.AddTransient<IResourceStartupProvider, DefaultResourceStartupProvider>();
             services.AddSingleton<IAllowRemoteProvider, DefaultAllowRemoteProvider>();
             services.AddTransient<IResourceManager, ResourceManager>();
+            services.AddTransient<IClientBroker, HttpClientBroker>();
 
             return services;
         }

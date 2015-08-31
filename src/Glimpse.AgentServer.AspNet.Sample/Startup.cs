@@ -13,7 +13,6 @@ namespace Glimpse.AspNet.Sample
                 .AddGlimpse()
                 .RunningAgentWeb()
                 .RunningServerWeb()
-                    .WithRemoteHttpClient()
                     .WithLocalAgent();
         }
 
