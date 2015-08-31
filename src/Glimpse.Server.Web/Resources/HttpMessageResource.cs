@@ -8,11 +8,11 @@ using Newtonsoft.Json;
 
 namespace Glimpse.Server.Web
 {
-    public class AgentMessageResource : IResource
+    public class HttpMessageResource : IResource
     {
         private readonly IServerBroker _messageServerBus;
 
-        public AgentMessageResource(IServerBroker messageServerBus)
+        public HttpMessageResource(IServerBroker messageServerBus)
         {
             _messageServerBus = messageServerBus;
         }

@@ -11,7 +11,7 @@ namespace Glimpse.Agent
 {
     public class DefaultAgentBroker : IAgentBroker
     {
-        private readonly IChannelSender _channelSender;
+        private readonly IMessagePublisher _messagePublisher;
         private readonly IMessageConverter _messageConverter;
         private readonly ISubject<MessageListenerOptions> _subject;
         private readonly BlockingCollection<IMessage> _queue;
@@ -20,9 +20,9 @@ namespace Glimpse.Agent
         // TODO: Review if we care about unifying which thread message is published on
         //       and which thread it is recieved on. If so need to use IScheduler.
 
-        public DefaultAgentBroker(IChannelSender channelSender, IMessageConverter messageConverter)
+        public DefaultAgentBroker(IMessagePublisher messagePublisher, IMessageConverter messageConverter)
         {
-            _channelSender = channelSender;
+            _messagePublisher = messagePublisher;
             _messageConverter = messageConverter;
 
             _context = new ContextData<MessageContext>();
@@ -45,7 +45,7 @@ namespace Glimpse.Agent
 
                 if (!notificationOptions.IsCancelled)
                 {
-                    _channelSender.PublishMessage(message);
+                    _messagePublisher.PublishMessage(message);
                 }
             }
         }

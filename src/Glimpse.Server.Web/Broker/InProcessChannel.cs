@@ -2,7 +2,7 @@
 
 namespace Glimpse.Server.Web
 {
-    public class InProcessChannel : IChannelSender
+    public class InProcessChannel : IMessagePublisher
     {
         private readonly IServerBroker _messageBus;
 
