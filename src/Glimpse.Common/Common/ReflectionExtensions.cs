@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace Glimpse.Common.Extensions
+namespace Glimpse.Common
 {
     public static class ReflectionExtensions
     {

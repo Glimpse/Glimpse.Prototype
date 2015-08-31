@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Glimpse.Common.Extensions;
+using Glimpse.Common;
 
 namespace Glimpse
 {
