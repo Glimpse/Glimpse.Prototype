@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,12 +11,12 @@ namespace Glimpse.Server.Web
         public const int RequestsPerPage = 50;
 
         private readonly IList<IMessage> _messages;
-        private readonly IDictionary<Guid, RequestIndices> _indices;
+        private readonly ConcurrentDictionary<Guid, RequestIndices> _indices;
 
         public InMemoryStorage()
         {
             _messages = new List<IMessage>();
-            _indices = new Dictionary<Guid, RequestIndices>();
+            _indices = new ConcurrentDictionary<Guid, RequestIndices>();
         }
 
         public void Persist(IMessage message)
@@ -27,14 +28,11 @@ namespace Glimpse.Server.Web
 
             var requestId = message.Context.Id;
 
-            if (_indices.ContainsKey(requestId))
+            _indices.AddOrUpdate(requestId, new RequestIndices(message), (id, indices) =>
             {
-                _indices[requestId].Update(message);
-            }
-            else
-            {
-                _indices.Add(requestId, new RequestIndices(message));
-            }
+                indices.Update(message);
+                return indices;
+            });
         }
 
         public Task<IEnumerable<IMessage>> RetrieveByType(params string[] types)
