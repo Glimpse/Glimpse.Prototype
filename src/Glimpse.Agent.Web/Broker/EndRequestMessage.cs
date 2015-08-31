@@ -1,36 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
+using Glimpse.Common.Broker;
 using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent.Web
 {
-    public class EndRequestMessage : IMessageIndices
+    public class EndRequestMessage
     {
         public EndRequestMessage(HttpRequest request, Timing timing)
         {
+            // TODO: check if there is a better way of doing this
             Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}";
             StartTime = timing.Start;
             EndTime = timing.End;
             Duration = timing.Elapsed.TotalMilliseconds;
             Method = request.Method;
-
-            Indices = new Dictionary<string, object> {
-                { "request.duration", Duration },
-                { "request.method", Method },
-                { "request.url", Url }
-            };
         }
 
-        public IReadOnlyDictionary<string, object> Indices { get; set; }
+        [PromoteToDuration]
+        public double? Duration { get; }
 
-        public double Duration { get; }
-
-        public DateTime StartTime { get; }
+        [PromoteToDateTime]
+        public DateTime? StartTime { get; }
 
         public DateTime EndTime { get; }
 
+        [PromoteToUrl]
         public string Url { get; }
 
+        [PromoteToMethod]
         public string Method { get; }
     }
 }

@@ -16,7 +16,7 @@ namespace Glimpse.Server.Web
             ParseAndUpdateIndicesFor(message);
         }
 
-        public float? Duration { get; private set; }
+        public double? Duration { get; private set; }
 
         public string Url { get; private set; }
 
@@ -33,7 +33,7 @@ namespace Glimpse.Server.Web
         public void Update(IMessage message)
         {
             if (message.Context.Id != Id)
-                throw new ArgumentException(string.Format("Input Request ID '{0}' does not match existing request ID '{1}'.", message.Context.Id, Id));
+                throw new ArgumentException($"Input Request ID '{message.Context.Id}' does not match existing request ID '{Id}'.");
 
             ParseAndUpdateIndicesFor(message);
         }
@@ -41,7 +41,7 @@ namespace Glimpse.Server.Web
         private void ParseAndUpdateIndicesFor(IMessage message)
         {
             var indices = message.Indices;
-            Duration = indices.GetValueOrDefault("request-duration") as float?;
+            Duration = indices.GetValueOrDefault("request-duration") as double?;
             Url = indices.GetValueOrDefault("request-url") as string;
             Method = indices.GetValueOrDefault("request-method") as string;
             StatusCode = indices.GetValueOrDefault("request-statuscode") as int?;
