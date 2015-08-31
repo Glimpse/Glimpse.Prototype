@@ -41,7 +41,7 @@ namespace Glimpse
             //
             // Broker
             //
-            services.AddSingleton<IChannelSender, InProcessChannel>();
+            services.AddSingleton<IMessagePublisher, InProcessChannel>();
 
             return services;
         }

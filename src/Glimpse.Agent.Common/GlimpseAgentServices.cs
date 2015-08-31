@@ -15,6 +15,7 @@ namespace Glimpse
             // Broker
             //
             services.AddSingleton<IAgentBroker, DefaultAgentBroker>();
+            services.AddTransient<IMessagePublisher, HttpMessagePublisher>();
 
             return services;
         }

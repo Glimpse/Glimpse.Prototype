@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace Glimpse.Agent
 {
-    public class HttpChannelSender : IChannelSender, IDisposable
+    public class HttpMessagePublisher : IMessagePublisher, IDisposable
     {
         private readonly HttpClient _httpClient;
         private readonly HttpClientHandler _httpHandler;
 
-        public HttpChannelSender()
+        public HttpMessagePublisher()
         {
             _httpHandler = new HttpClientHandler();
             _httpClient = new HttpClient(_httpHandler);

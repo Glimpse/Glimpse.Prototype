@@ -12,7 +12,7 @@ namespace Glimpse
             //
             // Broker
             //
-            services.AddSingleton<IChannelSender, HttpChannelSender>();
+            services.AddSingleton<IMessagePublisher, HttpMessagePublisher>();
 
 
             return services;
