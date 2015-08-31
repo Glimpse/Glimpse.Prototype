@@ -13,12 +13,12 @@ namespace Glimpse.Server.Web
         private readonly ISettings _settings;
         private readonly IEnumerable<IRequestAuthorizer> _requestAuthorizers;
         
-        public GlimpseServerWebMiddleware(RequestDelegate next, IApplicationBuilder app, IRequestAuthorizerProvider requestAuthorizerProvider,  IResourceStartupProvider resourceStartupsProvider, IResourceManager resourceManager)
+        public GlimpseServerWebMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IRequestAuthorizer> requestAuthorizerProvider, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IResourceManager resourceManager)
         {
             _next = next; 
             //_settings = BuildSettings(userHasAccess);
-            _requestAuthorizers = requestAuthorizerProvider.Authorizers;
-            _branch = BuildBranch(app, resourceStartupsProvider, resourceManager);
+            _requestAuthorizers = requestAuthorizerProvider.Instances;
+            _branch = BuildBranch(app, resourceStartupsProvider.Instances, resourceManager);
         }
         
         public async Task Invoke(HttpContext context)
@@ -33,7 +33,7 @@ namespace Glimpse.Server.Web
             }
         }
 
-        public RequestDelegate BuildBranch(IApplicationBuilder app, IResourceStartupProvider resourceStartupsProvider, IResourceManager resourceManager)
+        public RequestDelegate BuildBranch(IApplicationBuilder app, IEnumerable<IResourceStartup> resourceStartups, IResourceManager resourceManager)
         {
             // create new pipeline
             var branchBuilder = app.New();
@@ -41,7 +41,7 @@ namespace Glimpse.Server.Web
             {
                 // register resource startups
                 var resourceBuilder = new ResourceBuilder(app, resourceManager);
-                foreach (var resourceStartup in resourceStartupsProvider.Startups)
+                foreach (var resourceStartup in resourceStartups)
                 {
                     resourceStartup.Configure(resourceBuilder);
                 }
