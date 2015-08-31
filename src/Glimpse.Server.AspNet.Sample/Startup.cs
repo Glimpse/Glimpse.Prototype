@@ -8,7 +8,8 @@ namespace Glimpse.Server.AspNet.Sample
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddGlimpse()
+            services
+                .AddGlimpse()
                 .RunningServerWeb()
                     .WithRemoteHttpAgent()
                     .WithRemoteHttpClient();
