@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
+using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -25,7 +26,7 @@ namespace Glimpse.Server.Web
         {
             var response = context.Response;
 
-            response.Headers.Set("Content-Type", "application/json");
+            response.Headers[HeaderNames.ContentType] = "application/json";
 
             var list = _store.AllMessages;
             var output = _jsonSerializer.Serialize(list);
