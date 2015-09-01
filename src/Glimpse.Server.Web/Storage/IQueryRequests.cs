@@ -9,7 +9,7 @@ namespace Glimpse.Server.Web
     {
         ICollection<T> CreateFilterCollection();
 
-        Task<IEnumerable<IMessage>> GetByRequestId(Guid id);
+        Task<IEnumerable<string>> GetByRequestId(Guid id);
 
         T FilterByDuration(float min = 0, float max = float.MaxValue);
 
@@ -23,8 +23,8 @@ namespace Glimpse.Server.Web
 
         T FilterByDateTime(DateTime before);
 
-        Task<IEnumerable<IMessage>> Query(params T[] filters);
+        Task<IEnumerable<string>> Query(params T[] filters);
 
-        Task<IEnumerable<IMessage>> Query(IEnumerable<T> filters, params string[] types);
+        Task<IEnumerable<string>> Query(IEnumerable<T> filters, params string[] types);
     }
 }

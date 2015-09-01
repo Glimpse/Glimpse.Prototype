@@ -56,12 +56,12 @@ namespace Glimpse.Server.Web
             }
         }
 
-        public Task<IEnumerable<IMessage>> RetrieveByType(params string[] types)
+        public Task<IEnumerable<string>> RetrieveByType(params string[] types)
         {
             if (types == null || types.Length == 0)
                 throw new ArgumentException("At least one type must be specified.", "types");
 
-            return Task.Run(() => _messages.Where(m => m.Types.Intersect(types).Any()));
+            return Task.Run(() => _messages.Where(m => m.Types.Intersect(types).Any()).Select(m => m.Payload));
         }
 
         public ICollection<Func<RequestIndices, bool>> CreateFilterCollection()
@@ -69,9 +69,9 @@ namespace Glimpse.Server.Web
             return new List<Func<RequestIndices, bool>>();
         }
 
-        public Task<IEnumerable<IMessage>> GetByRequestId(Guid id)
+        public Task<IEnumerable<string>> GetByRequestId(Guid id)
         {
-            return Task.Run(() => _messages.Where(m => m.Context.Id == id));
+            return Task.Run(() => _messages.Where(m => m.Context.Id == id).Select(m => m.Payload));
         }
 
         public Func<RequestIndices, bool> FilterByDuration(float min = 0, float max = float.MaxValue)
@@ -104,12 +104,12 @@ namespace Glimpse.Server.Web
             return i => i.DateTime.HasValue && i.DateTime.Value < before;
         }
 
-        public Task<IEnumerable<IMessage>> Query(params Func<RequestIndices, bool>[] filters)
+        public Task<IEnumerable<string>> Query(params Func<RequestIndices, bool>[] filters)
         {
             return Query(filters, null);
         }
 
-        public Task<IEnumerable<IMessage>> Query(IEnumerable<Func<RequestIndices, bool>> filters, params string[] types)
+        public Task<IEnumerable<string>> Query(IEnumerable<Func<RequestIndices, bool>> filters, params string[] types)
         {
             return Task.Run(() =>
             {
@@ -125,7 +125,7 @@ namespace Glimpse.Server.Web
                         types == null ? _messages : _messages.Where(m => m.Types.Intersect(types).Any()), // only filter by type if types are specified
                         i => i.Id, 
                         m => m.Context.Id, 
-                        (i, m) => m);
+                        (i, m) => m.Payload);
                 });
         }
     }

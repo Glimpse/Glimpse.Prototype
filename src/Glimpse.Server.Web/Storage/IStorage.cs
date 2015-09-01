@@ -7,6 +7,6 @@ namespace Glimpse.Server.Web
     {
         void Persist(IMessage message);
 
-        Task<IEnumerable<IMessage>> RetrieveByType(params string[] types);
+        Task<IEnumerable<string>> RetrieveByType(params string[] types);
     }
 }
