@@ -74,6 +74,18 @@ namespace Glimpse
 
         private static Func<object, IReadOnlyDictionary<string, object>> GenerateIndicesCreator(Type messageType)
         {
+            /* Creates a func that looks something like this:
+            ** Func<object, IReadOnlyDictionary<string, object>> lambda = message =>
+            ** {
+            **     var casted = (<Message Type>) message;
+            **     return new ReadOnlyDictionary<string, object>(new Dictionary<string, object>
+            **     {
+            **         { "<PromoteToAttribute.Key>", message.<Property Name> },
+            **         ... // Repeat as many times as necessary
+            **     });
+            ** };
+            */
+
             var parameter = Expression.Parameter(_objectType, "message");
             var variable = Expression.Variable(messageType, "casted");
             var cast = Expression.Assign(variable, Expression.Convert(parameter, messageType));
