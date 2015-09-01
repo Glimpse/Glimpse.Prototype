@@ -28,7 +28,7 @@ namespace Glimpse.Server.Web
 
             response.Headers[HeaderNames.ContentType] = "application/json";
 
-            var list = _store.AllMessages;
+            var list = _store.Query(null);
             var output = _jsonSerializer.Serialize(list);
 
             await response.WriteAsync(output);
