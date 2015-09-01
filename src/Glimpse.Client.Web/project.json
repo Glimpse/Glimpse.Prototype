@@ -5,7 +5,7 @@
         "**.user",
         "**.vspscc"
     ],
-    "resources": [ "Resources" ],
+    "resource": [ "Resources" ],
     "dependencies": {
         "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-*",
         "Microsoft.AspNet.StaticFiles": "1.0.0-*"
