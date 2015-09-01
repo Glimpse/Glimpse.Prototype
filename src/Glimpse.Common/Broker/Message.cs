@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Glimpse
 {
@@ -16,8 +15,6 @@ namespace Glimpse
         public int Ordinal { get; set; }
 
         public MessageContext Context { get; set; }
-
-        public IEnumerable<string> Tags { get; set; }
 
         public IReadOnlyDictionary<string, object> Indices { get; set; }
     }
