@@ -6,7 +6,7 @@ namespace Glimpse.Server.Web
     {
         public DefaultAllowRemoteProvider(IOptions<GlimpseServerWebOptions> optionsAccessor)
         {
-            AllowRemote = optionsAccessor.Options.AllowRemote; 
+            AllowRemote = optionsAccessor.Value.AllowRemote; 
         }
         
         public bool AllowRemote { get; }
