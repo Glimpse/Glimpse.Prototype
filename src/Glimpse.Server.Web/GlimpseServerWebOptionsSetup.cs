@@ -6,7 +6,6 @@ namespace Glimpse.Server.Web
     {
         public GlimpseServerWebOptionsSetup() : base(ConfigureGlimpseServerWebOptions)
         {
-            Order = -1000;
         }
 
         public static void ConfigureGlimpseServerWebOptions(GlimpseServerWebOptions options)
