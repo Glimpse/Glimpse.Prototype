@@ -10,7 +10,7 @@ namespace Glimpse.Agent.Web
     { 
         public DefaultRequestIgnorerUriProvider(IOptions<GlimpseAgentWebOptions> optionsAccessor)
         {
-            var ignoredUris = optionsAccessor.Options.IgnoredUris;
+            var ignoredUris = optionsAccessor.Value.IgnoredUris;
             IgnoredUris = ignoredUris.ToList(); 
         }
 
