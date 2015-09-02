@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,8 @@ namespace Glimpse.Server.Web
         public ResourceParameters()
         {
         }
+
+        public static  ResourceParameters None { get; } = new ResourceParameters();
 
         public ResourceParameters(params ResourceParameter[] resourceParameters)
         {
@@ -25,6 +28,9 @@ namespace Glimpse.Server.Web
 
         public string GenerateUriTemplate()
         {
+            if (Count == 0)
+                return string.Empty;
+
             var sb = new StringBuilder();
 
             var requiredParams = this.Where(p => p.IsRequired).ToArray();
