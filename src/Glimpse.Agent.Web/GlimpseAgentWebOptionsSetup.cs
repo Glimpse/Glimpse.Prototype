@@ -8,7 +8,6 @@ namespace Glimpse.Agent.Web
     {
         public GlimpseAgentWebOptionsSetup() : base(ConfigureGlimpseAgentWebOptions)
         {
-            Order = -1000;
         }
 
         public static void ConfigureGlimpseAgentWebOptions(GlimpseAgentWebOptions options)
