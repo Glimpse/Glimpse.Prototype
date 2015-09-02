@@ -9,7 +9,7 @@ namespace Glimpse.Agent.Web
     {
         public DefaultRequestIgnorerContentTypeProvider(IOptions<GlimpseAgentWebOptions> optionsAccessor)
         {
-            var contentTypes = optionsAccessor.Options.IgnoredContentTypes;
+            var contentTypes = optionsAccessor.Value.IgnoredContentTypes;
             ContentTypes = contentTypes.ToList();
         }
 
