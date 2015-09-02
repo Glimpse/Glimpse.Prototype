@@ -5,8 +5,8 @@ namespace Glimpse.Agent.Web
 {
     public interface IInspector
     {
-        Task Before(HttpContext context);
+        void Before(HttpContext context);
 
-        Task After(HttpContext context);
+        void After(HttpContext context);
     }
 }

@@ -17,14 +17,14 @@ namespace Glimpse.Agent.Web
             {
                 foreach (var inspector in _inspectors)
                 {
-                    await inspector.Before(context);
+                    inspector.Before(context);
                 }
 
                 await next();
 
                 foreach (var inspector in _inspectors)
                 {
-                    await inspector.After(context);
+                    inspector.After(context);
                 }
             });
         }
