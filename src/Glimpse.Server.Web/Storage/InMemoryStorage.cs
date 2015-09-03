@@ -111,6 +111,11 @@ namespace Glimpse.Server.Web
 
         public Task<IEnumerable<string>> Query(IEnumerable<Func<RequestIndices, bool>> filters, params string[] types)
         {
+            if (filters == null)
+            {
+                filters = Enumerable.Empty<Func<RequestIndices, bool>>();
+            }
+
             return Task.Run(() =>
             {
                 var query = _indices.Values.AsEnumerable();
