@@ -7,9 +7,9 @@ namespace Glimpse.Server.Web
 
     public interface IServerBroker
     {
-        IObservable<MessageListenerOptions> ListenAll();
+        //IObservable<MessageListenerPayload> ListenAll();
 
-        IObservable<MessageListenerOptions> ListenAllIncludeLatest();
+        //IObservable<MessageListenerPayload> ListenAllIncludeLatest();
 
         void SendMessage(IMessage message);
     }

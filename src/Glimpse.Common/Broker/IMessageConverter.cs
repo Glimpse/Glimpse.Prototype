@@ -4,6 +4,6 @@ namespace Glimpse
 {
     public interface IMessageConverter
     {
-        IMessage ConvertMessage(object payload);
+        IMessage ConvertMessage(object payload, MessageContext context);
     }
 }

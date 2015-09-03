@@ -7,7 +7,7 @@ namespace Glimpse.Server.Web
 {
     public class DefaultServerBroker : IServerBroker
     {
-        private readonly ISubject<MessageListenerOptions> _subject;
+        //private readonly ISubject<MessageListenerPayload> _subject;
         private readonly IClientBroker _currentMessagePublisher;
         private readonly IStorage _storage;
 
@@ -19,7 +19,8 @@ namespace Glimpse.Server.Web
 
         public DefaultServerBroker(IClientBroker currentMessagePublisher, IStorage storage)
         {
-            _subject = new BehaviorSubject<MessageListenerOptions>(null);
+            // TODO: Should add back in at some point?
+            //_subject = new BehaviorSubject<MessageListenerPayload>(null);
             _currentMessagePublisher = currentMessagePublisher;
             _storage = storage;
 
@@ -30,27 +31,27 @@ namespace Glimpse.Server.Web
             //});
         }
         
-        public IObservable<MessageListenerOptions> ListenAll()
-        {
-            return ListenAllIncludeLatest().Skip(1);
-        }
+        //public IObservable<MessageListenerPayload> ListenAll()
+        //{
+        //    return ListenAllIncludeLatest().Skip(1);
+        //}
 
-        public IObservable<MessageListenerOptions> ListenAllIncludeLatest()
-        {
-            return _subject;
-        }
+        //public IObservable<MessageListenerPayload> ListenAllIncludeLatest()
+        //{
+        //    return _subject;
+        //}
 
         public void SendMessage(IMessage message)
         {
-            var notificationOptions = new MessageListenerOptions(message);
+            //var notificationOptions = new MessageListenerPayload(message);
 
-            _subject.OnNext(notificationOptions);
+            //_subject.OnNext(notificationOptions);
 
-            if (!notificationOptions.IsCancelled)
-            {
+            //if (!notificationOptions.IsCancelled)
+            //{
                 _currentMessagePublisher.PublishMessage(message);
                 _storage.Persist(message);
-            }
+            //}
         }
     }
 }
