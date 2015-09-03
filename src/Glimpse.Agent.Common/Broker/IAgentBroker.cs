@@ -5,16 +5,16 @@ namespace Glimpse.Agent
 {
     public interface IAgentBroker
     {
-        IObservable<MessageListenerOptions> Listen<T>();
+        /// <summary>
+        /// On the sender thread and is blocking
+        /// </summary>
+        AgentBrokerOptions OnSenderThread { get; }
 
-        IObservable<MessageListenerOptions> ListenIncludeLatest<T>();
-
-        IObservable<MessageListenerOptions> ListenAll();
-
-        IObservable<MessageListenerOptions> ListenAllIncludeLatest();
+        /// <summary>
+        /// Off the sender thread and is not blocking
+        /// </summary>
+        AgentBrokerOptions OffSenderThread { get; }
 
         void SendMessage(object message);
-
-        MessageContext Context { get; }
     }
 }

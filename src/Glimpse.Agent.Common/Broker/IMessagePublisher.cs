@@ -5,6 +5,6 @@ namespace Glimpse.Agent
 {
     public interface IMessagePublisher
     {
-        void PublishMessage(IMessage message);
+        void PublishMessage(MessageListenerPayload message);
     }
 }

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Glimpse.Agent
@@ -12,70 +10,50 @@ namespace Glimpse.Agent
     public class DefaultAgentBroker : IAgentBroker
     {
         private readonly IMessagePublisher _messagePublisher;
-        private readonly IMessageConverter _messageConverter;
-        private readonly ISubject<MessageListenerOptions> _subject;
-        private readonly BlockingCollection<IMessage> _queue;
-        private readonly IContextData<MessageContext> _context;
+        private readonly ISubject<MessageListenerPayload> _onSenderThreadSubject;
+        private readonly ISubject<MessageListenerPayload> _offSenderThreadSubject;
+        private readonly ISubject<MessageListenerPayload> _offSenderThreadInternalSubject;
+        private readonly IContextData<MessageContext> _context; 
 
-        // TODO: Review if we care about unifying which thread message is published on
-        //       and which thread it is recieved on. If so need to use IScheduler.
-
-        public DefaultAgentBroker(IMessagePublisher messagePublisher, IMessageConverter messageConverter)
+        public DefaultAgentBroker(IMessagePublisher messagePublisher)
         {
             _messagePublisher = messagePublisher;
-            _messageConverter = messageConverter;
-
             _context = new ContextData<MessageContext>();
-            _subject = new BehaviorSubject<MessageListenerOptions>(null);
-            _queue = new BlockingCollection<IMessage>();
 
-            Task.Run(() => ReadMessages());
+            _onSenderThreadSubject = new Subject<MessageListenerPayload>();
+            _offSenderThreadSubject = new Subject<MessageListenerPayload>();
+            _offSenderThreadInternalSubject = new Subject<MessageListenerPayload>();
+
+            OnSenderThread = new AgentBrokerOptions(_onSenderThreadSubject);
+            OffSenderThread = new AgentBrokerOptions(_offSenderThreadInternalSubject);
+
+            // ensure off-request data is observed onto a different thread
+            _offSenderThreadInternalSubject.Subscribe(payload => Observable.Start(() => _offSenderThreadSubject.OnNext(payload), TaskPoolScheduler.Default));
         }
 
-        public MessageContext Context => _context.Value;
+        /// <summary>
+        /// On the sender thread and is blocking
+        /// </summary>
+        public AgentBrokerOptions OnSenderThread { get; }
 
-        private void ReadMessages()
-        {
-            foreach (var message in _queue.GetConsumingEnumerable())
-            {
-                // run through all listeners
-                var notificationOptions = new MessageListenerOptions(message);
-
-                 _subject.OnNext(notificationOptions);
-
-                if (!notificationOptions.IsCancelled)
-                {
-                    _messagePublisher.PublishMessage(message);
-                }
-            }
-        }
-
-        public IObservable<MessageListenerOptions> Listen<T>() 
-        {
-            return ListenIncludeLatest<T>().Skip(1);
-        }
-
-        public IObservable<MessageListenerOptions> ListenIncludeLatest<T>()
-        {
-            return _subject
-                .Where(opts => typeof(T).GetTypeInfo().IsAssignableFrom(opts.Message.Payload.GetType().GetTypeInfo()));
-        }
-
-        public IObservable<MessageListenerOptions> ListenAll()
-        {
-            return ListenAllIncludeLatest().Skip(1);
-        }
-
-        public IObservable<MessageListenerOptions> ListenAllIncludeLatest()
-        {
-            return _subject;
-        }
-
+        /// <summary>
+        /// Off the sender thread and is not blocking
+        /// </summary>
+        public AgentBrokerOptions OffSenderThread { get; }
+        
         public void SendMessage(object payload)
         {
-            var message = _messageConverter.ConvertMessage(payload);
+            // need to fetch context data here as we are about to start switching threads
+            var options = new MessageListenerPayload(payload, _context.Value);
 
-            _queue.Add(message);
+            // should be non-blocking but up to implementation 
+            _messagePublisher.PublishMessage(options);
+
+            // non-blocking
+            _offSenderThreadInternalSubject.OnNext(options);
+
+            // blocking
+            _onSenderThreadSubject.OnNext(options);
         }
     }
 }

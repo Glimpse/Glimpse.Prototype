@@ -7,23 +7,21 @@ namespace Glimpse
     public class DefaultMessageConverter : IMessageConverter
     {
         private readonly JsonSerializer _jsonSerializer;
-        private readonly IContextData<MessageContext> _contextData;
 
-        public DefaultMessageConverter(JsonSerializer jsonSerializer, IContextData<MessageContext> contextData)
+        public DefaultMessageConverter(JsonSerializer jsonSerializer)
         {
             jsonSerializer.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             _jsonSerializer = jsonSerializer;
-            _contextData = contextData;
         }
 
-        public IMessage ConvertMessage(object payload)
+        public IMessage ConvertMessage(object payload, MessageContext context)
         { 
             var message = new Message();
             message.Id = Guid.NewGuid();
             message.Type = payload.GetType().FullName;
             message.Payload = _jsonSerializer.Serialize(payload);
-            message.Context = _contextData.Value;
+            message.Context = context;
 
             ProcessIndices(payload, message);
             ProcessTags(payload, message);
