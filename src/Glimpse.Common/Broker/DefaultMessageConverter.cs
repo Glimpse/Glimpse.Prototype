@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Glimpse
         private readonly static Type _dictionaryType = typeof(Dictionary<string, object>);
         private readonly static MethodInfo _addMethodInfo = _dictionaryType.GetMethod("Add", new[] { typeof(string), typeof(object) });
         private readonly static ConstructorInfo _constructorInfo = typeof(ReadOnlyDictionary<string, object>).GetConstructor(new [] { _dictionaryType });
-        private readonly static IDictionary<Type, Func<object, IReadOnlyDictionary<string, object>>> _methodCache = new Dictionary<Type, Func<object, IReadOnlyDictionary<string, object>>>();
+        private readonly static ConcurrentDictionary<Type, Func<object, IReadOnlyDictionary<string, object>>> _methodCache = new ConcurrentDictionary<Type, Func<object, IReadOnlyDictionary<string, object>>>();
 
         private readonly static Type[] _exclusions = { typeof(object) };
 
@@ -59,17 +60,8 @@ namespace Glimpse
         private static IReadOnlyDictionary<string, object> GetIndices(object payload)
         {
             var payloadType = payload.GetType();
-            Func<object, IReadOnlyDictionary<string, object>> indicesCreator;
 
-            if (_methodCache.ContainsKey(payloadType))
-            {
-                indicesCreator = _methodCache[payloadType];
-            }
-            else
-            {
-                indicesCreator = GenerateIndicesCreator(payloadType);
-                _methodCache.Add(payloadType, indicesCreator);
-            }
+            var indicesCreator = _methodCache.GetOrAdd(payloadType, GenerateIndicesCreator);
 
             return indicesCreator(payload);
         }
