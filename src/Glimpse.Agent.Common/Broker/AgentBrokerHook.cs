@@ -15,7 +15,7 @@ namespace Glimpse.Agent
 
         public IObservable<AgentBrokerData> Listen<T>()
         {
-            return _observable.Where(opts => typeof(T).GetTypeInfo().IsAssignableFrom(IntrospectionExtensions.GetTypeInfo(opts.Payload.GetType())));
+            return _observable.Where(opts => typeof(T).GetTypeInfo().IsAssignableFrom(opts.Payload.GetType().GetTypeInfo()));
         }
 
         public IObservable<AgentBrokerData> ListenAll()
