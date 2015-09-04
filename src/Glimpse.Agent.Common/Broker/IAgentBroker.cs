@@ -8,12 +8,12 @@ namespace Glimpse.Agent
         /// <summary>
         /// On the sender thread and is blocking
         /// </summary>
-        AgentBrokerOptions OnSenderThread { get; }
+        AgentBrokerHook OnSenderThread { get; }
 
         /// <summary>
         /// Off the sender thread and is not blocking
         /// </summary>
-        AgentBrokerOptions OffSenderThread { get; }
+        AgentBrokerHook OffSenderThread { get; }
 
         void SendMessage(object message);
     }

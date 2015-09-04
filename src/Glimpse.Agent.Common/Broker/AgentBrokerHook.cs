@@ -4,11 +4,11 @@ using System.Reflection;
 
 namespace Glimpse.Agent
 {
-    public class AgentBrokerOptions
+    public class AgentBrokerHook
     {
         private readonly IObservable<MessagePayloadData> _observable;
 
-        public AgentBrokerOptions(IObservable<MessagePayloadData> observable)
+        public AgentBrokerHook(IObservable<MessagePayloadData> observable)
         {
             _observable = observable;
         }
