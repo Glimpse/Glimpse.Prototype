@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Glimpse.Agent.Web;
+using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent.Web
 {
@@ -19,5 +20,7 @@ namespace Glimpse.Agent.Web
         public IList<int> IgnoredStatusCodes { get; }
 
         public IList<string> IgnoredContentTypes { get; }
+
+        public Func<HttpContext, bool> ShouldIgnore { get; set; }
     }
 }

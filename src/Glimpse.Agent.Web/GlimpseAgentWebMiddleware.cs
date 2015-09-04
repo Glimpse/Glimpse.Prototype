@@ -19,7 +19,6 @@ namespace Glimpse.Agent.Web
         {
             _contextData = contextData;
             _next = next;
-            //_settings = BuildSettings(shouldIgnoreRequest);
             _requestIgnorePolicies = requestIgnorerProvider.Instances;
             _branch = BuildBranch(app, inspectorStartupProvider.Instances);
         }
@@ -49,18 +48,6 @@ namespace Glimpse.Agent.Web
             branchBuilder.Use(subNext => { return async ctx => await _next(ctx); });
 
             return branchBuilder.Build();
-        }
-
-        private ISettings BuildSettings(Func<bool> shouldIgnoreRequest)
-        {
-            // TODO: Need to find a way/better place for 
-            var settings = new Settings();
-            if (shouldIgnoreRequest != null)
-            {
-                settings.ShouldProfile = shouldIgnoreRequest;
-            }
-
-            return settings;
         }
         
         private bool ShouldProfile(HttpContext context)
