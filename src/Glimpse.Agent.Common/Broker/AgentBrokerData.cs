@@ -2,9 +2,9 @@
 
 namespace Glimpse.Agent
 {
-    public class MessagePayloadData
+    public class AgentBrokerData
     {
-        public MessagePayloadData(object payload, MessageContext context)
+        public AgentBrokerData(object payload, MessageContext context)
         {
             Payload = payload;
             Context = context;

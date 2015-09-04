@@ -6,19 +6,19 @@ namespace Glimpse.Agent
 {
     public class AgentBrokerHook
     {
-        private readonly IObservable<MessagePayloadData> _observable;
+        private readonly IObservable<AgentBrokerData> _observable;
 
-        public AgentBrokerHook(IObservable<MessagePayloadData> observable)
+        public AgentBrokerHook(IObservable<AgentBrokerData> observable)
         {
             _observable = observable;
         }
 
-        public IObservable<MessagePayloadData> Listen<T>()
+        public IObservable<AgentBrokerData> Listen<T>()
         {
             return _observable.Where(opts => typeof(T).GetTypeInfo().IsAssignableFrom(IntrospectionExtensions.GetTypeInfo(opts.Payload.GetType())));
         }
 
-        public IObservable<MessagePayloadData> ListenAll()
+        public IObservable<AgentBrokerData> ListenAll()
         {
             return _observable;
         }
