@@ -10,12 +10,10 @@ namespace Glimpse.Server.Web
     {
         private readonly ISubject<IMessage> _offRecieverThreadSubject;
         private readonly ISubject<IMessage> _offRecieverThreadInternalSubject;
-        private readonly IClientBroker _currentMessagePublisher;
         private readonly IStorage _storage;
         
-        public DefaultServerBroker(IClientBroker currentMessagePublisher, IStorage storage)
+        public DefaultServerBroker(IStorage storage)
         {
-            _currentMessagePublisher = currentMessagePublisher;
             _storage = storage;
 
             _offRecieverThreadSubject = new Subject<IMessage>();
@@ -39,7 +37,6 @@ namespace Glimpse.Server.Web
 
             // TODO: This could probably be altered to be a listener of OffRecieverThread
             // blocking
-            _currentMessagePublisher.PublishMessage(message);
             _storage.Persist(message); 
         }
     }
