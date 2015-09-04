@@ -29,7 +29,7 @@ namespace Glimpse.Agent
             _publisherInternalSubject = new Subject<AgentBrokerData>();
 
             OnSenderThread = new AgentBrokerHook(_onSenderThreadSubject);
-            OffSenderThread = new AgentBrokerHook(_offSenderThreadInternalSubject);
+            OffSenderThread = new AgentBrokerHook(_offSenderThreadSubject);
 
             // ensure off-request data is observed onto a different thread
             _offSenderThreadInternalSubject.Subscribe(payload => Observable.Start(() => _offSenderThreadSubject.OnNext(payload), TaskPoolScheduler.Default));
