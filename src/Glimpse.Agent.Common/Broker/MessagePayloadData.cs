@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace Glimpse
+namespace Glimpse.Agent
 {
-    public class MessageListenerPayload
+    public class MessagePayloadData
     {
-        public MessageListenerPayload(object payload, MessageContext context)
+        public MessagePayloadData(object payload, MessageContext context)
         {
             Payload = payload;
             Context = context;
