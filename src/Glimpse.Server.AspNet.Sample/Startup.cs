@@ -10,7 +10,10 @@ namespace Glimpse.Server.AspNet.Sample
         {
             services
                 .AddGlimpse()
-                .RunningServerWeb();
+                    .RunningServerWeb(options =>
+                    {
+                        //options.AllowRemote = true;
+                    });
         }
 
         public void Configure(IApplicationBuilder app)

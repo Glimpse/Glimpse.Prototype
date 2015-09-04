@@ -28,12 +28,12 @@ namespace Glimpse.Agent.AspNet.Sample
             });
             */
 
-            services.AddGlimpse()
-                .RunningAgentWeb()
-                        .ConfigureAgentWeb(options =>
-                        {
-                            //options.IgnoredStatusCodes.Add(200);
-                        });
+            services
+                .AddGlimpse()
+                    .RunningAgentWeb(options =>
+                    {
+                        //options.IgnoredStatusCodes.Add(200);
+                    });
         }
 
         public void Configure(IApplicationBuilder app)
