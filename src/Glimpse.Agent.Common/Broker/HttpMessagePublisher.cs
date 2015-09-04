@@ -11,15 +11,13 @@ namespace Glimpse.Agent
 {
     public class HttpMessagePublisher : IMessagePublisher, IDisposable
     {
-        private readonly IMessageConverter _messageConverter;
-        private readonly ISubject<MessageListenerPayload> _listenerSubject;
+        private readonly ISubject<IMessage> _listenerSubject;
         private readonly HttpClient _httpClient;
         private readonly HttpClientHandler _httpHandler;
 
-        public HttpMessagePublisher(IMessageConverter messageConverter)
+        public HttpMessagePublisher()
         {
-            _messageConverter = messageConverter;
-            _listenerSubject = new Subject<MessageListenerPayload>();
+            _listenerSubject = new Subject<IMessage>();
 
             _httpHandler = new HttpClientHandler();
             _httpClient = new HttpClient(_httpHandler);
@@ -35,15 +33,13 @@ namespace Glimpse.Agent
             });
         }
 
-        public void PublishMessage(MessageListenerPayload payload)
+        public void PublishMessage(IMessage message)
         {
-            _listenerSubject.OnNext(payload);
+            _listenerSubject.OnNext(message);
         }
 
-        public async Task Process(IEnumerable<MessageListenerPayload> payload)
+        public async Task Process(IEnumerable<IMessage> messages)
         {
-            var messages = payload.Select(x => _messageConverter.ConvertMessage(x.Payload, x.Context));
-
             // TODO: Needs error handelling
             try
             {

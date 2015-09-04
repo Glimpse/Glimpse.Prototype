@@ -10,29 +10,16 @@ namespace Glimpse.Server.Web
 {
     public class InProcessChannel : IMessagePublisher
     {
-        private readonly IMessageConverter _messageConverter;
         private readonly IServerBroker _messageBus;
-        private readonly ISubject<MessageListenerPayload> _listenerSubject;
 
-        public InProcessChannel(IServerBroker messageBus, IMessageConverter messageConverter)
+        public InProcessChannel(IServerBroker messageBus)
         {
             _messageBus = messageBus;
-            _messageConverter = messageConverter;
-            _listenerSubject = new Subject<MessageListenerPayload>();
-
-            // ensure off-request message transport is obsered onto a different thread 
-            _listenerSubject.Subscribe(x => Observable.Start(() => Process(x), TaskPoolScheduler.Default));
         }
 
-        public void PublishMessage(MessageListenerPayload payload)
+        public void PublishMessage(IMessage message)
         {
-            _listenerSubject.OnNext(payload);
-        }
-
-        private void Process(MessageListenerPayload payload)
-        {
-            var messages = _messageConverter.ConvertMessage(payload.Payload, payload.Context);
-            _messageBus.SendMessage(messages);
+            _messageBus.SendMessage(message);
         }
     }
 }
