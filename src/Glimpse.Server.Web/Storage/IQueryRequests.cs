@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Server.Web
 {
-    // URI Template for this interface: {?min,max,url,methods,statuscodes,tags,before}
     public interface IQueryRequests
     {
         Task<IEnumerable<string>> GetByRequestId(Guid id);
