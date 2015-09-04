@@ -7,11 +7,6 @@ namespace Glimpse.Server.Web
     {
         public static IApplicationBuilder UseGlimpseServer(this IApplicationBuilder app)
         {
-            return app.UseGlimpseServer(null);
-        }
-
-        public static IApplicationBuilder UseGlimpseServer(this IApplicationBuilder app, Func<bool> shouldRun)
-        {
             return app.UseMiddleware<GlimpseServerWebMiddleware>(app);
         }
     } 

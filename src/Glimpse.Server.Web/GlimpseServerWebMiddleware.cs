@@ -10,13 +10,11 @@ namespace Glimpse.Server.Web
     {
         private readonly RequestDelegate _next;
         private readonly RequestDelegate _branch; 
-        private readonly ISettings _settings;
         private readonly IEnumerable<IRequestAuthorizer> _requestAuthorizers;
         
         public GlimpseServerWebMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IRequestAuthorizer> requestAuthorizerProvider, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IResourceManager resourceManager)
         {
             _next = next; 
-            //_settings = BuildSettings(userHasAccess);
             _requestAuthorizers = requestAuthorizerProvider.Instances;
             _branch = BuildBranch(app, resourceStartupsProvider.Instances, resourceManager);
         }
@@ -66,19 +64,7 @@ namespace Glimpse.Server.Web
 
             return branchBuilder.Build();
         }
-
-        private ISettings BuildSettings(Func<bool> userHasAccess)
-        {
-            // TODO: Need to find a way/better place for 
-            var settings = new Settings();
-            if (userHasAccess != null)
-            {
-                settings.ShouldProfile = userHasAccess;
-            }
-
-            return settings;
-        }
-
+        
         private bool ShouldExecute(HttpContext context)
         {
             foreach (var requestAuthorizer in _requestAuthorizers)
