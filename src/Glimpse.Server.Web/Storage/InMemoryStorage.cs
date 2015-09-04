@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Server.Web
 {
-    public class InMemoryStorage : IQueryRequests<Func<RequestIndices, bool>>, IStorage
+    public class InMemoryStorage : IStorage, IQueryRequests
     {
         public const int RequestsPerPage = 50;
         public const int MaxRequests = 500; // TODO: Make this configurable
@@ -59,14 +59,9 @@ namespace Glimpse.Server.Web
         public Task<IEnumerable<string>> RetrieveByType(params string[] types)
         {
             if (types == null || types.Length == 0)
-                throw new ArgumentException("At least one type must be specified.", "types");
+                throw new ArgumentException("At least one type must be specified.", nameof(types));
 
             return Task.Run(() => _messages.Where(m => m.Types.Intersect(types).Any()).Select(m => m.Payload));
-        }
-
-        public ICollection<Func<RequestIndices, bool>> CreateFilterCollection()
-        {
-            return new List<Func<RequestIndices, bool>>();
         }
 
         public Task<IEnumerable<string>> GetByRequestId(Guid id)
@@ -74,54 +69,43 @@ namespace Glimpse.Server.Web
             return Task.Run(() => _messages.Where(m => m.Context.Id == id).Select(m => m.Payload));
         }
 
-        public Func<RequestIndices, bool> FilterByDuration(float min = 0, float max = float.MaxValue)
-        {
-            return i => i.Duration.HasValue && i.Duration.Value >= min && i.Duration.Value <= max;
-        }
-
-        public Func<RequestIndices, bool> FilterByUrl(string contains)
-        {
-            return i => !string.IsNullOrWhiteSpace(i.Url) && i.Url.Contains(contains);
-        }
-
-        public Func<RequestIndices, bool> FilterByMethod(params string[] methods)
-        {
-            return i => !string.IsNullOrWhiteSpace(i.Method) && methods.Contains(i.Method);
-        }
-
-        public Func<RequestIndices, bool> FilterByTag(params string[] tags)
-        {
-            return i => i.Tags.Intersect(tags).Any();
-        }
-
-        public Func<RequestIndices, bool> FilterByStatusCode(int min = 0, int max = int.MaxValue)
-        {
-            return i => i.StatusCode.HasValue && i.StatusCode.Value >= min && i.StatusCode.Value <= max;
-        }
-
-        public Func<RequestIndices, bool> FilterByDateTime(DateTime before)
-        {
-            return i => i.DateTime.HasValue && i.DateTime.Value < before;
-        }
-
-        public Task<IEnumerable<string>> Query(params Func<RequestIndices, bool>[] filters)
+        public Task<IEnumerable<string>> Query(RequestFilters filters)
         {
             return Query(filters, null);
         }
 
-        public Task<IEnumerable<string>> Query(IEnumerable<Func<RequestIndices, bool>> filters, params string[] types)
+        public Task<IEnumerable<string>> Query(RequestFilters filters, params string[] types)
         {
             if (filters == null)
-            {
-                filters = Enumerable.Empty<Func<RequestIndices, bool>>();
-            }
+                filters = RequestFilters.None;
 
             return Task.Run(() =>
             {
                 var query = _indices.Values.AsEnumerable();
 
-                foreach (var filter in filters)
-                    query = query.Where(filter);
+                if (filters.DurationMaximum.HasValue)
+                    query = query.Where(i => i.Duration.HasValue && i.Duration <= filters.DurationMaximum);
+
+                if (filters.DurationMinimum.HasValue)
+                    query = query.Where(i => i.Duration.HasValue && i.Duration >= filters.DurationMinimum.Value);
+
+                if (!string.IsNullOrWhiteSpace(filters.UrlContains))
+                    query = query.Where(i => !string.IsNullOrWhiteSpace(i.Url) && i.Url.Contains(filters.UrlContains));
+
+                if (filters.MethodList.Any())
+                    query = query.Where(i => !string.IsNullOrWhiteSpace(i.Method) && filters.MethodList.Contains(i.Method));
+
+                if (filters.TagList.Any())
+                    query = query.Where(i => i.Tags.Intersect(filters.TagList).Any());
+
+                if (filters.StatusCodeMinimum.HasValue)
+                    query = query.Where(i => i.StatusCode.HasValue && i.StatusCode >= filters.StatusCodeMinimum);
+
+                if (filters.StatusCodeMaximum.HasValue)
+                    query = query.Where(i => i.StatusCode.HasValue && i.StatusCode <= filters.StatusCodeMaximum);
+
+                if (filters.RequesTimeBefore.HasValue)
+                    query = query.Where(i => i.DateTime.HasValue && i.DateTime < filters.RequesTimeBefore);
 
                 return query
                     .OrderByDescending(i => i.DateTime)

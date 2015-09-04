@@ -1,30 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Glimpse.Server.Web
 {
     // URI Template for this interface: {?min,max,url,methods,statuscodes,tags,before}
-    public interface IQueryRequests<T>
+    public interface IQueryRequests
     {
-        ICollection<T> CreateFilterCollection();
-
         Task<IEnumerable<string>> GetByRequestId(Guid id);
 
-        T FilterByDuration(float min = 0, float max = float.MaxValue);
+        Task<IEnumerable<string>> Query(RequestFilters filters);
 
-        T FilterByUrl(string contains);
+        Task<IEnumerable<string>> Query(RequestFilters filters, params string[] types);
+    }
 
-        T FilterByMethod(params string[] methods);
+    public class RequestFilters
+    {
+        private IEnumerable<string> _methodList; 
+        private IEnumerable<string> _tagList; 
 
-        T FilterByStatusCode(int min = 0, int max = int.MaxValue);
+        public static RequestFilters None { get; } = new RequestFilters();
 
-        T FilterByTag(params string[] tags);
+        public float? DurationMinimum { get; set; }
 
-        T FilterByDateTime(DateTime before);
+        public float? DurationMaximum { get; set; }
 
-        Task<IEnumerable<string>> Query(params T[] filters);
+        public string UrlContains { get; set; }
 
-        Task<IEnumerable<string>> Query(IEnumerable<T> filters, params string[] types);
+        public IEnumerable<string> MethodList
+        {
+            get { return _methodList ?? Enumerable.Empty<string>(); }
+            set { _methodList = value; }
+        }
+
+        public int? StatusCodeMinimum { get; set; }
+
+        public int? StatusCodeMaximum { get; set; }
+
+        public IEnumerable<string> TagList
+        {
+            get { return _tagList ?? Enumerable.Empty<string>(); }
+            set { _tagList = value; }
+        }
+
+        public DateTime? RequesTimeBefore { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace Glimpse.Server.Web
 
             response.Headers[HeaderNames.ContentType] = "application/json";
 
-            var list = await _store.Query(null);
+            var list = await _store.Query(RequestFilters.None);
 
             var sb = new StringBuilder("[");
             sb.Append(string.Join(",", list));
