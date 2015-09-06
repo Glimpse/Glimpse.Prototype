@@ -2,6 +2,7 @@
     "version": "1.0.0-*",
     "dependencies": {
         "Rx-Linq": "2.2.5",
+        "Rx-PlatformServices": "2.2.5",
         "Newtonsoft.Json": "6.0.6",
         "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-*",
         "Microsoft.Framework.DependencyInjection": "1.0.0-*"
