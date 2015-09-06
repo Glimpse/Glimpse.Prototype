@@ -64,9 +64,10 @@
 </head>
 <body>
     <div id="container"></div>
+    <div id="messages"></div>
 
     <script src="./scripts/jquery/jquery-2.1.1.js"></script>
-    <script src="./scripts/signalr/jquery.signalR-2.2.0.js"></script>
+    <!--<script src="./scripts/signalr/jquery.signalR-2.2.0.js"></script>-->
     <script src="./scripts/reactjs/react.js"></script>
     <script src="./scripts/reactjs/JSXTransformer.js"></script>
 
@@ -305,7 +306,22 @@
                 }); 
         });
     </script>
-    <script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var serverSentEvents = new window.EventSource('/Glimpse/MessageStream');
+            serverSentEvents.onmessage = function (e) {
+                $("#messages").append(JSON.stringify(e.data));
+            };
+
+            serverSentEvents.onopen = function (e) {
+                console.log(e);
+            }; 
+            serverSentEvents.onerror = function(e) {
+                console.log(e);
+            };
+        });
+    </script>
+    <!--<script>
         var connection = $.hubConnection("/Glimpse/MessageStream", { useDefaultPath: false });
         var messageClientPublisherHubProxy = connection.createHubProxy('webSocketClientChannelSender');
         messageClientPublisherHubProxy.on('recieveMessage', function(message) { 
@@ -316,6 +332,6 @@
             .fail(function (test) {
                 console.log('Could not connect');
             });
-    </script>
+    </script>-->
 </body>
 </html>
