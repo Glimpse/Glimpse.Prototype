@@ -19,7 +19,6 @@ namespace Glimpse.Server.AspNet.Sample
         public void Configure(IApplicationBuilder app)
         {
             app.UseGlimpseServer();
-            app.UseGlimpseUI();
             
             app.UseWelcomePage();
         }

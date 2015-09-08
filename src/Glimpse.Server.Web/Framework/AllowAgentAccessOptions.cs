@@ -4,11 +4,11 @@ using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse.Server.Web.Framework
 {
-    public class AuthorizeAgentOptionsShouldAllowAgent : IAuthorizeAgent
+    public class AllowAgentAccessOptions : IAllowAgentAccess
     {
         private readonly Func<HttpContext, bool> _shouldAllowAgent;
 
-        public AuthorizeAgentOptionsShouldAllowAgent(IOptions<GlimpseServerWebOptions> optionsAccessor)
+        public AllowAgentAccessOptions(IOptions<GlimpseServerWebOptions> optionsAccessor)
         {
             _shouldAllowAgent = optionsAccessor.Value.ShouldAllowAgent;
         }

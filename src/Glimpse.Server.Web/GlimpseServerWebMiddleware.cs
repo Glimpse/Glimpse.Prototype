@@ -8,17 +8,18 @@ namespace Glimpse.Server.Web
 {
     public class GlimpseServerWebMiddleware
     {
+        private readonly IEnumerable<IAllowClientAccess> _authorizeClients;
+        private readonly IEnumerable<IAllowAgentAccess> _authorizeAgents;
         private readonly RequestDelegate _next;
-        private readonly RequestDelegate _branch; 
-        private readonly IEnumerable<IAuthorizeClient> _authorizeClients;
-        private readonly IEnumerable<IAuthorizeAgent> _authorizeAgents;
+        private RequestDelegate _branch;
 
-        public GlimpseServerWebMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IAuthorizeClient> authorizeClientProvider, IExtensionProvider<IAuthorizeAgent> authorizeAgentProvider, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IResourceManager resourceManager)
+        public GlimpseServerWebMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IAllowClientAccess> authorizeClientProvider, IExtensionProvider<IAllowAgentAccess> authorizeAgentProvider, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IExtensionProvider<IResource> resourceProvider, IResourceManager resourceManager)
         {
-            _next = next;
             _authorizeClients = authorizeClientProvider.Instances;
             _authorizeAgents = authorizeAgentProvider.Instances;
-            _branch = BuildBranch(app, resourceStartupsProvider.Instances, resourceManager);
+            _next = next;
+
+            BuildBranch(app, resourceStartupsProvider.Instances, resourceProvider.Instances, resourceManager);
         }
         
         public async Task Invoke(HttpContext context)
@@ -26,24 +27,42 @@ namespace Glimpse.Server.Web
             await _branch(context);
         }
 
-        public RequestDelegate BuildBranch(IApplicationBuilder app, IEnumerable<IResourceStartup> resourceStartups, IResourceManager resourceManager)
+        public void BuildBranch(IApplicationBuilder app, IEnumerable<IResourceStartup> resourceStartups, IEnumerable<IResource> resources, IResourceManager resourceManager)
         {
             // create new pipeline
-            var branchBuilder = app.New();
-            branchBuilder.Map("/glimpse", innerBranchBuilder =>
+            var branchApp = app.New();
+            branchApp.Map("/glimpse", innerBranchBuilder =>
             {
                 // REGISTER: resource startups
-                var resourceBuilder = new ResourceBuilder(innerBranchBuilder, resourceManager);
+                var resourceStartupCallbacks = new List<Tuple<RequestDelegate, ResourceType>>();
                 foreach (var resourceStartup in resourceStartups)
                 {
-                    resourceStartup.Configure(resourceBuilder);
-                }
+                    var subBranchBuilder = innerBranchBuilder.New();
 
-                // RUN: our own pipline after the resource have had a chance to intercept
-                //     it if they want want. Normally they wont tap the underlying appBuider 
-                //     directly but it is possible and the following is terminating
+                    var resourceBuilderStartup = new ResourceBuilder(subBranchBuilder, resourceManager);
+                    resourceStartup.Configure(resourceBuilderStartup);
+                    
+                    resourceStartupCallbacks.Add(new Tuple<RequestDelegate, ResourceType>(subBranchBuilder.Build(), resourceStartup.Type));
+                }
+                // REGISTER: resources
+                var resourceBuilder = new ResourceBuilder(innerBranchBuilder, resourceManager);
+                foreach (var resource in resources)
+                {
+                    resourceBuilder.Run(resource.Name, resource.Parameters?.GenerateUriTemplate(), resource.Type, resource.Invoke);
+                }
+                
                 innerBranchBuilder.Run(async context =>
                 {
+                    // RUN: resource startups
+                    foreach (var resourceStartupCallback in resourceStartupCallbacks)
+                    {
+                        if (CanExecute(context, resourceStartupCallback.Item2))
+                        {
+                            await resourceStartupCallback.Item1(context);
+                        }
+                    }
+
+                    // RUN: resources
                     var result = resourceManager.Match(context);
                     if (result != null)
                     {
@@ -57,15 +76,11 @@ namespace Glimpse.Server.Web
                             context.Response.StatusCode = 401;
                         }
                     }
-                    else
-                    {
-                        context.Response.StatusCode = 404;
-                    }
                 });
             });
-            branchBuilder.Use(subNext => { return async ctx => await _next(ctx); });
+            branchApp.Use(subNext => { return async ctx => await _next(ctx); });
 
-            return branchBuilder.Build();
+            _branch = branchApp.Build();
         }
 
         public bool CanExecute(HttpContext context, ResourceType type)

@@ -65,6 +65,8 @@ namespace Glimpse.Server.Web
             });
         }
 
+        public ResourceType Type => ResourceType.Client;
+
         private void ProcessMessage(IMessage message)
         {
             var payload = _jsonSerializer.Serialize(message);

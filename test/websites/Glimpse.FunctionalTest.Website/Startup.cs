@@ -28,7 +28,6 @@ namespace Glimpse.FunctionalTest.Website
 
             app.UseGlimpseServer();
             app.UseGlimpseAgent();
-            app.UseGlimpseUI();
 
             app.UseMvcWithDefaultRoute();
         }

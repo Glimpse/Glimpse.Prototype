@@ -29,7 +29,6 @@ namespace Glimpse.AgentServer.Mvc.Sample
 
             app.UseGlimpseServer();
             app.UseGlimpseAgent();
-            app.UseGlimpseUI();
             
             app.UseMvcWithDefaultRoute();
 ;        }
