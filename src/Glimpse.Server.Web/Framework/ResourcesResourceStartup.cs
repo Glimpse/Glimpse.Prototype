@@ -16,7 +16,7 @@ namespace Glimpse.Server.Web
         {
             foreach (var resource in _resources)
             {
-                builder.Run(resource.Name, resource.Parameters?.GenerateUriTemplate(), resource.Invoke);
+                builder.Run(resource.Name, resource.Parameters?.GenerateUriTemplate(), resource.Type, resource.Invoke);
             }
         }
     }
