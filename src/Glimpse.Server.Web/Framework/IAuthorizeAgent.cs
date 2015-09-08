@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNet.Http;
 
-namespace Glimpse.Server.Web.Framework
+namespace Glimpse.Server.Web
 {
     public interface IAuthorizeAgent
     {
