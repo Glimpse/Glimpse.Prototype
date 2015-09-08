@@ -30,10 +30,10 @@ namespace Glimpse.Server.Web
         {
             // create new pipeline
             var branchBuilder = app.New();
-            branchBuilder.Map("/glimpse", innerApp =>
+            branchBuilder.Map("/glimpse", innerBranchBuilder =>
             {
                 // REGISTER: resource startups
-                var resourceBuilder = new ResourceBuilder(app, resourceManager);
+                var resourceBuilder = new ResourceBuilder(innerBranchBuilder, resourceManager);
                 foreach (var resourceStartup in resourceStartups)
                 {
                     resourceStartup.Configure(resourceBuilder);
@@ -42,7 +42,7 @@ namespace Glimpse.Server.Web
                 // RUN: our own pipline after the resource have had a chance to intercept
                 //     it if they want want. Normally they wont tap the underlying appBuider 
                 //     directly but it is possible and the following is terminating
-                innerApp.Run(async context =>
+                innerBranchBuilder.Run(async context =>
                 {
                     var result = resourceManager.Match(context);
                     if (result != null)
