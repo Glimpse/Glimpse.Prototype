@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading;
 using Glimpse.Common;
 
 namespace Glimpse
@@ -20,6 +21,7 @@ namespace Glimpse
         private readonly static MethodInfo _addMethodInfo = _dictionaryType.GetMethod("Add", new[] { typeof(string), typeof(object) });
         private readonly static ConstructorInfo _constructorInfo = typeof(ReadOnlyDictionary<string, object>).GetConstructor(new [] { _dictionaryType });
         private readonly static ConcurrentDictionary<Type, Func<object, IReadOnlyDictionary<string, object>>> _methodCache = new ConcurrentDictionary<Type, Func<object, IReadOnlyDictionary<string, object>>>();
+        private static int _ordinal = 0;
 
         private readonly static Type[] _exclusions = { typeof(object) };
 
@@ -36,6 +38,7 @@ namespace Glimpse
             var message = new Message
             {
                 Id = Guid.NewGuid(),
+                Ordinal = Interlocked.Increment(ref _ordinal),
                 Types = GetTypes(payload),
                 Payload = _jsonSerializer.Serialize(payload),
                 Context = context,
