@@ -9,9 +9,7 @@ namespace Glimpse.Server.Web
     public interface IResourceBuilder
     {
         IApplicationBuilder AppBuilder { get; }
-
-        IResourceBuilder Run(string name, string uriTemplate, Func<HttpContext, IDictionary<string, string>, Task> resource);
-
+        
         IResourceBuilder Run(string name, string uriTemplate, ResourceType type, Func<HttpContext, IDictionary<string, string>, Task> resource);
     }
 }
