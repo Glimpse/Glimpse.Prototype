@@ -3,11 +3,11 @@ using Microsoft.AspNet.Http.Features;
 
 namespace Glimpse.Server.Web
 {
-    public class ClientAuthorizerAllowRemote : IClientAuthorizer
+    public class AuthorizeClientAllowRemote : IAuthorizeClient
     {
         private readonly IAllowRemoteProvider _allowRemoteProvider;
 
-        public ClientAuthorizerAllowRemote(IAllowRemoteProvider allowRemoteProvider)
+        public AuthorizeClientAllowRemote(IAllowRemoteProvider allowRemoteProvider)
         {
             _allowRemoteProvider = allowRemoteProvider;
         }
