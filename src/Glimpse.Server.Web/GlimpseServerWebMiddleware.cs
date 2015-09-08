@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Builder;
 using System;
 using System.Collections.Generic;
+using Glimpse.Server.Web.Framework;
 using Microsoft.AspNet.Http;
 
 namespace Glimpse.Server.Web
@@ -11,17 +12,19 @@ namespace Glimpse.Server.Web
         private readonly RequestDelegate _next;
         private readonly RequestDelegate _branch; 
         private readonly IEnumerable<IAuthorizeClient> _authorizeClients;
-        
-        public GlimpseServerWebMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IAuthorizeClient> authorizeClientProvider, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IResourceManager resourceManager)
+        private readonly IEnumerable<IAuthorizeAgent> _authorizeAgents;
+
+        public GlimpseServerWebMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IAuthorizeClient> authorizeClientProvider, IExtensionProvider<IAuthorizeAgent> authorizeAgentProvider, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IResourceManager resourceManager)
         {
-            _next = next; 
+            _next = next;
             _authorizeClients = authorizeClientProvider.Instances;
+            _authorizeAgents = authorizeAgentProvider.Instances;
             _branch = BuildBranch(app, resourceStartupsProvider.Instances, resourceManager);
         }
         
         public async Task Invoke(HttpContext context)
         {
-            if (ShouldExecute(context))
+            if (CanAccessClient(context))
             { 
                 await _branch(context);
             }
@@ -65,11 +68,26 @@ namespace Glimpse.Server.Web
             return branchBuilder.Build();
         }
         
-        private bool ShouldExecute(HttpContext context)
+        private bool CanAccessClient(HttpContext context)
         {
             foreach (var authorizeClient in _authorizeClients)
             {
                 var allowed = authorizeClient.AllowUser(context);
+                if (!allowed)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // TODO: Need to wire up
+        private bool ShouldAllowAgent(HttpContext context)
+        {
+            foreach (var authorizeAgent in _authorizeAgents)
+            {
+                var allowed = authorizeAgent.AllowAgent(context);
                 if (!allowed)
                 {
                     return false;
