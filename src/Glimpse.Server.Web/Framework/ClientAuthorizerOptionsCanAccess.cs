@@ -13,7 +13,7 @@ namespace Glimpse.Server.Web.Framework
 
         public ClientAuthorizerOptionsCanAccess(IOptions<GlimpseServerWebOptions> optionsAccessor)
         {
-            _canAccess = optionsAccessor.Value.CanAccess;
+            _canAccess = optionsAccessor.Value.CanAccessClient;
         }
 
         public bool AllowUser(HttpContext context)
