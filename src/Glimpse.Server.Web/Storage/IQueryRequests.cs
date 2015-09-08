@@ -1,45 +1,48 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Glimpse.Server.Web
 {
-    public interface IQueryRequests<T>
+    public interface IQueryRequests
     {
-        ICollection<T> CreateFilterCollection();
+        Task<IEnumerable<string>> GetByRequestId(Guid id);
 
-        T FilterByDuration(float min = 0, float max = float.MaxValue);
+        Task<IEnumerable<string>> Query(RequestFilters filters);
 
-        T FilterByUrl(string contains);
-
-        T FilterByMethod(params string[] methods);
-
-        T FilterByStatusCode(int min = 0, int max = int.MaxValue);
-
-        Task<IEnumerable<IMessage>> Query(IEnumerable<T> filters);
-
-        Task<IEnumerable<IMessage>> QueryWith(params T[] filters);
+        Task<IEnumerable<string>> Query(RequestFilters filters, params string[] types);
     }
 
-    public abstract class QueryRequests<T> : IQueryRequests<T>
+    public class RequestFilters
     {
-        public ICollection<T> CreateFilterCollection()
+        private IEnumerable<string> _methodList; 
+        private IEnumerable<string> _tagList; 
+
+        public static RequestFilters None { get; } = new RequestFilters();
+
+        public float? DurationMinimum { get; set; }
+
+        public float? DurationMaximum { get; set; }
+
+        public string UrlContains { get; set; }
+
+        public IEnumerable<string> MethodList
         {
-            return new List<T>();
+            get { return _methodList ?? Enumerable.Empty<string>(); }
+            set { _methodList = value; }
         }
 
-        public abstract T FilterByDuration(float min = 0, float max = float.MaxValue);
+        public int? StatusCodeMinimum { get; set; }
 
-        public abstract T FilterByUrl(string contains);
+        public int? StatusCodeMaximum { get; set; }
 
-        public abstract T FilterByMethod(params string[] methods);
-
-        public abstract T FilterByStatusCode(int min = 0, int max = int.MaxValue);
-
-        public abstract Task<IEnumerable<IMessage>> Query(IEnumerable<T> filters);
-
-        public async Task<IEnumerable<IMessage>> QueryWith(params T[] filters)
+        public IEnumerable<string> TagList
         {
-            return await Query(filters);
+            get { return _tagList ?? Enumerable.Empty<string>(); }
+            set { _tagList = value; }
         }
+
+        public DateTime? RequesTimeBefore { get; set; }
     }
 }
