@@ -7,11 +7,11 @@ using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse.Server.Web.Framework
 {
-    public class RequestAuthorizerOptionsCanAccess : IRequestAuthorizer
+    public class ClientAuthorizerOptionsCanAccess : IClientAuthorizer
     {
         private readonly Func<HttpContext, bool> _canAccess;
 
-        public RequestAuthorizerOptionsCanAccess(IOptions<GlimpseServerWebOptions> optionsAccessor)
+        public ClientAuthorizerOptionsCanAccess(IOptions<GlimpseServerWebOptions> optionsAccessor)
         {
             _canAccess = optionsAccessor.Value.CanAccess;
         }

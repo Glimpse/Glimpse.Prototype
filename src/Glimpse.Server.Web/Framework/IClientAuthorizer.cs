@@ -2,7 +2,7 @@
 
 namespace Glimpse.Server.Web
 {
-    public interface IRequestAuthorizer
+    public interface IClientAuthorizer
     {
         bool AllowUser(HttpContext context);
     }

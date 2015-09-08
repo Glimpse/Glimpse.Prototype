@@ -10,12 +10,12 @@ namespace Glimpse.Server.Web
     {
         private readonly RequestDelegate _next;
         private readonly RequestDelegate _branch; 
-        private readonly IEnumerable<IRequestAuthorizer> _requestAuthorizers;
+        private readonly IEnumerable<IClientAuthorizer> _clientAuthorizers;
         
-        public GlimpseServerWebMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IRequestAuthorizer> requestAuthorizerProvider, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IResourceManager resourceManager)
+        public GlimpseServerWebMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IClientAuthorizer> clientAuthorizerProvider, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IResourceManager resourceManager)
         {
             _next = next; 
-            _requestAuthorizers = requestAuthorizerProvider.Instances;
+            _clientAuthorizers = clientAuthorizerProvider.Instances;
             _branch = BuildBranch(app, resourceStartupsProvider.Instances, resourceManager);
         }
         
@@ -67,9 +67,9 @@ namespace Glimpse.Server.Web
         
         private bool ShouldExecute(HttpContext context)
         {
-            foreach (var requestAuthorizer in _requestAuthorizers)
+            foreach (var clientAuthorizer in _clientAuthorizers)
             {
-                var allowed = requestAuthorizer.AllowUser(context);
+                var allowed = clientAuthorizer.AllowUser(context);
                 if (!allowed)
                 {
                     return false;
