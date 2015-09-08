@@ -1,9 +1,9 @@
-﻿using Glimpse.Agent.AspNet.Mvc;
+﻿using System.Diagnostics.Tracing;
+using Glimpse.Agent.AspNet.Mvc;
 using Glimpse.Agent.Web;
 using Glimpse.Server.Web;
 using Microsoft.AspNet.Builder;
 using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.Notification;
 
 namespace Glimpse.FunctionalTest.Website
 {
@@ -18,13 +18,13 @@ namespace Glimpse.FunctionalTest.Website
                 .WithLocalAgent();
 
             services.AddMvc();
-            services.AddTransient<MvcNotificationListener>();
+            services.AddTransient<MvcTelemetryListener>();
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            var notifier = app.ApplicationServices.GetRequiredService<INotifier>();
-            notifier.EnlistTarget(app.ApplicationServices.GetRequiredService<MvcNotificationListener>());
+            var telemetryListener = app.ApplicationServices.GetRequiredService<TelemetryListener>();
+            telemetryListener.SubscribeWithAdapter(app.ApplicationServices.GetRequiredService<MvcTelemetryListener>());
 
             app.UseGlimpseServer();
             app.UseGlimpseAgent();
