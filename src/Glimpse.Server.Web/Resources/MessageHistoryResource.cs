@@ -37,5 +37,7 @@ namespace Glimpse.Server.Web
         public string Name => "MessageHistory";
 
         public ResourceParameters Parameters => null;
+
+        public ResourceType Type => ResourceType.Client;
     }
 }

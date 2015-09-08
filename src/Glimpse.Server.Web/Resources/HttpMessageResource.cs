@@ -37,6 +37,8 @@ namespace Glimpse.Server.Web
 
         public ResourceParameters Parameters => null;
 
+        public ResourceType Type => ResourceType.Agent;
+
         private IEnumerable<Message> ReadMessage(HttpRequest request)
         {
             var reader = new StreamReader(request.Body);

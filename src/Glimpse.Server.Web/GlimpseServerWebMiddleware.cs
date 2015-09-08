@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Http;
 using System;
 using System.Collections.Generic;
-using Glimpse.Server.Web.Framework;
-using Microsoft.AspNet.Http;
 
 namespace Glimpse.Server.Web
 {
@@ -24,14 +23,7 @@ namespace Glimpse.Server.Web
         
         public async Task Invoke(HttpContext context)
         {
-            if (CanAccessClient(context))
-            { 
-                await _branch(context);
-            }
-            else
-            {
-                await _next(context);
-            }
+            await _branch(context);
         }
 
         public RequestDelegate BuildBranch(IApplicationBuilder app, IEnumerable<IResourceStartup> resourceStartups, IResourceManager resourceManager)
@@ -40,14 +32,14 @@ namespace Glimpse.Server.Web
             var branchBuilder = app.New();
             branchBuilder.Map("/glimpse", innerApp =>
             {
-                // register resource startups
+                // REGISTER: resource startups
                 var resourceBuilder = new ResourceBuilder(app, resourceManager);
                 foreach (var resourceStartup in resourceStartups)
                 {
                     resourceStartup.Configure(resourceBuilder);
                 }
 
-                // run our own pipline after the resource have had a chance to intercept
+                // RUN: our own pipline after the resource have had a chance to intercept
                 //     it if they want want. Normally they wont tap the underlying appBuider 
                 //     directly but it is possible and the following is terminating
                 innerApp.Run(async context =>
@@ -55,7 +47,15 @@ namespace Glimpse.Server.Web
                     var result = resourceManager.Match(context);
                     if (result != null)
                     {
-                        await result.Resource(context, result.Paramaters);
+                        if (CanExecute(context, result.Type))
+                        {
+                            await result.Resource(context, result.Paramaters);
+                        }
+                        else
+                        {
+                            // TODO: Review, do we want a 401, 404 or continue users pipeline 
+                            context.Response.StatusCode = 401;
+                        }
                     }
                     else
                     {
@@ -67,8 +67,13 @@ namespace Glimpse.Server.Web
 
             return branchBuilder.Build();
         }
+
+        public bool CanExecute(HttpContext context, ResourceType type)
+        {
+            return ResourceType.Agent == type ? ShouldAllowAgent(context) : ShouldAllowUser(context);
+        }
         
-        private bool CanAccessClient(HttpContext context)
+        private bool ShouldAllowUser(HttpContext context)
         {
             foreach (var authorizeClient in _authorizeClients)
             {

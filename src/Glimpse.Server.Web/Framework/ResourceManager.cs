@@ -10,9 +10,9 @@ namespace Glimpse.Server.Web
     {
         private IDictionary<string, ResourceManagerItem> _resourceTable = new Dictionary<string, ResourceManagerItem>(StringComparer.OrdinalIgnoreCase);
 
-        public void Register(string name, string uriTemplate,  Func<HttpContext, IDictionary<string, string>, Task> resource)
+        public void Register(string name, string uriTemplate, ResourceType type, Func<HttpContext, IDictionary<string, string>, Task> resource)
         {
-            _resourceTable.Add(name, new ResourceManagerItem(uriTemplate, resource));
+            _resourceTable.Add(name, new ResourceManagerItem(type, uriTemplate, resource));
         }
 
         public ResourceManagerResult Match(HttpContext context)
@@ -27,7 +27,7 @@ namespace Glimpse.Server.Web
                 && _resourceTable.TryGetValue(startingSegment, out managerItem)
                 && MatchUriTemplate(managerItem.UriTemplate, remainingPath, out paramaters))
             {
-                return new ResourceManagerResult(paramaters, managerItem.Resource);
+                return new ResourceManagerResult(paramaters, managerItem.Resource, managerItem.Type);
             }
             
             return null;
@@ -42,11 +42,14 @@ namespace Glimpse.Server.Web
 
         private class ResourceManagerItem
         {
-            public ResourceManagerItem(string uriTemplate, Func<HttpContext, IDictionary<string, string>, Task> resource)
+            public ResourceManagerItem(ResourceType type, string uriTemplate, Func<HttpContext, IDictionary<string, string>, Task> resource)
             {
+                Type = type;
                 UriTemplate = uriTemplate;
                 Resource = resource;
             }
+
+            public ResourceType Type { get; set; }
 
             public string UriTemplate { get; }
 
