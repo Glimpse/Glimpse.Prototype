@@ -42,25 +42,27 @@ namespace Glimpse.Server.Web
 
                     glimpseApp.Use(next =>
                     {
-                        startupApp.Use(a => { return async ctx => await next(ctx); });
+                        startupApp.Run(next);
 
                         var startupBranch = startupApp.Build();
 
-                        return async context =>
+                        return context =>
                         {
                             if (CanExecute(context, resourceStartup.Type))
                             {
-                                await startupBranch(context);
+                                return startupBranch(context);
                             }
+
+                            return next(context);
                         };
                     });
                 }
+
                 // REGISTER: resources
                 var resourceBuilder = new ResourceBuilder(glimpseApp, resourceManager);
                 foreach (var resource in resources)
                 {
-                    resourceBuilder.Run(resource.Name, resource.Parameters?.GenerateUriTemplate(), resource.Type,
-                        resource.Invoke);
+                    resourceBuilder.Run(resource.Name, resource.Parameters?.GenerateUriTemplate(), resource.Type, resource.Invoke);
                 }
 
                 glimpseApp.Run(async context =>
