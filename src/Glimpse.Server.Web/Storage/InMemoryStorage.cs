@@ -107,6 +107,9 @@ namespace Glimpse.Server.Web
                 if (filters.RequesTimeBefore.HasValue)
                     query = query.Where(i => i.DateTime.HasValue && i.DateTime < filters.RequesTimeBefore);
 
+                if (!string.IsNullOrWhiteSpace(filters.UserId))
+                    query = query.Where(i => !string.IsNullOrWhiteSpace(i.UserId) && i.UserId.Equals(filters.UserId, StringComparison.OrdinalIgnoreCase));
+
                 return query
                     .OrderByDescending(i => i.DateTime)
                     .Take(RequestsPerPage)

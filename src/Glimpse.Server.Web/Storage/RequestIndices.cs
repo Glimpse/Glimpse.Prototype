@@ -28,6 +28,8 @@ namespace Glimpse.Server.Web
 
         public DateTime? DateTime { get; private set; }
 
+        public string UserId { get; set; }
+
         public IEnumerable<string> Tags => _tags.Distinct();
 
         public void Update(IMessage message)
@@ -50,6 +52,9 @@ namespace Glimpse.Server.Web
 
             var method = indices.GetValueOrDefault("request-method") as string;
             if (!string.IsNullOrWhiteSpace(method)) Method = method;
+
+            var userId = indices.GetValueOrDefault("request-userId") as string;
+            if (!string.IsNullOrWhiteSpace(userId)) UserId = userId;
 
             var statusCode = indices.GetValueOrDefault("request-statuscode") as int?;
             if (statusCode != null) StatusCode = statusCode;
