@@ -7,14 +7,14 @@ namespace Glimpse
     {
         Guid Id { get; }
 
-        string Type { get; }
+        IEnumerable<string> Types { get; }
 
         string Payload { get; }
 
+        int Ordinal { get; }
+
         MessageContext Context { get; }
         
-        IEnumerable<string> Tags { get; } // TODO: Move into a key inside of Indices
-
         IReadOnlyDictionary<string, object> Indices { get; }
     }
 }
