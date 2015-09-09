@@ -44,5 +44,7 @@ namespace Glimpse.Server.Web
         }
 
         public DateTime? RequesTimeBefore { get; set; }
+
+        public string UserId { get; set; }
     }
 }

@@ -10,8 +10,7 @@ namespace Glimpse.Agent.Web.Message
             Image = image;
         }
 
-#warning TODO: Need to promote UserIdentification.UserId
-        // TODO: [PromoteTo("request-userId")]
+        [PromoteTo("request-userId")]
         public string UserId { get; }
 
         public string Username { get; }

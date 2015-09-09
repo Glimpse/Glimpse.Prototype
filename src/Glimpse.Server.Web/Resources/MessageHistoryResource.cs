@@ -30,6 +30,7 @@ namespace Glimpse.Server.Web
                     ResourceParameter.Custom("smax"),
                     ResourceParameter.Custom("tags"),
                     ResourceParameter.Custom("before"),
+                    ResourceParameter.Custom("user"),
                     ResourceParameter.Custom("types"));
             else
                 Parameters = new ResourceParameters(ResourceParameter.Custom("types"));
@@ -70,6 +71,9 @@ namespace Glimpse.Server.Web
 
                 if (parameters.ContainsKey("tags"))
                     filters.TagList = parameters["tags"].Split(',');
+
+                if (parameters.ContainsKey("user"))
+                    filters.UserId = parameters["user"];
 
                 if (parameters.ContainsKey("before"))
                     filters.RequesTimeBefore = DateTime.Parse(parameters["before"]);
