@@ -47,7 +47,7 @@ namespace Glimpse.Agent.Web.Inspectors
         {
             var preppedEmail = email.Trim().ToLower();
             var hash = preppedEmail.Md5();
-            return $"http://www.gravatar.com/avatar/{hash}.jpg?d=identicon";
+            return $"https://www.gravatar.com/avatar/{hash}.jpg?d=identicon";
         }
     }
 }
