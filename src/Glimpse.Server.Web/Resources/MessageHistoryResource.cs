@@ -98,7 +98,9 @@ namespace Glimpse.Server.Web
         }
 
         public string Name => "MessageHistory";
-
+        
         public ResourceParameters Parameters { get; }
+
+        public ResourceType Type => ResourceType.Client;
     }
 }

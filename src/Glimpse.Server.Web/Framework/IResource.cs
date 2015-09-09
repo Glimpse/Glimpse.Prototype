@@ -12,5 +12,7 @@ namespace Glimpse.Server.Web
         string Name { get; }
 
         ResourceParameters Parameters { get; }
+
+        ResourceType Type { get; }
     }
 }

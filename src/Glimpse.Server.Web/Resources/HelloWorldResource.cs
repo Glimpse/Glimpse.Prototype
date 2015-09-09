@@ -21,5 +21,7 @@ namespace Glimpse.Server.Web
         public string Name => "HelloWorld";
 
         public ResourceParameters Parameters => null;
+
+        public ResourceType Type => ResourceType.Client;
     }
 }

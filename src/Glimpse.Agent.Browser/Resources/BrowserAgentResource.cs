@@ -60,5 +60,7 @@ namespace Glimpse.Agent.Browser.Resources
         public string Name => "BrowserAgent";
 
         public ResourceParameters Parameters => null;
+
+        public ResourceType Type => ResourceType.Agent;
     }
 }

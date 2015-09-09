@@ -18,9 +18,9 @@ namespace Glimpse.Server.Web
 
         public IApplicationBuilder AppBuilder { get; }
         
-        public IResourceBuilder Run(string name, string uriTemplate, Func<HttpContext, IDictionary<string, string>, Task> resource)
+        public IResourceBuilder Run(string name, string uriTemplate, ResourceType type, Func<HttpContext, IDictionary<string, string>, Task> resource)
         {
-            ResourceManager.Register(name, uriTemplate, resource);
+            ResourceManager.Register(name, uriTemplate, type, resource);
 
             return this;
         }

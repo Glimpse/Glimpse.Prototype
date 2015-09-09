@@ -25,7 +25,8 @@ namespace Glimpse
             // Options
             //
             services.AddTransient<IConfigureOptions<GlimpseServerWebOptions>, GlimpseServerWebOptionsSetup>();
-            services.AddTransient<IExtensionProvider<IRequestAuthorizer>, DefaultExtensionProvider<IRequestAuthorizer>>();
+            services.AddTransient<IExtensionProvider<IAllowClientAccess>, DefaultExtensionProvider<IAllowClientAccess>>();
+            services.AddTransient<IExtensionProvider<IAllowAgentAccess>, DefaultExtensionProvider<IAllowAgentAccess>>();
             services.AddTransient<IExtensionProvider<IResource>, DefaultExtensionProvider<IResource>>();
             services.AddTransient<IExtensionProvider<IResourceStartup>, DefaultExtensionProvider<IResourceStartup>>();
             services.AddSingleton<IAllowRemoteProvider, DefaultAllowRemoteProvider>();

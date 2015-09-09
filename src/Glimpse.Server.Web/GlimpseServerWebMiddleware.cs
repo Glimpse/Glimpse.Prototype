@@ -1,75 +1,117 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Http;
 using System;
 using System.Collections.Generic;
-using Microsoft.AspNet.Http;
 
 namespace Glimpse.Server.Web
 {
     public class GlimpseServerWebMiddleware
     {
+        private readonly IEnumerable<IAllowClientAccess> _authorizeClients;
+        private readonly IEnumerable<IAllowAgentAccess> _authorizeAgents;
         private readonly RequestDelegate _next;
-        private readonly RequestDelegate _branch; 
-        private readonly IEnumerable<IRequestAuthorizer> _requestAuthorizers;
-        
-        public GlimpseServerWebMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IRequestAuthorizer> requestAuthorizerProvider, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IResourceManager resourceManager)
+        private readonly RequestDelegate _branch;
+
+        public GlimpseServerWebMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IAllowClientAccess> authorizeClientProvider, IExtensionProvider<IAllowAgentAccess> authorizeAgentProvider, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IExtensionProvider<IResource> resourceProvider, IResourceManager resourceManager)
         {
-            _next = next; 
-            _requestAuthorizers = requestAuthorizerProvider.Instances;
-            _branch = BuildBranch(app, resourceStartupsProvider.Instances, resourceManager);
+            _authorizeClients = authorizeClientProvider.Instances;
+            _authorizeAgents = authorizeAgentProvider.Instances;
+
+            _next = next;
+            _branch = BuildBranch(app, resourceStartupsProvider.Instances, resourceProvider.Instances, resourceManager);
         }
         
         public async Task Invoke(HttpContext context)
         {
-            if (ShouldExecute(context))
-            { 
-                await _branch(context);
-            }
-            else
-            {
-                await _next(context);
-            }
+            await _branch(context);
         }
 
-        public RequestDelegate BuildBranch(IApplicationBuilder app, IEnumerable<IResourceStartup> resourceStartups, IResourceManager resourceManager)
+        public RequestDelegate BuildBranch(IApplicationBuilder app, IEnumerable<IResourceStartup> resourceStartups, IEnumerable<IResource> resources, IResourceManager resourceManager)
         {
-            // create new pipeline
-            var branchBuilder = app.New();
-            branchBuilder.Map("/glimpse", innerApp =>
+            var branchApp = app.New();
+            branchApp.Map("/glimpse", glimpseApp =>
             {
-                // register resource startups
-                var resourceBuilder = new ResourceBuilder(app, resourceManager);
+                // REGISTER: resource startups
                 foreach (var resourceStartup in resourceStartups)
                 {
-                    resourceStartup.Configure(resourceBuilder);
+                    var startupApp = glimpseApp.New();
+
+                    var resourceBuilderStartup = new ResourceBuilder(startupApp, resourceManager);
+                    resourceStartup.Configure(resourceBuilderStartup);
+
+                    glimpseApp.Use(next =>
+                    {
+                        startupApp.Run(next);
+
+                        var startupBranch = startupApp.Build();
+
+                        return context =>
+                        {
+                            if (CanExecute(context, resourceStartup.Type))
+                            {
+                                return startupBranch(context);
+                            }
+
+                            return next(context);
+                        };
+                    });
                 }
 
-                // run our own pipline after the resource have had a chance to intercept
-                //     it if they want want. Normally they wont tap the underlying appBuider 
-                //     directly but it is possible and the following is terminating
-                innerApp.Run(async context =>
+                // REGISTER: resources
+                var resourceBuilder = new ResourceBuilder(glimpseApp, resourceManager);
+                foreach (var resource in resources)
                 {
+                    resourceBuilder.Run(resource.Name, resource.Parameters?.GenerateUriTemplate(), resource.Type, resource.Invoke);
+                }
+
+                glimpseApp.Run(async context =>
+                {
+                    // RUN: resources
                     var result = resourceManager.Match(context);
                     if (result != null)
                     {
-                        await result.Resource(context, result.Paramaters);
-                    }
-                    else
-                    {
-                        context.Response.StatusCode = 404;
+                        if (CanExecute(context, result.Type))
+                        {
+                            await result.Resource(context, result.Paramaters);
+                        }
+                        else
+                        {
+                            // TODO: Review, do we want a 401, 404 or continue users pipeline 
+                            context.Response.StatusCode = 401;
+                        }
                     }
                 });
             });
-            branchBuilder.Use(subNext => { return async ctx => await _next(ctx); });
+            branchApp.Use(subNext => { return async ctx => await _next(ctx); });
 
-            return branchBuilder.Build();
+            return branchApp.Build();
+        }
+
+        public bool CanExecute(HttpContext context, ResourceType type)
+        {
+            return ResourceType.Agent == type ? AllowAgentAccess(context) : AllowClientAccess(context);
         }
         
-        private bool ShouldExecute(HttpContext context)
+        private bool AllowClientAccess(HttpContext context)
         {
-            foreach (var requestAuthorizer in _requestAuthorizers)
+            foreach (var authorizeClient in _authorizeClients)
             {
-                var allowed = requestAuthorizer.AllowUser(context);
+                var allowed = authorizeClient.AllowUser(context);
+                if (!allowed)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        
+        private bool AllowAgentAccess(HttpContext context)
+        {
+            foreach (var authorizeAgent in _authorizeAgents)
+            {
+                var allowed = authorizeAgent.AllowAgent(context);
                 if (!allowed)
                 {
                     return false;
