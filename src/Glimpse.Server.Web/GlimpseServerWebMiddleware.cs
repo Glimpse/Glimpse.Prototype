@@ -88,10 +88,10 @@ namespace Glimpse.Server.Web
 
         public bool CanExecute(HttpContext context, ResourceType type)
         {
-            return ResourceType.Agent == type ? ShouldAllowAgent(context) : ShouldAllowUser(context);
+            return ResourceType.Agent == type ? AllowAgentAccess(context) : AllowClientAccess(context);
         }
         
-        private bool ShouldAllowUser(HttpContext context)
+        private bool AllowClientAccess(HttpContext context)
         {
             foreach (var authorizeClient in _authorizeClients)
             {
@@ -104,9 +104,8 @@ namespace Glimpse.Server.Web
 
             return true;
         }
-
-        // TODO: Need to wire up
-        private bool ShouldAllowAgent(HttpContext context)
+        
+        private bool AllowAgentAccess(HttpContext context)
         {
             foreach (var authorizeAgent in _authorizeAgents)
             {

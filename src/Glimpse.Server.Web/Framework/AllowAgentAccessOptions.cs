@@ -6,16 +6,16 @@ namespace Glimpse.Server.Web.Framework
 {
     public class AllowAgentAccessOptions : IAllowAgentAccess
     {
-        private readonly Func<HttpContext, bool> _shouldAllowAgent;
+        private readonly Func<HttpContext, bool> _allowAgentAccess;
 
         public AllowAgentAccessOptions(IOptions<GlimpseServerWebOptions> optionsAccessor)
         {
-            _shouldAllowAgent = optionsAccessor.Value.ShouldAllowAgent;
+            _allowAgentAccess = optionsAccessor.Value.AllowAgentAccess;
         }
 
         public bool AllowAgent(HttpContext context)
         {
-            return _shouldAllowAgent != null ? _shouldAllowAgent(context) : true;
+            return _allowAgentAccess != null ? _allowAgentAccess(context) : true;
         }
     }
 }
