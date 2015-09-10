@@ -92,7 +92,7 @@ namespace Glimpse
             foreach (var property in messageType.GetProperties())
             {
                 var attribute =
-                    property.GetCustomAttributes(typeof(PromoteToAttribute), true)
+                    property.GetCustomAttributes(typeof (PromoteToAttribute), true)
                         .Cast<PromoteToAttribute>()
                         .SingleOrDefault();
                 if (attribute != null)
@@ -101,10 +101,15 @@ namespace Glimpse
             }
 
             var ctor = Expression.New(_dictionaryType);
-            var init = Expression.ListInit(ctor, items);
-            var wrapped = Expression.New(_constructorInfo, init);
 
-            var code = Expression.Block(new[] { variable }, cast, init, wrapped);
+            var initItems = items.Count > 0;
+            ListInitExpression init = null;
+            if (initItems)
+                init = Expression.ListInit(ctor, items);
+
+            var wrapped = Expression.New(_constructorInfo, initItems ? (Expression)init : ctor);
+
+            var code = Expression.Block(new[] { variable }, cast, initItems ? (Expression)init : ctor, wrapped);
 
             var lambda = Expression.Lambda<Func<object, IReadOnlyDictionary<string, object>>>(code, parameter);
             return lambda.Compile();
