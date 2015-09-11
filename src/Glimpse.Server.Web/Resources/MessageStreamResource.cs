@@ -46,11 +46,13 @@ namespace Glimpse.Server.Web
 
                 context.Response.ContentType = "text/event-stream";
                 await context.Response.WriteAsync("retry: 5000\n\n");
-                await context.Response.WriteAsync("data: pong\n\n");
+                //await context.Response.WriteAsync("data: pong\n\n");
                 await context.Response.Body.FlushAsync();
 
                 var unSubscribe = _senderSubject.Subscribe(async t =>
                 {
+                    // TODO: its possible to get multiple writes happen at once here,
+                    //       need to figure out how to prevent that.
                     await context.Response.WriteAsync($"data: {t}\n\n");
                     await context.Response.Body.FlushAsync();
                 });
