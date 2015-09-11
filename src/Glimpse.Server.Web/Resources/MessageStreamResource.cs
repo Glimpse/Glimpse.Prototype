@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Http.Features;
 using Microsoft.AspNet.Http;
 using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Glimpse.Server.Web
 {
@@ -14,13 +12,9 @@ namespace Glimpse.Server.Web
     {
         private readonly IServerBroker _serverBroker;
         private readonly ISubject<string> _senderSubject;
-        private readonly JsonSerializer _jsonSerializer;
 
-        public MessageStreamResource(IServerBroker serverBroker, JsonSerializer jsonSerializer)
+        public MessageStreamResource(IServerBroker serverBroker)
         {
-            jsonSerializer.ContractResolver = new CamelCasePropertyNamesContractResolver();
-
-            _jsonSerializer = jsonSerializer;
             _serverBroker = serverBroker;
 
             _senderSubject = new Subject<string>();
@@ -71,9 +65,7 @@ namespace Glimpse.Server.Web
 
         private void ProcessMessage(IMessage message)
         {
-            var payload = _jsonSerializer.Serialize(message);
-
-            _senderSubject.OnNext(payload);
+            _senderSubject.OnNext(message.Payload);
         }
     }
 }
