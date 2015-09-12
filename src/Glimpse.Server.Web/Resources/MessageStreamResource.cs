@@ -52,7 +52,7 @@ namespace Glimpse.Server.Web
                     // others trying to access - will wait until the first one released.
                     await _syncLock.WaitAsync();
                     
-                    await context.Response.WriteAsync($"data: {t}\n\n");
+                    await context.Response.WriteAsync($"data: [{t}]\n\n");
                     await context.Response.Body.FlushAsync();
 
                     _syncLock.Release();
