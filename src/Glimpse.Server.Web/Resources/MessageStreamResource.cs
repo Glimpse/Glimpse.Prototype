@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Http.Features;
 using Microsoft.AspNet.Http;
 using System;
+using System.Linq;
+using System.Threading;
 
 namespace Glimpse.Server.Web
 {
@@ -12,6 +14,7 @@ namespace Glimpse.Server.Web
     {
         private readonly IServerBroker _serverBroker;
         private readonly ISubject<string> _senderSubject;
+        private readonly SemaphoreSlim _syncLock = new SemaphoreSlim(1);
 
         public MessageStreamResource(IServerBroker serverBroker)
         {
@@ -45,10 +48,14 @@ namespace Glimpse.Server.Web
 
                 var unSubscribe = _senderSubject.Subscribe(async t =>
                 {
-                    // TODO: its possible to get multiple writes happen at once here,
-                    //       need to figure out how to prevent that.
+                    // Only 1 thread can access the function or functions that use this lock, 
+                    // others trying to access - will wait until the first one released.
+                    await _syncLock.WaitAsync();
+                    
                     await context.Response.WriteAsync($"data: {t}\n\n");
                     await context.Response.Body.FlushAsync();
+
+                    _syncLock.Release();
                 });
 
                 context.RequestAborted.Register(() =>
