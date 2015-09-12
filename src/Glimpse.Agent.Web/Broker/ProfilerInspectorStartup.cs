@@ -19,7 +19,7 @@
                 await next();
 
                 var timing = _messageBus.EndLogicalOperation<BeginRequestMessage>().Timing;
-                var endMessage = new EndRequestMessage(context.Request, timing);
+                var endMessage = new EndRequestMessage(context.Request, context.Response, timing);
                 _messageBus.SendMessage(endMessage);
             });
         }
