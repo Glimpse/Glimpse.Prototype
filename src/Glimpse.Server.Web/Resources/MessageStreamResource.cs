@@ -48,14 +48,17 @@ namespace Glimpse.Server.Web
 
                 var unSubscribe = _senderSubject.Subscribe(async t =>
                 {
-                    // Only 1 thread can access the function or functions that use this lock, 
-                    // others trying to access - will wait until the first one released.
                     await _syncLock.WaitAsync();
-                    
-                    await context.Response.WriteAsync($"data: [{t}]\n\n");
-                    await context.Response.Body.FlushAsync();
 
-                    _syncLock.Release();
+                    try
+                    {
+                        await context.Response.WriteAsync($"data: [{t}]\n\n");
+                        await context.Response.Body.FlushAsync();
+                    }
+                    finally 
+                    {
+                        _syncLock.Release();
+                    }
                 });
 
                 context.RequestAborted.Register(() =>
