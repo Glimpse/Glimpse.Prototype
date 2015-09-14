@@ -1,22 +1,26 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Threading;
 
 namespace Glimpse
 {
     public struct OperationTiming<T>
     {
-        public OperationTiming(Operation operation)
-        {
-            Item = (T)operation.Item;
-            Start = operation.Start;
+        private readonly Stopwatch _timer;
 
-            End = DateTime.UtcNow;
+        public OperationTiming(Operation operation)
+            : this((T)operation.Item, operation.Start, DateTime.UtcNow, operation.Timer)
+        {
         }
 
-        public OperationTiming(T item, DateTime start, DateTime end)
+        public OperationTiming(T item, DateTime start, DateTime end, Stopwatch timer)
         {
+            timer.Stop();
+
             Item = item;
             Start = start;
             End = end;
+            _timer = timer;
         }
 
         public T Item { get; }
@@ -25,8 +29,8 @@ namespace Glimpse
 
         public DateTime End { get; }
 
-        public TimeSpan Elapsed => End - Start;
+        public TimeSpan Elapsed => _timer.Elapsed;
 
-        public Timing Timing => new Timing(Start, End);
+        public Timing Timing => new Timing(Start, End, _timer.Elapsed);
     }
 }
