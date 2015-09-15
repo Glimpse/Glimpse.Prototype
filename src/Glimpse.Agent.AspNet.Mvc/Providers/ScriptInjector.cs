@@ -4,7 +4,7 @@ using Microsoft.AspNet.Mvc.Rendering;
 
 namespace Glimpse.Agent.AspNet.Mvc
 {
-    [TargetElement("body")]
+    [HtmlTargetElement("body")]
     public class ScriptInjector : TagHelper
     {
         public override int Order => int.MaxValue;
@@ -13,17 +13,17 @@ namespace Glimpse.Agent.AspNet.Mvc
         {
             var js = new StringBuilder();
             js.AppendLine("var link = document.createElement('a');");
-            js.AppendLine("link.setAttribute('href', '/glimpseui/index.html');");
+            js.AppendLine("link.setAttribute('href', '/glimpse/client/index.html');");
             js.AppendLine("link.setAttribute('target', '_blank');");
             js.AppendLine("link.text = 'Open Glimpse';");
             js.AppendLine("document.body.appendChild(link);");
 
             var tag = new TagBuilder("script")
             {
-                InnerHtml = new StringHtmlContent(js.ToString())
+                InnerHtml = new HtmlString(js.ToString())
             };
 
-            output.PostContent.Append(tag.InnerHtml);
+            output.PostContent.Append(tag);
         }
     }
 }
