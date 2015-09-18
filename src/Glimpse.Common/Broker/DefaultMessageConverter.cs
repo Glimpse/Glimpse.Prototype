@@ -44,8 +44,10 @@ namespace Glimpse
                 Context = context,
                 Indices = GetIndices(payload)
             };
-
-            message.Payload = _jsonSerializer.Serialize(message);
+            
+            string messageTypes = "[" + string.Join(",", message.Types.Select( (s)=> "\"" + s + "\""))  + "]";
+            string messageContext = $"{{\"id\":\"{message.Context.Id}\",\"type\":\"{message.Context.Type}\"}}";
+            message.Payload = $"{{\"id\":\"{message.Id}\",\"ordinal\":\"{message.Ordinal}\",\"types\":{messageTypes},\"payload\":{message.Payload},\"context\":{messageContext}}}";
 
             return message;
         }
