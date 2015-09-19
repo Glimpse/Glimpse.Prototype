@@ -10,12 +10,14 @@ namespace Glimpse.Agent.Web
         {
             // TODO: check if there is a better way of doing this
             Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}";
-            StartTime = timing.Start;
-            EndTime = timing.End;
             Duration = timing.Elapsed.TotalMilliseconds;
             Method = request.Method;
             ContentType = response.ContentType;
             StatusCode = response.StatusCode;
+
+            // ensure that we are working with UTC
+            StartTime = timing.Start.ToUniversalTime();
+            EndTime = timing.End.ToUniversalTime();
         }
 
         [PromoteToDuration]
