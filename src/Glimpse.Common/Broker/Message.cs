@@ -17,8 +17,7 @@ namespace Glimpse
         public int Ordinal { get; set; }
 
         public MessageContext Context { get; set; }
-
-        [JsonIgnore]
+        
         public IReadOnlyDictionary<string, object> Indices { get; set; }
     }
 }
