@@ -45,9 +45,7 @@ namespace Glimpse.Agent.AspNet.Mvc
         }
 
         [TelemetryName("Microsoft.AspNet.Mvc.AfterAction")]
-        public void OnAfterAction(
-            IActionDescriptor actionDescriptor,
-            IHttpContext httpContext)
+        public void OnAfterAction(IActionDescriptor actionDescriptor, IHttpContext httpContext)
         {
             var timing = _broker.EndLogicalOperation<ActionSelectedMessage>().Timing;
             var message = new ActionInvokedMessage()
