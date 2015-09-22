@@ -15,7 +15,12 @@ namespace Glimpse.Server.Web
         public bool AllowUser(HttpContext context)
         {
             var connectionFeature = context.Features.Get<IHttpConnectionFeature>();
-            return _allowRemoteProvider.AllowRemote || (connectionFeature != null && connectionFeature.IsLocal);
+
+            // TODO: MUST BE REMOVED!!!!
+            var bypass = connectionFeature == null;
+            // TODO: MUST BE REMOVED!!!!
+
+            return bypass || _allowRemoteProvider.AllowRemote || (connectionFeature != null && connectionFeature.IsLocal);
         }
     }
 }
