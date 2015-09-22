@@ -12,7 +12,7 @@ namespace Glimpse.AspNet.Sample
             services
                 .AddGlimpse()
                 .RunningAgentWeb()
-                .RunningServerWeb()
+                .RunningServerWeb(settings => settings.AllowRemote = true) // Temp workaround for kestrel not implementing IHttpConnectionFeature
                     .WithLocalAgent();
         }
 

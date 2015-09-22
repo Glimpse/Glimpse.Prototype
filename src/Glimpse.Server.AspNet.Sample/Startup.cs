@@ -10,10 +10,7 @@ namespace Glimpse.Server.AspNet.Sample
         {
             services
                 .AddGlimpse()
-                    .RunningServerWeb(options =>
-                    {
-                        //options.AllowRemote = true;
-                    });
+                    .RunningServerWeb(settings => settings.AllowRemote = true); // Temp workaround for kestrel not implementing IHttpConnectionFeature;
         }
 
         public void Configure(IApplicationBuilder app)
