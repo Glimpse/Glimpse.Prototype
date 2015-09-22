@@ -81,7 +81,7 @@ namespace Glimpse.Agent.AspNet.Mvc
         {
         }
 
-        [TelemetryName("Microsoft.AspNet.Mvc.BeforeActionResult")]
+        [TelemetryName("Microsoft.AspNet.Mvc.AfterActionResult")]
         public void OnAfterActionResult(
             IActionContext actionContext,
             IActionResult result)
