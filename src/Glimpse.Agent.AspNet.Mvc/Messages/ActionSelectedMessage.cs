@@ -1,7 +1,7 @@
 ﻿
 namespace Glimpse.Agent.AspNet.Mvc.Messages
 {
-    public class ActionSelectedMessage
+    public class ActionSelectedMessage : IActionRouteFoundMessage
     {
         public string ActionId { get; set; }
 
