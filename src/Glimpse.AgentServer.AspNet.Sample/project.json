@@ -10,15 +10,17 @@
         "**.vspscc"
     ],
     "commands": {
-        "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:5100"
+        "web": "Microsoft.AspNet.Hosting server=Microsoft.AspNet.Server.WebListener server.urls=http://localhost:5100",
+        "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:5100"
     },
     "dependencies": {
         "Glimpse.Server.Web": "",
         "Glimpse.Agent.Web": "",
         "Glimpse.Agent.Browser": "",
         "Glimpse.Client.Web.Simple": "",
-        "Microsoft.AspNet.Server.Kestrel": "1.0.0-*",
-        "Microsoft.AspNet.Diagnostics": "1.0.0-*"
+        "Microsoft.AspNet.Diagnostics": "1.0.0-*",
+        "Microsoft.AspNet.Server.WebListener": "1.0.0-*",
+        "Microsoft.AspNet.Server.Kestrel": "1.0.0-*"
     },
     "frameworks" : {
         "dnx451": { },
