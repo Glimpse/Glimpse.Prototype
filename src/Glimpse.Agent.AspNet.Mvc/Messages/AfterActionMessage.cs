@@ -1,7 +1,7 @@
 ﻿
 namespace Glimpse.Agent.AspNet.Mvc.Messages
 {
-    public class ActionInvokedMessage
+    public class AfterActionMessage
     {
         public string ActionId { get; set; }
 
