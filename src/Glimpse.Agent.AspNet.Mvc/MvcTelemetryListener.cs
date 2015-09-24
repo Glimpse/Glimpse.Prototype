@@ -72,6 +72,8 @@ namespace Glimpse.Agent.AspNet.Mvc
             {
                 ActionId = actionDescriptor.Id,
                 DisplayName = actionDescriptor.DisplayName,
+                ActionName = actionDescriptor.Name,
+                ControllerName = actionDescriptor.ControllerName,
                 Timing = timing
             };
 
