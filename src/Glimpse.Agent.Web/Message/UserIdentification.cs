@@ -2,12 +2,13 @@ namespace Glimpse.Agent.Web.Message
 {
     public class UserIdentification
     {
-        public UserIdentification(string userId, string username, string email, string image)
+        public UserIdentification(string userId, string username, string email, string image, bool isAnonymous)
         {
             UserId = userId;
             Username = username;
             Email = email;
             Image = image;
+            IsAnonymous = isAnonymous;
         }
 
         [PromoteTo("request-userId")]
@@ -18,5 +19,7 @@ namespace Glimpse.Agent.Web.Message
         public string Email { get; }
 
         public string Image { get; }
+
+        public bool IsAnonymous { get; }
     }
 }
