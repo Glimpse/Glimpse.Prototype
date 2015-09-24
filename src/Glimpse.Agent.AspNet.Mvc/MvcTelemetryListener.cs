@@ -24,7 +24,7 @@ namespace Glimpse.Agent.AspNet.Mvc
         {
             var router = routeData.Routers[routeData.Routers.Count - 2];
 
-            var message = new ActionSelectedMessage
+            var message = new BeforeActionMessage
             {
                 ActionId = actionDescriptor.Id,
                 DisplayName = actionDescriptor.DisplayName,
@@ -67,10 +67,11 @@ namespace Glimpse.Agent.AspNet.Mvc
         [TelemetryName("Microsoft.AspNet.Mvc.AfterAction")]
         public void OnAfterAction(IActionDescriptor actionDescriptor, IHttpContext httpContext)
         {
-            var timing = _broker.EndLogicalOperation<ActionSelectedMessage>().Timing;
-            var message = new ActionInvokedMessage()
+            var timing = _broker.EndLogicalOperation<BeforeActionMessage>().Timing;
+
+            var message = new AfterActionMessage()
             {
-                ActionId = actionDescriptor.Id
+                ActionId = actionDescriptor.Id,
                 Timing = timing
             };
 
