@@ -70,10 +70,7 @@ namespace Glimpse.Agent.AspNet.Mvc
             var timing = _broker.EndLogicalOperation<ActionSelectedMessage>().Timing;
             var message = new ActionInvokedMessage()
             {
-                ActionId = actionDescriptor.Id,
-                DisplayName = actionDescriptor.DisplayName,
-                ActionName = actionDescriptor.Name,
-                ControllerName = actionDescriptor.ControllerName,
+                ActionId = actionDescriptor.Id
                 Timing = timing
             };
 
