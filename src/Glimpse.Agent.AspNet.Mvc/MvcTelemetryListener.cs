@@ -40,6 +40,8 @@ namespace Glimpse.Agent.AspNet.Mvc
             // I don't think there is a case where one can exist without the other
             if (routeData.Values != null && router.ParsedTemplate != null)
             {
+                // going through and merging the two lists of data... neither list contains 
+                // everything that we need.
                 message.RouteData.Data = routeData.Values.GroupJoin(router.ParsedTemplate,
                     c => c.Key,
                     b => b.Name,
