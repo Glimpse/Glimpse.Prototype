@@ -24,34 +24,41 @@ namespace Glimpse.Agent.AspNet.Mvc
         {
             var router = routeData.Routers[routeData.Routers.Count - 2];
 
-            // NOTE: All routes currently should be `TemplateRoute` but who knows
-            //       what will happen in the future, so making this a little more robust by 
-            var namedRouter = router as INamedRouter;
-            var realRouter = router as TemplateRoute;
-
-            var message = new ActionSelectedMessage();
-            message.ActionId = actionDescriptor.Id;
-            message.DisplayName = actionDescriptor.DisplayName;
-
-            if (namedRouter != null)
+            var message = new ActionSelectedMessage
             {
-                message.RouteData = new Glimpse.Agent.AspNet.Mvc.Messages.RouteData()
+                ActionId = actionDescriptor.Id,
+                DisplayName = actionDescriptor.DisplayName,
+                ActionName = actionDescriptor.Name,
+                ControllerName = actionDescriptor.ControllerName,
+                RouteData = new Glimpse.Agent.AspNet.Mvc.Messages.RouteData()
                 {
-                    Name = namedRouter.Name
-                };
-            }
+                    Name = router.Name,
+                    Pattern = router.RouteTemplate
+                }
+            };
 
-            if (realRouter != null)
+            // I don't think there is a case where one can exist without the other
+            if (routeData.Values != null && router.ParsedTemplate != null)
             {
-                message.RouteData.Pattern = realRouter.RouteTemplate;
-                message.RouteData.Data = routeData.Values.Select(kvp => new RouteResolutionData()
-                    {
-                        Tag = kvp.Key,
-                        Match = kvp.Value.ToString()
-                        // TODO: Need to pull out `default` and `optional`
-                        //Default = null,
-                        //Optional = false
-                    }).ToList(); 
+                message.RouteData.Data = routeData.Values.GroupJoin(router.ParsedTemplate,
+                    c => c.Key,
+                    b => b.Name,
+                    (c, b) => {
+                        var result = new RouteResolutionData()
+                        {
+                            Tag = c.Key,
+                            Match = c.Value.ToString()
+                        };
+
+                        var template = b.FirstOrDefault();
+                        if (template != null)
+                        {
+                            result.Default = template.DefaultValue.ToString();
+                            result.Optional = template.IsOptional;
+                        }
+
+                        return result;
+                    }).ToList();
             }
 
             _broker.BeginLogicalOperation(message);
@@ -115,6 +122,18 @@ namespace Glimpse.Agent.AspNet.Mvc
             string viewName,
             IView view)
         {
+            var message = new ViewFoundMessage()
+            {
+                ActionId = actionContext.ActionDescriptor.Id,
+                Name = viewName,
+            };
         }
+    }
+
+    public class ViewFoundMessage
+    {
+        public string ActionId { get; set; }
+
+        public string Name { get; set; }
     }
 }

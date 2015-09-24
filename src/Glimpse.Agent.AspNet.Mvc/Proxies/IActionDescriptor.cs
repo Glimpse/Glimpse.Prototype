@@ -5,5 +5,7 @@ namespace Glimpse.Agent.AspNet.Mvc.Proxies
     {
         string Id { get; }
         string DisplayName { get; }
+        string Name { get; }
+        string ControllerName { get; }
     }
 }
