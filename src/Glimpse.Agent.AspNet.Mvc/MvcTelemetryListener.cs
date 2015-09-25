@@ -2,8 +2,6 @@
 using System.Linq;
 using Glimpse.Agent.AspNet.Mvc.Messages;
 using Glimpse.Agent.AspNet.Mvc.Proxies;
-using Microsoft.AspNet.Routing;
-using Microsoft.AspNet.Routing.Template;
 using Microsoft.Framework.TelemetryAdapter;
 
 namespace Glimpse.Agent.AspNet.Mvc
