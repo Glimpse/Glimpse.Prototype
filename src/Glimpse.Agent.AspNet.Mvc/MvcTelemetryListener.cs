@@ -152,8 +152,8 @@ namespace Glimpse.Agent.AspNet.Mvc
                     {
                         ViewName = viewResult.ViewName,
                         StatusCode = viewResult.StatusCode,
-                        TempData = viewResult.TempData,
-                        ViewData = viewResult.ViewData,
+                        //TempData = viewResult.TempData,  //Not including here atm... being captured by ViewResultViewFound/ViewResultViewNotFound instead
+                        //ViewData = viewResult.ViewData,
                         ContentType = viewResult.ContentType?.ToString()
                     };
 

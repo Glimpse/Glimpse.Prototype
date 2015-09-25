@@ -15,11 +15,9 @@ namespace Glimpse.Agent.AspNet.Mvc.Messages
 
             public string ViewName { get; set; }
 
-            // TODO: need make sure that these are serializable 
-            public IDictionary<string, object> TempData { get; set; }
-
-            // TODO: need make sure that these are serializable 
-            public IDictionary<string, object> ViewData { get; set; }
+            //public IDictionary<string, object> TempData { get; set; }
+ 
+            //public IDictionary<string, object> ViewData { get; set; }
 
             public string ContentType { get; set; }
         }
