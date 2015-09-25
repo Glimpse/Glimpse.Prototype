@@ -145,7 +145,7 @@ namespace Glimpse.Agent.AspNet.Mvc
             switch (result.GetType().FullName)
             {
                 case "Microsoft.AspNet.Mvc.ViewResult":
-                    var viewResult = _proxyAdapter.Process<ActionResult.IViewResult>("Microsoft.AspNet.Mvc.ViewResult", result);
+                    var viewResult = _proxyAdapter.Process<ActionResultTypes.IViewResult>("Microsoft.AspNet.Mvc.ViewResult", result);
 
                     actionResult.Type = "ViewResult";
                     actionResult.Data = new ActionResultData.ViewResult
@@ -159,7 +159,7 @@ namespace Glimpse.Agent.AspNet.Mvc
 
                     break;
                 case "Microsoft.AspNet.Mvc.ContentResult":
-                    var contentResult = _proxyAdapter.Process<ActionResult.IContentResult>("Microsoft.AspNet.Mvc.ContentResult", result);
+                    var contentResult = _proxyAdapter.Process<ActionResultTypes.IContentResult>("Microsoft.AspNet.Mvc.ContentResult", result);
 
                     actionResult.Type = "ContentResult";
                     actionResult.Data = new ActionResultData.ContentResult
@@ -171,7 +171,7 @@ namespace Glimpse.Agent.AspNet.Mvc
 
                     break;
                 case "Microsoft.AspNet.Mvc.ObjectResult":
-                    var objectResult = _proxyAdapter.Process<ActionResult.IObjectResult>("Microsoft.AspNet.Mvc.ContentResult", result);
+                    var objectResult = _proxyAdapter.Process<ActionResultTypes.IObjectResult>("Microsoft.AspNet.Mvc.ContentResult", result);
 
                     actionResult.Type = "ContentResult";
                     actionResult.Data = new ActionResultData.ObjectResult

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Glimpse.Agent.AspNet.Mvc.Proxies
 {
-    public class ActionResult
+    public class ActionResultTypes
     {
         public interface IViewResult
         {
