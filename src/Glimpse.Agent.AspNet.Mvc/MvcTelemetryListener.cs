@@ -231,13 +231,8 @@ namespace Glimpse.Agent.AspNet.Mvc
                 ActionId = actionContext.ActionDescriptor.Id,
                 Name = viewName,
             };
+
+            _broker.SendMessage(message);
         }
-    }
-
-    public class ViewFoundMessage
-    {
-        public string ActionId { get; set; }
-
-        public string Name { get; set; }
     }
 }
