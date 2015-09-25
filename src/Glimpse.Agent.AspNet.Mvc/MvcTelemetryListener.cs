@@ -84,6 +84,8 @@ namespace Glimpse.Agent.AspNet.Mvc
             _broker.SendMessage(message);
         }
 
+        // Note: This event is the start of the action execution. The action has been selected, the route
+        //       has been selected, filters have run and model binding has occured.
         [TelemetryName("Microsoft.AspNet.Mvc.BeforeActionMethod")]
         public void OnBeforeActionMethod(
             IActionContext actionContext,
