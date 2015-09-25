@@ -141,6 +141,8 @@ namespace Glimpse.Agent.AspNet.Mvc
             // TODO: Need to work off the inheritence chain 
             //var inheritancHierarchy = result.GetType().GetInheritancHierarchy().ToList();
 
+            // TODO: currently looking to see if this switch code and ProxyAdapter can be
+            //       consumed by Microsoft.Framework.TelemetryAdapter
             var actionResult = new ActionResultData();
             switch (result.GetType().FullName)
             {
