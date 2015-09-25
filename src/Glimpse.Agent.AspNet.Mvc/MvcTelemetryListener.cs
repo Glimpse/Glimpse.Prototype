@@ -99,7 +99,7 @@ namespace Glimpse.Agent.AspNet.Mvc
                 DisplayName = actionDescriptor.DisplayName,
                 ActionName = actionDescriptor.Name,
                 ControllerName = actionDescriptor.ControllerName,
-                Binding = actionArguments.Select(x => new BindingData { Type = x.Value?.GetType(), Name = x.Key, Value = x.Value }).ToList()
+                Binding = actionArguments?.Select(x => new BindingData { Type = x.Value?.GetType(), Name = x.Key, Value = x.Value }).ToList()
             };
 
             _broker.BeginLogicalOperation(message);
