@@ -11,10 +11,16 @@ namespace Glimpse.Agent.AspNet.Mvc
     public class MvcTelemetryListener
     {
         private readonly IAgentBroker _broker;
+        private readonly ProxyAdapter _proxyAdapter;
 
         public MvcTelemetryListener(IAgentBroker broker)
         {
             _broker = broker;
+
+            _proxyAdapter = new ProxyAdapter();
+            _proxyAdapter.Register("Microsoft.AspNet.Mvc.ViewResult");
+            _proxyAdapter.Register("Microsoft.AspNet.Mvc.ContentResult");
+            _proxyAdapter.Register("Microsoft.AspNet.Mvc.ObjectResult");
         }
 
         // Note: This event is the start of the action pipeline. The action has been selected, the route
@@ -114,12 +120,70 @@ namespace Glimpse.Agent.AspNet.Mvc
 
             _broker.SendMessage(message);
         }
-
+        
+        // Note: This event is the start of the result pipeline. The action has been executed, but
+        //       we haven't yet determined which view (if any) will handle the request
         [TelemetryName("Microsoft.AspNet.Mvc.BeforeActionResult")]
         public void OnBeforeActionResult(
             IActionContext actionContext,
-            IActionResult result)
+            object result)
         {
+            var actionDescriptor = actionContext.ActionDescriptor;
+
+            var message = new BeforeActionResultMessage
+            {
+                ActionId = actionDescriptor.Id,
+                DisplayName = actionDescriptor.DisplayName,
+                ActionName = actionDescriptor.Name,
+                ControllerName = actionDescriptor.ControllerName
+            };
+
+            // TODO: Need to work off the inheritence chain 
+            //var inheritancHierarchy = result.GetType().GetInheritancHierarchy().ToList();
+
+            var actionResult = new ActionResultData();
+            switch (result.GetType().FullName)
+            {
+                case "Microsoft.AspNet.Mvc.ViewResult":
+                    var viewResult = _proxyAdapter.Process<ActionResult.IViewResult>("Microsoft.AspNet.Mvc.ViewResult", result);
+
+                    actionResult.Type = "ViewResult";
+                    actionResult.Data = new ActionResultData.ViewResult
+                    {
+                        ViewName = viewResult.ViewName,
+                        StatusCode = viewResult.StatusCode,
+                        TempData = viewResult.TempData,
+                        ViewData = viewResult.ViewData,
+                        ContentType = viewResult.ContentType?.ToString()
+                    };
+
+                    break;
+                case "Microsoft.AspNet.Mvc.ContentResult":
+                    var contentResult = _proxyAdapter.Process<ActionResult.IContentResult>("Microsoft.AspNet.Mvc.ContentResult", result);
+
+                    actionResult.Type = "ContentResult";
+                    actionResult.Data = new ActionResultData.ContentResult
+                    {
+                        StatusCode = contentResult.StatusCode,
+                        Content = contentResult.Content,
+                        ContentType = contentResult.ContentType?.ToString()
+                    };
+
+                    break;
+                case "Microsoft.AspNet.Mvc.ObjectResult":
+                    var objectResult = _proxyAdapter.Process<ActionResult.IObjectResult>("Microsoft.AspNet.Mvc.ContentResult", result);
+
+                    actionResult.Type = "ContentResult";
+                    actionResult.Data = new ActionResultData.ObjectResult
+                    {
+                        StatusCode = objectResult.StatusCode,
+                        Value = objectResult.Value,
+                        Formatters = objectResult.Formatters?.Select(x => x.GetType()).ToList(),
+                        ContentTypes = objectResult.ContentTypes?.Select(x => x.ToString()).ToList()
+                    };
+
+                    break;
+            }
         }
 
         [TelemetryName("Microsoft.AspNet.Mvc.AfterActionResult")]
