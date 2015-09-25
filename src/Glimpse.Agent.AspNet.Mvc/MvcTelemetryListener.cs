@@ -199,6 +199,15 @@ namespace Glimpse.Agent.AspNet.Mvc
             IActionContext actionContext,
             IActionResult result)
         {
+            var timing = _broker.EndLogicalOperation<BeforeActionResultMessage>().Timing;
+
+            var message = new AfterActionResultMessage()
+            {
+                ActionId = actionContext.ActionDescriptor.Id,
+                Timing = timing
+            };
+
+            _broker.SendMessage(message);
         }
 
         [TelemetryName("Microsoft.AspNet.Mvc.ViewResultViewNotFound")]
