@@ -184,6 +184,14 @@ namespace Glimpse.Agent.AspNet.Mvc
 
                     break;
             }
+
+            // only link up the details if we processed the actionresult
+            if (!string.IsNullOrEmpty(actionResult.Type))
+            {
+                message.ActionResult = actionResult;
+            }
+
+            _broker.BeginLogicalOperation(message);
         }
 
         [TelemetryName("Microsoft.AspNet.Mvc.AfterActionResult")]
