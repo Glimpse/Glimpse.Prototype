@@ -210,26 +210,56 @@ namespace Glimpse.Agent.AspNet.Mvc
             _broker.SendMessage(message);
         }
 
+        // NOTE: This event is only fired when we dont find any matches at all. This executes
+        //       at the end of the matching process. You will never get a ViewResultViewNotFound 
+        //       and ViewResultViewFound event firing for the same view resolution.
         [TelemetryName("Microsoft.AspNet.Mvc.ViewResultViewNotFound")]
         public void OnViewResultViewNotFound(
             IActionContext actionContext,
-            IActionResult result,
+            ActionResultTypes.IViewResult result,
             string viewName,
             IReadOnlyList<string> searchedLocations)
         {
+            var message = new ViewResultFoundStatusMessage()
+            {
+                ActionId = actionContext.ActionDescriptor.Id,
+                ActionName = actionContext.ActionDescriptor.Name,
+                ControllerName = actionContext.ActionDescriptor.ControllerName,
+                ViewName = viewName,
+                DidFind = true,
+                SearchedLocations = null, // Don't have this yet :(
+                ViewData = new ViewResult
+                {
+                    ViewData = result.ViewData,
+                    TempData = result.TempData
+                }
+            };
+
+            _broker.SendMessage(message);
         }
 
+        // NOTE: This event is only fired when we do find a match. This executes at the end of
+        //       the matching process. You will never get a ViewResultViewNotFound and 
+        //       ViewResultViewFound event firing for the same view resolution.
         [TelemetryName("Microsoft.AspNet.Mvc.ViewResultViewFound")]
         public void OnViewResultViewFound(
             IActionContext actionContext,
-            IActionResult result,
+            ActionResultTypes.IViewResult result,
             string viewName,
             IView view)
         {
-            var message = new ViewFoundMessage()
+            var message = new ViewResultFoundStatusMessage()
             {
                 ActionId = actionContext.ActionDescriptor.Id,
-                Name = viewName,
+                ActionName = actionContext.ActionDescriptor.Name,
+                ControllerName = actionContext.ActionDescriptor.ControllerName,
+                ViewName = viewName,
+                DidFind = true,
+                SearchedLocations = null, // Don't have this yet :(
+                ViewData = new ViewResult {
+                    ViewData = result.ViewData,
+                    TempData = result.TempData
+                }
             };
 
             _broker.SendMessage(message);
