@@ -1,60 +1,240 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using Glimpse.Internal.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Glimpse.Internal.Extensions;
 
 namespace Glimpse.Server.Storage
 {
     public class InMemoryStorage : IStorage, IQueryRequests
     {
-        public const int RequestsPerPage = 50;
-        public const int MaxRequests = 500; // TODO: Make this configurable
-
-        private readonly List<IMessage> _messages;
-        private readonly ConcurrentDictionary<Guid, RequestIndices> _indices;
-
-        private static readonly object _locker = new object(); // HACK :(
-
-        public InMemoryStorage()
+        /// <summary>
+        /// Internal class to contain all data associated with a single request. 
+        /// </summary>
+        private class RequestInfo
         {
-            _messages = new List<IMessage>();
-            _indices = new ConcurrentDictionary<Guid, RequestIndices>();
-        }
-
-        public void Persist(IMessage message)
-        {
-            _messages.Add(message);
-
-            if (!message.Context.Type.Equals("request", StringComparison.OrdinalIgnoreCase))
-                return;
-
-            var requestId = message.Context.Id;
-
-            _indices.AddOrUpdate(requestId, 
-                new RequestIndices(message), 
-                (id, indices) =>
-                {
-                    indices.Update(message);
-                    return indices;
-                });
-
-            // TODO: There's probably a better data structure for all of this, but not that I could find
-            if (_indices.Count > MaxRequests)
+            public RequestInfo(LinkedListNode<Guid> lruNode)
             {
-                lock (_locker) // Hack - I know, I know...
+                this.RequestLRUNode = lruNode;
+                this.Messages = new LinkedList<IMessage>();
+                this.Indices = null;
+            }
+
+            /// <summary>
+            /// List of individual messages associated with this request
+            /// </summary>
+            public LinkedList<IMessage> Messages { get; private set; }
+
+            /// <summary>
+            /// The node in the _activeRequests list.  Storing this here allows us to determine to track 
+            /// requests by age in constant time.
+            /// </summary>
+            public LinkedListNode<Guid> RequestLRUNode { get; private set; }
+
+            /// <summary>
+            /// Indices associated with this Request
+            /// </summary>
+            public RequestIndices Indices { get; set; }
+
+            public void AddMessage(IMessage message)
+            {
+                this.Messages.AddLast(message);
+            }
+
+            public void AddOrUpdateIndices(IMessage message)
+            {
+                if (this.Indices == null)
                 {
-                    var toRemove = MaxRequests/10;
-                    RequestIndices removed;
-                    for (int i = 0; i < toRemove; i++)
-                    {
-                        var idToRemove = _messages.Last().Context.Id;
-                        _messages.RemoveAll(m => m.Context.Id == idToRemove);
-                        _indices.TryRemove(idToRemove, out removed);
-                    }
+                    this.Indices = new RequestIndices(message);
+                }
+                else
+                {
+                    this.Indices.Update(message);
                 }
             }
+        }
+
+        public const int RequestsPerPage = 50;
+        public const int DefaultMaxRequests = 500;
+
+        /// <summary>
+        /// Primary storage for Messages. 
+        /// </summary>
+        private readonly Dictionary<Guid, RequestInfo> _requestTable;
+
+        /// <summary>
+        /// Currently active requests, ordered by incoming messages for the request.  The first entry in the list will be
+        /// the most recent request to receive a message, the last entry the oldest request to receive a message.
+        /// </summary>
+        private readonly LinkedList<Guid> _requestLRUList;
+
+        /// <summary>
+        /// Maximum number of requests to store for this request.
+        /// </summary>
+        private readonly int _maxRequests;
+
+
+        /// <summary>
+        /// Lock to synchronize access to this data structure. 
+        /// </summary>
+        // TODO:  Consider changing to a multi-reader/single-writer lock for increased read throughput
+        private readonly object _locker = new object();
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="maxRequests">Max number of requests to store.  OPtional.  Defaults to DefaultMaxRequests.</param>
+        public InMemoryStorage(int maxRequests = DefaultMaxRequests)
+        {
+            _requestTable = new Dictionary<Guid, RequestInfo>();
+            _requestLRUList = new LinkedList<Guid>();
+            _maxRequests = maxRequests;
+        }
+
+        /// <summary>
+        /// Persist the given message.
+        /// </summary>
+        /// <param name="message">The message to store.</param>
+        public void Persist(IMessage message)
+        {
+            var requestId = message.Context.Id;
+
+            lock (_locker)
+            {
+                var requestInfo = GetOrCreateRequestInfo(requestId);
+
+                requestInfo.AddMessage(message);
+
+                if (IsRequestMessage(message))
+                {
+                    requestInfo.AddOrUpdateIndices(message);
+                }
+
+                TriggerCleanup();
+            }
+        }
+
+        /// <summary>
+        /// Get the request for the given ID, or create it if it doesn't exist.
+        /// </summary>
+        /// <param name="requestId">Guid of the request</param>
+        /// <returns>RequestInfo isntance associated with the ID</returns>
+        private RequestInfo GetOrCreateRequestInfo(Guid requestId)
+        {
+            // TODO:  need to assert here that lock is correctly held
+            RequestInfo ri;
+            if (!_requestTable.TryGetValue(requestId, out ri))
+            {
+                ri = AddRequest(requestId);
+            }
+            else if (ri.RequestLRUNode.Previous != null)
+            {
+                UpdateLRUList(ri);
+            }
+
+            return ri;
+        }
+        
+        /// <summary>
+        /// Add a new request to the structure
+        /// </summary>
+        /// <param name="requestId"></param>
+        /// <returns></returns>
+        private RequestInfo AddRequest(Guid requestId)
+        {
+            // TODO:  need to assert here that lock is correctly held
+            var llNode = _requestLRUList.AddFirst(requestId);
+            var ri = new RequestInfo(llNode);
+            _requestTable.Add(requestId, ri);
+            return ri;
+        }
+
+        /// <summary>
+        /// Update a requests position in the LRU list.
+        /// </summary>
+        /// <param name="requestInfo">RequestInfo instance of the request to update</param>
+        private void UpdateLRUList(RequestInfo requestInfo)
+        {
+            // move this request to the head of the "active list"
+            _requestLRUList.Remove(requestInfo.RequestLRUNode);
+            _requestLRUList.AddFirst(requestInfo.RequestLRUNode);
+        }
+
+        /// <summary>
+        /// Determines if a message is a request message or not
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns>true if a request message, false otherwise</returns>
+        private static bool IsRequestMessage(IMessage message)
+        {
+            return message.Context.Type.Equals("request", StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
+        /// Initiate cleanup logic to purge old requests
+        /// </summary>
+        private void TriggerCleanup()
+        {
+            if (_requestTable.Count > _maxRequests)
+            {
+                var toRemove = Math.Max(_maxRequests / 10, 1);
+                for (int i = 0; i < toRemove; i++)
+                {
+                    RemoveOldestRequest();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Remove the oldest request
+        /// </summary>
+        private void RemoveOldestRequest()
+        {
+            LinkedListNode<Guid> r = _requestLRUList.Last;
+            _requestLRUList.Remove(r);
+            _requestTable.Remove(r.Value);
+        }
+        
+        /// <summary>
+        ///  Run a set of internal consistency checks.  
+        /// </summary>
+        /// <returns>True if all consistency checks pass, false otherwise.</returns>
+        public bool CheckConsistency()
+        {
+            lock (_locker)
+            {
+                // verify every node in _activeRequests has a corresponding entry in _requestTable
+                var current = _requestLRUList.First;
+                while (current != null)
+                {
+                    var requestInfo = _requestTable[current.Value];
+                    if (requestInfo == null) { return false; }
+                    if (requestInfo.RequestLRUNode != current) { return false; }
+                    current = current.Next;
+                }
+
+                // verify every node in _requestTable has a valid entry in _activeRequests 
+                foreach (var kvpair in _requestTable)
+                {
+                    if (kvpair.Value.RequestLRUNode == null) { return false; }
+                    if (kvpair.Value.RequestLRUNode.List != _requestLRUList) { return false; }
+                }
+
+                // verify # of requests is within expected range
+                if (this._requestTable.Count < this._maxRequests) { return false; }
+                if (this._requestLRUList.Count != this._requestTable.Count) { return false; }
+
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the current number of requests stored.
+        /// </summary>
+        /// <returns>The current number of requests stored.</returns>
+        public int GetRequestCount()
+        {
+            return _requestTable.Count;
         }
 
         public Task<IEnumerable<string>> RetrieveByType(params string[] types)
@@ -62,12 +242,29 @@ namespace Glimpse.Server.Storage
             if (types == null || types.Length == 0)
                 throw new ArgumentException("At least one type must be specified.", nameof(types));
 
-            return Task.Run(() => _messages.Where(m => m.Types.Intersect(types).Any()).Select(m => m.Payload));
+            return Task.Run(() => this.GetAllMessages().Where(m => m.Types.Intersect(types).Any()).Select(m => m.Payload));
         }
 
         public Task<IEnumerable<string>> GetByRequestId(Guid id)
         {
-            return Task.Run(() => _messages.Where(m => m.Context.Id == id).Select(m => m.Payload));
+            return Task.Run(() => GetMessagesByRequestId(id).Select(m => m.Payload));
+        }
+
+        /// <summary>
+        /// Returns the list of individual messages for a given request ID.
+        /// </summary>
+        /// <param name="id">The request ID.</param>
+        /// <returns>Messages associated with request ID.</returns>
+        public IEnumerable<IMessage> GetMessagesByRequestId(Guid id)
+        {
+            if (_requestTable.ContainsKey(id))
+            {
+                return _requestTable[id].Messages;
+            }
+            else
+            {
+                return new Message[] { };
+            }
         }
 
         public Task<IEnumerable<string>> Query(RequestFilters filters)
@@ -82,7 +279,7 @@ namespace Glimpse.Server.Storage
 
             return Task.Run(() =>
             {
-                var query = _indices.Values.AsEnumerable();
+                var query = this.GetAllIndices();
 
                 if (filters.DurationMaximum.HasValue)
                     query = query.Where(i => i.Duration.HasValue && i.Duration <= filters.DurationMaximum);
@@ -115,11 +312,35 @@ namespace Glimpse.Server.Storage
                     .OrderByDescending(i => i.DateTime)
                     .Take(RequestsPerPage)
                     .Join(
-                        types == null ? _messages : _messages.Where(m => m.Types.Intersect(types).Any()), // only filter by type if types are specified
-                        i => i.Id, 
-                        m => m.Context.Id, 
+                        types == null ? this.GetAllMessages() : this.GetAllMessages().Where(m => m.Types.Intersect(types).Any()), // only filter by type if types are specified
+                        i => i.Id,
+                        m => m.Context.Id,
                         (i, m) => m.Payload);
-                });
+            });
+        }
+
+        /// <summary>
+        /// Retrieve all messages for all requests.
+        /// </summary>
+        /// <returns>All messages for all requests.</returns>
+        private IEnumerable<IMessage> GetAllMessages()
+        {
+            foreach (var requestInfo in this._requestTable.Values)
+            {
+                foreach (IMessage msg in requestInfo.Messages)
+                {
+                    yield return msg;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Retrieve all indices for all requests.
+        /// </summary>
+        /// <returns>All indices for all requests.</returns>
+        private IEnumerable<RequestIndices> GetAllIndices()
+        {
+            return this._requestTable.Values.Select((ri) => ri.Indices);
         }
     }
 
