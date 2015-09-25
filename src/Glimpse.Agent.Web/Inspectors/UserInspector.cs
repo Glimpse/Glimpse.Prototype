@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Text;
 using Glimpse.Agent.Web.Framework;
-using Glimpse.Agent.Web.Message;
+using Glimpse.Agent.Web.Messages;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Http.Features;
 

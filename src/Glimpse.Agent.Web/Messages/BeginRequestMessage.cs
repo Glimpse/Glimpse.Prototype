@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Http;
 using Glimpse.Common.Broker;
 
-namespace Glimpse.Agent.Web
+namespace Glimpse.Agent.Web.Messages
 {
     public class BeginRequestMessage
     {

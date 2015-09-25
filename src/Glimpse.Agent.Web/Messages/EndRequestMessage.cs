@@ -2,7 +2,7 @@
 using Glimpse.Common.Broker;
 using Microsoft.AspNet.Http;
 
-namespace Glimpse.Agent.Web
+namespace Glimpse.Agent.Web.Messages
 {
     public class EndRequestMessage
     {

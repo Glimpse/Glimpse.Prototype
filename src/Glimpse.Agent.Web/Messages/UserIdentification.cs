@@ -1,4 +1,4 @@
-namespace Glimpse.Agent.Web.Message
+namespace Glimpse.Agent.Web.Messages
 {
     public class UserIdentification
     {
