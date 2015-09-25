@@ -15,6 +15,11 @@ namespace Glimpse
             //
             services.AddTransient<IMvcRazorHost, GlimpseRazorHost>();
 
+            //
+            // Telemetry
+            //
+            services.AddTransient<MvcTelemetryListener>();
+
             return services;
         }
     }

@@ -19,14 +19,10 @@ namespace Glimpse.AgentServer.Mvc.Sample
                     .WithLocalAgent();
 
             services.AddMvc();
-            services.AddTransient<MvcTelemetryListener>();
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            var telemetryListener = app.ApplicationServices.GetRequiredService<TelemetryListener>();
-            telemetryListener.SubscribeWithAdapter(app.ApplicationServices.GetRequiredService<MvcTelemetryListener>());
-
             app.UseGlimpseServer();
             app.UseGlimpseAgent();
             
