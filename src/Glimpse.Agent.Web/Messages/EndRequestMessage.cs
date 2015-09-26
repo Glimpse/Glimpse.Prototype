@@ -1,43 +1,28 @@
 ﻿using System;
 using Glimpse.Common.Broker;
-using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent.Web.Messages
 {
     public class EndRequestMessage
     {
-        public EndRequestMessage(HttpRequest request, HttpResponse response, Timing timing)
-        {
-            // TODO: check if there is a better way of doing this
-            Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}";
-            Duration = timing.Elapsed.TotalMilliseconds;
-            Method = request.Method;
-            ContentType = response.ContentType;
-            StatusCode = response.StatusCode;
-
-            // ensure that we are working with UTC
-            StartTime = timing.Start.ToUniversalTime();
-            EndTime = timing.End.ToUniversalTime();
-        }
-
         [PromoteToDuration]
-        public double? Duration { get; }
+        public double? Duration { get; set; }
 
         [PromoteToDateTime]
-        public DateTime? StartTime { get; }
+        public DateTime? StartTime { get; set;  }
 
-        public DateTime EndTime { get; }
+        public DateTime EndTime { get; set; }
 
         [PromoteToUrl]
-        public string Url { get; }
+        public string Url { get; set; }
 
         [PromoteToMethod]
-        public string Method { get; }
+        public string Method { get; set; }
 
         [PromoteToContentType]
-        public string ContentType { get; }
+        public string ContentType { get; set; }
 
         [PromoteToStatusCode]
-        public int StatusCode { get; }
+        public int StatusCode { get; set; }
     }
 }
