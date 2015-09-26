@@ -12,12 +12,10 @@ namespace Glimpse.Agent.Web
         private readonly RequestDelegate _next;
         private readonly RequestDelegate _branch;
         private readonly ISettings _settings;
-        private readonly IContextData<MessageContext> _contextData;
         private readonly IEnumerable<IRequestIgnorer> _requestIgnorePolicies;
 
-        public GlimpseAgentWebMiddleware(RequestDelegate next, IApplicationBuilder app, IContextData<MessageContext> contextData, IExtensionProvider<IRequestIgnorer> requestIgnorerProvider, IExtensionProvider<IInspectorStartup> inspectorStartupProvider)
+        public GlimpseAgentWebMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IRequestIgnorer> requestIgnorerProvider, IExtensionProvider<IInspectorStartup> inspectorStartupProvider)
         {
-            _contextData = contextData;
             _next = next;
             _requestIgnorePolicies = requestIgnorerProvider.Instances;
             _branch = BuildBranch(app, inspectorStartupProvider.Instances);
@@ -27,8 +25,6 @@ namespace Glimpse.Agent.Web
         {
             if (ShouldProfile(context))
             {
-                _contextData.Value = new MessageContext { Id = Guid.NewGuid(), Type = "Request" };
-
                 await _branch(context);
             }
             else
