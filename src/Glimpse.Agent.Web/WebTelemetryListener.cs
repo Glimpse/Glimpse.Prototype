@@ -31,7 +31,8 @@ namespace Glimpse.Agent.Web
             {
                 // TODO: check if there is a better way of doing this
                 // TODO: should there be a StartTime property here?
-                Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}"
+                Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}",
+                Method = request.Method,
             };
 
             _broker.BeginLogicalOperation(beginMessage);
@@ -50,7 +51,6 @@ namespace Glimpse.Agent.Web
                 // TODO: check if there is a better way of doing this
                 Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}",
                 Duration = timing.Elapsed.TotalMilliseconds,
-                Method = request.Method,
                 ContentType = response.ContentType,
                 StatusCode = response.StatusCode,
                 StartTime = timing.Start.ToUniversalTime(),
