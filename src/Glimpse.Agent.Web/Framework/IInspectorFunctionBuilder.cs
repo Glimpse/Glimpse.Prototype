@@ -5,10 +5,10 @@ using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent.Web
 {
-    public interface IInspectorBuilder
+    public interface IInspectorFunctionBuilder
     {
         IApplicationBuilder AppBuilder { get; }
 
-        IInspectorBuilder Use(Func<HttpContext, Func<Task>, Task> middleware);
+        IInspectorFunctionBuilder Use(Func<HttpContext, Func<Task>, Task> middleware);
     }
 }

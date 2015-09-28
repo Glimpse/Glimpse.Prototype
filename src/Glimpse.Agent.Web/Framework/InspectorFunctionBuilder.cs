@@ -5,19 +5,19 @@ using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent.Web
 {
-    public class InspectorBuilder : IInspectorBuilder
+    public class InspectorFunctionBuilder : IInspectorFunctionBuilder
     {
-        public InspectorBuilder(IApplicationBuilder app)
+        public InspectorFunctionBuilder(IApplicationBuilder app)
         {
             AppBuilder = app;
         }
 
         public IApplicationBuilder AppBuilder { get; }
         
-        public IInspectorBuilder Use(Func<HttpContext, Func<Task>, Task> middleware)
+        public IInspectorFunctionBuilder Use(Func<HttpContext, Func<Task>, Task> middleware)
         {
             var newAppBuilder = AppBuilder.Use(middleware);
-            return (newAppBuilder != AppBuilder) ? new InspectorBuilder(newAppBuilder) : this;
+            return (newAppBuilder != AppBuilder) ? new InspectorFunctionBuilder(newAppBuilder) : this;
         }
     }
 }

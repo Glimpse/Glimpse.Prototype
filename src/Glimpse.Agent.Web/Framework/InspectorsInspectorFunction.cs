@@ -2,16 +2,16 @@
 
 namespace Glimpse.Agent.Web
 {
-    public class InspectorsInspectorStartup : IInspectorStartup
+    public class InspectorsInspectorFunction : IInspectorFunction
     {
         private readonly IEnumerable<IInspector> _inspectors;
 
-        public InspectorsInspectorStartup(IExtensionProvider<IInspector> inspectorProvider)
+        public InspectorsInspectorFunction(IExtensionProvider<IInspector> inspectorProvider)
         {
             _inspectors = inspectorProvider.Instances;
         }
 
-        public void Configure(IInspectorBuilder builder)
+        public void Configure(IInspectorFunctionBuilder builder)
         {
             builder.Use(async (context, next) =>
             {
