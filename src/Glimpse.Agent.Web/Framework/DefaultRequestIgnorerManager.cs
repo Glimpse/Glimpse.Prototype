@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Http;
 
@@ -23,6 +24,11 @@ namespace Glimpse.Agent.Web
 
         public bool ShouldIgnore(HttpContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             if (RequestIgnorers.Any())
             {
                 foreach (var policy in RequestIgnorers)
