@@ -6,9 +6,9 @@ namespace Glimpse.Agent.Web
 {
     public class DefaultAgentStartupManager : IAgentStartupManager
     {
-        public DefaultAgentStartupManager(IExtensionProvider<IAgentStartup> startups)
+        public DefaultAgentStartupManager(IExtensionProvider<IAgentStartup> startupProvider)
         {
-            Startups = startups.Instances;
+            Startups = startupProvider.Instances;
         }
 
         private IEnumerable<IAgentStartup> Startups { get; }

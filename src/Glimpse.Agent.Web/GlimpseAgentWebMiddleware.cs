@@ -12,18 +12,18 @@ namespace Glimpse.Agent.Web
         private readonly RequestDelegate _next;
         private readonly RequestDelegate _branch;
         private readonly ISettings _settings;
-        private readonly IEnumerable<IRequestIgnorer> _requestIgnorePolicies;
+        private readonly IRequestIgnorerManager _requestIgnorerManager;
 
-        public GlimpseAgentWebMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IRequestIgnorer> requestIgnorerProvider, IExtensionProvider<IInspectorStartup> inspectorStartupProvider)
+        public GlimpseAgentWebMiddleware(RequestDelegate next, IApplicationBuilder app, IRequestIgnorerManager requestIgnorerManager, IExtensionProvider<IInspectorStartup> inspectorStartupProvider)
         {
             _next = next;
-            _requestIgnorePolicies = requestIgnorerProvider.Instances;
+            _requestIgnorerManager = requestIgnorerManager;
             _branch = BuildBranch(app, inspectorStartupProvider.Instances);
         }
         
         public async Task Invoke(HttpContext context)
         {
-            if (ShouldProfile(context))
+            if (!_requestIgnorerManager.ShouldIgnore(context))
             {
                 await _branch(context);
             }
@@ -44,22 +44,6 @@ namespace Glimpse.Agent.Web
             branchBuilder.Use(subNext => { return async ctx => await _next(ctx); });
 
             return branchBuilder.Build();
-        }
-        
-        private bool ShouldProfile(HttpContext context)
-        {
-            if (_requestIgnorePolicies.Any())
-            {
-                foreach (var policy in _requestIgnorePolicies)
-                {
-                    if (policy.ShouldIgnore(context))
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
         }
     }
 }
