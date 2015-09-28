@@ -16,13 +16,18 @@ namespace Glimpse.Agent.Web
 
         private IHttpContextAccessor HttpContextAccessor { get; }
 
+        public bool ShouldIgnore()
+        {
+            return ShouldIgnore(HttpContextAccessor.HttpContext);
+        }
+
         public bool ShouldIgnore(HttpContext context)
         {
             if (RequestIgnorers.Any())
             {
                 foreach (var policy in RequestIgnorers)
                 {
-                    if (policy.ShouldIgnore(GetContext(context)))
+                    if (policy.ShouldIgnore(context))
                     {
                         return true;
                     }
@@ -30,11 +35,6 @@ namespace Glimpse.Agent.Web
             }
 
             return false;
-        }
-
-        private HttpContext GetContext(HttpContext context)
-        {
-            return context != null ? context : HttpContextAccessor.HttpContext;
         }
     }
 }
