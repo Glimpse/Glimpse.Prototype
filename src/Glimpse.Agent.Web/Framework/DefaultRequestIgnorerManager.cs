@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Http;
+using Microsoft.AspNet.JsonPatch.Helpers;
 
 namespace Glimpse.Agent.Web
 {
@@ -29,18 +30,40 @@ namespace Glimpse.Agent.Web
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (RequestIgnorers.Any())
+            var result = GetCachedResult(context);
+            if (result == null)
             {
-                foreach (var policy in RequestIgnorers)
+                if (RequestIgnorers.Any())
                 {
-                    if (policy.ShouldIgnore(context))
+                    foreach (var policy in RequestIgnorers)
                     {
-                        return true;
+                        if (policy.ShouldIgnore(context))
+                        {
+                            result = true;
+                            break;
+                        }
                     }
                 }
+
+                if (!result.HasValue)
+                {
+                    result = false;
+                }
+
+                SetCachedResult(context, result);
             }
 
-            return false;
+            return result.Value;
+        }
+
+        private bool? GetCachedResult(HttpContext context)
+        {
+            return context.Items["Glimpse.ShouldIgnoreRequest"] as bool?;
+        }
+
+        private void SetCachedResult(HttpContext context, bool? value)
+        {
+            context.Items["Glimpse.ShouldIgnoreRequest"] = value;
         }
     }
 }
