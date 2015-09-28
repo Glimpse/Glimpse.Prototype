@@ -23,8 +23,9 @@ namespace Glimpse
             services.AddSingleton<IExtensionProvider<IAgentStartup>, DefaultExtensionProvider<IAgentStartup>>();
             
             //
-            // Telemetry
+            // Common
             //
+            services.AddTransient<IAgentStartupManager, DefaultAgentStartupManager>();
             services.AddTransient<WebTelemetryListener>();
 
             return services;

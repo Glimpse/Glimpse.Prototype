@@ -1,0 +1,27 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using Glimpse.Web;
+
+namespace Glimpse.Agent.Web
+{
+    public class DefaultAgentStartupManager : IAgentStartupManager
+    {
+        public DefaultAgentStartupManager(IExtensionProvider<IAgentStartup> startups)
+        {
+            Startups = startups.Instances;
+        }
+
+        private IEnumerable<IAgentStartup> Startups { get; }
+
+        public void Run(IStartupOptions options)
+        {
+            if (Startups.Any())
+            {
+                foreach (var startup in Startups)
+                {
+                    startup.Run(options);
+                }
+            }
+        }
+    }
+}
