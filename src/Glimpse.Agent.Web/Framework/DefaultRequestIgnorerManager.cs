@@ -6,12 +6,15 @@ namespace Glimpse.Agent.Web
 {
     public class DefaultRequestIgnorerManager : IRequestIgnorerManager
     {
-        public DefaultRequestIgnorerManager(IExtensionProvider<IRequestIgnorer> requestIgnorerProvider)
+        public DefaultRequestIgnorerManager(IExtensionProvider<IRequestIgnorer> requestIgnorerProvider, IHttpContextAccessor httpContextAccessor)
         {
             RequestIgnorers = requestIgnorerProvider.Instances;
+            HttpContextAccessor = httpContextAccessor;
         }
 
         private IEnumerable<IRequestIgnorer> RequestIgnorers { get; }
+
+        private IHttpContextAccessor HttpContextAccessor { get; }
 
         public bool ShouldIgnore(HttpContext context)
         {
@@ -19,7 +22,7 @@ namespace Glimpse.Agent.Web
             {
                 foreach (var policy in RequestIgnorers)
                 {
-                    if (policy.ShouldIgnore(context))
+                    if (policy.ShouldIgnore(GetContext(context)))
                     {
                         return true;
                     }
@@ -27,6 +30,11 @@ namespace Glimpse.Agent.Web
             }
 
             return false;
+        }
+
+        private HttpContext GetContext(HttpContext context)
+        {
+            return context != null ? context : HttpContextAccessor.HttpContext;
         }
     }
 }
