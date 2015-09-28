@@ -27,7 +27,8 @@ namespace Glimpse.Agent.Web
         {
             if (context == null)
             {
-                throw new ArgumentNullException(nameof(context));
+                // TODO: This should throw but is just returning atm because of bug in hosting
+                return false;  //throw new ArgumentNullException(nameof(context));
             }
 
             var result = GetCachedResult(context);
