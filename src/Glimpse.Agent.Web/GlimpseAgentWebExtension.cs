@@ -9,15 +9,8 @@ namespace Glimpse.Agent.Web
     {
         public static IApplicationBuilder UseGlimpseAgent(this IApplicationBuilder app)
         {
-            var startups = app.ApplicationServices.GetRequiredService<IExtensionProvider<IAgentStartup>>();
-            if (startups.Instances.Any())
-            {
-                var options = new StartupOptions(app);
-                foreach (var startup in startups.Instances)
-                {
-                    startup.Run(options);
-                }
-            }
+            var manager = app.ApplicationServices.GetRequiredService<IAgentStartupManager>();
+            manager.Run(new StartupOptions(app));
 
             return app.UseMiddleware<GlimpseAgentWebMiddleware>(app);
         }
