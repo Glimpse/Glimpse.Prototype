@@ -8,12 +8,12 @@ using Microsoft.Framework.TelemetryAdapter;
 
 namespace Glimpse.Agent.Web
 {
-    public class WebTelemetryListener
+    public class AspNetTelemetryListener
     {
         private readonly IAgentBroker _broker;
         private readonly IContextData<MessageContext> _contextData;
 
-        public WebTelemetryListener(IAgentBroker broker, IContextData<MessageContext> contextData)
+        public AspNetTelemetryListener(IAgentBroker broker, IContextData<MessageContext> contextData)
         {
             _broker = broker;
             _contextData = contextData;
