@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
+using Glimpse.Broker;
 using Glimpse.Common;
 
 namespace Glimpse
@@ -29,6 +30,7 @@ namespace Glimpse
         public DefaultMessageConverter(JsonSerializer jsonSerializer)
         {
             jsonSerializer.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            jsonSerializer.Converters.Add(new TimeSpanConverter());
 
             _jsonSerializer = jsonSerializer;
         }
