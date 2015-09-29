@@ -18,7 +18,7 @@ namespace Glimpse
             //
             services.AddSingleton<IServerBroker, DefaultServerBroker>();
             services.AddSingleton<IStorage, InMemoryStorage>();
-            services.AddSingleton<IScriptOptionsProvider, DefaultScriptOptionsProvider>();
+            services.AddTransient<IResourceManager, ResourceManager>();
 
             //
             // Options
@@ -29,7 +29,8 @@ namespace Glimpse
             services.AddTransient<IExtensionProvider<IResource>, DefaultExtensionProvider<IResource>>();
             services.AddTransient<IExtensionProvider<IResourceStartup>, DefaultExtensionProvider<IResourceStartup>>();
             services.AddSingleton<IAllowRemoteProvider, DefaultAllowRemoteProvider>();
-            services.AddTransient<IResourceManager, ResourceManager>();
+            services.AddSingleton<IScriptOptionsProvider, DefaultScriptOptionsProvider>();
+            services.AddSingleton<IMetadataProvider, DefaultMetadataProvider>();
 
             return services;
         }
