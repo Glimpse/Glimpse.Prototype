@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Glimpse
+namespace Glimpse.Server.Web
 {
-    public class Metadata : IMetadata
+    public class Metadata
     {
         public Metadata()
         {
             Resources = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>());
         }
 
-        public ReadOnlyDictionary<string, string> Resources { get; set; }
+        public IReadOnlyDictionary<string, string> Resources { get; set; }
 
         public string Hash { get; set; }
     }

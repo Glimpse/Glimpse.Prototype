@@ -1,4 +1,4 @@
-﻿namespace Glimpse
+﻿namespace Glimpse.Web
 {
     public class ScriptOptions
     {

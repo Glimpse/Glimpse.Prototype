@@ -1,6 +1,8 @@
 ﻿using Glimpse.Agent;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Framework.OptionsModel;
 using Glimpse.Server.Web;
+using Glimpse.Web;
 using Microsoft.Extensions.OptionsModel;
 
 namespace Glimpse
@@ -12,14 +14,11 @@ namespace Glimpse
             var services = new ServiceCollection();
 
             //
-            // Broker
+            // Common
             //
             services.AddSingleton<IServerBroker, DefaultServerBroker>();
-
-            //
-            // Store
-            //
             services.AddSingleton<IStorage, InMemoryStorage>();
+            services.AddSingleton<IScriptOptionsProvider, DefaultScriptOptionsProvider>();
 
             //
             // Options
