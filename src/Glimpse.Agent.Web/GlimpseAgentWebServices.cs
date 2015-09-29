@@ -18,7 +18,7 @@ namespace Glimpse
             services.AddSingleton<IRequestIgnorerStatusCodeProvider, DefaultRequestIgnorerStatusCodeProvider>();
             services.AddSingleton<IRequestIgnorerContentTypeProvider, DefaultRequestIgnorerContentTypeProvider>();
             services.AddSingleton<IExtensionProvider<IRequestIgnorer>, DefaultExtensionProvider<IRequestIgnorer>>();
-            services.AddSingleton<IExtensionProvider<IInspectorStartup>, DefaultExtensionProvider<IInspectorStartup>>();
+            services.AddSingleton<IExtensionProvider<IInspectorFunction>, DefaultExtensionProvider<IInspectorFunction>>();
             services.AddSingleton<IExtensionProvider<IInspector>, DefaultExtensionProvider<IInspector>>();
             services.AddSingleton<IExtensionProvider<IAgentStartup>, DefaultExtensionProvider<IAgentStartup>>();
             
@@ -27,7 +27,7 @@ namespace Glimpse
             //
             services.AddTransient<IAgentStartupManager, DefaultAgentStartupManager>();
             services.AddTransient<IRequestIgnorerManager, DefaultRequestIgnorerManager>();
-            services.AddTransient<IInspectorStartupManager, DefaultInspectorStartupManager>();
+            services.AddTransient<IInspectorFunctionManager, DefaultInspectorFunctionManager>();
             services.AddTransient<WebTelemetryListener>();
 
             return services;

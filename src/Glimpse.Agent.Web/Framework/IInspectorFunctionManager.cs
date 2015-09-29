@@ -2,7 +2,7 @@
 
 namespace Glimpse.Agent.Web
 {
-    public interface IInspectorStartupManager
+    public interface IInspectorFunctionManager
     {
         RequestDelegate BuildInspectorBranch(RequestDelegate next, IApplicationBuilder app);
     }

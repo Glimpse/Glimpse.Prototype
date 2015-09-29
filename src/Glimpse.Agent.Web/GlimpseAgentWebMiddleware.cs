@@ -13,11 +13,11 @@ namespace Glimpse.Agent.Web
         private readonly ISettings _settings;
         private readonly IRequestIgnorerManager _requestIgnorerManager;
 
-        public GlimpseAgentWebMiddleware(RequestDelegate next, IApplicationBuilder app, IRequestIgnorerManager requestIgnorerManager, IInspectorStartupManager inspectorStartupManager)
+        public GlimpseAgentWebMiddleware(RequestDelegate next, IApplicationBuilder app, IRequestIgnorerManager requestIgnorerManager, IInspectorFunctionManager inspectorFunctionManager)
         {
             _next = next;
             _requestIgnorerManager = requestIgnorerManager;
-            _branch = inspectorStartupManager.BuildInspectorBranch(next, app);
+            _branch = inspectorFunctionManager.BuildInspectorBranch(next, app);
         }
         
         public async Task Invoke(HttpContext context)
