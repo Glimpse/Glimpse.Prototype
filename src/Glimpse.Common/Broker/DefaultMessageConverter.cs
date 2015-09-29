@@ -45,7 +45,7 @@ namespace Glimpse
                 Indices = GetIndices(payload)
             };
             
-            var messageTypes = "[" + string.Join(",", message.Types.Select( (s)=> "\"" + s + "\""))  + "]";
+            var messageTypes = "[" + string.Join(",", message.Types.Select(s => "\"" + s + "\""))  + "]";
             var messageContext = $"{{\"id\":\"{message.Context.Id}\",\"type\":\"{message.Context.Type}\"}}";
             message.Payload = $"{{\"id\":\"{message.Id}\",\"ordinal\":\"{message.Ordinal}\",\"types\":{messageTypes},\"payload\":{message.Payload},\"context\":{messageContext}}}";
 
