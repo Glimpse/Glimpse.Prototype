@@ -18,7 +18,7 @@ namespace Glimpse.Agent.Web
             var appServices = options.ApplicationServices;
 
             var telemetryListener = appServices.GetRequiredService<TelemetryListener>();
-            telemetryListener.SubscribeWithAdapter(appServices.GetRequiredService<AspNetTelemetryListener>(), IsEnabled);
+            telemetryListener.SubscribeWithAdapter(appServices.GetRequiredService<WebTelemetryListener>(), IsEnabled);
         }
 
         private bool IsEnabled(string topic)

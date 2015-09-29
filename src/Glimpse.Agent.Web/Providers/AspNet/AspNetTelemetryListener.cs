@@ -8,17 +8,8 @@ using Microsoft.Framework.TelemetryAdapter;
 
 namespace Glimpse.Agent.Web
 {
-    public class AspNetTelemetryListener
+    public partial class WebTelemetryListener
     {
-        private readonly IAgentBroker _broker;
-        private readonly IContextData<MessageContext> _contextData;
-
-        public AspNetTelemetryListener(IAgentBroker broker, IContextData<MessageContext> contextData)
-        {
-            _broker = broker;
-            _contextData = contextData;
-        }
-
         [TelemetryName("Microsoft.AspNet.Hosting.BeginRequest")]
         public void OnBeginRequest(HttpContext httpContext)
         {

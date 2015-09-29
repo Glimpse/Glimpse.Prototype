@@ -28,7 +28,7 @@ namespace Glimpse
             services.AddTransient<IAgentStartupManager, DefaultAgentStartupManager>();
             services.AddTransient<IRequestIgnorerManager, DefaultRequestIgnorerManager>();
             services.AddTransient<IInspectorFunctionManager, DefaultInspectorFunctionManager>();
-            services.AddTransient<AspNetTelemetryListener>();
+            services.AddTransient<WebTelemetryListener>();
 
             return services;
         }

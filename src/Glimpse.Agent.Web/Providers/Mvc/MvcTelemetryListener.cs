@@ -4,18 +4,12 @@ using Glimpse.Agent.AspNet.Mvc.Messages;
 using Glimpse.Agent.AspNet.Mvc.Proxies;
 using Microsoft.Framework.TelemetryAdapter;
 
-namespace Glimpse.Agent.AspNet.Mvc
+namespace Glimpse.Agent.Web
 {
-    public class MvcTelemetryListener
+    public partial class WebTelemetryListener
     {
-        private readonly IAgentBroker _broker;
-        private readonly ProxyAdapter _proxyAdapter;
-
-        public MvcTelemetryListener(IAgentBroker broker)
+        partial void MvcOnCreated()
         {
-            _broker = broker;
-
-            _proxyAdapter = new ProxyAdapter();
             _proxyAdapter.Register("Microsoft.AspNet.Mvc.ViewResult");
             _proxyAdapter.Register("Microsoft.AspNet.Mvc.ContentResult");
             _proxyAdapter.Register("Microsoft.AspNet.Mvc.ObjectResult");
