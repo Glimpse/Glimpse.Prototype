@@ -1,4 +1,4 @@
-﻿namespace Glimpse.Common.Broker
+﻿namespace Glimpse.Agent.Web.Broker
 {
     public class PromoteToStatusCodeAttribute : PromoteToAttribute
     {

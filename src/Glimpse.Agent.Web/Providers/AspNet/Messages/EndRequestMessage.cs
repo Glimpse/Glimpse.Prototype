@@ -1,5 +1,5 @@
 ﻿using System;
-using Glimpse.Common.Broker;
+using Glimpse.Agent.Web.Broker;
 
 namespace Glimpse.Agent.Web.Messages
 {

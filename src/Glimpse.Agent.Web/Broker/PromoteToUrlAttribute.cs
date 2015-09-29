@@ -1,8 +1,5 @@
-﻿using System;
-
-namespace Glimpse.Common.Broker
+﻿namespace Glimpse.Agent.Web.Broker
 {
-    [AttributeUsage(AttributeTargets.Property)]
     public class PromoteToUrlAttribute : PromoteToAttribute
     {
         public PromoteToUrlAttribute() : base("request-url")
