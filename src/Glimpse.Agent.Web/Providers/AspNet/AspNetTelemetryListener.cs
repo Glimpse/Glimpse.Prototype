@@ -41,7 +41,7 @@ namespace Glimpse.Agent.Web
             {
                 // TODO: check if there is a better way of doing this
                 Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}",
-                Duration = timing.Elapsed.TotalMilliseconds,
+                Duration = Math.Round(timing.Elapsed.TotalMilliseconds, 2),
                 ContentType = response.ContentType,
                 StatusCode = response.StatusCode,
                 StartTime = timing.Start.ToUniversalTime(),
