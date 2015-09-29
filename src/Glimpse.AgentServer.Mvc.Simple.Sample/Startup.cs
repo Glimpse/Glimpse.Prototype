@@ -5,7 +5,7 @@ using Glimpse.Server.Web;
 using Microsoft.AspNet.Builder;
 using Microsoft.Framework.DependencyInjection;
 
-namespace Glimpse.AgentServer.Mvc.Sample
+namespace Glimpse.AgentServer.Mvc.Simple.Sample
 {
     public class Startup
     {

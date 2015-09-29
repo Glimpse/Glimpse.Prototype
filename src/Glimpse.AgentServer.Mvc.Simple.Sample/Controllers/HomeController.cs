@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Mvc;
 
-namespace Glimpse.AgentServer.AspNet.Sample.Controllers
+namespace Glimpse.AgentServer.Mvc.Simple.Sample.Controllers
 {
     public class HomeController : Controller
     {
