@@ -13,7 +13,7 @@ namespace Glimpse
             //
             // Options
             //
-            services.AddTransient<IMvcRazorHost, GlimpseRazorHost>();
+            services.AddTransient<IMvcRazorHost, ScriptInjectorRazorHost>();
 
             return services;
         }

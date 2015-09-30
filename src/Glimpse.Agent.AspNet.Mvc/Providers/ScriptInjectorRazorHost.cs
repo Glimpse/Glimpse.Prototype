@@ -6,9 +6,9 @@ using Microsoft.AspNet.Razor.Chunks;
 
 namespace Glimpse.Agent.AspNet.Mvc
 {
-    public class GlimpseRazorHost : MvcRazorHost
+    public class ScriptInjectorRazorHost : MvcRazorHost
     {
-        public GlimpseRazorHost(IChunkTreeCache codeTreeCache) : base(codeTreeCache)
+        public ScriptInjectorRazorHost(IChunkTreeCache codeTreeCache) : base(codeTreeCache)
         {
         }
 
