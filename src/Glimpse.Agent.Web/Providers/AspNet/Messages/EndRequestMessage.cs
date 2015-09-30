@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Glimpse.Agent.Web.Broker;
 
 namespace Glimpse.Agent.Web.Messages
@@ -16,10 +17,14 @@ namespace Glimpse.Agent.Web.Messages
         [PromoteToUrl]
         public string Url { get; set; }
 
+        public long? ContentLength { get; set; }
+
         [PromoteToContentType]
         public string ContentType { get; set; }
 
         [PromoteToStatusCode]
         public int StatusCode { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> Headers { get; set; }
     }
 }
