@@ -1,4 +1,6 @@
-﻿using Glimpse.Agent.Web.Broker;
+﻿using System.Collections.Generic;
+using Glimpse.Agent.Web.Broker;
+using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent.Web.Messages
 {
@@ -9,5 +11,11 @@ namespace Glimpse.Agent.Web.Messages
 
         [PromoteToMethod]
         public string Method { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> Headers { get; set; }
+
+        public long? ContentLength { get; set; }
+
+        public string ContentType { get; set; }
     }
 }

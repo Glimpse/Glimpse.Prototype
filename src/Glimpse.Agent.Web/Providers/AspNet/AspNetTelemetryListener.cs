@@ -24,6 +24,9 @@ namespace Glimpse.Agent.Web
                 // TODO: should there be a StartTime property here?
                 Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}",
                 Method = request.Method,
+                Headers = request.Headers?.Select(x => new KeyValuePair<string, string>(x.Key, x.Value.ToString())),
+                ContentLength = request.ContentLength,
+                ContentType = request.ContentType
             };
 
             _broker.BeginLogicalOperation(beginMessage);
