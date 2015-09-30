@@ -10,7 +10,6 @@ namespace Glimpse.Agent.Web
     {
         private readonly RequestDelegate _next;
         private readonly RequestDelegate _branch;
-        private readonly ISettings _settings;
         private readonly IRequestIgnorerManager _requestIgnorerManager;
 
         public GlimpseAgentWebMiddleware(RequestDelegate next, IApplicationBuilder app, IRequestIgnorerManager requestIgnorerManager, IInspectorFunctionManager inspectorFunctionManager)
