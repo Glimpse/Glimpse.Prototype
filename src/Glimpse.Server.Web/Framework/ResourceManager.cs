@@ -22,14 +22,14 @@ namespace Glimpse.Server.Web
             var path = context.Request.Path;
             var remainingPath = (PathString)null;
             var startingSegment = path.StartingSegment(out remainingPath);
-            var paramaters = (IDictionary<string, string>)null;
+            var parameters = (IDictionary<string, string>)null;
             var managerItem = (ResourceManagerItem)null;
             
             if (!string.IsNullOrEmpty(startingSegment)
                 && _resourceTable.TryGetValue(startingSegment, out managerItem)
-                && MatchUriTemplate(managerItem.UriTemplate, remainingPath, out paramaters))
+                && MatchUriTemplate(managerItem.UriTemplate, remainingPath, out parameters))
             {
-                return new ResourceManagerResult(paramaters, managerItem.Resource, managerItem.Type);
+                return new ResourceManagerResult(parameters, managerItem.Resource, managerItem.Type);
             }
             
             return null;
