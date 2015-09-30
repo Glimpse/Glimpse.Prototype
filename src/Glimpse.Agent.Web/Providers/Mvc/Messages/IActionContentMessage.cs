@@ -2,7 +2,7 @@
 
 namespace Glimpse.Agent.AspNet.Mvc.Messages
 {
-    public interface IActionContentProcessedMessage
+    public interface IActionContentMessage
     {
         IReadOnlyList<BindingData> Binding { get; }
     }

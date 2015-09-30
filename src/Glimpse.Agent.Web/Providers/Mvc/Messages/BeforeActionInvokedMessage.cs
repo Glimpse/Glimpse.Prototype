@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Glimpse.Agent.AspNet.Mvc.Messages
 {
-    public class BeforeActionInvokedMessage : IActionContentProcessedMessage
+    public class BeforeActionInvokedMessage : IActionContentMessage
     {
         public string ActionId { get; set; }
 
