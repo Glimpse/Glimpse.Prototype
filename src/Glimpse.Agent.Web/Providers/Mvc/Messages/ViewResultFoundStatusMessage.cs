@@ -2,7 +2,7 @@
 
 namespace Glimpse.Agent.AspNet.Mvc.Messages
 {
-    public class ViewResultFoundStatusMessage
+    public class ViewResultFoundStatusMessage : IActionViewMessage
     {
         public string ActionId { get; set; }
 
