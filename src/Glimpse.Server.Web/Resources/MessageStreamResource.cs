@@ -13,15 +13,18 @@ namespace Glimpse.Server.Web
     public class MessageStreamResource : IResourceStartup
     {
         private readonly IServerBroker _serverBroker;
-        private readonly ISubject<string> _senderSubject;
+        private readonly ISubject<Container> _senderSubject;
         private readonly SemaphoreSlim _syncLock = new SemaphoreSlim(1);
 
         public MessageStreamResource(IServerBroker serverBroker)
         {
             _serverBroker = serverBroker;
 
-            _senderSubject = new Subject<string>();
+            _senderSubject = new Subject<Container>();
 
+            // setup heart beat to keep alive client connections
+            Observable.Interval(new TimeSpan(0, 0, 20), TaskPoolScheduler.Default).Subscribe(x => _senderSubject.OnNext(new Container("ping", "")));
+            
             // TODO: See if we can get Defered working there
             // lets subscribe, hope of the thread and then broadcast to all connections
             //_serverBroker.OffRecieverThread.ListenAll().Subscribe(message => Observable.Defer(() => Observable.Start(() => ProcessMessage(message), TaskPoolScheduler.Default)));
@@ -43,7 +46,6 @@ namespace Glimpse.Server.Web
 
                 context.Response.ContentType = "text/event-stream";
                 await context.Response.WriteAsync("retry: 5000\n\n");
-                //await context.Response.WriteAsync("data: pong\n\n");
                 await context.Response.Body.FlushAsync();
 
                 var unSubscribe = _senderSubject.Subscribe(async t =>
@@ -52,7 +54,8 @@ namespace Glimpse.Server.Web
 
                     try
                     {
-                        await context.Response.WriteAsync($"data: [{t}]\n\n");
+                        await context.Response.WriteAsync($"event: {t.Event}\n");
+                        await context.Response.WriteAsync($"data: [{t.Data}]\n\n");
                         await context.Response.Body.FlushAsync();
                     }
                     finally 
@@ -75,7 +78,20 @@ namespace Glimpse.Server.Web
 
         private void ProcessMessage(IMessage message)
         {
-            _senderSubject.OnNext(message.Payload);
+            _senderSubject.OnNext(new Container("message", message.Payload));
+        }
+
+        private class Container
+        {
+            public Container(string @event, string data)
+            {
+                Event = @event;
+                Data = data;
+            }
+
+            public string Data { get; }
+
+            public string Event { get; }
         }
     }
 }
