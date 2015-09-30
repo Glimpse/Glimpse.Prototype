@@ -233,3 +233,4 @@ $RECYCLE.BIN/
 
 project.lock.json
 .vs
+/src/Glimpse.*.Sample/wwwroot/lib/
