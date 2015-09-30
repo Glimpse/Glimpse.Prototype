@@ -31,6 +31,9 @@ namespace Glimpse
             // Messages.
             //
             services.AddSingleton<IMessageConverter, DefaultMessageConverter>();
+            services.AddTransient<IMessagePayloadFormatter, DefaultMessagePayloadFormatter>();
+            services.AddTransient<IMessageIndexProcessor, DefaultMessageIndexProcessor>();
+            services.AddTransient<IMessageTypeProcessor, DefaultMessageTypeProcessor>();
 
             //
             // JSON.Net.
