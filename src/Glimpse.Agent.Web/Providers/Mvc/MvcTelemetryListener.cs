@@ -102,6 +102,11 @@ namespace Glimpse.Agent.Web
             var message = new AfterActionInvokedMessage()
             {
                 ActionId = actionDescriptor.Id,
+                DisplayName = actionDescriptor.DisplayName,
+                ActionName = actionDescriptor.Name,
+                ControllerName = actionDescriptor.ControllerName,
+                TargetClass = actionDescriptor.ControllerTypeInfo.Name,
+                TargetMethod = actionDescriptor.MethodInfo.Name,
                 Timing = timing
             };
 

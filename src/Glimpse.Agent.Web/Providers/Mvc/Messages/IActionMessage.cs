@@ -10,6 +10,10 @@
 
         string ControllerName { get; set; }
 
+        string TargetClass { get; set; }
+
+        string TargetMethod { get; set; }
+
         Timing Timing { get; set; }
     }
 }
