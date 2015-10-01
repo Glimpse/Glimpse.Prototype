@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Glimpse.Common;
 using Microsoft.AspNet.Http;
 
 namespace Glimpse.Server.Web
@@ -24,7 +25,7 @@ namespace Glimpse.Server.Web
 
             var request = _httpContextAccessor.HttpContext.Request;
             var baseUrl = $"{request.Scheme}://{request.Host}/glimpse/"; //TODO: 'glimpse' should come from config
-            var resources = _resourceManager.RegisteredUris.ToDictionary(kvp => kvp.Key, kvp => $"{baseUrl}{kvp.Key}/{kvp.Value}");
+            var resources = _resourceManager.RegisteredUris.ToDictionary(kvp => kvp.Key.KebabCase(), kvp => $"{baseUrl}{kvp.Key}/{kvp.Value}");
 
             _metadata = new Metadata(resources);
 
