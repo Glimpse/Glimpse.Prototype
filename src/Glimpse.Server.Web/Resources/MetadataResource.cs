@@ -38,6 +38,6 @@ namespace Glimpse.Server.Web.Resources
 
         public string Name => "Metadata";
         public ResourceParameters Parameters => new ResourceParameters(+ResourceParameter.Hash);
-        public ResourceType Type => ResourceType.Agent;
+        public ResourceType Type => ResourceType.Client;
     }
 }
