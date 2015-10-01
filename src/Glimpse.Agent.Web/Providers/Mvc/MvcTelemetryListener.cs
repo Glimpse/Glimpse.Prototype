@@ -223,7 +223,7 @@ namespace Glimpse.Agent.Web
                 ControllerName = actionContext.ActionDescriptor.ControllerName,
                 ViewName = viewName,
                 DidFind = true,
-                SearchedLocations = null, // Don't have this yet :(
+                SearchedLocations = searchedLocations,
                 ViewData = new ViewResult
                 {
                     ViewData = result.ViewData,
