@@ -5,9 +5,9 @@ namespace Glimpse.Server.Web
 {
     public class Metadata
     {
-        public Metadata()
+        public Metadata(IDictionary<string, string> resources)
         {
-            Resources = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>());
+            Resources = new ReadOnlyDictionary<string, string>(resources);
         }
 
         public IReadOnlyDictionary<string, string> Resources { get; set; }
