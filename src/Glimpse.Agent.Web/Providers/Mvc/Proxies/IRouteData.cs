@@ -5,7 +5,7 @@ namespace Glimpse.Agent.AspNet.Mvc.Proxies
 {
     public interface IRouteData
     {
-        IReadOnlyList<IRouter> Routers { get; }
+        IReadOnlyList<object> Routers { get; }
         IDictionary<string, object> DataTokens { get; }
         IDictionary<string, object> Values { get; }
     }
@@ -14,8 +14,13 @@ namespace Glimpse.Agent.AspNet.Mvc.Proxies
     {
         string Name { get; }
         string RouteTemplate { get; }
-        IDictionary<string, object> Values { get; }
-        IReadOnlyList<IRouterTemplatePart> ParsedTemplate { get; }
+        IReadOnlyDictionary<string, object> Values { get; }
+        IRouterParsedTemplate ParsedTemplate { get; }
+    }
+
+    public interface IRouterParsedTemplate
+    {
+        IReadOnlyList<IRouterTemplatePart> Parameters { get; }
     }
 
     public interface IRouterTemplatePart

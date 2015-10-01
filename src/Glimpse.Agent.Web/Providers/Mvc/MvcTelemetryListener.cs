@@ -13,6 +13,7 @@ namespace Glimpse.Agent.Web
             _proxyAdapter.Register("Microsoft.AspNet.Mvc.ViewResult");
             _proxyAdapter.Register("Microsoft.AspNet.Mvc.ContentResult");
             _proxyAdapter.Register("Microsoft.AspNet.Mvc.ObjectResult");
+            _proxyAdapter.Register("Microsoft.AspNet.Routing.Template.TemplateRoute");
         }
 
         // Note: This event is the start of the action pipeline. The action has been selected, the route
@@ -28,36 +29,23 @@ namespace Glimpse.Agent.Web
                 DisplayName = actionDescriptor.DisplayName,
                 ActionName = actionDescriptor.Name,
                 ControllerName = actionDescriptor.ControllerName,
-                RouteData = new Glimpse.Agent.AspNet.Mvc.Messages.RouteData()
+                RouteData = new RouteData
                 {
-                    Name = router.Name,
-                    Pattern = router.RouteTemplate
+                    Data = routeData.Values?.Select(x => new KeyValuePair<string, string>(x.Key, x.Value?.ToString())).ToList()
                 }
             };
 
-            // I don't think there is a case where one can exist without the other
-            if (routeData.Values != null && router.ParsedTemplate != null)
+            if (router.GetType().FullName == "Microsoft.AspNet.Routing.Template.TemplateRoute")
             {
-                // going through and merging the two lists of data... neither list contains 
-                // everything that we need.
-                message.RouteData.Data = routeData.Values.GroupJoin(router.ParsedTemplate,
-                    c => c.Key,
-                    b => b.Name,
-                    (c, b) => {
-                        var result = new RouteResolutionData()
-                        {
-                            Tag = c.Key,
-                            Match = c.Value.ToString()
-                        };
+                var templateRoute = _proxyAdapter.Process<IRouter>("Microsoft.AspNet.Routing.Template.TemplateRoute", router);
 
-                        var template = b.FirstOrDefault();
-                        if (template != null)
-                        {
-                            result.Default = template.DefaultValue.ToString();
-                            result.Optional = template.IsOptional;
-                        }
+                var messageRouteData = message.RouteData;
+                messageRouteData.Name = templateRoute.Name;
+                messageRouteData.Pattern = templateRoute.RouteTemplate;
+                messageRouteData.Configuration = templateRoute.ParsedTemplate?.Parameters?.Select(x => {
+                        var config = new RouteConfigurationData { Default = x.DefaultValue?.ToString(), Optional = x.IsOptional };
+                        return new KeyValuePair<string, RouteConfigurationData>(x.Name, config);
 
-                        return result;
                     }).ToList();
             }
 
