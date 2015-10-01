@@ -23,8 +23,8 @@ namespace Glimpse.Server.Web
                 return _metadata;
 
             var request = _httpContextAccessor.HttpContext.Request;
-            var baseUrl = $"{request.Scheme}://{request.Host}glimpse/"; //TODO: 'glimpse' should come from config
-            var resources = _resourceManager.RegisteredUris.ToDictionary(kvp => kvp.Key, kvp => baseUrl + kvp.Value);
+            var baseUrl = $"{request.Scheme}://{request.Host}/glimpse/"; //TODO: 'glimpse' should come from config
+            var resources = _resourceManager.RegisteredUris.ToDictionary(kvp => kvp.Key, kvp => $"{baseUrl}{kvp.Key}/{kvp.Value}");
 
             _metadata = new Metadata(resources);
 
