@@ -16,6 +16,8 @@ namespace Glimpse.Agent.AspNet.Mvc.Messages
 
         public IEnumerable<string> SearchedLocations { get; set; }
 
+        public string Path { get; set; }
+
         public ViewResult ViewData { get; set; }
     }
 }

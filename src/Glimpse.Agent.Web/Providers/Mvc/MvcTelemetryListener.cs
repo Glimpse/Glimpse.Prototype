@@ -224,6 +224,7 @@ namespace Glimpse.Agent.Web
                 ViewName = viewName,
                 DidFind = true,
                 SearchedLocations = searchedLocations,
+                Path = null,
                 ViewData = new ViewResult
                 {
                     ViewData = result.ViewData,
@@ -252,6 +253,7 @@ namespace Glimpse.Agent.Web
                 ViewName = viewName,
                 DidFind = true,
                 SearchedLocations = null, // Don't have this yet :(
+                Path = view.Path,
                 ViewData = new ViewResult {
                     ViewData = result.ViewData,
                     TempData = result.TempData
