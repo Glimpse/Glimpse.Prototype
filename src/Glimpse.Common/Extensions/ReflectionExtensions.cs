@@ -23,7 +23,12 @@ namespace Glimpse.Common
 
         public static string KebabCase(this Type type)
         {
-            return type.Name.KebabCase().Replace("i-", ""); // handle IFoo interface naming
+            var result = type.Name.KebabCase();
+            
+            if (type.GetTypeInfo().IsInterface && result[0] == 'i')
+                return result.Substring(1); // Handle IFooBar -> foo-bar case
+
+            return result;
         }
     }
 }
