@@ -14,27 +14,32 @@ namespace Glimpse.Agent.Web
             _proxyAdapter.Register("Microsoft.AspNet.Mvc.ContentResult");
             _proxyAdapter.Register("Microsoft.AspNet.Mvc.ObjectResult");
             _proxyAdapter.Register("Microsoft.AspNet.Routing.Template.TemplateRoute");
+            _proxyAdapter.Register("Microsoft.AspNet.Mvc.Controllers.ControllerActionDescriptor");
+            _proxyAdapter.Register("Microsoft.AspNet.Mvc.Abstractions.ActionDescriptor");
         }
 
-        // Note: This event is the start of the action pipeline. The action has been selected, the route
+        // NOTE: This event is the start of the action pipeline. The action has been selected, the route
         //       has been selected but no filters have run and model binding hasn't occured.
         [TelemetryName("Microsoft.AspNet.Mvc.BeforeAction")]
-        public void OnBeforeAction(IActionDescriptor actionDescriptor, IHttpContext httpContext, IRouteData routeData)
+        public void OnBeforeAction(object actionDescriptor, IHttpContext httpContext, IRouteData routeData)
         {
-            var router = routeData.Routers[routeData.Routers.Count - 2];
+            var typedActionDescriptor = ConvertActionDescriptor(actionDescriptor);
 
             var message = new BeforeActionMessage
             {
-                ActionId = actionDescriptor.Id,
-                DisplayName = actionDescriptor.DisplayName,
-                ActionName = actionDescriptor.Name,
-                ControllerName = actionDescriptor.ControllerName,
+                ActionId = typedActionDescriptor.Id,
+                DisplayName = typedActionDescriptor.DisplayName,
+                ActionName = typedActionDescriptor.Name,
+                ControllerName = typedActionDescriptor.ControllerName,
                 RouteData = new RouteData
                 {
                     Data = routeData.Values?.Select(x => new KeyValuePair<string, string>(x.Key, x.Value?.ToString())).ToList()
                 }
             };
 
+            // NOTE: Template data is only available in the TemplateRoute, so we need to try and 
+            //       promote that type into something we can use
+            var router = routeData.Routers[routeData.Routers.Count - 2];
             if (router.GetType().FullName == "Microsoft.AspNet.Routing.Template.TemplateRoute")
             {
                 var templateRoute = _proxyAdapter.Process<IRouter>("Microsoft.AspNet.Routing.Template.TemplateRoute", router);
@@ -72,7 +77,7 @@ namespace Glimpse.Agent.Web
             IActionContext actionContext,
             IDictionary<string, object> actionArguments)
         {
-            var actionDescriptor = actionContext.ActionDescriptor;
+            var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
             var message = new BeforeActionInvokedMessage
             {
@@ -92,10 +97,11 @@ namespace Glimpse.Agent.Web
             IActionResult result)
         {
             var timing = _broker.EndLogicalOperation<BeforeActionInvokedMessage>().Timing;
+            var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
             var message = new AfterActionInvokedMessage()
             {
-                ActionId = actionContext.ActionDescriptor.Id,
+                ActionId = actionDescriptor.Id,
                 Timing = timing
             };
 
@@ -109,7 +115,7 @@ namespace Glimpse.Agent.Web
             IActionContext actionContext,
             object result)
         {
-            var actionDescriptor = actionContext.ActionDescriptor;
+            var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
             var message = new BeforeActionResultMessage
             {
@@ -183,10 +189,11 @@ namespace Glimpse.Agent.Web
             IActionResult result)
         {
             var timing = _broker.EndLogicalOperation<BeforeActionResultMessage>().Timing;
+            var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
             var message = new AfterActionResultMessage()
             {
-                ActionId = actionContext.ActionDescriptor.Id,
+                ActionId = actionDescriptor.Id,
                 Timing = timing
             };
 
@@ -203,11 +210,13 @@ namespace Glimpse.Agent.Web
             string viewName,
             IReadOnlyList<string> searchedLocations)
         {
+            var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
+
             var message = new ViewResultFoundStatusMessage()
             {
-                ActionId = actionContext.ActionDescriptor.Id,
-                ActionName = actionContext.ActionDescriptor.Name,
-                ControllerName = actionContext.ActionDescriptor.ControllerName,
+                ActionId = actionDescriptor.Id,
+                ActionName = actionDescriptor.Name,
+                ControllerName = actionDescriptor.ControllerName,
                 ViewName = viewName,
                 DidFind = true,
                 SearchedLocations = searchedLocations,
@@ -232,11 +241,13 @@ namespace Glimpse.Agent.Web
             string viewName,
             IView view)
         {
+            var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
+
             var message = new ViewResultFoundStatusMessage()
             {
-                ActionId = actionContext.ActionDescriptor.Id,
-                ActionName = actionContext.ActionDescriptor.Name,
-                ControllerName = actionContext.ActionDescriptor.ControllerName,
+                ActionId = actionDescriptor.Id,
+                ActionName = actionDescriptor.Name,
+                ControllerName = actionDescriptor.ControllerName,
                 ViewName = viewName,
                 DidFind = true,
                 SearchedLocations = null, // Don't have this yet :(
@@ -248,6 +259,26 @@ namespace Glimpse.Agent.Web
             };
 
             _broker.SendMessage(message);
+        }
+
+        private IActionDescriptor ConvertActionDescriptor(object actionDescriptor)
+        {
+            var typedActionDescriptor = (IActionDescriptor)null;
+
+            // NOTE: ActionDescriptor is usually ControllerActionDescriptor but the compile time type is
+            //       ActionDescriptor. This is a problem because we are misisng the ControllerName which 
+            //       we use a lot.
+            switch (actionDescriptor.GetType().FullName)
+            {
+                case "Microsoft.AspNet.Mvc.Controllers.ControllerActionDescriptor":
+                    typedActionDescriptor = _proxyAdapter.Process<IActionDescriptor>("Microsoft.AspNet.Mvc.Controllers.ControllerActionDescriptor", actionDescriptor);
+                    break;
+                case "Microsoft.AspNet.Mvc.Abstractions.ActionDescriptor":
+                    typedActionDescriptor = _proxyAdapter.Process<IActionDescriptor>("Microsoft.AspNet.Mvc.Abstractions.ActionDescriptor", actionDescriptor);
+                    break;
+            }
+
+            return typedActionDescriptor;
         }
     }
 }
