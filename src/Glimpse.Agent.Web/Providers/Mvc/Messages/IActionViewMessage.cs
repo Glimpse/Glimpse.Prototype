@@ -9,7 +9,11 @@ namespace Glimpse.Agent.AspNet.Mvc.Messages
         string ViewName { get; set; }
 
         bool DidFind { get; set; }
-        
+
+        IEnumerable<string> SearchedLocations { get; set; }
+
+        string Path { get; set; }
+
         ViewResult ViewData { get; set; }
     }
 }
