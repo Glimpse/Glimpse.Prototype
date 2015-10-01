@@ -18,7 +18,7 @@ namespace Glimpse
             //
             services.AddSingleton<IServerBroker, DefaultServerBroker>();
             services.AddSingleton<IStorage, InMemoryStorage>();
-            services.AddTransient<IResourceManager, ResourceManager>();
+            services.AddSingleton<IResourceManager, ResourceManager>();
 
             //
             // Options
