@@ -45,7 +45,6 @@ namespace Glimpse.Agent.Web
                 messageRouteData.Configuration = templateRoute.ParsedTemplate?.Parameters?.Select(x => {
                         var config = new RouteConfigurationData { Default = x.DefaultValue?.ToString(), Optional = x.IsOptional };
                         return new KeyValuePair<string, RouteConfigurationData>(x.Name, config);
-
                     }).ToList();
             }
 
@@ -66,7 +65,7 @@ namespace Glimpse.Agent.Web
             _broker.SendMessage(message);
         }
 
-        // Note: This event is the start of the action execution. The action has been selected, the route
+        // NOTE: This event is the start of the action execution. The action has been selected, the route
         //       has been selected, filters have run and model binding has occured.
         [TelemetryName("Microsoft.AspNet.Mvc.BeforeActionMethod")]
         public void OnBeforeActionMethod(
@@ -102,8 +101,8 @@ namespace Glimpse.Agent.Web
 
             _broker.SendMessage(message);
         }
-        
-        // Note: This event is the start of the result pipeline. The action has been executed, but
+
+        // NOTE: This event is the start of the result pipeline. The action has been executed, but
         //       we haven't yet determined which view (if any) will handle the request
         [TelemetryName("Microsoft.AspNet.Mvc.BeforeActionResult")]
         public void OnBeforeActionResult(
