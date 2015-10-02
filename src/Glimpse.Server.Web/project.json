@@ -4,7 +4,8 @@
         "Glimpse.Web.Common": "",
         "Glimpse.Agent.Common": "",
         "Glimpse.Server.Common": "",
-        "Microsoft.AspNet.SignalR.Server": "3.0.0-*"
+      "Microsoft.AspNet.SignalR.Server": "3.0.0-*",
+      "Tavis.UriTemplates": "0.6.5-beta"
     },
     "frameworks": {
         "dnx451": {
