@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Glimpse.Server.Web
 {
@@ -12,6 +13,9 @@ namespace Glimpse.Server.Web
 
         public IReadOnlyDictionary<string, string> Resources { get; set; }
 
-        public string Hash { get; set; }
+        public string Hash
+        {
+            get { return string.Join("&", Resources.Select(r => $"{r.Key}={r.Value}")).Crc32(); }
+        }
     }
 }
