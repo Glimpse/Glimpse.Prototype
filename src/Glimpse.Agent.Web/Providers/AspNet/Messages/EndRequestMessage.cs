@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Glimpse.Agent.Web.Broker;
+using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent.Web.Messages
 {
@@ -16,6 +17,10 @@ namespace Glimpse.Agent.Web.Messages
 
         [PromoteToUrl]
         public string Url { get; set; }
+
+        public string Path { get; set; }
+
+        public string QueryString { get; set; }
 
         public long? ContentLength { get; set; }
 

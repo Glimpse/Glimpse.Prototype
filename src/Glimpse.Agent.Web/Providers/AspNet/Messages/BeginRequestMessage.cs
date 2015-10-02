@@ -9,6 +9,10 @@ namespace Glimpse.Agent.Web.Messages
         [PromoteToUrl]
         public string Url { get; set; }
 
+        public string Path { get; set; }
+
+        public string QueryString { get; set; }
+
         [PromoteToMethod]
         public string Method { get; set; }
 

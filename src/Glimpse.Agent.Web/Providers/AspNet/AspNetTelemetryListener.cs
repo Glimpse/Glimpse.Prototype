@@ -23,6 +23,8 @@ namespace Glimpse.Agent.Web
                 // TODO: check if there is a better way of doing this
                 // TODO: should there be a StartTime property here?
                 Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}",
+                Path = request.Path,
+                QueryString = request.QueryString.Value,
                 Method = request.Method,
                 Headers = request.Headers?.Select(x => new KeyValuePair<string, string>(x.Key, x.Value.ToString())),
                 ContentLength = request.ContentLength,
@@ -44,6 +46,8 @@ namespace Glimpse.Agent.Web
             {
                 // TODO: check if there is a better way of doing this
                 Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}",
+                Path = request.Path,
+                QueryString = request.QueryString.Value,
                 Duration = Math.Round(timing.Elapsed.TotalMilliseconds, 2),
                 Headers = response.Headers?.Select(x => new KeyValuePair<string, string>(x.Key, x.Value.ToString())),
                 ContentLength = response.ContentLength,
