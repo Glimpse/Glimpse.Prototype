@@ -4,23 +4,24 @@ namespace Glimpse.Server.Web
 {
     public class DefaultScriptOptionsProvider : IScriptOptionsProvider
     {
+        private readonly IMetadataProvider _metadataProvider;
+
         public DefaultScriptOptionsProvider(IMetadataProvider metadataProvider)
         {
-            Metadata = metadataProvider.BuildInstance();
+            _metadataProvider = metadataProvider;
         }
-
-        private Metadata Metadata { get; }
 
         public ScriptOptions BuildInstance()
         {
-            var options = new ScriptOptions();
+            var metadata = _metadataProvider.BuildInstance();
 
-            options.BrowserAgentScriptUri = Metadata.Resources.GetValueOrDefault("browser-agent-script");
-            options.HttpMessageUri = Metadata.Resources.GetValueOrDefault("http-message");
-            options.HudClientScriptUri = Metadata.Resources.GetValueOrDefault("hud-client-script");
-            options.MetadataUri = Metadata.Resources.GetValueOrDefault("metadata");
-
-            return options;
+            return new ScriptOptions
+            {
+                BrowserAgentScriptUri = metadata.Resources.GetValueOrDefault("browser-agent-script"),
+                HttpMessageUri = metadata.Resources.GetValueOrDefault("agent-message"),
+                HudClientScriptUri = metadata.Resources.GetValueOrDefault("hud-client-script"),
+                MetadataUri = metadata.Resources.GetValueOrDefault("metadata")
+            };
         }
     }
 }
