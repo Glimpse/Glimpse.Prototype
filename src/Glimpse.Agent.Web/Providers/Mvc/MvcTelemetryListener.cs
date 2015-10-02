@@ -230,7 +230,8 @@ namespace Glimpse.Agent.Web
                 {
                     ViewData = result.ViewData,
                     TempData = result.TempData
-                }
+                },
+                Timing = new Timing() // TODO: to be removed
             };
 
             _broker.SendMessage(message);
@@ -260,7 +261,8 @@ namespace Glimpse.Agent.Web
                 ViewData = new ViewResult {
                     ViewData = result.ViewData,
                     TempData = result.TempData
-                }
+                },
+                Timing = new Timing() // TODO: to be removed
             };
 
             _broker.SendMessage(message);

@@ -15,5 +15,7 @@ namespace Glimpse.Agent.AspNet.Mvc.Messages
         string Path { get; set; }
 
         ViewResult ViewData { get; set; }
+
+        Timing Timing { get; set; }
     }
 }

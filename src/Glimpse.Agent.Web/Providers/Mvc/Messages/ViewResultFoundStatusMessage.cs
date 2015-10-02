@@ -19,5 +19,8 @@ namespace Glimpse.Agent.AspNet.Mvc.Messages
         public string Path { get; set; }
 
         public ViewResult ViewData { get; set; }
+
+        // TODO: Needs to be removed when IActionViewMessage is shifted
+        public Timing Timing { get; set; }
     }
 }
