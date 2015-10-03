@@ -9,5 +9,7 @@
         public string HttpMessageUri { get; set; }
 
         public string MetadataUri { get; set; }
+
+        public string SpaClientScriptUri { get; set; }
     }
 }

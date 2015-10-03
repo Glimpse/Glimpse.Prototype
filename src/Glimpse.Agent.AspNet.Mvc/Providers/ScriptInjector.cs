@@ -22,11 +22,9 @@ namespace Glimpse.Agent.AspNet.Mvc
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            var tag = new TagBuilder("script");
-            tag.Attributes.Add("data-request-id", _requestId.ToString());
-            tag.Attributes.Add("src", _scriptOptions.HudClientScriptUri);
-
-            output.PostContent.SetContent(tag);
+            output.PostContent.SetContentEncoded(
+                $@"<script src=""{_scriptOptions.HudClientScriptUri}"" data-request-id=""{_requestId}"" data-client-url=""{_scriptOptions.SpaClientScriptUri}"" async></script>
+                   <script src=""{_scriptOptions.BrowserAgentScriptUri}"" data-request-id=""{_requestId}"" data-action-url=""{_scriptOptions.HttpMessageUri}"" async></script>");
         }
     }
 }

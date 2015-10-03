@@ -22,7 +22,8 @@ namespace Glimpse.Server.Web.Resources
     ""browserAgentScriptUri"" : ""{scriptOptions.BrowserAgentScriptUri}"",
     ""hudClientScriptUri"" : ""{scriptOptions.HudClientScriptUri}"",
     ""httpMessageUri"" : ""{scriptOptions.HttpMessageUri}"",
-    ""metadataUri"" : ""{scriptOptions.MetadataUri}""
+    ""metadataUri"" : ""{scriptOptions.MetadataUri}"",
+    ""spaClientScriptUri"" : ""{scriptOptions.SpaClientScriptUri}""
 }}";
 
             var response = context.Response;
