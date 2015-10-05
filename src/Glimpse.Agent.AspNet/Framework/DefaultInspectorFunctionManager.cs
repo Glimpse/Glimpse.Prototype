@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Glimpse.Initialization;
 using Microsoft.AspNet.Builder;
 
 namespace Glimpse.Agent.AspNet

@@ -3,6 +3,7 @@ using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using System;
 using System.Collections.Generic;
+using Glimpse.Initialization;
 
 namespace Glimpse.Server.Web
 {

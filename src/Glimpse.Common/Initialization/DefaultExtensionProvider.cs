@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Glimpse
+namespace Glimpse.Initialization
 {
     public class DefaultExtensionProvider<T> : IExtensionProvider<T>
         where T : class

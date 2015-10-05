@@ -1,4 +1,5 @@
 ﻿using Glimpse.Agent;
+using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 using Glimpse.Server.Web;
 using Glimpse.Web;

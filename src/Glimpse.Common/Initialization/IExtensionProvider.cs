@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Glimpse
+namespace Glimpse.Initialization
 {
     public interface IExtensionProvider<T>
         where T : class
