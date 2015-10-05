@@ -1,6 +1,5 @@
 ﻿using Glimpse.Agent;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Framework.OptionsModel;
 using Glimpse.Server.Web;
 using Glimpse.Web;
 using Microsoft.Extensions.OptionsModel;
