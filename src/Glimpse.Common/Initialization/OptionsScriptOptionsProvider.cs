@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.OptionsModel;
 
-namespace Glimpse.Web
+namespace Glimpse.Initialization
 {
     public class OptionsScriptOptionsProvider : IScriptOptionsProvider
     {

@@ -2,7 +2,6 @@
 using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 using Glimpse.Server.Web;
-using Glimpse.Web;
 using Microsoft.Extensions.OptionsModel;
 
 namespace Glimpse

@@ -1,4 +1,4 @@
-﻿namespace Glimpse.Web
+﻿namespace Glimpse.Initialization
 {
     public interface IScriptOptionsProvider
     {
