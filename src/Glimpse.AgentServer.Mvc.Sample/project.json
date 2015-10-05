@@ -3,7 +3,7 @@
   "userSecretsId": "aspnet5-Glimpse.AgentServer.Mvc.Sample-13d51bc5-beea-48f5-a33d-0b583120c537",
   "version": "1.0.0-*",
   "dependencies": {
-    "Glimpse.Server.Web": "",
+    "Glimpse.Server": "",
     "Glimpse.Agent.Web": "",
     "Glimpse.Client.Web": "",
     "Glimpse.Agent.AspNet.Mvc": "",

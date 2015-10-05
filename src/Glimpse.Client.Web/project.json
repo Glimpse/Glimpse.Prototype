@@ -7,7 +7,7 @@
     ],
     "resource": [ "Resources" ],
     "dependencies": {
-        "Glimpse.Server.Web": "",
+        "Glimpse.Server": "",
         "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-*",
         "Microsoft.AspNet.StaticFiles": "1.0.0-*"
     },

@@ -2,7 +2,7 @@
     "version": "1.0.0-*",
     "dependencies": {
         "Glimpse.Web.Common": "",
-        "Glimpse.Server.Web": ""
+        "Glimpse.Server": ""
     },
     "resource": "Resources/Embed/**/*.*",
     "frameworks" : {
