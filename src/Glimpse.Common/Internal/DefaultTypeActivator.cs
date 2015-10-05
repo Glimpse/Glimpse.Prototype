@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Glimpse
+namespace Glimpse.Internal
 {
     public class DefaultTypeActivator : ITypeActivator
     {

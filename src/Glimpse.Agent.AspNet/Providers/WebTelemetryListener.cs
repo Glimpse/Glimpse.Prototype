@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Glimpse.Internal;
 using Glimpse.Agent.AspNet.Mvc.Proxies;
 
 namespace Glimpse.Agent.AspNet

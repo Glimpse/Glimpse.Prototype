@@ -6,7 +6,7 @@ using System.Runtime.Remoting;
 using System.Threading;
 #endif
 
-namespace Glimpse
+namespace Glimpse.Internal
 {
     public class ContextData<T> : IContextData<T>
     {

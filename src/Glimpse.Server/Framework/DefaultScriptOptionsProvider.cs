@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Glimpse.Initialization;
 using Glimpse.Extensions;
+using Glimpse.Internal;
 using Tavis.UriTemplates;
 
 namespace Glimpse.Server.Web

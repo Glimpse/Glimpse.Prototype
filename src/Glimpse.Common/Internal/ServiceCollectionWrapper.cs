@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Glimpse
+namespace Glimpse.Internal
 {
     public class ServiceCollectionWrapper : IServiceCollection
     {

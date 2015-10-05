@@ -1,5 +1,6 @@
 using System.Linq;
 using Glimpse.Extensions;
+using Glimpse.Internal;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 

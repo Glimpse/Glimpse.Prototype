@@ -1,5 +1,6 @@
 using System;
 using Glimpse.Initialization;
+using Glimpse.Internal;
 using Microsoft.AspNet.Razor.Runtime.TagHelpers;
 
 namespace Glimpse.Agent.AspNet.Mvc

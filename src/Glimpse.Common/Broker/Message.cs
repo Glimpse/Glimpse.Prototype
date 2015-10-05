@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Glimpse.Internal;
 using Newtonsoft.Json;
 
 namespace Glimpse

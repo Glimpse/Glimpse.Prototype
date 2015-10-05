@@ -4,6 +4,7 @@ using System.Text;
 using Glimpse.Agent.AspNet.Framework;
 using Glimpse.Agent.AspNet.Messages;
 using Glimpse.Extensions;
+using Glimpse.Internal;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Http.Features;
 

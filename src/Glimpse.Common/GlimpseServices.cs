@@ -1,9 +1,7 @@
-﻿using Glimpse;
+﻿using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
+using Glimpse.Internal;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using System;
-using System.Reflection;
 
 namespace Glimpse
 {
