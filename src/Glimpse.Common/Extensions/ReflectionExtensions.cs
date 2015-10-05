@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text.RegularExpressions;
 
 namespace Glimpse.Common
 {
     public static class ReflectionExtensions
     {
-        private readonly static Regex _regex = new Regex("([A-Z0-9])", RegexOptions.Compiled);
-
         public static IEnumerable<Type> BaseTypes(this TypeInfo typeInfo, bool includeSelf = false)
         {
             if (includeSelf)
@@ -26,14 +23,12 @@ namespace Glimpse.Common
 
         public static string KebabCase(this Type type)
         {
-            return _regex.Replace(type.Name, Replacement)
-                .Replace("i-", ""); // handle IFoo interface naming
-        }
+            var result = type.Name.KebabCase();
+            
+            if (type.GetTypeInfo().IsInterface && result[0] == 'i')
+                return result.Substring(1); // Handle IFooBar -> foo-bar case
 
-        private static string Replacement(Match m)
-        {
-            var result = m.Value.ToLower();
-            return m.Index == 0 ? result : "-" + result;
+            return result;
         }
     }
 }

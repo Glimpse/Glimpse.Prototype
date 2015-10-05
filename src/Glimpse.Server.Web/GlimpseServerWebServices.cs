@@ -1,6 +1,7 @@
 ﻿using Glimpse.Agent;
 using Microsoft.Extensions.DependencyInjection;
 using Glimpse.Server.Web;
+using Glimpse.Web;
 using Microsoft.Extensions.OptionsModel;
 
 namespace Glimpse
@@ -12,14 +13,11 @@ namespace Glimpse
             var services = new ServiceCollection();
 
             //
-            // Broker
+            // Common
             //
             services.AddSingleton<IServerBroker, DefaultServerBroker>();
-
-            //
-            // Store
-            //
             services.AddSingleton<IStorage, InMemoryStorage>();
+            services.AddSingleton<IResourceManager, ResourceManager>();
 
             //
             // Options
@@ -30,7 +28,8 @@ namespace Glimpse
             services.AddTransient<IExtensionProvider<IResource>, DefaultExtensionProvider<IResource>>();
             services.AddTransient<IExtensionProvider<IResourceStartup>, DefaultExtensionProvider<IResourceStartup>>();
             services.AddSingleton<IAllowRemoteProvider, DefaultAllowRemoteProvider>();
-            services.AddTransient<IResourceManager, ResourceManager>();
+            services.AddSingleton<IScriptOptionsProvider, DefaultScriptOptionsProvider>();
+            services.AddSingleton<IMetadataProvider, DefaultMetadataProvider>();
 
             return services;
         }
