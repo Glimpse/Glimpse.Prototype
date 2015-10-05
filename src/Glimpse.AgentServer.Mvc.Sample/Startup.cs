@@ -18,7 +18,7 @@ using Microsoft.Extensions.Logging;
 using Glimpse.AgentServer.Mvc.Sample.Models;
 using Glimpse.AgentServer.Mvc.Sample.Services;
 using Glimpse.Server.Web;
-using Glimpse.Agent.Web;
+using Glimpse.Agent.AspNet;
 
 namespace Glimpse.AgentServer.Mvc.Sample
 {

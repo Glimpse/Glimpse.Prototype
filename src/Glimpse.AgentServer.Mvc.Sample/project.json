@@ -4,7 +4,7 @@
   "version": "1.0.0-*",
   "dependencies": {
     "Glimpse.Server": "",
-    "Glimpse.Agent.Web": "",
+    "Glimpse.Agent.AspNet": "",
     "Glimpse.Client.Web": "",
     "Glimpse.Agent.AspNet.Mvc": "",
     "EntityFramework.Commands": "7.0.0-*",
