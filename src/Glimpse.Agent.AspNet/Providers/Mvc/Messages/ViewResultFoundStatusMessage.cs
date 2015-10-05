@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Glimpse.Internal;
 
 namespace Glimpse.Agent.AspNet.Mvc.Messages
 {

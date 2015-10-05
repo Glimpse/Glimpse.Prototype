@@ -2,6 +2,7 @@
 using System.Linq;
 using Glimpse.Agent.AspNet.Mvc.Messages;
 using Glimpse.Agent.AspNet.Mvc.Proxies;
+using Glimpse.Internal;
 using Microsoft.Extensions.TelemetryAdapter;
 
 namespace Glimpse.Agent.AspNet

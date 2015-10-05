@@ -1,3 +1,5 @@
+using Glimpse.Internal;
+
 namespace Glimpse.Agent.AspNet.Messages
 {
     public class UserIdentification

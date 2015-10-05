@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Glimpse
+namespace Glimpse.Internal
 {
     public struct Operation
     {

@@ -1,4 +1,6 @@
-﻿namespace Glimpse.Agent.AspNet.Mvc.Messages
+﻿using Glimpse.Internal;
+
+namespace Glimpse.Agent.AspNet.Mvc.Messages
 {
     public class AfterActionInvokedMessage : IActionMessage
     {

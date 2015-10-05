@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Glimpse
+namespace Glimpse.Internal
 {
     public class DefaultMessageConverter : IMessageConverter
     {

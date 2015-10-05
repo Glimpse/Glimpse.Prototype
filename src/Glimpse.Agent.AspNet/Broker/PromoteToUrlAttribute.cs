@@ -1,4 +1,6 @@
-﻿namespace Glimpse.Agent.AspNet.Broker
+﻿using Glimpse.Internal;
+
+namespace Glimpse.Agent.AspNet.Broker
 {
     public class PromoteToUrlAttribute : PromoteToAttribute
     {

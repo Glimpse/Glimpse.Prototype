@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Glimpse
+namespace Glimpse.Internal
 {
     public class DefaultMessageIndexProcessor : IMessageIndexProcessor
     {

@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 
-namespace Glimpse
+namespace Glimpse.Internal
 {
     public struct OperationTiming<T>
     {

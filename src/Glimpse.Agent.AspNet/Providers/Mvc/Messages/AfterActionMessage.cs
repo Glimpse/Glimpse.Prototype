@@ -1,4 +1,6 @@
 ﻿
+using Glimpse.Internal;
+
 namespace Glimpse.Agent.AspNet.Mvc.Messages
 {
     public class AfterActionMessage

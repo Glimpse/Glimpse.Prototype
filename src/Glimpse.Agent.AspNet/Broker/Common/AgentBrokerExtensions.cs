@@ -1,4 +1,6 @@
 ﻿
+using Glimpse.Internal;
+
 namespace Glimpse.Agent
 {
     public static class AgentBrokerExtensions

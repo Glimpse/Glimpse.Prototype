@@ -1,8 +1,7 @@
 ﻿
 using System.Collections.Generic;
-using Glimpse.Internal;
 
-namespace Glimpse
+namespace Glimpse.Internal
 {
     public class OperationStack
     {

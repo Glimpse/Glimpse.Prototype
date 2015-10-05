@@ -1,10 +1,9 @@
 using System.Linq;
 using Glimpse.Extensions;
-using Glimpse.Internal;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Glimpse
+namespace Glimpse.Internal
 {
     public class DefaultMessagePayloadFormatter : IMessagePayloadFormatter
     {
