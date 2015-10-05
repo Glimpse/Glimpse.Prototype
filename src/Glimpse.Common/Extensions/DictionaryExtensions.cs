@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Glimpse
+namespace Glimpse.Extensions
 {
     public static class DictionaryExtensions
     {

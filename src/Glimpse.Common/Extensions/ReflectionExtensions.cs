@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Glimpse
+namespace Glimpse.Extensions
 {
     public static class ReflectionExtensions
     {

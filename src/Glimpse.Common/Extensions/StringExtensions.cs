@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using System.Linq;
 
-namespace Glimpse
+namespace Glimpse.Extensions
 {
     public static class StringExtensions
     {

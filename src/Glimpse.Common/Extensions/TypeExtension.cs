@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Glimpse
+namespace Glimpse.Extensions
 {
     public static class TypeExtension
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Http;
 
-namespace Glimpse
+namespace Glimpse.Extensions
 {
     public static class PathStringExtension
     {

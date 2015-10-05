@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.AspNet.Http;
+using Glimpse.Extensions;
 
 namespace Glimpse.Server.Web
 {

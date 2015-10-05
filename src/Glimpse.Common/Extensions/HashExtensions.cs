@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Glimpse
+namespace Glimpse.Extensions
 {
     public static class HashExtensions
     {

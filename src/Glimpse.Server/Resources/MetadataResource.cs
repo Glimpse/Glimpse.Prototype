@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
+using Glimpse.Extensions;
 
 namespace Glimpse.Server.Web.Resources
 {
