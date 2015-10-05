@@ -3,7 +3,6 @@
     "dependencies": {
         "Glimpse.Common": "",
         "Glimpse.Agent.Common": "",
-        "Glimpse.Web.Common": "",
         "Microsoft.Extensions.TelemetryAdapter": "1.0.0-*",
         "System.Diagnostics.Tracing.Telemetry": "4.0.0-beta-*"
     },

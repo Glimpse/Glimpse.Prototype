@@ -15,8 +15,7 @@ namespace Glimpse
         public static GlimpseServerServiceCollectionBuilder RunningServerWeb(this GlimpseServiceCollectionBuilder services, Action<GlimpseServerWebOptions> setupAction)
         {
             services.AddOptions();
-
-            services.TryAdd(GlimpseWebServices.GetDefaultServices());
+            
             services.TryAdd(GlimpseServerWebServices.GetDefaultServices());
 
             if (setupAction != null)

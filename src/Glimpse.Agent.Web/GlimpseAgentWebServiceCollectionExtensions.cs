@@ -17,7 +17,6 @@ namespace Glimpse
             services.AddOptions();
 
             services.TryAdd(GlimpseAgentServices.GetDefaultServices());
-            services.TryAdd(GlimpseWebServices.GetDefaultServices());
             services.TryAdd(GlimpseAgentWebServices.GetDefaultServices());
 
             if (setupAction != null)
