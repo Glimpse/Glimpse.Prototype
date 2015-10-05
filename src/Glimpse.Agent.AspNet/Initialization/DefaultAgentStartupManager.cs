@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Glimpse.Web;
+using Glimpse.Initialization;
 
-namespace Glimpse.Agent.AspNet
+namespace Glimpse.Initialization
 {
     public class DefaultAgentStartupManager : IAgentStartupManager
     {

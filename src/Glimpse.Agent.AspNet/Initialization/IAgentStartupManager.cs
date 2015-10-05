@@ -1,6 +1,4 @@
-﻿using Glimpse.Web;
-
-namespace Glimpse.Agent.AspNet
+﻿namespace Glimpse.Initialization
 {
     public interface IAgentStartupManager
     {

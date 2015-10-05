@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.Tracing;
-using Glimpse.Web;
+using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse.Agent.AspNet

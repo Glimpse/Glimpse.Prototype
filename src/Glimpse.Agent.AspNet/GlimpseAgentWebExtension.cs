@@ -1,5 +1,4 @@
-using System.Linq;
-using Glimpse.Web;
+using Glimpse.Initialization;
 using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.DependencyInjection;
 

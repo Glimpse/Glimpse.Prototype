@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNet.Builder;
 
-namespace Glimpse.Web
+namespace Glimpse.Initialization
 {
     public class StartupOptions : IStartupOptions
     {

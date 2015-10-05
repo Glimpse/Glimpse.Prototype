@@ -1,5 +1,6 @@
 ﻿using Glimpse.Agent;
 using Glimpse.Agent.AspNet;
+using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.OptionsModel;
 
