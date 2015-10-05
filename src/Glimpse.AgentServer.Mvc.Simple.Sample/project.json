@@ -18,7 +18,6 @@
         "Glimpse.Agent.Web": "",
         "Glimpse.Client.Web": "",
         "Glimpse.Agent.AspNet.Mvc": "",
-        "Glimpse.Agent.Browser": "",
         "Microsoft.AspNet.Mvc": "6.0.0-*",
         "Microsoft.AspNet.Server.WebListener": "1.0.0-*",
         "Microsoft.AspNet.Server.Kestrel": "1.0.0-*"

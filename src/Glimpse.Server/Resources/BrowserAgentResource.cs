@@ -9,6 +9,10 @@ namespace Glimpse.Server.Web.Resources
     {
         public async Task Invoke(HttpContext context, IDictionary<string, string> parameters)
         {
+            ////TODO: Read from file system the script
+            //var assembly = typeof(BrowserAgentResource).GetTypeInfo().Assembly;
+            //var agentStream = assembly.GetManifestResourceStream("Glimpse.Server.Resources.Embed.scripts.BrowserAgent.js");
+
             var response = context.Response;
             response.Headers[HeaderNames.ContentType] = "text/javascript";
 
@@ -16,7 +20,9 @@ namespace Glimpse.Server.Web.Resources
         }
 
         public string Name => "BrowserAgentScript";
+
         public ResourceParameters Parameters => new ResourceParameters(+ResourceParameter.Hash);
+
         public ResourceType Type => ResourceType.Agent;
     }
 }

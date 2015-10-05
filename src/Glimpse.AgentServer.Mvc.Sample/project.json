@@ -7,7 +7,6 @@
     "Glimpse.Agent.Web": "",
     "Glimpse.Client.Web": "",
     "Glimpse.Agent.AspNet.Mvc": "",
-    "Glimpse.Agent.Browser": "",
     "EntityFramework.Commands": "7.0.0-*",
     "EntityFramework.SqlServer": "7.0.0-*",
     "Microsoft.AspNet.Authentication.Cookies": "1.0.0-*",
