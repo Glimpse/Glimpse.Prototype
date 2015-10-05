@@ -1,7 +1,5 @@
 using System;
 using Glimpse.Web;
-using Microsoft.AspNet.Html.Abstractions;
-using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Razor.Runtime.TagHelpers;
 
 namespace Glimpse.Agent.AspNet.Mvc

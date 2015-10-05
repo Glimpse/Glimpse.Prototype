@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Http;
-using Microsoft.AspNet.JsonPatch.Helpers;
 
 namespace Glimpse.Agent.AspNet
 {
