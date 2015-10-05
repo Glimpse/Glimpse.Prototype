@@ -7,7 +7,7 @@ namespace Glimpse
 {
     public class GlimpseAgentServiceCollectionBuilder : GlimpseServiceCollectionBuilder
     {
-        public GlimpseAgentServiceCollectionBuilder(IServiceCollection innerCollection) 
+        public GlimpseAgentServiceCollectionBuilder(IServiceCollection innerCollection)
             : base(innerCollection)
         {
         }

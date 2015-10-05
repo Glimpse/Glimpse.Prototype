@@ -1,7 +1,7 @@
 {
     "version": "1.0.0-*",
     "dependencies": {
-        "Glimpse.Agent.Common": "",
+        "Glimpse.Agent.AspNet": "",
         "Microsoft.AspNet.SignalR.Server": "3.0.0-*",
         "Tavis.UriTemplates": "0.6.5-beta"
     },

@@ -2,8 +2,9 @@
     "version": "1.0.0-*",
     "dependencies": {
         "Glimpse.Common": "",
-        "Glimpse.Agent.Common": "",
         "Microsoft.Extensions.TelemetryAdapter": "1.0.0-*",
+        "Microsoft.AspNet.WebApi.Client": "5.2.2",
+        "System.Net.Http": "4.0.0",
         "System.Diagnostics.Tracing.Telemetry": "4.0.0-beta-*"
     },
     "frameworks" : {

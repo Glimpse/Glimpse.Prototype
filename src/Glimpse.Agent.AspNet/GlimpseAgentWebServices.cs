@@ -1,4 +1,5 @@
-﻿using Glimpse.Agent.AspNet;
+﻿using Glimpse.Agent;
+using Glimpse.Agent.AspNet;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.OptionsModel;
 
@@ -9,6 +10,12 @@ namespace Glimpse
         public static IServiceCollection GetDefaultServices()
         {
             var services = new ServiceCollection();
+
+            //
+            // Broker
+            //
+            services.AddSingleton<IAgentBroker, DefaultAgentBroker>();
+            services.AddTransient<IMessagePublisher, HttpMessagePublisher>();
 
             //
             // Options

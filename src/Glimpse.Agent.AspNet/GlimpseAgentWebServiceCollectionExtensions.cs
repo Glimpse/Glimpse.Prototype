@@ -15,8 +15,7 @@ namespace Glimpse
         public static GlimpseAgentServiceCollectionBuilder RunningAgentWeb(this GlimpseServiceCollectionBuilder services, Action<GlimpseAgentWebOptions> setupAction)
         {
             services.AddOptions();
-
-            services.TryAdd(GlimpseAgentServices.GetDefaultServices());
+            
             services.TryAdd(GlimpseAgentWebServices.GetDefaultServices());
 
             if (setupAction != null)
