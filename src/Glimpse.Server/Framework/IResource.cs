@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Glimpse.Web;
 using Microsoft.AspNet.Http;
 
 namespace Glimpse.Server.Web

@@ -1,6 +1,4 @@
-﻿using Glimpse.Web;
-
-namespace Glimpse.Server.Web
+﻿namespace Glimpse.Server.Web
 {
     public interface IResourceStartup
     {
