@@ -1,6 +1,6 @@
 ﻿using Glimpse.Web;
 using Microsoft.AspNet.Mvc.Razor;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse
 {

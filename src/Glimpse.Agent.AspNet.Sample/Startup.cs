@@ -1,6 +1,6 @@
 ﻿using Glimpse.Agent.Web;
 using Microsoft.AspNet.Builder;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse.Agent.AspNet.Sample
 {

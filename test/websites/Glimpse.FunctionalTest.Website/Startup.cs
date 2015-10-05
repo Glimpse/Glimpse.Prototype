@@ -3,7 +3,7 @@ using Glimpse.Agent.AspNet.Mvc;
 using Glimpse.Agent.Web;
 using Glimpse.Server.Web;
 using Microsoft.AspNet.Builder;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse.FunctionalTest.Website
 {

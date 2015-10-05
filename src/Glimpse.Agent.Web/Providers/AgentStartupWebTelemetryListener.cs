@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.Tracing;
 using Glimpse.Web;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse.Agent.Web
 {

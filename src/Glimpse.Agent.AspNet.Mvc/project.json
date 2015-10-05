@@ -3,7 +3,7 @@
   "dependencies": {
     "Glimpse.Agent.Web": "",
     "Microsoft.AspNet.Routing": "1.0.0-*",
-    "Microsoft.Framework.TelemetryAdapter": "1.0.0-*",
+    "Microsoft.Extensions.TelemetryAdapter": "1.0.0-*",
     "System.Diagnostics.Tracing.Telemetry": "4.0.0-beta-*"
   },
 

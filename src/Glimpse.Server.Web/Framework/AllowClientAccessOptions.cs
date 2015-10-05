@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.AspNet.Http;
-using Microsoft.Framework.OptionsModel;
+using Microsoft.Extensions.OptionsModel;
 
 namespace Glimpse.Server.Web.Framework
 {

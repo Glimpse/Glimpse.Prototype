@@ -1,7 +1,7 @@
 ﻿using Glimpse.Agent;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Glimpse.Server.Web;
-using Microsoft.Framework.OptionsModel;
+using Microsoft.Extensions.OptionsModel;
 
 namespace Glimpse
 {

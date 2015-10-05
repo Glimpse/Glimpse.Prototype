@@ -3,7 +3,7 @@
     "dependencies": {
         "Glimpse.Common": "",
         "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-*",
-        "Microsoft.Framework.DependencyInjection": "1.0.0-*",
+        "Microsoft.Extensions.DependencyInjection": "1.0.0-*",
         "Microsoft.AspNet.Http.Abstractions": "1.0.0-*",
         "Microsoft.AspNet.Razor": "4.0.0-*",
         "Microsoft.AspNet.Mvc.Razor.Host":  "6.0.0-*",

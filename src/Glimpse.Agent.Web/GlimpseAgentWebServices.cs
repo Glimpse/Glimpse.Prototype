@@ -1,6 +1,6 @@
 ﻿using Glimpse.Agent.Web;
-using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.OptionsModel;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.OptionsModel;
 
 namespace Glimpse
 {

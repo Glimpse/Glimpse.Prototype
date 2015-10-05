@@ -1,7 +1,7 @@
 ﻿using Glimpse.Agent.Web;
 using Microsoft.AspNet.Builder;
 using Glimpse.Server.Web;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse.AspNet.Sample
 {

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.Framework.TelemetryAdapter.Internal;
+using Microsoft.Extensions.TelemetryAdapter.Internal;
 
 namespace Glimpse.Agent.AspNet.Mvc.Proxies
 {

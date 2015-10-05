@@ -2,7 +2,7 @@
 using System.Linq;
 using Glimpse.Agent.AspNet.Mvc.Messages;
 using Glimpse.Agent.AspNet.Mvc.Proxies;
-using Microsoft.Framework.TelemetryAdapter;
+using Microsoft.Extensions.TelemetryAdapter;
 
 namespace Glimpse.Agent.Web
 {
@@ -75,7 +75,7 @@ namespace Glimpse.Agent.Web
         [TelemetryName("Microsoft.AspNet.Mvc.BeforeActionMethod")]
         public void OnBeforeActionMethod(
             IActionContext actionContext,
-            IDictionary<string, object> actionArguments)
+            IDictionary<string, object> arguments)
         {
             var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
@@ -85,7 +85,7 @@ namespace Glimpse.Agent.Web
                 DisplayName = actionDescriptor.DisplayName,
                 ActionName = actionDescriptor.Name,
                 ControllerName = actionDescriptor.ControllerName,
-                Binding = actionArguments?.Select(x => new BindingData { Type = x.Value?.GetType(), Name = x.Key, Value = x.Value }).ToList()
+                Binding = arguments?.Select(x => new BindingData { Type = x.Value?.GetType(), Name = x.Key, Value = x.Value }).ToList()
             };
 
             _broker.BeginLogicalOperation(message);
@@ -134,7 +134,7 @@ namespace Glimpse.Agent.Web
             //var inheritancHierarchy = result.GetType().GetInheritancHierarchy().ToList();
 
             // TODO: currently looking to see if this switch code and ProxyAdapter can be
-            //       consumed by Microsoft.Framework.TelemetryAdapter
+            //       consumed by Microsoft.Extensions.TelemetryAdapter
             var actionResult = new ActionResultData();
             switch (result.GetType().FullName)
             {

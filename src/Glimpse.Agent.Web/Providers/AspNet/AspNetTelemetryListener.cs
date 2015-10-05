@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Glimpse.Agent.Web.Messages;
 using Microsoft.AspNet.Http;
-using Microsoft.Framework.TelemetryAdapter;
+using Microsoft.Extensions.TelemetryAdapter;
 
 namespace Glimpse.Agent.Web
 {

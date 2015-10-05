@@ -1,6 +1,6 @@
 ﻿using System;
 using Glimpse.Agent.Web;
-using Microsoft.Framework.OptionsModel;
+using Microsoft.Extensions.OptionsModel;
 
 namespace Glimpse.Agent.Web
 {
