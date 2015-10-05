@@ -2,7 +2,6 @@
     "version": "1.0.0-*",
     "dependencies": {
         "Glimpse.Agent.AspNet": "",
-        "Microsoft.AspNet.SignalR.Server": "3.0.0-*",
         "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-*",
         "Microsoft.AspNet.StaticFiles": "1.0.0-*",
         "Tavis.UriTemplates": "0.6.5-beta"
