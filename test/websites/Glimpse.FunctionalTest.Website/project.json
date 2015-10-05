@@ -4,7 +4,6 @@
 
   "dependencies": {
     "Glimpse.Agent.AspNet.Mvc": "",
-    "Glimpse.Client.Web": "",
     "Glimpse.Server": "",
     "Microsoft.AspNet.Mvc":  "6.0.0-*",
     "Microsoft.AspNet.Server.IIS": "1.0.0-*",

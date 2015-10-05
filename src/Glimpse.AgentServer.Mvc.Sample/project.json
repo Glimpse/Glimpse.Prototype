@@ -5,7 +5,6 @@
   "dependencies": {
     "Glimpse.Server": "",
     "Glimpse.Agent.AspNet": "",
-    "Glimpse.Client.Web": "",
     "Glimpse.Agent.AspNet.Mvc": "",
     "EntityFramework.Commands": "7.0.0-*",
     "EntityFramework.SqlServer": "7.0.0-*",

@@ -16,7 +16,6 @@
     "dependencies": {
         "Glimpse.Server": "",
         "Glimpse.Agent.AspNet": "",
-        "Glimpse.Client.Web": "",
         "Glimpse.Agent.AspNet.Mvc": "",
         "Microsoft.AspNet.Mvc": "6.0.0-*",
         "Microsoft.AspNet.Server.WebListener": "1.0.0-*",

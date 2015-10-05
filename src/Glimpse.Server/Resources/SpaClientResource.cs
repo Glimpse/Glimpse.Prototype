@@ -4,7 +4,7 @@ using Glimpse.Server.Web;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 
-namespace Glimpse.Client.Web
+namespace Glimpse.Server.Web
 {
     //TODO: "Merge" with ClientResource
     public class SpaClientResource : IResource

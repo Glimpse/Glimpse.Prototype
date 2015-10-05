@@ -2,7 +2,6 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Glimpse.Client.Web;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.TestHost;
 using Microsoft.Extensions.DependencyInjection;

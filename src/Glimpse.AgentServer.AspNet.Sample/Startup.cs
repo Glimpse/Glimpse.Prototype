@@ -20,7 +20,6 @@ namespace Glimpse.AspNet.Sample
         {
             app.UseGlimpseServer();
             app.UseGlimpseAgent();
-            app.UseGlimpseUI();
 
             app.Use(next => new SamplePage().Invoke);
             /*
