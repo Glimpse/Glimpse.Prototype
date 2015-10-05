@@ -11,7 +11,7 @@ namespace Glimpse.Server.Web.Resources
         {
             ////TODO: Read from file system the script
             //var assembly = typeof(BrowserAgentResource).GetTypeInfo().Assembly;
-            //var agentStream = assembly.GetManifestResourceStream("Glimpse.Server.Resources.Embed.scripts.BrowserAgent.js");
+            //var agentStream = assembly.GetManifestResourceStream("Glimpse.Server.Resources.Embed.BrowserAgent.scripts.BrowserAgent.js");
 
             var response = context.Response;
             response.Headers[HeaderNames.ContentType] = "text/javascript";
