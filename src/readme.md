@@ -9,7 +9,7 @@ To run, simply set the project as default and start the project or use command l
 
 Client is available at the [/glimpseui/index.html](/glimpseui/index.html) endpoint.
 
-## Glimpse.AgentServer.Mvc.Sample
+## Glimpse.AgentServer.AspNet.Mvc.Sample
 
 Sample project that runs the Web Agenet, Web Server and Web Client all in proc on top of MVC. 
 
