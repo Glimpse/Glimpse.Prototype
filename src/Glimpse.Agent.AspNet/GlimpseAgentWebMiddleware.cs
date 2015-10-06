@@ -1,6 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Glimpse.Agent.Configuration;
+using Glimpse.Agent.Inspectors;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 

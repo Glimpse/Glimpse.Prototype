@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.Tracing;
 using Glimpse.Agent;
+using Glimpse.Agent.Configuration;
 using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 

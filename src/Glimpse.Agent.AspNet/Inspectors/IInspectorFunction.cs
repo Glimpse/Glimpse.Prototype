@@ -1,4 +1,4 @@
-﻿namespace Glimpse.Agent
+﻿namespace Glimpse.Agent.Inspectors
 {
     public interface IInspectorFunction
     {

@@ -1,4 +1,6 @@
 ﻿using Glimpse.Agent;
+using Glimpse.Agent.Configuration;
+using Glimpse.Agent.Inspectors;
 using Glimpse.Agent.Internal.Inspectors.Mvc;
 using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;

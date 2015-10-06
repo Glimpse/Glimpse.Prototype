@@ -2,7 +2,7 @@
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.OptionsModel;
 
-namespace Glimpse.Agent.Framework
+namespace Glimpse.Agent.Configuration
 {
     public class RequestIgnorerOptionsShouldIgnore : IRequestIgnorer
     {

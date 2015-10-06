@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Http;
 
-namespace Glimpse.Agent
+namespace Glimpse.Agent.Configuration
 {
     public interface IRequestIgnorer
     {

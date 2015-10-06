@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Globalization;
 using System.Text;
-using Glimpse.Agent.Framework;
+using Glimpse.Agent.Inspectors;
 using Glimpse.Agent.Messages;
 using Glimpse.Extensions;
 using Glimpse.Internal;

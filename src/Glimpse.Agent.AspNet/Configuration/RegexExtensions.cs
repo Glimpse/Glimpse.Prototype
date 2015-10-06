@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Glimpse.Agent
+namespace Glimpse.Agent.Configuration
 {
     public static class RegexExtensions
     {

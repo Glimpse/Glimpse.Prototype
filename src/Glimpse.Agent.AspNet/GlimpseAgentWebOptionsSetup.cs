@@ -1,5 +1,4 @@
-﻿using System;
-using Glimpse.Agent;
+﻿using Glimpse.Agent.Configuration;
 using Microsoft.Extensions.OptionsModel;
 
 namespace Glimpse.Agent

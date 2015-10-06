@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNet.Http;
 
-namespace Glimpse.Agent
+namespace Glimpse.Agent.Inspectors
 {
     public interface IInspector
     {
