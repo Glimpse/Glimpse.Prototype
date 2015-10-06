@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Glimpse.Internal;
+﻿using Glimpse.Internal;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse
 {
