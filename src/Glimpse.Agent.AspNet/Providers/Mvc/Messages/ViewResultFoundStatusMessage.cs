@@ -10,7 +10,7 @@ namespace Glimpse.Agent.AspNet.Mvc.Messages
 
         public string ActionName { get; set; }
 
-        public string ControllerName { get; set; }
+        public string ActionControllerName { get; set; }
 
         public string ViewName { get; set; }
 

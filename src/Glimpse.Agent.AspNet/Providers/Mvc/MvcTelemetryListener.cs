@@ -30,9 +30,9 @@ namespace Glimpse.Agent.AspNet
             var message = new BeforeActionMessage
             {
                 ActionId = typedActionDescriptor.Id,
-                DisplayName = typedActionDescriptor.DisplayName,
+                ActionDisplayName = typedActionDescriptor.DisplayName,
                 ActionName = typedActionDescriptor.Name,
-                ControllerName = typedActionDescriptor.ControllerName,
+                ActionControllerName = typedActionDescriptor.ControllerName,
                 RouteData = routeData.Values?.Select(x => new KeyValuePair<string, string>(x.Key, x.Value?.ToString())).ToList()
             };
 
@@ -80,9 +80,9 @@ namespace Glimpse.Agent.AspNet
             var message = new BeforeActionInvokedMessage
             {
                 ActionId = actionDescriptor.Id,
-                DisplayName = actionDescriptor.DisplayName,
+                ActionDisplayName = actionDescriptor.DisplayName,
                 ActionName = actionDescriptor.Name,
-                ControllerName = actionDescriptor.ControllerName,
+                ActionControllerName = actionDescriptor.ControllerName,
                 Binding = arguments?.Select(x => new BindingData { Type = x.Value?.GetType(), Name = x.Key, Value = x.Value }).ToList()
             };
 
@@ -100,12 +100,14 @@ namespace Glimpse.Agent.AspNet
             var message = new AfterActionInvokedMessage()
             {
                 ActionId = actionDescriptor.Id,
-                DisplayName = actionDescriptor.DisplayName,
+                ActionDisplayName = actionDescriptor.DisplayName,
                 ActionName = actionDescriptor.Name,
-                ControllerName = actionDescriptor.ControllerName,
-                TargetClass = actionDescriptor.ControllerTypeInfo.Name,
-                TargetMethod = actionDescriptor.MethodInfo.Name,
-                Timing = timing
+                ActionControllerName = actionDescriptor.ControllerName,
+                ActionTargetClass = actionDescriptor.ControllerTypeInfo.Name,
+                ActionTargetMethod = actionDescriptor.MethodInfo.Name,
+                ActionStartTime = timing.Start,
+                ActionEndTime = timing.End,
+                ActionDuration = timing.Elapsed
             };
 
             _broker.SendMessage(message);
@@ -123,9 +125,9 @@ namespace Glimpse.Agent.AspNet
             var message = new BeforeActionResultMessage
             {
                 ActionId = actionDescriptor.Id,
-                DisplayName = actionDescriptor.DisplayName,
+                ActionDisplayName = actionDescriptor.DisplayName,
                 ActionName = actionDescriptor.Name,
-                ControllerName = actionDescriptor.ControllerName
+                ActionControllerName = actionDescriptor.ControllerName
             };
 
             // TODO: Need to work off the inheritence chain 
@@ -219,7 +221,7 @@ namespace Glimpse.Agent.AspNet
             {
                 ActionId = actionDescriptor.Id,
                 ActionName = actionDescriptor.Name,
-                ControllerName = actionDescriptor.ControllerName,
+                ActionControllerName = actionDescriptor.ControllerName,
                 ViewName = viewName,
                 ViewDidFind = true,
                 ViewSearchedLocations = searchedLocations,
@@ -252,7 +254,7 @@ namespace Glimpse.Agent.AspNet
             {
                 ActionId = actionDescriptor.Id,
                 ActionName = actionDescriptor.Name,
-                ControllerName = actionDescriptor.ControllerName,
+                ActionControllerName = actionDescriptor.ControllerName,
                 ViewName = viewName,
                 ViewDidFind = true,
                 ViewSearchedLocations = null, // Don't have this yet :(
