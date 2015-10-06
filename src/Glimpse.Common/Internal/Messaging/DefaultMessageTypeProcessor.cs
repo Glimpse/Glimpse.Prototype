@@ -17,7 +17,15 @@ namespace Glimpse.Internal
             return typeInfo.BaseTypes(true)
                 .Concat(typeInfo.ImplementedInterfaces)
                 .Except(_exclusions)
-                .Select(t => t.KebabCase());
+                .Select(t =>
+                {
+                    var result = t.KebabCase();
+
+                    if (result.EndsWith("-message"))
+                        return result.Substring(0, result.Length - 8);
+
+                    return result;
+                });
         }
     }
 }
