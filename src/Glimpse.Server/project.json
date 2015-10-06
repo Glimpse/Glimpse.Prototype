@@ -6,7 +6,7 @@
         "Microsoft.AspNet.StaticFiles": "1.0.0-*",
         "Tavis.UriTemplates": "0.6.5-beta"
     },
-    "resource": "Resources/Embed/**/*.*",
+    "resource": "Resources/Embeded/**/*.*",
     "frameworks": {
         "dnx451": {
             "dependencies": {

@@ -10,6 +10,7 @@ namespace Glimpse.Server.Resources
     {
         public void Configure(IResourceBuilder resourceBuilder)
         {
+            // TODO: Add HTTP Caching
             var options = new FileServerOptions();
             options.RequestPath = "/Client";
             options.EnableDefaultFiles = false;
