@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace Glimpse.Agent
+﻿namespace Glimpse.Agent
 {
-    public class AgentBrokerData
+    public class AgentBrokerPayload
     {
-        public AgentBrokerData(object payload, MessageContext context)
+        public AgentBrokerPayload(object payload, MessageContext context)
         {
             Payload = payload;
             Context = context;

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace Glimpse.Agent
+﻿namespace Glimpse
 {
     public interface IMessagePublisher
     {

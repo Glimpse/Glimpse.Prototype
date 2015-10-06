@@ -4,21 +4,21 @@ using System.Reflection;
 
 namespace Glimpse.Agent
 {
-    public class AgentBrokerHook
+    public class AgentBrokerObservations
     {
-        private readonly IObservable<AgentBrokerData> _observable;
+        private readonly IObservable<AgentBrokerPayload> _observable;
 
-        public AgentBrokerHook(IObservable<AgentBrokerData> observable)
+        public AgentBrokerObservations(IObservable<AgentBrokerPayload> observable)
         {
             _observable = observable;
         }
 
-        public IObservable<AgentBrokerData> Listen<T>()
+        public IObservable<AgentBrokerPayload> Listen<T>()
         {
             return _observable.Where(opts => typeof(T).GetTypeInfo().IsAssignableFrom(opts.Payload.GetType().GetTypeInfo()));
         }
 
-        public IObservable<AgentBrokerData> ListenAll()
+        public IObservable<AgentBrokerPayload> ListenAll()
         {
             return _observable;
         }

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Glimpse.Agent.AspNet.Broker;
+using Glimpse.Internal;
 using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent.AspNet.Messages

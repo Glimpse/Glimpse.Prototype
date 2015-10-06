@@ -1,6 +1,4 @@
-﻿using Glimpse.Internal;
-
-namespace Glimpse.Agent.AspNet.Broker
+namespace Glimpse.Internal
 {
     public class PromoteToDateTimeAttribute : PromoteToAttribute
     {

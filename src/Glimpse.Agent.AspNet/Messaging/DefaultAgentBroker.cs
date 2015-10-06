@@ -10,10 +10,10 @@ namespace Glimpse.Agent
     {
         private readonly IMessageConverter _messageConverter;
         private readonly IMessagePublisher _messagePublisher;
-        private readonly ISubject<AgentBrokerData> _onSenderThreadSubject;
-        private readonly ISubject<AgentBrokerData> _offSenderThreadSubject;
-        private readonly ISubject<AgentBrokerData> _offSenderThreadInternalSubject;
-        private readonly ISubject<AgentBrokerData> _publisherInternalSubject;
+        private readonly ISubject<AgentBrokerPayload> _onSenderThreadSubject;
+        private readonly ISubject<AgentBrokerPayload> _offSenderThreadSubject;
+        private readonly ISubject<AgentBrokerPayload> _offSenderThreadInternalSubject;
+        private readonly ISubject<AgentBrokerPayload> _publisherInternalSubject;
         private readonly IContextData<MessageContext> _context; 
 
         public DefaultAgentBroker(IMessagePublisher messagePublisher, IMessageConverter messageConverter)
@@ -22,13 +22,13 @@ namespace Glimpse.Agent
             _messageConverter = messageConverter;
             _context = new ContextData<MessageContext>();
 
-            _onSenderThreadSubject = new Subject<AgentBrokerData>();
-            _offSenderThreadSubject = new Subject<AgentBrokerData>();
-            _offSenderThreadInternalSubject = new Subject<AgentBrokerData>();
-            _publisherInternalSubject = new Subject<AgentBrokerData>();
+            _onSenderThreadSubject = new Subject<AgentBrokerPayload>();
+            _offSenderThreadSubject = new Subject<AgentBrokerPayload>();
+            _offSenderThreadInternalSubject = new Subject<AgentBrokerPayload>();
+            _publisherInternalSubject = new Subject<AgentBrokerPayload>();
 
-            OnSenderThread = new AgentBrokerHook(_onSenderThreadSubject);
-            OffSenderThread = new AgentBrokerHook(_offSenderThreadSubject);
+            OnSenderThread = new AgentBrokerObservations(_onSenderThreadSubject);
+            OffSenderThread = new AgentBrokerObservations(_offSenderThreadSubject);
 
             // ensure off-request data is observed onto a different thread
             _offSenderThreadInternalSubject.Subscribe(payload => Observable.Start(() => _offSenderThreadSubject.OnNext(payload), TaskPoolScheduler.Default));
@@ -38,17 +38,17 @@ namespace Glimpse.Agent
         /// <summary>
         /// On the sender thread and is blocking
         /// </summary>
-        public AgentBrokerHook OnSenderThread { get; }
+        public AgentBrokerObservations OnSenderThread { get; }
 
         /// <summary>
         /// Off the sender thread and is not blocking
         /// </summary>
-        public AgentBrokerHook OffSenderThread { get; }
+        public AgentBrokerObservations OffSenderThread { get; }
         
         public void SendMessage(object payload)
         {
             // need to fetch context data here as we are about to start switching threads
-            var data = new AgentBrokerData(payload, _context.Value);
+            var data = new AgentBrokerPayload(payload, _context.Value);
             
             // non-blocking
             _publisherInternalSubject.OnNext(data);
@@ -60,12 +60,11 @@ namespace Glimpse.Agent
             _onSenderThreadSubject.OnNext(data);
         }
 
-        private void PublishMessage(AgentBrokerData data)
+        private void PublishMessage(AgentBrokerPayload data)
         {
             var message = _messageConverter.ConvertMessage(data.Payload, data.Context);
 
-            _messagePublisher.PublishMessage(message);
-
+            _messagePublisher.PublishMessage(message); // TODO: Hook into offThread
         }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reactive.Concurrency;
-using System.Reactive.Linq;
-using System.Reactive.Subjects;
-using System.Linq;
-using Glimpse.Agent;
+﻿using Glimpse.Agent;
 
 namespace Glimpse.Server.Web
 {
