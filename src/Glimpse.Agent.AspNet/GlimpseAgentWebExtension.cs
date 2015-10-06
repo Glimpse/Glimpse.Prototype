@@ -2,7 +2,7 @@ using Glimpse.Initialization;
 using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Glimpse.Agent.AspNet
+namespace Glimpse.Agent
 {
     public static class GlimpseAgentWebExtension
     {

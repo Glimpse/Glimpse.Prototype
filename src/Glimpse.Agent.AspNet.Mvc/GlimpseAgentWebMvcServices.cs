@@ -1,4 +1,4 @@
-﻿using Glimpse.Agent.AspNet.Mvc;
+﻿using Glimpse.Agent.Mvc;
 using Microsoft.AspNet.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 

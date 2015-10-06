@@ -1,8 +1,8 @@
 ﻿using System;
-using Glimpse.Agent.AspNet;
+using Glimpse.Agent;
 using Microsoft.Extensions.OptionsModel;
 
-namespace Glimpse.Agent.AspNet
+namespace Glimpse.Agent
 {
     public class GlimpseAgentWebOptionsSetup : ConfigureOptions<GlimpseAgentWebOptions>
     {

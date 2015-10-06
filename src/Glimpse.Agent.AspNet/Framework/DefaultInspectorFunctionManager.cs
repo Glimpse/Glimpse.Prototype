@@ -2,7 +2,7 @@
 using Glimpse.Initialization;
 using Microsoft.AspNet.Builder;
 
-namespace Glimpse.Agent.AspNet
+namespace Glimpse.Agent
 {
     public class DefaultInspectorFunctionManager : IInspectorFunctionManager
     {

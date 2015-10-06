@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.OptionsModel;
 
-namespace Glimpse.Agent.AspNet
+namespace Glimpse.Agent
 {
     public class DefaultRequestIgnorerUriProvider : IRequestIgnorerUriProvider
     { 

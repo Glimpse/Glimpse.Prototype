@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
-using Glimpse.Agent.AspNet;
+using Glimpse.Agent;
 
 namespace Glimpse
 {

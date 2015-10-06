@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Glimpse.Initialization;
 
-namespace Glimpse.Agent.AspNet
+namespace Glimpse.Agent
 {
     public class InspectorsInspectorFunction : IInspectorFunction
     {

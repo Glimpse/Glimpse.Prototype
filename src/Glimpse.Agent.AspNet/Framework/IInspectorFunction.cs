@@ -1,4 +1,4 @@
-﻿namespace Glimpse.Agent.AspNet
+﻿namespace Glimpse.Agent
 {
     public interface IInspectorFunction
     {

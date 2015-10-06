@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Builder;
 
-namespace Glimpse.Agent.AspNet
+namespace Glimpse.Agent
 {
     public interface IInspectorFunctionManager
     {

@@ -1,8 +1,8 @@
-﻿using Glimpse.Agent.AspNet;
+﻿using Glimpse.Agent;
 using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Glimpse.Agent.AspNet.Sample
+namespace Glimpse.Agent.Sample
 {
     public class Startup
     {

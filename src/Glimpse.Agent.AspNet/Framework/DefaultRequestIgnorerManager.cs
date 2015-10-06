@@ -4,7 +4,7 @@ using System.Linq;
 using Glimpse.Initialization;
 using Microsoft.AspNet.Http;
 
-namespace Glimpse.Agent.AspNet
+namespace Glimpse.Agent
 {
     public class DefaultRequestIgnorerManager : IRequestIgnorerManager
     {

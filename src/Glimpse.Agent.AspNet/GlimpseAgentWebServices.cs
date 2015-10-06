@@ -1,5 +1,5 @@
 ﻿using Glimpse.Agent;
-using Glimpse.Agent.AspNet;
+using Glimpse.Agent.Internal.Inspectors.Mvc;
 using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.OptionsModel;
@@ -36,7 +36,7 @@ namespace Glimpse
             services.AddTransient<IAgentStartupManager, DefaultAgentStartupManager>();
             services.AddTransient<IRequestIgnorerManager, DefaultRequestIgnorerManager>();
             services.AddTransient<IInspectorFunctionManager, DefaultInspectorFunctionManager>();
-            services.AddTransient<WebTelemetryListener>();
+            services.AddTransient<WebDiagnosticsInspector>();
 
             return services;
         }

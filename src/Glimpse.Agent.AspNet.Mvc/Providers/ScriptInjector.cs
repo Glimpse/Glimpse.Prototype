@@ -3,7 +3,7 @@ using Glimpse.Initialization;
 using Glimpse.Internal;
 using Microsoft.AspNet.Razor.Runtime.TagHelpers;
 
-namespace Glimpse.Agent.AspNet.Mvc
+namespace Glimpse.Agent.Mvc
 {
     [HtmlTargetElement("body")]
     public class ScriptInjector : TagHelper

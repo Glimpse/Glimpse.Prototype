@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.OptionsModel;
 
-namespace Glimpse.Agent.AspNet
+namespace Glimpse.Agent
 {
     public class DefaultRequestIgnorerStatusCodeProvider : IRequestIgnorerStatusCodeProvider
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Http;
 
-namespace Glimpse.Agent.AspNet.Framework
+namespace Glimpse.Agent.Framework
 {
     public class Inspector : IInspector
     {

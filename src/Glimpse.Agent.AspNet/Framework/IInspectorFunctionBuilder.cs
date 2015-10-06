@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 
-namespace Glimpse.Agent.AspNet
+namespace Glimpse.Agent
 {
     public interface IInspectorFunctionBuilder
     {

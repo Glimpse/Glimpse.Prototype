@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Glimpse.Agent.AspNet
+namespace Glimpse.Agent
 {
     public interface IRequestIgnorerStatusCodeProvider
     {

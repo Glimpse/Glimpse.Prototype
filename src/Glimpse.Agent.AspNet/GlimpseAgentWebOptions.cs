@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Glimpse.Agent.AspNet;
+using Glimpse.Agent;
 using Microsoft.AspNet.Http;
 
-namespace Glimpse.Agent.AspNet
+namespace Glimpse.Agent
 {
     public class GlimpseAgentWebOptions
     {
