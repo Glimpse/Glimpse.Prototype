@@ -209,7 +209,7 @@ namespace Glimpse.Agent.AspNet
         // NOTE: This event is only fired when we dont find any matches at all. This executes
         //       at the end of the matching process. You will never get a ViewResultViewNotFound 
         //       and ViewResultViewFound event firing for the same view resolution.
-        [TelemetryName("Microsoft.AspNet.Mvc.ViewResultViewNotFound")]
+        [TelemetryName("Microsoft.AspNet.Mvc.ViewNotFound")]
         public void OnViewResultViewNotFound(
             IActionContext actionContext,
             ActionResultTypes.IViewResult result,
@@ -241,7 +241,7 @@ namespace Glimpse.Agent.AspNet
         // NOTE: This event is only fired when we do find a match. This executes at the end of
         //       the matching process. You will never get a ViewResultViewNotFound and 
         //       ViewResultViewFound event firing for the same view resolution.
-        [TelemetryName("Microsoft.AspNet.Mvc.ViewResultViewFound")]
+        [TelemetryName("Microsoft.AspNet.Mvc.ViewFound")]
         public void OnViewResultViewFound(
             IActionContext actionContext,
             ActionResultTypes.IViewResult result,
@@ -259,10 +259,10 @@ namespace Glimpse.Agent.AspNet
                 DidFind = true,
                 SearchedLocations = null, // Don't have this yet :(
                 Path = view.Path,
-                ViewData = new ViewResult {
-                    ViewData = result.ViewData,
-                    TempData = result.TempData
-                },
+                //ViewData = new ViewResult {      // TODO: because we switch threads, we need to make sure we get
+                //    ViewData = result.ViewData,  //       what we need off the thread before publishing
+                //    TempData = result.TempData
+                //},
                 Timing = new Timing() // TODO: to be removed
             };
 
