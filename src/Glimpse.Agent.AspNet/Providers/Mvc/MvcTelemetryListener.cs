@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Glimpse.Agent.AspNet.Mvc.Messages;
 using Glimpse.Agent.AspNet.Mvc.Proxies;
@@ -220,15 +221,16 @@ namespace Glimpse.Agent.AspNet
                 ActionName = actionDescriptor.Name,
                 ControllerName = actionDescriptor.ControllerName,
                 ViewName = viewName,
-                DidFind = true,
-                SearchedLocations = searchedLocations,
-                Path = null,
-                ViewData = new ViewResult
-                {
-                    ViewData = result.ViewData,
-                    TempData = result.TempData
-                },
-                Timing = new Timing() // TODO: to be removed
+                ViewDidFind = true,
+                ViewSearchedLocations = searchedLocations,
+                ViewPath = null,
+                //ViewData = new ViewResult {      // TODO: because we switch threads, we need to make sure we get
+                //    ViewData = result.ViewData,  //       what we need off the thread before publishing
+                //    TempData = result.TempData
+                //},
+                ViewStartTime = (DateTime?)null,
+                ViewEndTime = (DateTime?)null,
+                ViewDuration = 0.0
             };
 
             _broker.SendMessage(message);
@@ -252,14 +254,16 @@ namespace Glimpse.Agent.AspNet
                 ActionName = actionDescriptor.Name,
                 ControllerName = actionDescriptor.ControllerName,
                 ViewName = viewName,
-                DidFind = true,
-                SearchedLocations = null, // Don't have this yet :(
-                Path = view.Path,
+                ViewDidFind = true,
+                ViewSearchedLocations = null, // Don't have this yet :(
+                ViewPath = view.Path,
                 //ViewData = new ViewResult {      // TODO: because we switch threads, we need to make sure we get
                 //    ViewData = result.ViewData,  //       what we need off the thread before publishing
                 //    TempData = result.TempData
                 //},
-                Timing = new Timing() // TODO: to be removed
+                ViewStartTime = (DateTime?)null,
+                ViewEndTime = (DateTime?)null,
+                ViewDuration = 0.0
             };
 
             _broker.SendMessage(message);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Glimpse.Internal;
 
 namespace Glimpse.Agent.AspNet.Mvc.Messages
@@ -13,15 +14,18 @@ namespace Glimpse.Agent.AspNet.Mvc.Messages
 
         public string ViewName { get; set; }
 
-        public bool DidFind { get; set; }
+        public bool ViewDidFind { get; set; }
 
-        public IEnumerable<string> SearchedLocations { get; set; }
+        public IEnumerable<string> ViewSearchedLocations { get; set; }
 
-        public string Path { get; set; }
+        public string ViewPath { get; set; }
 
         public ViewResult ViewData { get; set; }
+        
+        public DateTime? ViewStartTime { get; set; }
 
-        // TODO: Needs to be removed when IActionViewMessage is shifted
-        public Timing Timing { get; set; }
+        public DateTime? ViewEndTime { get; set; }
+
+        public double ViewDuration { get; set; }
     }
 }

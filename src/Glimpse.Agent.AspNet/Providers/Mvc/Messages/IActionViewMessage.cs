@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Glimpse.Internal;
 
 namespace Glimpse.Agent.AspNet.Mvc.Messages
@@ -9,14 +10,18 @@ namespace Glimpse.Agent.AspNet.Mvc.Messages
 
         string ViewName { get; set; }
 
-        bool DidFind { get; set; }
+        bool ViewDidFind { get; set; }
 
-        IEnumerable<string> SearchedLocations { get; set; }
+        IEnumerable<string> ViewSearchedLocations { get; set; }
 
-        string Path { get; set; }
+        string ViewPath { get; set; }
 
         ViewResult ViewData { get; set; }
 
-        Timing Timing { get; set; }
+        DateTime? ViewStartTime { get; set; }
+
+        DateTime? ViewEndTime { get; set; }
+
+        double ViewDuration { get; set; }
     }
 }
