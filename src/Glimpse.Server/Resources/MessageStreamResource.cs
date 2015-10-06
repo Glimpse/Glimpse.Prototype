@@ -1,14 +1,14 @@
-﻿using System.Reactive.Concurrency;
+﻿using System;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Http.Features;
-using Microsoft.AspNet.Http;
-using System;
-using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using Glimpse.Server.Web;
+using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Http.Features;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server.Resources
 {
     public class MessageStreamResource : IResourceStartup
     {

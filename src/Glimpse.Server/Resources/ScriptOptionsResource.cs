@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Glimpse.Initialization;
+using Glimpse.Server.Web;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 
-namespace Glimpse.Server.Web.Resources
+namespace Glimpse.Server.Resources
 {
     public class ScriptOptionsResource : IResource
     {

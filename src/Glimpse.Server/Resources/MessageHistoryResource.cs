@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Glimpse.Server.Extensions;
+using Glimpse.Server.Web;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server.Resources
 {
     public class MessageHistoryResource : IResource
     {

@@ -2,11 +2,12 @@
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Glimpse.Server.Web;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server.Resources
 {
     public class HttpMessageResource : IResource
     {

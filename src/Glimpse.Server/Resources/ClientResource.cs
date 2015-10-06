@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Reflection;
+﻿using System.Reflection;
+using Glimpse.Server.Web;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.FileProviders;
 using Microsoft.AspNet.StaticFiles;
-using Glimpse.Server.Web;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server.Resources
 {
     public class ClientResource : IResourceStartup
     {
