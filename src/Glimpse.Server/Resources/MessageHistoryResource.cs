@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Glimpse.Server.Web.Extensions;
+using Glimpse.Server.Extensions;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 

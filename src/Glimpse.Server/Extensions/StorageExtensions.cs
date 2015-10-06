@@ -1,4 +1,6 @@
-namespace Glimpse.Server.Web.Extensions
+using Glimpse.Server.Web;
+
+namespace Glimpse.Server.Extensions
 {
     public static class StorageExtensions
     {
