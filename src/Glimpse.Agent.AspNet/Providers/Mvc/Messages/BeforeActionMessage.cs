@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace Glimpse.Agent.AspNet.Mvc.Messages
 {
     public class BeforeActionMessage : IActionRouteMessage
@@ -11,6 +13,12 @@ namespace Glimpse.Agent.AspNet.Mvc.Messages
 
         public string ControllerName { get; set; }
 
-        public RouteData RouteData { get; set; }
+        public string RouteName { get; set; }
+
+        public string RoutePattern { get; set; }
+
+        public IList<KeyValuePair<string, string>> RouteData { get; set; }
+
+        public IList<KeyValuePair<string, RouteConfigurationData>> RouteConfiguration { get; set; }
     }
 }

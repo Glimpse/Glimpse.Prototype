@@ -32,10 +32,7 @@ namespace Glimpse.Agent.AspNet
                 DisplayName = typedActionDescriptor.DisplayName,
                 ActionName = typedActionDescriptor.Name,
                 ControllerName = typedActionDescriptor.ControllerName,
-                RouteData = new RouteData
-                {
-                    Data = routeData.Values?.Select(x => new KeyValuePair<string, string>(x.Key, x.Value?.ToString())).ToList()
-                }
+                RouteData = routeData.Values?.Select(x => new KeyValuePair<string, string>(x.Key, x.Value?.ToString())).ToList()
             };
 
             // NOTE: Template data is only available in the TemplateRoute, so we need to try and 
@@ -44,11 +41,10 @@ namespace Glimpse.Agent.AspNet
             if (router.GetType().FullName == "Microsoft.AspNet.Routing.Template.TemplateRoute")
             {
                 var templateRoute = _proxyAdapter.Process<IRouter>("Microsoft.AspNet.Routing.Template.TemplateRoute", router);
-
-                var messageRouteData = message.RouteData;
-                messageRouteData.Name = templateRoute.Name;
-                messageRouteData.Pattern = templateRoute.RouteTemplate;
-                messageRouteData.Configuration = templateRoute.ParsedTemplate?.Parameters?.Select(x => {
+                
+                message.RouteName = templateRoute.Name;
+                message.RoutePattern = templateRoute.RouteTemplate;
+                message.RouteConfiguration = templateRoute.ParsedTemplate?.Parameters?.Select(x => {
                         var config = new RouteConfigurationData { Default = x.DefaultValue?.ToString(), Optional = x.IsOptional };
                         return new KeyValuePair<string, RouteConfigurationData>(x.Name, config);
                     }).ToList();
