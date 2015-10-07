@@ -1,7 +1,6 @@
 ﻿using System.Linq;
-using Glimpse.Extensions;
 using Glimpse.Server.Internal;
-using Glimpse.Server;
+using Glimpse.Common.Internal.Extensions;
 using Microsoft.AspNet.Http;
 
 namespace Glimpse.Server.Configuration

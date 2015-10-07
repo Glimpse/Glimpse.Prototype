@@ -1,13 +1,16 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using Newtonsoft.Json;
 
-namespace Glimpse.Extensions
+namespace Glimpse.Common.Internal.Extensions
 {
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public static class JsonSerializerExtensions
     {
+        // TODO: Do we actually need this anymore?
+        // TODO: Can we make this more performant? What about with better allocations?
         public static string Serialize(this JsonSerializer jsonSerializer, object data)
         {
             // Brought across from - https://github.com/JamesNK/Newtonsoft.Json/blob/master/Src/Newtonsoft.Json/JsonConvert.cs#L635

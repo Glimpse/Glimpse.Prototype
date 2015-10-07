@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
 using System.Reflection;
-using System.Threading.Tasks;
 
-namespace Glimpse.Extensions
+namespace Glimpse.Common.Internal.Extensions
 {
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public static class TypeExtension
     {
         public static IEnumerable<Type> GetInheritancHierarchy(this Type target)

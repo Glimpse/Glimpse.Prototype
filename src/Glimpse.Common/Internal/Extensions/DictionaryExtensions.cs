@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
-namespace Glimpse.Extensions
+namespace Glimpse.Common.Internal.Extensions
 {
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public static class DictionaryExtensions
     {
         public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)

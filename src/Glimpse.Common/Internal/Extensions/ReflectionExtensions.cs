@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 
-namespace Glimpse.Extensions
+namespace Glimpse.Common.Internal.Extensions
 {
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public static class ReflectionExtensions
     {
         public static IEnumerable<Type> BaseTypes(this TypeInfo typeInfo, bool includeSelf = false)

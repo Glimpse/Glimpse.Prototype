@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Glimpse.Extensions;
+using Glimpse.Common.Internal.Extensions;
 
 namespace Glimpse.Internal
 {

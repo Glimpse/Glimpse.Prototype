@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Glimpse.Extensions;
+using Glimpse.Common.Internal.Extensions;
 
 namespace Glimpse.Server.Storage
 {

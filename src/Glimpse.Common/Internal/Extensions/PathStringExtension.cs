@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNet.Http;
+﻿using System.ComponentModel;
+using Microsoft.AspNet.Http;
 
-namespace Glimpse.Extensions
+namespace Glimpse.Common.Internal.Extensions
 {
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public static class PathStringExtension
     {
         public static string StartingSegment(this PathString path, out PathString remaining)

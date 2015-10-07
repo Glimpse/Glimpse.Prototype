@@ -1,8 +1,10 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.ComponentModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 
-namespace Glimpse.Extensions
+namespace Glimpse.Common.Internal.Extensions
 {
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public static class StringExtensions
     {
         private readonly static Regex _splitter = new Regex(

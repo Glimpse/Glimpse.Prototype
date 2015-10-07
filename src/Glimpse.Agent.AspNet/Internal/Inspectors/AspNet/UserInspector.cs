@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Text;
 using Glimpse.Agent.Inspectors;
 using Glimpse.Agent.Messages;
-using Glimpse.Extensions;
+using Glimpse.Common.Internal.Extensions;
 using Glimpse.Internal;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Http.Features;

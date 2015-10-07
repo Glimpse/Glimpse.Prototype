@@ -1,8 +1,10 @@
+using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Glimpse.Extensions
+namespace Glimpse.Common.Internal.Extensions
 {
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public static class HashExtensions
     {
         private static readonly MD5 _md5 = MD5.Create();
