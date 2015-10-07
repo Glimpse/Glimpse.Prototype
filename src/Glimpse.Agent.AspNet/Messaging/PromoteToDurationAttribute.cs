@@ -1,4 +1,4 @@
-namespace Glimpse.Agent.Internal.Messaging
+namespace Glimpse.Agent
 {
     public class PromoteToDurationAttribute : PromoteToAttribute
     {
