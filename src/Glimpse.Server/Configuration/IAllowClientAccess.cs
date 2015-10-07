@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Http;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server.Configuration
 {
     public interface IAllowClientAccess
     {

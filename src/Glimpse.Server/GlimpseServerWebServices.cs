@@ -1,6 +1,7 @@
 ﻿using Glimpse.Agent;
 using Glimpse.Initialization;
 using Glimpse.Server;
+using Glimpse.Server.Configuration;
 using Glimpse.Server.Resources;
 using Glimpse.Server.Storage;
 using Microsoft.Extensions.DependencyInjection;

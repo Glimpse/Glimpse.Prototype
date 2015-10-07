@@ -1,8 +1,9 @@
 ﻿using System;
+using Glimpse.Server.Web;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.OptionsModel;
 
-namespace Glimpse.Server.Web.Framework
+namespace Glimpse.Server.Configuration
 {
     public class AllowAgentAccessOptions : IAllowAgentAccess
     {

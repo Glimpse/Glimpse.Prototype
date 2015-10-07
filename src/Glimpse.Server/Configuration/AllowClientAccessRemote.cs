@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Http.Features;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server.Configuration
 {
     public class AllowClientAccessRemote : IAllowClientAccess
     {

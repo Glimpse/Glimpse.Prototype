@@ -1,4 +1,4 @@
-﻿namespace Glimpse.Server.Web
+﻿namespace Glimpse.Server.Configuration
 {
     public interface IAllowRemoteProvider
     {

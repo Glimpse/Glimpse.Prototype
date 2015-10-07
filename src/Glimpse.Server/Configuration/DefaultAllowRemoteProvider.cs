@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.OptionsModel;
+﻿using Glimpse.Server.Web;
+using Microsoft.Extensions.OptionsModel;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server.Configuration
 {
     public class DefaultAllowRemoteProvider : IAllowRemoteProvider
     {
