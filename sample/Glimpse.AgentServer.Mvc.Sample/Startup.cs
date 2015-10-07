@@ -17,7 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Glimpse.AgentServer.AspNet.Mvc.Sample.Models;
 using Glimpse.AgentServer.AspNet.Mvc.Sample.Services;
-using Glimpse.Server.Web;
+using Glimpse.Server;
 using Glimpse.Agent;
 
 namespace Glimpse.AgentServer.AspNet.Mvc.Sample

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.OptionsModel;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server
 {
     public class GlimpseServerWebOptionsSetup : ConfigureOptions<GlimpseServerWebOptions>
     {

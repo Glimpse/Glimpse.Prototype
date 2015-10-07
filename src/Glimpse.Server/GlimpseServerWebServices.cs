@@ -1,12 +1,10 @@
-﻿using Glimpse.Agent;
-using Glimpse.Initialization;
+﻿using Glimpse.Initialization;
 using Glimpse.Server;
 using Glimpse.Server.Configuration;
 using Glimpse.Server.Internal;
 using Glimpse.Server.Resources;
 using Glimpse.Server.Storage;
 using Microsoft.Extensions.DependencyInjection;
-using Glimpse.Server.Web;
 using Microsoft.Extensions.OptionsModel;
 
 namespace Glimpse

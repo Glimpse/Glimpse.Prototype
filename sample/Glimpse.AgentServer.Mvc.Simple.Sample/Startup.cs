@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.Tracing;
 using Glimpse.Agent.Mvc;
 using Glimpse.Agent;
-using Glimpse.Server.Web;
+using Glimpse.Server;
 using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.DependencyInjection;
 

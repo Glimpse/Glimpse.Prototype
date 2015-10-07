@@ -1,5 +1,5 @@
 ﻿using System;
-using Glimpse.Server.Web;
+using Glimpse.Server;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.OptionsModel;
 

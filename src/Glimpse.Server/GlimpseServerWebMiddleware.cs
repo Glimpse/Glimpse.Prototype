@@ -1,14 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
-using System;
 using System.Collections.Generic;
 using Glimpse.Initialization;
 using Glimpse.Server.Configuration;
 using Glimpse.Server.Internal;
 using Glimpse.Server.Resources;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server
 {
     public class GlimpseServerWebMiddleware
     {

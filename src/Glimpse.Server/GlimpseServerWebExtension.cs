@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.AspNet.Builder;
+﻿using Microsoft.AspNet.Builder;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server
 {
     public static class GlimpseServerWebExtension
     {

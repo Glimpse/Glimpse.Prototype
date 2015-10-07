@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNet.Http;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server
 {
     public class GlimpseServerWebOptions
     {

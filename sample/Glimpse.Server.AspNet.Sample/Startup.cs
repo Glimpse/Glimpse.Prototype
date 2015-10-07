@@ -1,4 +1,4 @@
-﻿using Glimpse.Server.Web;
+﻿using Glimpse.Server;
 using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.DependencyInjection;
 

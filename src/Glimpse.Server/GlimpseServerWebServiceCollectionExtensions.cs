@@ -1,5 +1,5 @@
 ﻿using System;
-using Glimpse.Server.Web;
+using Glimpse.Server;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 

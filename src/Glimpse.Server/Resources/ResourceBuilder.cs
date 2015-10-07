@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Glimpse.Server.Internal;
-using Glimpse.Server.Web;
+using Glimpse.Server;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 
