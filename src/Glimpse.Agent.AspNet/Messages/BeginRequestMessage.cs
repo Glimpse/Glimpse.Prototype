@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Glimpse.Internal;
 using Microsoft.AspNet.Http;
+using Microsoft.Extensions.Primitives;
 
 namespace Glimpse.Agent.Messages
 {
@@ -16,7 +17,7 @@ namespace Glimpse.Agent.Messages
         [PromoteToMethod]
         public string Method { get; set; }
 
-        public IEnumerable<KeyValuePair<string, string>> Headers { get; set; }
+        public IDictionary<string, StringValues> Headers { get; set; }
 
         public long? ContentLength { get; set; }
 

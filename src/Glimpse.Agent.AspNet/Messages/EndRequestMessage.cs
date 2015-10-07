@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Glimpse.Internal;
 using Microsoft.AspNet.Http;
+using Microsoft.Extensions.Primitives;
 
 namespace Glimpse.Agent.Messages
 {
@@ -30,6 +31,6 @@ namespace Glimpse.Agent.Messages
         [PromoteToStatusCode]
         public int StatusCode { get; set; }
 
-        public IEnumerable<KeyValuePair<string, string>> Headers { get; set; }
+        public IDictionary<string, StringValues> Headers { get; set; }
     }
 }

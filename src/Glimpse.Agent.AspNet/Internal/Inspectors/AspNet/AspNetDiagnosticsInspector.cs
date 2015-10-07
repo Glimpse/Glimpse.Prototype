@@ -25,7 +25,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 Path = request.Path,
                 QueryString = request.QueryString.Value,
                 Method = request.Method,
-                Headers = request.Headers?.Select(x => new KeyValuePair<string, string>(x.Key, x.Value.ToString())),
+                Headers = request.Headers,
                 ContentLength = request.ContentLength,
                 ContentType = request.ContentType
             };
@@ -48,7 +48,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 Path = request.Path,
                 QueryString = request.QueryString.Value,
                 Duration = Math.Round(timing.Elapsed.TotalMilliseconds, 2),
-                Headers = response.Headers?.Select(x => new KeyValuePair<string, string>(x.Key, x.Value.ToString())),
+                Headers = response.Headers,
                 ContentLength = response.ContentLength,
                 ContentType = response.ContentType,
                 StatusCode = response.StatusCode,
