@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Glimpse.Server.Web;
@@ -36,7 +37,7 @@ namespace Glimpse.Server.Resources
 
         public string Name => "AgentMessage";
 
-        public ResourceParameters Parameters => null;
+        public IEnumerable<ResourceParameter> Parameters => Enumerable.Empty<ResourceParameter>();
 
         public ResourceType Type => ResourceType.Agent;
 

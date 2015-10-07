@@ -22,7 +22,7 @@ namespace Glimpse.Server.Resources
         }
 
         public string Name => "SpaClientScript";
-        public ResourceParameters Parameters => new ResourceParameters(+ResourceParameter.Hash, ResourceParameter.RequestId);
+        public IEnumerable<ResourceParameter> Parameters => new []{ +ResourceParameter.Hash, ResourceParameter.RequestId};
         public ResourceType Type => ResourceType.Client;
     }
 }

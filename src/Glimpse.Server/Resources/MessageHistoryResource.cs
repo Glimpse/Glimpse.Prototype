@@ -22,7 +22,7 @@ namespace Glimpse.Server.Resources
 
             _canQueryRequests = storage.Supports<IQueryRequests>();
             if (_canQueryRequests)
-                Parameters = new ResourceParameters(
+                Parameters = new[] {
                     ResourceParameter.Custom("dmin"),
                     ResourceParameter.Custom("dmax"),
                     ResourceParameter.Custom("url"),
@@ -32,9 +32,9 @@ namespace Glimpse.Server.Resources
                     ResourceParameter.Custom("tags"),
                     ResourceParameter.Custom("before"),
                     ResourceParameter.Custom("user"),
-                    ResourceParameter.Custom("types"));
+                    ResourceParameter.Custom("types")};
             else
-                Parameters = new ResourceParameters(ResourceParameter.Custom("types"));
+                Parameters = new [] { ResourceParameter.Custom("types") };
             
         }
 
@@ -100,7 +100,7 @@ namespace Glimpse.Server.Resources
 
         public string Name => "MessageHistory";
         
-        public ResourceParameters Parameters { get; }
+        public IEnumerable<ResourceParameter> Parameters { get; }
 
         public ResourceType Type => ResourceType.Client;
     }

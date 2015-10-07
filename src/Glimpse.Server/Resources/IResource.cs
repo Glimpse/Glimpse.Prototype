@@ -10,7 +10,7 @@ namespace Glimpse.Server.Resources
 
         string Name { get; }
 
-        ResourceParameters Parameters { get; }
+        IEnumerable<ResourceParameter> Parameters { get; }
 
         ResourceType Type { get; }
     }

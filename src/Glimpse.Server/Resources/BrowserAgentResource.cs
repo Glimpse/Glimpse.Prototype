@@ -22,7 +22,7 @@ namespace Glimpse.Server.Resources
 
         public string Name => "BrowserAgentScript";
 
-        public ResourceParameters Parameters => new ResourceParameters(+ResourceParameter.Hash);
+        public IEnumerable<ResourceParameter> Parameters => new [] { +ResourceParameter.Hash};
 
         public ResourceType Type => ResourceType.Agent;
     }

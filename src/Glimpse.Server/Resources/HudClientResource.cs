@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Glimpse.Server.Web;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 
@@ -25,7 +25,7 @@ document.body.appendChild(link);");
         }
 
         public string Name => "HudClientScript";
-        public ResourceParameters Parameters => ResourceParameters.None;
+        public IEnumerable<ResourceParameter> Parameters => Enumerable.Empty<ResourceParameter>();
         public ResourceType Type => ResourceType.Agent;
     }
 }

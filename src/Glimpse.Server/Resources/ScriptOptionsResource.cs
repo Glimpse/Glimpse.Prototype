@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Glimpse.Initialization;
-using Glimpse.Server.Web;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 
@@ -34,7 +33,7 @@ namespace Glimpse.Server.Resources
         }
 
         public string Name => "ScriptOptions";
-        public ResourceParameters Parameters => new ResourceParameters(ResourceParameter.Hash);
+        public IEnumerable<ResourceParameter> Parameters => new [] { ResourceParameter.Hash };
         public ResourceType Type => ResourceType.Client;
     }
 }
