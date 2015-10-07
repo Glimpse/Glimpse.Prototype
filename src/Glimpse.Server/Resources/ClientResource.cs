@@ -15,7 +15,7 @@ namespace Glimpse.Server.Resources
             options.RequestPath = "/Client";
             options.EnableDefaultFiles = false;
             options.StaticFileOptions.ContentTypeProvider = new FileExtensionContentTypeProvider();
-            options.FileProvider = new EmbeddedFileProvider(typeof(ClientResource).GetTypeInfo().Assembly, "Glimpse.Server.Resources.Embed.Client");
+            options.FileProvider = new EmbeddedFileProvider(typeof(ClientResource).GetTypeInfo().Assembly, "Glimpse.Server.Resources.Embeded.Client");
 
             resourceBuilder.AppBuilder.UseFileServer(options);
         }
