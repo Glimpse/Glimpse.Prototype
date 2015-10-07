@@ -13,6 +13,7 @@ namespace Glimpse.Internal
         {
             jsonSerializer.ContractResolver = new CamelCasePropertyNamesContractResolver();
             jsonSerializer.Converters.Add(new TimeSpanConverter());
+            jsonSerializer.Converters.Add(new StringValuesConverter());
 
             _jsonSerializer = jsonSerializer;
         }
