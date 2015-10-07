@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Text;
 using Glimpse.Agent.Inspectors;
 using Glimpse.Agent.Messages;
+using Glimpse.Common;
 using Glimpse.Internal.Extensions;
 using Glimpse.Internal;
 using Microsoft.AspNet.Http;
@@ -101,9 +102,9 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         private const string GlimpseCookie = ".Glimpse.Session"; // TODO: Move this somewhere configurable
         private readonly ConcurrentDictionary<string, string> _gravatarCache = new ConcurrentDictionary<string, string>(); 
         private readonly ConcurrentDictionary<string, string> _crcCache = new ConcurrentDictionary<string, string>();
-        private readonly IContextData<MessageContext> _context;
+        private readonly IGlimpseContextAccessor _context;
 
-        public UserInspector(IAgentBroker broker, IContextData<MessageContext> context)
+        public UserInspector(IAgentBroker broker, IGlimpseContextAccessor context)
         {
             _broker = broker;
             _context = context;
@@ -118,7 +119,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 var response = context.Features.Get<IHttpResponseFeature>();
                 if (response != null && !response.HasStarted)
                 {
-                    context.Response.Cookies.Append(GlimpseCookie, _context.Value.Id.ToString("N"));
+                    context.Response.Cookies.Append(GlimpseCookie, _context.RequestId.ToString("N"));
                 }
             }
         }
@@ -132,7 +133,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             if (string.IsNullOrEmpty(userId))
             {
                 isAnonymous = true;
-                userId = (string)context.Request.Cookies[GlimpseCookie] ?? _context.Value.Id.ToString("N");
+                userId = (string)context.Request.Cookies[GlimpseCookie] ?? _context.RequestId.ToString("N");
             }
 
             var username = user.FindFirst("name")?.Value ?? _crcCache.GetOrAdd(userId, GenerateUsername);

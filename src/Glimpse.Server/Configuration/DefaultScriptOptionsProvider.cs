@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using Glimpse.Common;
 using Glimpse.Initialization;
 using Glimpse.Internal.Extensions;
-using Glimpse.Internal;
 using Tavis.UriTemplates;
 
 namespace Glimpse.Server.Configuration
@@ -9,9 +9,9 @@ namespace Glimpse.Server.Configuration
     public class DefaultScriptOptionsProvider : IScriptOptionsProvider
     {
         private readonly IMetadataProvider _metadataProvider;
-        private readonly IContextData<MessageContext> _context;
+        private readonly IGlimpseContextAccessor _context;
 
-        public DefaultScriptOptionsProvider(IMetadataProvider metadataProvider, IContextData<MessageContext> context)
+        public DefaultScriptOptionsProvider(IMetadataProvider metadataProvider, IGlimpseContextAccessor context)
         {
             _metadataProvider = metadataProvider;
             _context = context;
@@ -23,7 +23,7 @@ namespace Glimpse.Server.Configuration
             var supportedParameters = new Dictionary<string, object>
             {
                 {"hash", metadata.Hash},
-                {"requestid", _context.Value.Id}
+                {"requestid", _context.RequestId}
             };
 
             var browserAgentScriptTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("browser-agent-script") ?? "");

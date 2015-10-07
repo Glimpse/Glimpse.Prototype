@@ -1,4 +1,5 @@
 using System;
+using Glimpse.Common;
 using Glimpse.Initialization;
 using Glimpse.Internal;
 using Microsoft.AspNet.Razor.Runtime.TagHelpers;
@@ -11,9 +12,9 @@ namespace Glimpse.Agent.Razor
         private readonly Guid _requestId;
         private readonly ScriptOptions _scriptOptions;
 
-        public ScriptInjector(IContextData<MessageContext> context, IScriptOptionsProvider scriptOptionsProvider)
+        public ScriptInjector(IGlimpseContextAccessor context, IScriptOptionsProvider scriptOptionsProvider)
         {
-            _requestId = context.Value.Id;
+            _requestId = context.RequestId;
             _scriptOptions = scriptOptionsProvider.BuildInstance();
         }
 

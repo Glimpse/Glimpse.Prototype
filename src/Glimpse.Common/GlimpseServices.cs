@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Glimpse.Common;
 using Microsoft.Extensions.DependencyInjection;
 using Glimpse.Internal;
 using Newtonsoft.Json;
@@ -24,6 +25,7 @@ namespace Glimpse
             // Context.
             //
             services.AddTransient(typeof(IContextData<>), typeof(ContextData<>)); 
+            services.AddTransient<IGlimpseContextAccessor, DefaultGlimpseContextAccessor>(); 
 
             //
             // JSON.Net.
