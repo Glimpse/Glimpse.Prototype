@@ -4,12 +4,11 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
-using Glimpse.Server;
-using Glimpse.Server.Web;
+using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Http.Features;
 
-namespace Glimpse.Server.Resources
+namespace Glimpse.Server.Internal.Resources
 {
     public class MessageStreamResource : IResourceStartup
     {

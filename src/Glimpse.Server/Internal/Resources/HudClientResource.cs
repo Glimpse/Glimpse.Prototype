@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 
-namespace Glimpse.Server.Resources
+namespace Glimpse.Server.Internal.Resources
 {
     public class HudClientResource : IResource
     {

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Glimpse.Server.Web;
+using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 
-namespace Glimpse.Server.Resources
+namespace Glimpse.Server.Internal.Resources
 {
     //TODO: "Merge" with ClientResource
     public class SpaClientResource : IResource

@@ -3,13 +3,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Glimpse.Server;
-using Glimpse.Server.Web;
+using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 
-namespace Glimpse.Server.Resources
+namespace Glimpse.Server.Internal.Resources
 {
     public class HttpMessageResource : IResource
     {

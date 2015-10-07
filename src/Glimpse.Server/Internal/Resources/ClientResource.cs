@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
-using Glimpse.Server.Web;
+using Glimpse.Server.Resources;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.FileProviders;
 using Microsoft.AspNet.StaticFiles;
 
-namespace Glimpse.Server.Resources
+namespace Glimpse.Server.Internal.Resources
 {
     public class ClientResource : IResourceStartup
     {
@@ -15,7 +15,7 @@ namespace Glimpse.Server.Resources
             options.RequestPath = "/Client";
             options.EnableDefaultFiles = false;
             options.StaticFileOptions.ContentTypeProvider = new FileExtensionContentTypeProvider();
-            options.FileProvider = new EmbeddedFileProvider(typeof(ClientResource).GetTypeInfo().Assembly, "Glimpse.Server.Resources.Embeded.Client");
+            options.FileProvider = new EmbeddedFileProvider(typeof(ClientResource).GetTypeInfo().Assembly, "Glimpse.Server.Internal.Resources.Embeded.Client");
 
             resourceBuilder.AppBuilder.UseFileServer(options);
         }

@@ -2,12 +2,12 @@
 using System.Threading.Tasks;
 using Glimpse.Extensions;
 using Glimpse.Server.Configuration;
-using Glimpse.Server.Web;
+using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 
-namespace Glimpse.Server.Resources
+namespace Glimpse.Server.Internal.Resources
 {
     public class MetadataResource : IResource
     {
