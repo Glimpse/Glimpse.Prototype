@@ -1,15 +1,12 @@
-﻿using System.ComponentModel;
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Glimpse.Common.Internal.Extensions
+namespace Glimpse.Internal.Extensions
 {
-    [EditorBrowsable(EditorBrowsableState.Never)]
     public static class JsonSerializerExtensions
     {
-        // TODO: Do we actually need this anymore?
         // TODO: Can we make this more performant? What about with better allocations?
         public static string Serialize(this JsonSerializer jsonSerializer, object data)
         {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;
-using Glimpse.Common.Internal.Extensions;
+using Glimpse.Internal.Extensions;
 
 namespace Glimpse.Server.Internal
 {

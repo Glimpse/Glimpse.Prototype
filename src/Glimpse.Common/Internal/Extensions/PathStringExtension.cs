@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Microsoft.AspNet.Http;
 
-namespace Glimpse.Common.Internal.Extensions
+namespace Glimpse.Internal.Extensions
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class PathStringExtension

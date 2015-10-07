@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 
-namespace Glimpse.Common.Internal.Extensions
+namespace Glimpse.Internal.Extensions
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class ReflectionExtensions

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Glimpse.Common.Internal.Extensions
+namespace Glimpse.Internal.Extensions
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class StringExtensions

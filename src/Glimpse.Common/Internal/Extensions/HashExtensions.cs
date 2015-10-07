@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Glimpse.Common.Internal.Extensions
+namespace Glimpse.Internal.Extensions
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class HashExtensions

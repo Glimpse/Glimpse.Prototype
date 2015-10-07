@@ -1,4 +1,4 @@
-using Glimpse.Common.Internal.Extensions;
+using Glimpse.Internal.Extensions;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;

@@ -5,7 +5,7 @@ using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
-using Glimpse.Common.Internal.Extensions;
+using Glimpse.Internal.Extensions;
 
 namespace Glimpse.Server.Internal.Resources
 {

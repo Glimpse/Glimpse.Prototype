@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Glimpse.Initialization;
-using Glimpse.Common.Internal.Extensions;
+using Glimpse.Internal.Extensions;
 using Glimpse.Internal;
 using Tavis.UriTemplates;
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Glimpse.Common.Internal.Extensions;
+using Glimpse.Internal.Extensions;
 
 namespace Glimpse.Server.Configuration
 {
