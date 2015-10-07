@@ -1,7 +1,4 @@
-using Glimpse.Server.Storage;
-using Glimpse.Server.Web;
-
-namespace Glimpse.Server.Extensions
+namespace Glimpse.Server.Storage
 {
     public static class StorageExtensions
     {
