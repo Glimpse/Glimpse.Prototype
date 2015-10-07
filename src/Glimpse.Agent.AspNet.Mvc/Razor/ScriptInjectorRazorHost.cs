@@ -4,7 +4,7 @@ using Microsoft.AspNet.Mvc.Razor;
 using Microsoft.AspNet.Mvc.Razor.Directives;
 using Microsoft.AspNet.Razor.Chunks;
 
-namespace Glimpse.Agent.Mvc
+namespace Glimpse.Agent.Razor
 {
     public class ScriptInjectorRazorHost : MvcRazorHost
     {
