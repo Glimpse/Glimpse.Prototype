@@ -1,4 +1,4 @@
-﻿namespace Glimpse.Server.Web
+namespace Glimpse.Server.Resources
 {
     public interface IResourceStartup
     {

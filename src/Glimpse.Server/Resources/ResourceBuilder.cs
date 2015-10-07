@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using Glimpse.Server.Web;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server.Resources
 {
     public class ResourceBuilder : IResourceBuilder
     {

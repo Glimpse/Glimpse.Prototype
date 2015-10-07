@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server.Resources
 {
     public class ResourceParameters : List<ResourceParameter>
     {

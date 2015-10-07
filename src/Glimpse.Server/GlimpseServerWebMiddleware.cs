@@ -4,6 +4,7 @@ using Microsoft.AspNet.Http;
 using System;
 using System.Collections.Generic;
 using Glimpse.Initialization;
+using Glimpse.Server.Resources;
 
 namespace Glimpse.Server.Web
 {
