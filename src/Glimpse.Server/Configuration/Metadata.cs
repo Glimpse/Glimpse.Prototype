@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Glimpse.Extensions;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server.Configuration
 {
     public class Metadata
     {

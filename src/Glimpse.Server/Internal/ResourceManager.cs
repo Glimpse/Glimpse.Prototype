@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Http;
 using Glimpse.Extensions;
 using Glimpse.Server.Resources;
+using Microsoft.AspNet.Http;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server.Internal
 {
     public class ResourceManager : IResourceManager
     {

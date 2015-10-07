@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server.Internal
 {
     public interface IResourceManager
     {

@@ -1,8 +1,10 @@
 ﻿using System.Linq;
-using Microsoft.AspNet.Http;
 using Glimpse.Extensions;
+using Glimpse.Server.Internal;
+using Glimpse.Server.Web;
+using Microsoft.AspNet.Http;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server.Configuration
 {
     public class DefaultMetadataProvider : IMetadataProvider
     {

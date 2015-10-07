@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Glimpse.Initialization;
 using Glimpse.Server.Configuration;
+using Glimpse.Server.Internal;
 using Glimpse.Server.Resources;
 
 namespace Glimpse.Server.Web

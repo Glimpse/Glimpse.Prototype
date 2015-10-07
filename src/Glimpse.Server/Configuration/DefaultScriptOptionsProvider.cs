@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Glimpse.Initialization;
 using Glimpse.Extensions;
+using Glimpse.Initialization;
 using Glimpse.Internal;
 using Tavis.UriTemplates;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server.Configuration
 {
     public class DefaultScriptOptionsProvider : IScriptOptionsProvider
     {
