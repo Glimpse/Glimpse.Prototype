@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Glimpse.Server.Storage;
 
-namespace Glimpse.Server.Web
+namespace Glimpse.Server
 {
     public class DefaultServerBroker : IServerBroker
     {
@@ -20,7 +19,7 @@ namespace Glimpse.Server.Web
             _offRecieverThreadSubject = new Subject<IMessage>();
             _offRecieverThreadInternalSubject = new Subject<IMessage>();
 
-            OffRecieverThread = new ServerBrokerHook(_offRecieverThreadSubject);
+            OffRecieverThread = new ServerBrokerObservations(_offRecieverThreadSubject);
 
             // ensure off-request data is observed onto a different thread
             _offRecieverThreadInternalSubject.Subscribe(payload => Observable.Start(() => _offRecieverThreadSubject.OnNext(payload), TaskPoolScheduler.Default));
@@ -29,7 +28,7 @@ namespace Glimpse.Server.Web
         /// <summary>
         /// Off the reciever thread and is not blocking
         /// </summary>
-        public ServerBrokerHook OffRecieverThread { get; }
+        public ServerBrokerObservations OffRecieverThread { get; }
         
         public void SendMessage(IMessage message)
         {

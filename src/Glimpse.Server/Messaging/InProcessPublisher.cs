@@ -1,12 +1,10 @@
-﻿using Glimpse.Agent;
-
-namespace Glimpse.Server.Web
+﻿namespace Glimpse.Server
 {
-    public class InProcessChannel : IMessagePublisher
+    public class InProcessPublisher : IMessagePublisher
     {
         private readonly IServerBroker _messageBus;
 
-        public InProcessChannel(IServerBroker messageBus)
+        public InProcessPublisher(IServerBroker messageBus)
         {
             _messageBus = messageBus;
         }

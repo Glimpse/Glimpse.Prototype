@@ -1,5 +1,6 @@
 ﻿using Glimpse.Agent;
 using Glimpse.Initialization;
+using Glimpse.Server;
 using Glimpse.Server.Resources;
 using Glimpse.Server.Storage;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,7 +44,7 @@ namespace Glimpse
             //
             // Broker
             //
-            services.AddSingleton<IMessagePublisher, InProcessChannel>();
+            services.AddSingleton<IMessagePublisher, InProcessPublisher>();
 
             return services;
         }

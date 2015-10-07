@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Glimpse.Server;
 using Glimpse.Server.Web;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
