@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse
 {
-    public class GlimpseAgentWebMvcServices
+    public class GlimpseAgentMvcServices
     {
         public static IServiceCollection GetDefaultServices()
         {

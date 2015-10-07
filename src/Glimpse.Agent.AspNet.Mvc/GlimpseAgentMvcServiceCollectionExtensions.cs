@@ -2,11 +2,11 @@
 
 namespace Glimpse
 {
-    public static class GlimpseAgentWebMvcServiceCollectionExtensions
+    public static class GlimpseAgentMvcServiceCollectionExtensions
     {
         public static GlimpseAgentServiceCollectionBuilder WithMvcInspectors(this GlimpseAgentServiceCollectionBuilder services)
         {
-            services.TryAdd(GlimpseAgentWebMvcServices.GetDefaultServices());
+            services.TryAdd(GlimpseAgentMvcServices.GetDefaultServices());
 
             return services;
         }

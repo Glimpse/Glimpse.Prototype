@@ -6,13 +6,13 @@ using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent
 {
-    public class GlimpseAgentWebMiddleware
+    public class GlimpseAgentMiddleware
     {
         private readonly RequestDelegate _next;
         private readonly RequestDelegate _branch;
         private readonly IRequestIgnorerManager _requestIgnorerManager;
 
-        public GlimpseAgentWebMiddleware(RequestDelegate next, IApplicationBuilder app, IRequestIgnorerManager requestIgnorerManager, IInspectorFunctionManager inspectorFunctionManager)
+        public GlimpseAgentMiddleware(RequestDelegate next, IApplicationBuilder app, IRequestIgnorerManager requestIgnorerManager, IInspectorFunctionManager inspectorFunctionManager)
         {
             _next = next;
             _requestIgnorerManager = requestIgnorerManager;

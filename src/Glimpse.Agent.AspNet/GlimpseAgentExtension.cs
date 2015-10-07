@@ -4,14 +4,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse.Agent
 {
-    public static class GlimpseAgentWebExtension
+    public static class GlimpseAgentExtension
     {
         public static IApplicationBuilder UseGlimpseAgent(this IApplicationBuilder app)
         {
             var manager = app.ApplicationServices.GetRequiredService<IAgentStartupManager>();
             manager.Run(new StartupOptions(app));
 
-            return app.UseMiddleware<GlimpseAgentWebMiddleware>(app);
+            return app.UseMiddleware<GlimpseAgentMiddleware>(app);
         }
     }
 }

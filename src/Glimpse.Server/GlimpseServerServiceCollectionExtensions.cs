@@ -5,18 +5,18 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Glimpse
 {
-    public static class GlimpseServerWebServiceCollectionExtensions
+    public static class GlimpseServerServiceCollectionExtensions
     {
         public static GlimpseServerServiceCollectionBuilder RunningServerWeb(this GlimpseServiceCollectionBuilder services)
         {
             return services.RunningServerWeb(null);
         }
 
-        public static GlimpseServerServiceCollectionBuilder RunningServerWeb(this GlimpseServiceCollectionBuilder services, Action<GlimpseServerWebOptions> setupAction)
+        public static GlimpseServerServiceCollectionBuilder RunningServerWeb(this GlimpseServiceCollectionBuilder services, Action<GlimpseServerOptions> setupAction)
         {
             services.AddOptions();
             
-            services.TryAdd(GlimpseServerWebServices.GetDefaultServices());
+            services.TryAdd(GlimpseServerServices.GetDefaultServices());
 
             if (setupAction != null)
             {
@@ -28,7 +28,7 @@ namespace Glimpse
 
         public static IServiceCollection WithLocalAgent(this GlimpseServerServiceCollectionBuilder services)
         { 
-            return services.Add(GlimpseServerWebServices.GetLocalAgentServices());
+            return services.Add(GlimpseServerServices.GetLocalAgentServices());
         }
     }
 }

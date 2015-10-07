@@ -9,7 +9,7 @@ namespace Glimpse.Server.Configuration
     {
         private readonly Func<HttpContext, bool> _allowAccess;
 
-        public AllowClientAccessOptions(IOptions<GlimpseServerWebOptions> optionsAccessor)
+        public AllowClientAccessOptions(IOptions<GlimpseServerOptions> optionsAccessor)
         {
             _allowAccess = optionsAccessor.Value.AllowClientAccess;
         }

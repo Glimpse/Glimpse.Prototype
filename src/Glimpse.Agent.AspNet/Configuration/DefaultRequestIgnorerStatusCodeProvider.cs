@@ -6,7 +6,7 @@ namespace Glimpse.Agent.Configuration
 {
     public class DefaultRequestIgnorerStatusCodeProvider : IRequestIgnorerStatusCodeProvider
     {
-        public DefaultRequestIgnorerStatusCodeProvider(IOptions<GlimpseAgentWebOptions> optionsAccessor)
+        public DefaultRequestIgnorerStatusCodeProvider(IOptions<GlimpseAgentOptions> optionsAccessor)
         {
             var statusCodes = optionsAccessor.Value.IgnoredStatusCodes;
             StatusCodes = statusCodes.ToList();

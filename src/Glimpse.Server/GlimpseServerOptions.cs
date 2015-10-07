@@ -3,7 +3,7 @@ using Microsoft.AspNet.Http;
 
 namespace Glimpse.Server
 {
-    public class GlimpseServerWebOptions
+    public class GlimpseServerOptions
     {
         public bool AllowRemote { get; set; }
 

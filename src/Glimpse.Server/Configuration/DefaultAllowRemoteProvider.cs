@@ -5,7 +5,7 @@ namespace Glimpse.Server.Configuration
 {
     public class DefaultAllowRemoteProvider : IAllowRemoteProvider
     {
-        public DefaultAllowRemoteProvider(IOptions<GlimpseServerWebOptions> optionsAccessor)
+        public DefaultAllowRemoteProvider(IOptions<GlimpseServerOptions> optionsAccessor)
         {
             AllowRemote = optionsAccessor.Value.AllowRemote; 
         }

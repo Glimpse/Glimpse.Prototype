@@ -4,13 +4,12 @@ using Glimpse.Agent.Configuration;
 using Glimpse.Agent.Inspectors;
 using Glimpse.Agent.Internal.Inspectors.Mvc;
 using Glimpse.Initialization;
-using Glimpse.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.OptionsModel;
 
 namespace Glimpse
 {
-    public class GlimpseAgentWebServices
+    public class GlimpseAgentServices
     {
         public static IServiceCollection GetDefaultServices()
         {
@@ -25,7 +24,7 @@ namespace Glimpse
             //
             // Options
             //
-            services.AddTransient<IConfigureOptions<GlimpseAgentWebOptions>, GlimpseAgentWebOptionsSetup>();
+            services.AddTransient<IConfigureOptions<GlimpseAgentOptions>, GlimpseAgentOptionsSetup>();
             services.AddSingleton<IRequestIgnorerUriProvider, DefaultRequestIgnorerUriProvider>();
             services.AddSingleton<IRequestIgnorerStatusCodeProvider, DefaultRequestIgnorerStatusCodeProvider>();
             services.AddSingleton<IRequestIgnorerContentTypeProvider, DefaultRequestIgnorerContentTypeProvider>();

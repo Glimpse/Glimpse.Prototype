@@ -3,13 +3,13 @@ using Microsoft.Extensions.OptionsModel;
 
 namespace Glimpse.Agent
 {
-    public class GlimpseAgentWebOptionsSetup : ConfigureOptions<GlimpseAgentWebOptions>
+    public class GlimpseAgentOptionsSetup : ConfigureOptions<GlimpseAgentOptions>
     {
-        public GlimpseAgentWebOptionsSetup() : base(ConfigureGlimpseAgentWebOptions)
+        public GlimpseAgentOptionsSetup() : base(ConfigureGlimpseAgentWebOptions)
         {
         }
 
-        public static void ConfigureGlimpseAgentWebOptions(GlimpseAgentWebOptions options)
+        public static void ConfigureGlimpseAgentWebOptions(GlimpseAgentOptions options)
         {
             // Set up IgnoredUris
             options.IgnoredUris.AddCompiled("^/__browserLink/requestData");

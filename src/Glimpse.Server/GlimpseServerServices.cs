@@ -9,7 +9,7 @@ using Microsoft.Extensions.OptionsModel;
 
 namespace Glimpse
 {
-    public class GlimpseServerWebServices
+    public class GlimpseServerServices
     {
         public static IServiceCollection GetDefaultServices()
         {
@@ -25,7 +25,7 @@ namespace Glimpse
             //
             // Options
             //
-            services.AddTransient<IConfigureOptions<GlimpseServerWebOptions>, GlimpseServerWebOptionsSetup>();
+            services.AddTransient<IConfigureOptions<GlimpseServerOptions>, GlimpseServerOptionsSetup>();
             services.AddTransient<IExtensionProvider<IAllowClientAccess>, DefaultExtensionProvider<IAllowClientAccess>>();
             services.AddTransient<IExtensionProvider<IAllowAgentAccess>, DefaultExtensionProvider<IAllowAgentAccess>>();
             services.AddTransient<IExtensionProvider<IResource>, DefaultExtensionProvider<IResource>>();

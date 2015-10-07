@@ -9,14 +9,14 @@ using Glimpse.Server.Resources;
 
 namespace Glimpse.Server
 {
-    public class GlimpseServerWebMiddleware
+    public class GlimpseServerMiddleware
     {
         private readonly IEnumerable<IAllowClientAccess> _authorizeClients;
         private readonly IEnumerable<IAllowAgentAccess> _authorizeAgents;
         private readonly RequestDelegate _next;
         private readonly RequestDelegate _branch;
 
-        public GlimpseServerWebMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IAllowClientAccess> authorizeClientProvider, IExtensionProvider<IAllowAgentAccess> authorizeAgentProvider, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IExtensionProvider<IResource> resourceProvider, IResourceManager resourceManager)
+        public GlimpseServerMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IAllowClientAccess> authorizeClientProvider, IExtensionProvider<IAllowAgentAccess> authorizeAgentProvider, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IExtensionProvider<IResource> resourceProvider, IResourceManager resourceManager)
         {
             _authorizeClients = authorizeClientProvider.Instances;
             _authorizeAgents = authorizeAgentProvider.Instances;

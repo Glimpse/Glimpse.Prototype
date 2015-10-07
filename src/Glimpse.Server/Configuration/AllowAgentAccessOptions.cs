@@ -9,7 +9,7 @@ namespace Glimpse.Server.Configuration
     {
         private readonly Func<HttpContext, bool> _allowAgentAccess;
 
-        public AllowAgentAccessOptions(IOptions<GlimpseServerWebOptions> optionsAccessor)
+        public AllowAgentAccessOptions(IOptions<GlimpseServerOptions> optionsAccessor)
         {
             _allowAgentAccess = optionsAccessor.Value.AllowAgentAccess;
         }

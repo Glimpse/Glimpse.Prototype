@@ -6,7 +6,7 @@ namespace Glimpse.Agent.Configuration
 { 
     public class DefaultRequestIgnorerContentTypeProvider : IRequestIgnorerContentTypeProvider
     {
-        public DefaultRequestIgnorerContentTypeProvider(IOptions<GlimpseAgentWebOptions> optionsAccessor)
+        public DefaultRequestIgnorerContentTypeProvider(IOptions<GlimpseAgentOptions> optionsAccessor)
         {
             var contentTypes = optionsAccessor.Value.IgnoredContentTypes;
             ContentTypes = contentTypes.ToList();

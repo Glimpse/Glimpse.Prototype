@@ -7,7 +7,7 @@ namespace Glimpse.Agent.Configuration
 {
     public class DefaultRequestIgnorerUriProvider : IRequestIgnorerUriProvider
     { 
-        public DefaultRequestIgnorerUriProvider(IOptions<GlimpseAgentWebOptions> optionsAccessor)
+        public DefaultRequestIgnorerUriProvider(IOptions<GlimpseAgentOptions> optionsAccessor)
         {
             var ignoredUris = optionsAccessor.Value.IgnoredUris;
             IgnoredUris = ignoredUris.ToList(); 

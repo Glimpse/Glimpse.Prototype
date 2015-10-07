@@ -8,7 +8,7 @@ namespace Glimpse.Agent.Configuration
     {
         private readonly Func<HttpContext, bool> _shouldIgnore;
 
-        public RequestIgnorerOptionsShouldIgnore(IOptions<GlimpseAgentWebOptions> optionsAccessor)
+        public RequestIgnorerOptionsShouldIgnore(IOptions<GlimpseAgentOptions> optionsAccessor)
         {
             _shouldIgnore = optionsAccessor.Value.ShouldIgnore;
         }

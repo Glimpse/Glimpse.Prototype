@@ -5,18 +5,18 @@ using Glimpse.Agent;
 
 namespace Glimpse
 {
-    public static class GlimpseAgentWebServiceCollectionExtensions
+    public static class GlimpseAgentServiceCollectionExtensions
     {
         public static GlimpseAgentServiceCollectionBuilder RunningAgentWeb(this GlimpseServiceCollectionBuilder services)
         {
             return services.RunningAgentWeb(null);
         }
          
-        public static GlimpseAgentServiceCollectionBuilder RunningAgentWeb(this GlimpseServiceCollectionBuilder services, Action<GlimpseAgentWebOptions> setupAction)
+        public static GlimpseAgentServiceCollectionBuilder RunningAgentWeb(this GlimpseServiceCollectionBuilder services, Action<GlimpseAgentOptions> setupAction)
         {
             services.AddOptions();
             
-            services.TryAdd(GlimpseAgentWebServices.GetDefaultServices());
+            services.TryAdd(GlimpseAgentServices.GetDefaultServices());
 
             if (setupAction != null)
             {

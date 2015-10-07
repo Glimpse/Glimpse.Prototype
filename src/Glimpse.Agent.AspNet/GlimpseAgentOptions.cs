@@ -5,9 +5,9 @@ using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent
 {
-    public class GlimpseAgentWebOptions
+    public class GlimpseAgentOptions
     {
-        public GlimpseAgentWebOptions()
+        public GlimpseAgentOptions()
         {
             IgnoredUris = new List<Regex>();
             IgnoredStatusCodes = new List<int>();
