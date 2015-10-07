@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Glimpse.Internal
+namespace Glimpse.Agent.Internal.Messaging
 {
     public interface IMessageTypeProcessor
     {

@@ -1,6 +1,4 @@
-﻿using Glimpse;
-
-namespace Glimpse.Internal
+﻿namespace Glimpse.Agent.Internal.Messaging
 {
     public class PromoteToUserIdAttribute : PromoteToAttribute
     {

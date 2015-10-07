@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Glimpse.Agent.Internal.Messaging;
 using Glimpse.Internal;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.Primitives;

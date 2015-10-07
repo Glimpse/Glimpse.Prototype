@@ -26,14 +26,6 @@ namespace Glimpse
             services.AddTransient(typeof(IContextData<>), typeof(ContextData<>)); 
 
             //
-            // Messages.
-            //
-            services.AddSingleton<IMessageConverter, DefaultMessageConverter>();
-            services.AddTransient<IMessagePayloadFormatter, DefaultMessagePayloadFormatter>();
-            services.AddTransient<IMessageIndexProcessor, DefaultMessageIndexProcessor>();
-            services.AddTransient<IMessageTypeProcessor, DefaultMessageTypeProcessor>();
-
-            //
             // JSON.Net.
             //
             services.AddTransient<JsonSerializer, JsonSerializer>();

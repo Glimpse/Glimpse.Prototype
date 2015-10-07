@@ -2,6 +2,7 @@
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using Glimpse.Agent.Internal.Messaging;
 using Glimpse.Internal;
 
 namespace Glimpse.Agent

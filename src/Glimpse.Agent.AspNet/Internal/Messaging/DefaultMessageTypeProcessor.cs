@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Glimpse.Internal.Extensions;
 
-namespace Glimpse.Internal
+namespace Glimpse.Agent.Internal.Messaging
 {
     public class DefaultMessageTypeProcessor : IMessageTypeProcessor
     {

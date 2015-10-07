@@ -1,8 +1,10 @@
 ﻿using Glimpse.Agent;
+using Glimpse.Agent.Internal.Messaging;
 using Glimpse.Agent.Configuration;
 using Glimpse.Agent.Inspectors;
 using Glimpse.Agent.Internal.Inspectors.Mvc;
 using Glimpse.Initialization;
+using Glimpse.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.OptionsModel;
 
@@ -31,7 +33,15 @@ namespace Glimpse
             services.AddSingleton<IExtensionProvider<IInspectorFunction>, DefaultExtensionProvider<IInspectorFunction>>();
             services.AddSingleton<IExtensionProvider<IInspector>, DefaultExtensionProvider<IInspector>>();
             services.AddSingleton<IExtensionProvider<IAgentStartup>, DefaultExtensionProvider<IAgentStartup>>();
-            
+
+            //
+            // Messages.
+            //
+            services.AddSingleton<IMessageConverter, DefaultMessageConverter>();
+            services.AddTransient<IMessagePayloadFormatter, DefaultMessagePayloadFormatter>();
+            services.AddTransient<IMessageIndexProcessor, DefaultMessageIndexProcessor>();
+            services.AddTransient<IMessageTypeProcessor, DefaultMessageTypeProcessor>();
+
             //
             // Common
             //

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Glimpse.Internal
+namespace Glimpse.Agent.Internal.Messaging
 {
-    public class DefaultMessageConverter : IMessageConverter
+    // Glimpse servers & clients depend on this behavior. 
+    // As such, this type is marked internal to prevent tampering
+    internal class DefaultMessageConverter : IMessageConverter
     {
         private static int _ordinal = 0;
         
@@ -37,17 +39,17 @@ namespace Glimpse.Internal
             return message;
         }
 
-        protected virtual string GetPayload(Message message, object payload)
+        private string GetPayload(Message message, object payload)
         {
             return PayloadFormatter.Serialize(message, payload);
         }
 
-        protected virtual IReadOnlyDictionary<string, object> GetIndices(object payload)
+        private IReadOnlyDictionary<string, object> GetIndices(object payload)
         {
             return IndexProcessor.Derive(payload);
         }
 
-        protected virtual IEnumerable<string> GetTypes(object payload)
+        private IEnumerable<string> GetTypes(object payload)
         {
             return TypeProcessor.Derive(payload);
         }

@@ -1,4 +1,4 @@
-namespace Glimpse.Internal
+namespace Glimpse.Agent.Internal.Messaging
 {
     public class PromoteToDateTimeAttribute : PromoteToAttribute
     {
