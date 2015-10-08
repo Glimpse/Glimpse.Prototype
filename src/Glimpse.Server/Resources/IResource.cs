@@ -12,6 +12,7 @@ namespace Glimpse.Server.Resources
 
         IEnumerable<ResourceParameter> Parameters { get; }
 
+        // This should usually be set to ResourceType.Client.
         ResourceType Type { get; }
     }
 }

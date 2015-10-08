@@ -27,6 +27,6 @@ document.body.appendChild(link);");
 
         public string Name => "HudClientScript";
         public IEnumerable<ResourceParameter> Parameters => Enumerable.Empty<ResourceParameter>();
-        public ResourceType Type => ResourceType.Agent;
+        public ResourceType Type => ResourceType.Client;
     }
 }
