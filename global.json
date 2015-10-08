@@ -1,6 +1,3 @@
 {
-  "projects": [ "src", "test/websites" ],
-  "sdk": {
-    "version": "1.0.0-rc1-15813"
-  }
+  "projects": [ "src", "test/websites" ]
 }
