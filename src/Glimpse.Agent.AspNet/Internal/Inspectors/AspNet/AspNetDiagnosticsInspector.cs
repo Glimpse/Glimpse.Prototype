@@ -16,21 +16,22 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             _contextData.Value = new MessageContext { Id = Guid.NewGuid(), Type = "Request" };
 
             var request = httpContext.Request;
+            var requestDateTime = DateTime.UtcNow;
 
             var beginMessage = new BeginRequestMessage
             {
                 // TODO: check if there is a better way of doing this
-                // TODO: should there be a StartTime property here?
-                Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}",
-                Path = request.Path,
-                QueryString = request.QueryString.Value,
-                Method = request.Method,
-                Headers = request.Headers,
-                ContentLength = request.ContentLength,
-                ContentType = request.ContentType
+                RequestUrl = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}",
+                RequestPath = request.Path,
+                RequestQueryString = request.QueryString.Value,
+                RequestMethod = request.Method,
+                RequestHeaders = request.Headers,
+                RequestContentLength = request.ContentLength,
+                RequestContentType = request.ContentType,
+                RequestStartTime = requestDateTime
             };
-
-            _broker.BeginLogicalOperation(beginMessage);
+            
+            _broker.BeginLogicalOperation(beginMessage, requestDateTime);
         }
 
         [TelemetryName("Microsoft.AspNet.Hosting.EndRequest")]
@@ -44,18 +45,18 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             var endMessage = new EndRequestMessage
             {
                 // TODO: check if there is a better way of doing this
-                Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}",
-                Path = request.Path,
-                QueryString = request.QueryString.Value,
-                Duration = Math.Round(timing.Elapsed.TotalMilliseconds, 2),
-                Headers = response.Headers,
-                ContentLength = response.ContentLength,
-                ContentType = response.ContentType,
-                StatusCode = response.StatusCode,
-                StartTime = timing.Start.ToUniversalTime(),
-                EndTime = timing.End.ToUniversalTime()
+                RequestUrl = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}",
+                RequestPath = request.Path,
+                RequestQueryString = request.QueryString.Value,
+                RequestStartTime = timing.Start.ToUniversalTime(),
+                ResponseDuration = Math.Round(timing.Elapsed.TotalMilliseconds, 2),
+                ResponseHeaders = response.Headers,
+                ResponseContentLength = response.ContentLength,
+                ResponseContentType = response.ContentType,
+                ResponseStatusCode = response.StatusCode,
+                ResponseEndTime = timing.End.ToUniversalTime()
             };
-
+            
             _broker.SendMessage(endMessage);
         }
     }

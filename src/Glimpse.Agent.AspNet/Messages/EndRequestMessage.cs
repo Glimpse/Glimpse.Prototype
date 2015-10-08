@@ -10,28 +10,28 @@ namespace Glimpse.Agent.Messages
     public class EndRequestMessage
     {
         [PromoteToDuration]
-        public double? Duration { get; set; }
+        public double? ResponseDuration { get; set; }
 
         [PromoteToDateTime]
-        public DateTime? StartTime { get; set;  }
+        public DateTime? RequestStartTime { get; set;  }
 
-        public DateTime EndTime { get; set; }
+        public DateTime ResponseEndTime { get; set; }
 
         [PromoteToUrl]
-        public string Url { get; set; }
+        public string RequestUrl { get; set; }
 
-        public string Path { get; set; }
+        public string RequestPath { get; set; }
 
-        public string QueryString { get; set; }
+        public string RequestQueryString { get; set; }
 
-        public long? ContentLength { get; set; }
+        public long? ResponseContentLength { get; set; }
 
         [PromoteToContentType]
-        public string ContentType { get; set; }
+        public string ResponseContentType { get; set; }
 
         [PromoteToStatusCode]
-        public int StatusCode { get; set; }
+        public int ResponseStatusCode { get; set; }
 
-        public IDictionary<string, StringValues> Headers { get; set; }
+        public IDictionary<string, StringValues> ResponseHeaders { get; set; }
     }
 }
