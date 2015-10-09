@@ -38,7 +38,7 @@ namespace Glimpse.Server.Configuration
             var metadataTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("metadata") ?? "");
             metadataTemplate.AddParameters(supportedParameters);
 
-            var spaClientScriptTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("spa-client-script") ?? "");
+            var spaClientScriptTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("client") ?? "");
             spaClientScriptTemplate.AddParameters(supportedParameters);
 
             return new ScriptOptions

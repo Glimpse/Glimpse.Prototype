@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Glimpse.Server.Resources;
@@ -10,12 +11,18 @@ namespace Glimpse.Server.Internal
 {
     public class ResourceManager : IResourceManager
     {
+        private IDictionary<string, string> _templateTable = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         private IDictionary<string, ResourceManagerItem> _resourceTable = new Dictionary<string, ResourceManagerItem>(StringComparer.OrdinalIgnoreCase);
+
+        public void Register(string name, string uriTemplate)
+        {
+            _templateTable.Add(name, uriTemplate);
+        }
 
         public void Register(string name, string uriTemplate, ResourceType type, Func<HttpContext, IDictionary<string, string>, Task> resource)
         {
-            // todo: blow up on bad name??
             _resourceTable.Add(name, new ResourceManagerItem(type, uriTemplate, resource));
+            Register(name, uriTemplate);
         }
 
         public ResourceManagerResult Match(HttpContext context)
@@ -36,10 +43,7 @@ namespace Glimpse.Server.Internal
             return null;
         }
 
-        public IReadOnlyDictionary<string, string> RegisteredUris
-        {
-            get { return _resourceTable.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.UriTemplate); }
-        }
+        public IReadOnlyDictionary<string, string> RegisteredUris => new ReadOnlyDictionary<string, string>(_templateTable);
 
         private bool MatchUriTemplate(string uriTemplate, PathString remainingPath, out IDictionary<string, string> paramaters)
         {
