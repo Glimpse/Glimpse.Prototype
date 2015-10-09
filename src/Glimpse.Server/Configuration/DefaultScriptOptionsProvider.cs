@@ -21,9 +21,9 @@ namespace Glimpse.Server.Configuration
             var resources = metadata.Resources;
             var supportedParameters = new Dictionary<string, object>{ {"hash", metadata.Hash} };
 
-            var browserAgentScriptTemplate = new UriTemplate(resources.GetValueOrDefault("browser-agent-script", string.Empty), true);
+            var browserAgentScriptTemplate = new UriTemplate(resources.GetValueOrDefault("browser-agent", string.Empty), true);
             var httpMessageTemplate = new UriTemplate(resources.GetValueOrDefault("agent-message", string.Empty), true);
-            var hudScriptTemplate = new UriTemplate(resources.GetValueOrDefault("hud-client-script", string.Empty), true);
+            var hudScriptTemplate = new UriTemplate(resources.GetValueOrDefault("hud-client", string.Empty), true);
             var metadataTemplate = new UriTemplate(resources.GetValueOrDefault("metadata", string.Empty), true);
             var clientScriptTemplate = new UriTemplate(resources.GetValueOrDefault("client", string.Empty), true);
 

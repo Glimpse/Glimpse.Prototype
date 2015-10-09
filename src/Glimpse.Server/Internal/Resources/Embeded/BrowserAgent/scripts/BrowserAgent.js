@@ -1,5 +1,6 @@
-﻿(function() {
-    var common = (function() {
+﻿(function () {
+    console.log("Hello from BrowserAgent.js");
+    /*var common = (function() {
             return {
                 getRequestId: function() {
                     // TODO: Get the current request id somehow
@@ -87,5 +88,5 @@
             .fail(function() {
                 console.log('Could not connect');
             });
-    })();
+    })();*/
 })();
