@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Glimpse.Agent.Messages
 {
@@ -11,6 +12,12 @@ namespace Glimpse.Agent.Messages
         public string ActionName { get; set; }
 
         public string ActionControllerName { get; set; }
+        
+        public string ActionTargetClass { get; set; }
+
+        public string ActionTargetMethod { get; set; }
+
+        public DateTime ActionInvokedStartTime { get; set; }
 
         public IReadOnlyList<BindingData> Binding { get; set; }
     }

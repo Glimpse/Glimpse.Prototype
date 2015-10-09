@@ -1,4 +1,5 @@
-﻿using Glimpse.Internal;
+﻿using System;
+using Glimpse.Internal;
 
 namespace Glimpse.Agent.Messages
 {
@@ -6,6 +7,12 @@ namespace Glimpse.Agent.Messages
     {
         public string ActionId { get; set; }
 
-        public Timing Timing { get; set; }
+        public string ActionName { get; set; }
+
+        public string ActionControllerName { get; set; }
+
+        public DateTime ActionResultEndTime { get; set; }
+
+        public TimeSpan ActionResultDuration { get; set; }
     }
 }

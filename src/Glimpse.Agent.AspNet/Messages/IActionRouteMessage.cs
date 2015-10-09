@@ -10,8 +10,8 @@ namespace Glimpse.Agent.Messages
 
         string RoutePattern { get; set; }
 
-        IList<KeyValuePair<string, string>> RouteData { get; set; }
+        IReadOnlyDictionary<string, string> RouteData { get; set; }
 
-        IList<KeyValuePair<string, RouteConfigurationData>> RouteConfiguration { get; set; }
+        IReadOnlyDictionary<string, RouteConfigurationData> RouteConfiguration { get; set; }
     }
 }

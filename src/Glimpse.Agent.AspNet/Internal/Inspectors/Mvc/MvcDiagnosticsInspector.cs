@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Glimpse.Agent.Internal.Inspectors.Mvc.Proxies;
-using Glimpse.Agent.Internal.Inspectors.Mvc.Proxies;
 using Glimpse.Agent.Messages;
 using Microsoft.Extensions.TelemetryAdapter;
 
@@ -18,6 +17,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             _proxyAdapter.Register("Microsoft.AspNet.Routing.Template.TemplateRoute");
             _proxyAdapter.Register("Microsoft.AspNet.Mvc.Controllers.ControllerActionDescriptor");
             _proxyAdapter.Register("Microsoft.AspNet.Mvc.Abstractions.ActionDescriptor");
+            _proxyAdapter.Register("Microsoft.AspNet.Mvc.FileResult");
         }
 
         // NOTE: This event is the start of the action pipeline. The action has been selected, the route
@@ -25,6 +25,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         [TelemetryName("Microsoft.AspNet.Mvc.BeforeAction")]
         public void OnBeforeAction(object actionDescriptor, IHttpContext httpContext, IRouteData routeData)
         {
+            var startDateTime = DateTime.UtcNow;
             var typedActionDescriptor = ConvertActionDescriptor(actionDescriptor);
 
             var message = new BeforeActionMessage
@@ -33,7 +34,8 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 ActionDisplayName = typedActionDescriptor.DisplayName,
                 ActionName = typedActionDescriptor.Name,
                 ActionControllerName = typedActionDescriptor.ControllerName,
-                RouteData = routeData.Values?.Select(x => new KeyValuePair<string, string>(x.Key, x.Value?.ToString())).ToList()
+                ActionStartTime = startDateTime,
+                RouteData = routeData.Values?.ToDictionary(x => x.Key, x => x.Value?.ToString())
             };
 
             // NOTE: Template data is only available in the TemplateRoute, so we need to try and 
@@ -45,13 +47,12 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 
                 message.RouteName = templateRoute.Name;
                 message.RoutePattern = templateRoute.RouteTemplate;
-                message.RouteConfiguration = templateRoute.ParsedTemplate?.Parameters?.Select(x => {
-                        var config = new RouteConfigurationData { Default = x.DefaultValue?.ToString(), Optional = x.IsOptional };
-                        return new KeyValuePair<string, RouteConfigurationData>(x.Name, config);
-                    }).ToList();
+                message.RouteConfiguration = templateRoute.ParsedTemplate?.Parameters?.ToDictionary(x => x.Name,
+                    x => new RouteConfigurationData { Default = x.DefaultValue?.ToString(), Optional = x.IsOptional });
             }
 
-            _broker.BeginLogicalOperation(message);
+            _broker.BeginLogicalOperation(message, startDateTime);
+            _broker.SendMessage(message);
         }
 
         [TelemetryName("Microsoft.AspNet.Mvc.AfterAction")]
@@ -62,7 +63,10 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             var message = new AfterActionMessage()
             {
                 ActionId = actionDescriptor.Id,
-                Timing = timing
+                ActionName = actionDescriptor.Name,
+                ActionControllerName = actionDescriptor.ControllerName,
+                ActionEndTime = timing.End,
+                ActionDuration = timing.Elapsed
             };
 
             _broker.SendMessage(message);
@@ -75,6 +79,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             IActionContext actionContext,
             IDictionary<string, object> arguments)
         {
+            var startDateTime = DateTime.UtcNow;
             var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
             var message = new BeforeActionInvokedMessage
@@ -83,10 +88,15 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 ActionDisplayName = actionDescriptor.DisplayName,
                 ActionName = actionDescriptor.Name,
                 ActionControllerName = actionDescriptor.ControllerName,
+                ActionTargetClass = actionDescriptor.ControllerTypeInfo.Name,
+                ActionTargetMethod = actionDescriptor.MethodInfo.Name,
+                ActionInvokedStartTime = startDateTime,
+                // TODO: Need to safely get the value
                 Binding = arguments?.Select(x => new BindingData { Type = x.Value?.GetType(), Name = x.Key, Value = x.Value }).ToList()
             };
 
-            _broker.BeginLogicalOperation(message);
+            _broker.BeginLogicalOperation(message, startDateTime);
+            _broker.SendMessage(message);
         }
 
         [TelemetryName("Microsoft.AspNet.Mvc.AfterActionMethod")]
@@ -100,14 +110,10 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             var message = new AfterActionInvokedMessage()
             {
                 ActionId = actionDescriptor.Id,
-                ActionDisplayName = actionDescriptor.DisplayName,
                 ActionName = actionDescriptor.Name,
                 ActionControllerName = actionDescriptor.ControllerName,
-                ActionTargetClass = actionDescriptor.ControllerTypeInfo.Name,
-                ActionTargetMethod = actionDescriptor.MethodInfo.Name,
-                ActionStartTime = timing.Start,
-                ActionEndTime = timing.End,
-                ActionDuration = timing.Elapsed
+                ActionInvokedEndTime = timing.End,
+                ActionInvokedDuration = timing.Elapsed
             };
 
             _broker.SendMessage(message);
@@ -120,34 +126,24 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             IActionContext actionContext,
             object result)
         {
+            var startDateTime = DateTime.UtcNow;
             var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
-
-            var message = new BeforeActionResultMessage
-            {
-                ActionId = actionDescriptor.Id,
-                ActionDisplayName = actionDescriptor.DisplayName,
-                ActionName = actionDescriptor.Name,
-                ActionControllerName = actionDescriptor.ControllerName
-            };
 
             // TODO: Need to work off the inheritence chain 
             //var inheritancHierarchy = result.GetType().GetInheritancHierarchy().ToList();
 
             // TODO: currently looking to see if this switch code and ProxyAdapter can be
             //       consumed by Microsoft.Extensions.TelemetryAdapter
-            var actionResult = new ActionResultData();
+            var message = (BeforeActionResultMessage)null;
             switch (result.GetType().FullName)
             {
                 case "Microsoft.AspNet.Mvc.ViewResult":
                     var viewResult = _proxyAdapter.Process<ActionResultTypes.IViewResult>("Microsoft.AspNet.Mvc.ViewResult", result);
 
-                    actionResult.Type = "ViewResult";
-                    actionResult.Data = new ActionResultData.ViewResult
+                    message = new BeforeActionViewResultMessage
                     {
                         ViewName = viewResult.ViewName,
                         StatusCode = viewResult.StatusCode,
-                        //TempData = viewResult.TempData,  //Not including here atm... being captured by ViewResultViewFound/ViewResultViewNotFound instead
-                        //ViewData = viewResult.ViewData,
                         ContentType = viewResult.ContentType?.ToString()
                     };
 
@@ -155,8 +151,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 case "Microsoft.AspNet.Mvc.ContentResult":
                     var contentResult = _proxyAdapter.Process<ActionResultTypes.IContentResult>("Microsoft.AspNet.Mvc.ContentResult", result);
 
-                    actionResult.Type = "ContentResult";
-                    actionResult.Data = new ActionResultData.ContentResult
+                    message = new BeforeActionContentResultMessage
                     {
                         StatusCode = contentResult.StatusCode,
                         Content = contentResult.Content,
@@ -167,8 +162,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 case "Microsoft.AspNet.Mvc.ObjectResult":
                     var objectResult = _proxyAdapter.Process<ActionResultTypes.IObjectResult>("Microsoft.AspNet.Mvc.ContentResult", result);
 
-                    actionResult.Type = "ContentResult";
-                    actionResult.Data = new ActionResultData.ObjectResult
+                    message = new BeforeActionObjectResultMessage
                     {
                         StatusCode = objectResult.StatusCode,
                         Value = objectResult.Value,
@@ -177,15 +171,38 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                     };
 
                     break;
+                case "Microsoft.AspNet.Mvc.FileResult":
+                case "Microsoft.AspNet.Mvc.FileContentResult":
+                case "Microsoft.AspNet.Mvc.FileStreamResult":
+                    var fileResult = _proxyAdapter.Process<ActionResultTypes.IFileResult>("Microsoft.AspNet.Mvc.FileResult", result);
+
+                    message = new BeforeActionFileResultMessage
+                    {
+                        FileDownloadName = fileResult.FileDownloadName,
+                        ContentType = fileResult.ContentType
+                    };
+
+                    break;
+                default:
+                    message = new BeforeActionResultMessage();
+
+                    break;
             }
 
-            // only link up the details if we processed the actionresult
-            if (!string.IsNullOrEmpty(actionResult.Type))
-            {
-                message.ActionResult = actionResult;
-            }
+            // TODO: Need to implement the following 
+            // https://github.com/aspnet/Mvc/blob/dev/src/Microsoft.AspNet.Mvc.Formatters.Json/JsonResult.cs
+            // https://github.com/aspnet/Mvc/blob/dev/src/Microsoft.AspNet.Mvc.Core/RedirectResult.cs
+            // https://github.com/aspnet/Mvc/blob/dev/src/Microsoft.AspNet.Mvc.Core/RedirectToRouteResult.cs
+            // https://github.com/aspnet/Mvc/blob/dev/src/Microsoft.AspNet.Mvc.Core/HttpStatusCodeResult.cs
 
-            _broker.BeginLogicalOperation(message);
+            message.ActionId = actionDescriptor.Id;
+            message.ActionDisplayName = actionDescriptor.DisplayName;
+            message.ActionName = actionDescriptor.Name;
+            message.ActionControllerName = actionDescriptor.ControllerName;
+            message.ActionResultStartTime = startDateTime;
+
+            _broker.BeginLogicalOperation(message, startDateTime);
+            _broker.SendMessage(message);
         }
 
         [TelemetryName("Microsoft.AspNet.Mvc.AfterActionResult")]
@@ -199,7 +216,10 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             var message = new AfterActionResultMessage()
             {
                 ActionId = actionDescriptor.Id,
-                Timing = timing
+                ActionName = actionDescriptor.Name,
+                ActionControllerName = actionDescriptor.ControllerName,
+                ActionResultEndTime = timing.End,
+                ActionResultDuration = timing.Elapsed
             };
 
             _broker.SendMessage(message);
@@ -217,22 +237,15 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         {
             var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
-            var message = new ViewResultFoundStatusMessage()
+            var message = new ActionViewNotFoundMessage()
             {
                 ActionId = actionDescriptor.Id,
                 ActionName = actionDescriptor.Name,
                 ActionControllerName = actionDescriptor.ControllerName,
                 ViewName = viewName,
-                ViewDidFind = true,
                 ViewSearchedLocations = searchedLocations,
-                ViewPath = null,
-                //ViewData = new ViewResult {      // TODO: because we switch threads, we need to make sure we get
-                //    ViewData = result.ViewData,  //       what we need off the thread before publishing
-                //    TempData = result.TempData
-                //},
-                ViewStartTime = (DateTime?)null,
-                ViewEndTime = (DateTime?)null,
-                ViewDuration = 0.0
+                ViewDidFind = false,
+                ViewSearchedTime = DateTime.UtcNow
             };
 
             _broker.SendMessage(message);
@@ -250,22 +263,56 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         {
             var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
-            var message = new ViewResultFoundStatusMessage()
+            var message = new ActionViewDidFoundMessage
             {
                 ActionId = actionDescriptor.Id,
                 ActionName = actionDescriptor.Name,
                 ActionControllerName = actionDescriptor.ControllerName,
                 ViewName = viewName,
+                ViewPath = view.Path,
                 ViewDidFind = true,
-                ViewSearchedLocations = null, // Don't have this yet :(
+                ViewSearchedTime = DateTime.UtcNow
+            };
+
+            _broker.SendMessage(message);
+        }
+
+        [TelemetryName("Microsoft.AspNet.Mvc.BeforeView")]
+        public void OnBeforeView(IView view, IViewContext viewContext)
+        {
+            var startDateTime = DateTime.UtcNow;
+            var actionDescriptor = ConvertActionDescriptor(viewContext.ActionDescriptor);
+            
+            var message = new BeforeActionViewMessage
+            {
+                ActionId = actionDescriptor.Id,
+                ActionName = actionDescriptor.Name,
+                ActionControllerName = actionDescriptor.ControllerName,
                 ViewPath = view.Path,
                 //ViewData = new ViewResult {      // TODO: because we switch threads, we need to make sure we get
                 //    ViewData = result.ViewData,  //       what we need off the thread before publishing
                 //    TempData = result.TempData
                 //},
-                ViewStartTime = (DateTime?)null,
-                ViewEndTime = (DateTime?)null,
-                ViewDuration = 0.0
+                ViewStartTime = startDateTime
+            };
+
+            _broker.BeginLogicalOperation(message, startDateTime);
+            _broker.SendMessage(message);
+        }
+
+        [TelemetryName("Microsoft.AspNet.Mvc.AfterView")]
+        public void OnAfterView(IView view, IViewContext viewContext)
+        {
+            var timing = _broker.EndLogicalOperation<BeforeActionViewMessage>().Timing;
+            var actionDescriptor = ConvertActionDescriptor(viewContext.ActionDescriptor);
+
+            var message = new AfterActionViewMessage
+            {
+                ActionId = actionDescriptor.Id,
+                ActionName = actionDescriptor.Name,
+                ActionControllerName = actionDescriptor.ControllerName,
+                ViewEndTime = timing.End,
+                ViewDuration = timing.Elapsed
             };
 
             _broker.SendMessage(message);

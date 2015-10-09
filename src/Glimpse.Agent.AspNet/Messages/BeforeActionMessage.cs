@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 
 namespace Glimpse.Agent.Messages
@@ -17,8 +18,10 @@ namespace Glimpse.Agent.Messages
 
         public string RoutePattern { get; set; }
 
-        public IList<KeyValuePair<string, string>> RouteData { get; set; }
+        public IReadOnlyDictionary<string, string> RouteData { get; set; }
 
-        public IList<KeyValuePair<string, RouteConfigurationData>> RouteConfiguration { get; set; }
+        public IReadOnlyDictionary<string, RouteConfigurationData> RouteConfiguration { get; set; }
+
+        public DateTime ActionStartTime { get; set; }
     }
 }

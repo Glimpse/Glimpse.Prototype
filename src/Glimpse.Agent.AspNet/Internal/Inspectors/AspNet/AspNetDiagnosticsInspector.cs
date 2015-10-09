@@ -18,7 +18,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             var request = httpContext.Request;
             var requestDateTime = DateTime.UtcNow;
 
-            var beginMessage = new BeginRequestMessage
+            var message = new BeginRequestMessage
             {
                 // TODO: check if there is a better way of doing this
                 RequestUrl = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}",
@@ -31,7 +31,8 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 RequestStartTime = requestDateTime
             };
             
-            _broker.BeginLogicalOperation(beginMessage, requestDateTime);
+            _broker.BeginLogicalOperation(message, requestDateTime);
+            _broker.SendMessage(message);
         }
 
         [TelemetryName("Microsoft.AspNet.Hosting.EndRequest")]
@@ -42,7 +43,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             var request = httpContext.Request;
             var response = httpContext.Response;
 
-            var endMessage = new EndRequestMessage
+            var message = new EndRequestMessage
             {
                 // TODO: check if there is a better way of doing this
                 RequestUrl = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}",
@@ -57,7 +58,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 ResponseEndTime = timing.End.ToUniversalTime()
             };
             
-            _broker.SendMessage(endMessage);
+            _broker.SendMessage(message);
         }
     }
 }

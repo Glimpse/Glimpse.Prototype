@@ -29,5 +29,11 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc.Proxies
             IList<string> ContentTypes { get; set; }
             Type DeclaredType { get; set; }
         }
+
+        public interface IFileResult
+        {
+            string FileDownloadName { get; set; }
+            string ContentType { get; set; }
+        }
     }
 }

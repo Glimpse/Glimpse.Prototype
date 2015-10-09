@@ -1,10 +1,8 @@
-﻿
-using System;
-using Glimpse.Internal;
+﻿using System;
 
 namespace Glimpse.Agent.Messages
 {
-    public class AfterActionMessage
+    public class AfterActionViewMessage
     {
         public string ActionId { get; set; }
 
@@ -12,8 +10,8 @@ namespace Glimpse.Agent.Messages
 
         public string ActionControllerName { get; set; }
 
-        public DateTime ActionEndTime { get; set; }
+        public DateTime? ViewEndTime { get; set; }
 
-        public TimeSpan ActionDuration { get; set; }
+        public TimeSpan ViewDuration { get; set; }
     }
 }
