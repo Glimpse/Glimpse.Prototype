@@ -18,6 +18,7 @@ namespace Glimpse.Server.Internal.Resources
             options.FileProvider = new EmbeddedFileProvider(typeof(ClientResource).GetTypeInfo().Assembly, "Glimpse.Server.Internal.Resources.Embeded.Client");
 
             resourceBuilder.AppBuilder.UseFileServer(options);
+            resourceBuilder.RegisterResource("Client", "index.html?hash={hash}{&requestId}");
         }
 
         public ResourceType Type => ResourceType.Client;
