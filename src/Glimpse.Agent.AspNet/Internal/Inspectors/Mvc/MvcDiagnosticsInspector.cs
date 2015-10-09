@@ -283,7 +283,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             var startDateTime = DateTime.UtcNow;
             var actionDescriptor = ConvertActionDescriptor(viewContext.ActionDescriptor);
             
-            var message = new BeforeActionViewMessage
+            var message = new BeforeActionViewInvokedMessage
             {
                 ActionId = actionDescriptor.Id,
                 ActionName = actionDescriptor.Name,
@@ -303,10 +303,10 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         [TelemetryName("Microsoft.AspNet.Mvc.AfterView")]
         public void OnAfterView(IView view, IViewContext viewContext)
         {
-            var timing = _broker.EndLogicalOperation<BeforeActionViewMessage>().Timing;
+            var timing = _broker.EndLogicalOperation<BeforeActionViewInvokedMessage>().Timing;
             var actionDescriptor = ConvertActionDescriptor(viewContext.ActionDescriptor);
 
-            var message = new AfterActionViewMessage
+            var message = new AfterActionViewInvokedMessage
             {
                 ActionId = actionDescriptor.Id,
                 ActionName = actionDescriptor.Name,

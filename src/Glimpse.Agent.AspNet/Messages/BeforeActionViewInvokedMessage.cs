@@ -2,7 +2,7 @@
 
 namespace Glimpse.Agent.Messages
 {
-    public class AfterActionViewMessage
+    public class BeforeActionViewInvokedMessage
     {
         public string ActionId { get; set; }
 
@@ -10,8 +10,11 @@ namespace Glimpse.Agent.Messages
 
         public string ActionControllerName { get; set; }
 
-        public DateTime? ViewEndTime { get; set; }
+        public string ViewPath { get; set; }
 
-        public TimeSpan ViewDuration { get; set; }
+        public ViewResultData ViewData { get; set; }
+
+        public DateTime? ViewStartTime { get; set; }
+
     }
 }
