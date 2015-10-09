@@ -25,6 +25,7 @@ namespace Glimpse.Agent.Messages
 
         public string RequestContentType { get; set; }
 
+        [PromoteToDateTime]
         public DateTime RequestStartTime { get; set; }
     }
 }

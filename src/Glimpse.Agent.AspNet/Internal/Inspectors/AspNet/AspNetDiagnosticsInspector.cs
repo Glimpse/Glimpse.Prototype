@@ -49,7 +49,6 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 RequestUrl = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}",
                 RequestPath = request.Path,
                 RequestQueryString = request.QueryString.Value,
-                RequestStartTime = timing.Start.ToUniversalTime(),
                 ResponseDuration = Math.Round(timing.Elapsed.TotalMilliseconds, 2),
                 ResponseHeaders = response.Headers,
                 ResponseContentLength = response.ContentLength,

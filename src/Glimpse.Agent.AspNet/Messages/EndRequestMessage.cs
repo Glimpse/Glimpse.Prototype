@@ -9,14 +9,6 @@ namespace Glimpse.Agent.Messages
 {
     public class EndRequestMessage
     {
-        [PromoteToDuration]
-        public double? ResponseDuration { get; set; }
-
-        [PromoteToDateTime]
-        public DateTime? RequestStartTime { get; set;  }
-
-        public DateTime ResponseEndTime { get; set; }
-
         [PromoteToUrl]
         public string RequestUrl { get; set; }
 
@@ -33,5 +25,10 @@ namespace Glimpse.Agent.Messages
         public int ResponseStatusCode { get; set; }
 
         public IDictionary<string, StringValues> ResponseHeaders { get; set; }
+
+        [PromoteToDuration]
+        public double? ResponseDuration { get; set; }
+
+        public DateTime ResponseEndTime { get; set; }
     }
 }
