@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;
@@ -18,15 +17,16 @@ namespace Glimpse.Server.Internal.Resources
 var script = document.querySelector('script[data-request-id]'),
 link = document.createElement('a'),
 requestId = script.dataset.requestId,
-clientUrl = script.dataset.clientUrl;
-link.setAttribute('href', clientUrl);
+clientTemplate = script.dataset.clientTemplate;
+// TODO: Remove .replace() as 'poor mans' uri template resolution.
+link.setAttribute('href', clientTemplate.replace('{&requestId}', '&requestId='+requestId));
 link.setAttribute('target', '_blank');
 link.text = 'Open Glimpse';
 document.body.appendChild(link);");
         }
 
         public string Name => "HudClientScript";
-        public IEnumerable<ResourceParameter> Parameters => Enumerable.Empty<ResourceParameter>();
+        public IEnumerable<ResourceParameter> Parameters => new []{ +ResourceParameter.Hash };
         public ResourceType Type => ResourceType.Client;
     }
 }

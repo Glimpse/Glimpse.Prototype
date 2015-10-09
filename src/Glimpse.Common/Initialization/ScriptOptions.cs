@@ -2,14 +2,14 @@
 {
     public class ScriptOptions
     {
-        public string BrowserAgentScriptUri { get; set; }
+        public string BrowserAgentScriptTemplate { get; set; }
 
-        public string HudClientScriptUri { get; set; }
+        public string HudScriptTemplate { get; set; }
 
-        public string HttpMessageUri { get; set; }
+        public string HttpMessageTemplate { get; set; }
 
-        public string MetadataUri { get; set; }
+        public string MetadataTemplate { get; set; }
 
-        public string SpaClientScriptUri { get; set; }
+        public string ClientScriptTemplate { get; set; }
     }
 }

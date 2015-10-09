@@ -16,7 +16,7 @@ namespace Glimpse.Server.Configuration
 
         public string Hash
         {
-            get { return string.Join("&", Resources.Select(r => $"{r.Key}={r.Value}")).Crc32(); }
+            get { return string.Join("&", Resources.Select(r => $"{r.Key}={r.Value}")).Crc32().ToLower(); }
         }
     }
 }

@@ -20,11 +20,11 @@ namespace Glimpse.Server.Internal.Resources
         {
             var scriptOptions = _scriptOptionsProvider.BuildInstance();
             var json = $@"{{
-    ""browserAgentScriptUri"" : ""{scriptOptions.BrowserAgentScriptUri}"",
-    ""hudClientScriptUri"" : ""{scriptOptions.HudClientScriptUri}"",
-    ""httpMessageUri"" : ""{scriptOptions.HttpMessageUri}"",
-    ""metadataUri"" : ""{scriptOptions.MetadataUri}"",
-    ""spaClientScriptUri"" : ""{scriptOptions.SpaClientScriptUri}""
+    ""browserAgentScriptTemplate"" : ""{scriptOptions.BrowserAgentScriptTemplate}"",
+    ""hudScriptTemplate"" : ""{scriptOptions.HudScriptTemplate}"",
+    ""httpMessageTemplate"" : ""{scriptOptions.HttpMessageTemplate}"",
+    ""metadataTemplate"" : ""{scriptOptions.MetadataTemplate}"",
+    ""clientScriptTemplate"" : ""{scriptOptions.ClientScriptTemplate}""
 }}";
 
             var response = context.Response;

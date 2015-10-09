@@ -23,8 +23,8 @@ namespace Glimpse.Agent.Razor
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.PostContent.SetContentEncoded(
-                $@"<script src=""{_scriptOptions.HudClientScriptUri}"" data-request-id=""{_requestId}"" data-client-url=""{_scriptOptions.SpaClientScriptUri}"" async></script>
-                   <script src=""{_scriptOptions.BrowserAgentScriptUri}"" data-request-id=""{_requestId}"" data-action-url=""{_scriptOptions.HttpMessageUri}"" async></script>");
+                $@"<script src=""{_scriptOptions.HudScriptTemplate}"" data-request-id=""{_requestId}"" data-client-template=""{_scriptOptions.ClientScriptTemplate}"" async></script>
+                   <script src=""{_scriptOptions.BrowserAgentScriptTemplate}"" data-request-id=""{_requestId}"" data-action-template=""{_scriptOptions.HttpMessageTemplate}"" async></script>");
         }
     }
 }

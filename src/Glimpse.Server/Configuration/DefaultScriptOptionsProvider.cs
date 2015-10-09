@@ -9,45 +9,40 @@ namespace Glimpse.Server.Configuration
     public class DefaultScriptOptionsProvider : IScriptOptionsProvider
     {
         private readonly IMetadataProvider _metadataProvider;
-        private readonly IGlimpseContextAccessor _context;
 
-        public DefaultScriptOptionsProvider(IMetadataProvider metadataProvider, IGlimpseContextAccessor context)
+        public DefaultScriptOptionsProvider(IMetadataProvider metadataProvider)
         {
             _metadataProvider = metadataProvider;
-            _context = context;
         }
 
         public ScriptOptions BuildInstance()
         {
             var metadata = _metadataProvider.BuildInstance();
-            var supportedParameters = new Dictionary<string, object>
-            {
-                {"hash", metadata.Hash},
-                {"requestid", _context.RequestId}
-            };
+            var resources = metadata.Resources;
+            var supportedParameters = new Dictionary<string, object>{ {"hash", metadata.Hash} };
 
-            var browserAgentScriptTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("browser-agent-script") ?? "");
+            var browserAgentScriptTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("browser-agent-script", string.Empty), resolvePartially:true);
             browserAgentScriptTemplate.AddParameters(supportedParameters);
 
-            var httpMessageTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("agent-message") ?? "");
+            var httpMessageTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("agent-message", string.Empty), resolvePartially: true);
             httpMessageTemplate.AddParameters(supportedParameters);
 
-            var hudClientScriptTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("hud-client-script") ?? "");
+            var hudClientScriptTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("hud-client-script", string.Empty), resolvePartially: true);
             hudClientScriptTemplate.AddParameters(supportedParameters);
 
-            var metadataTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("metadata") ?? "");
+            var metadataTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("metadata", string.Empty), resolvePartially: true);
             metadataTemplate.AddParameters(supportedParameters);
 
-            var spaClientScriptTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("client") ?? "");
+            var spaClientScriptTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("client", string.Empty), resolvePartially: true);
             spaClientScriptTemplate.AddParameters(supportedParameters);
 
             return new ScriptOptions
             {
-                BrowserAgentScriptUri = browserAgentScriptTemplate.Resolve(),
-                HttpMessageUri = httpMessageTemplate.Resolve(),
-                HudClientScriptUri = hudClientScriptTemplate.Resolve(),
-                MetadataUri = metadataTemplate.Resolve(),
-                SpaClientScriptUri = spaClientScriptTemplate.Resolve()
+                BrowserAgentScriptTemplate = browserAgentScriptTemplate.Resolve(),
+                HttpMessageTemplate = httpMessageTemplate.Resolve(),
+                HudScriptTemplate = hudClientScriptTemplate.Resolve(),
+                MetadataTemplate = metadataTemplate.Resolve(),
+                ClientScriptTemplate = spaClientScriptTemplate.Resolve()
             };
         }
     }
