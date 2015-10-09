@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Glimpse.Common;
 using Glimpse.Initialization;
 using Glimpse.Internal.Extensions;
+using Glimpse.Server.Internal.Extensions;
 using Tavis.UriTemplates;
 
 namespace Glimpse.Server.Configuration
@@ -21,28 +21,19 @@ namespace Glimpse.Server.Configuration
             var resources = metadata.Resources;
             var supportedParameters = new Dictionary<string, object>{ {"hash", metadata.Hash} };
 
-            var browserAgentScriptTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("browser-agent-script", string.Empty), resolvePartially:true);
-            browserAgentScriptTemplate.AddParameters(supportedParameters);
-
-            var httpMessageTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("agent-message", string.Empty), resolvePartially: true);
-            httpMessageTemplate.AddParameters(supportedParameters);
-
-            var hudClientScriptTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("hud-client-script", string.Empty), resolvePartially: true);
-            hudClientScriptTemplate.AddParameters(supportedParameters);
-
-            var metadataTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("metadata", string.Empty), resolvePartially: true);
-            metadataTemplate.AddParameters(supportedParameters);
-
-            var spaClientScriptTemplate = new UriTemplate(metadata.Resources.GetValueOrDefault("client", string.Empty), resolvePartially: true);
-            spaClientScriptTemplate.AddParameters(supportedParameters);
+            var browserAgentScriptTemplate = new UriTemplate(resources.GetValueOrDefault("browser-agent-script", string.Empty), true);
+            var httpMessageTemplate = new UriTemplate(resources.GetValueOrDefault("agent-message", string.Empty), true);
+            var hudScriptTemplate = new UriTemplate(resources.GetValueOrDefault("hud-client-script", string.Empty), true);
+            var metadataTemplate = new UriTemplate(resources.GetValueOrDefault("metadata", string.Empty), true);
+            var clientScriptTemplate = new UriTemplate(resources.GetValueOrDefault("client", string.Empty), true);
 
             return new ScriptOptions
             {
-                BrowserAgentScriptTemplate = browserAgentScriptTemplate.Resolve(),
-                HttpMessageTemplate = httpMessageTemplate.Resolve(),
-                HudScriptTemplate = hudClientScriptTemplate.Resolve(),
-                MetadataTemplate = metadataTemplate.Resolve(),
-                ClientScriptTemplate = spaClientScriptTemplate.Resolve()
+                BrowserAgentScriptTemplate = browserAgentScriptTemplate.ResolveWith(supportedParameters),
+                HttpMessageTemplate = httpMessageTemplate.ResolveWith(supportedParameters),
+                HudScriptTemplate = hudScriptTemplate.ResolveWith(supportedParameters),
+                MetadataTemplate = metadataTemplate.ResolveWith(supportedParameters),
+                ClientScriptTemplate = clientScriptTemplate.ResolveWith(supportedParameters)
             };
         }
     }
