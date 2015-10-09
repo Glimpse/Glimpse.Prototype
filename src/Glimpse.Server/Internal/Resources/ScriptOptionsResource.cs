@@ -20,11 +20,14 @@ namespace Glimpse.Server.Internal.Resources
         {
             var scriptOptions = _scriptOptionsProvider.BuildInstance();
             var json = $@"{{
-    ""browserAgentScriptTemplate"" : ""{scriptOptions.BrowserAgentScriptTemplate}"",
-    ""hudScriptTemplate"" : ""{scriptOptions.HudScriptTemplate}"",
-    ""httpMessageTemplate"" : ""{scriptOptions.HttpMessageTemplate}"",
-    ""metadataTemplate"" : ""{scriptOptions.MetadataTemplate}"",
-    ""clientScriptTemplate"" : ""{scriptOptions.ClientScriptTemplate}""
+""scriptOptions"":
+    {{
+        ""browserAgentScriptTemplate"" : ""{scriptOptions.BrowserAgentScriptTemplate}"",
+        ""hudScriptTemplate"" : ""{scriptOptions.HudScriptTemplate}"",
+        ""messageIngressTemplate"" : ""{scriptOptions.MessageIngressTemplate}"",
+        ""metadataTemplate"" : ""{scriptOptions.MetadataTemplate}"",
+        ""clientScriptTemplate"" : ""{scriptOptions.ClientScriptTemplate}""
+    }}
 }}";
 
             var response = context.Response;
@@ -33,7 +36,7 @@ namespace Glimpse.Server.Internal.Resources
             await response.WriteAsync(json);
         }
 
-        public string Name => "ScriptOptions";
+        public string Name => "script-options";
         public IEnumerable<ResourceParameter> Parameters => new [] { ResourceParameter.Hash };
         public ResourceType Type => ResourceType.Client;
     }

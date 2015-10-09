@@ -98,7 +98,7 @@ namespace Glimpse.Server.Internal.Resources
             await response.WriteAsync(output);
         }
 
-        public string Name => "MessageHistory";
+        public string Name => "message-history";
         
         public IEnumerable<ResourceParameter> Parameters { get; }
 

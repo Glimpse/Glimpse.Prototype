@@ -39,7 +39,7 @@ namespace Glimpse.Server.Internal.Resources
             return _metadata;
         }
 
-        public string Name => "Metadata";
+        public string Name => "metadata";
         public IEnumerable<ResourceParameter> Parameters => new [] { +ResourceParameter.Hash };
         public ResourceType Type => ResourceType.Client;
     }

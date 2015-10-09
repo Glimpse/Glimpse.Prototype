@@ -33,7 +33,7 @@ namespace Glimpse.Server.Internal.Resources
 
         public void Configure(IResourceBuilder resourceBuilder)
         {
-            resourceBuilder.Run("MessageStream", null, ResourceType.Client, async (context, dictionary) =>
+            resourceBuilder.Run("message-stream", null, ResourceType.Client, async (context, dictionary) =>
             {
                 var continueTask = new TaskCompletionSource<bool>();
 

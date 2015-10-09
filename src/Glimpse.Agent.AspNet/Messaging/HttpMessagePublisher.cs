@@ -6,6 +6,7 @@ using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using Glimpse.Initialization;
 
 namespace Glimpse.Agent
 {
@@ -14,9 +15,12 @@ namespace Glimpse.Agent
         private readonly ISubject<IMessage> _listenerSubject;
         private readonly HttpClient _httpClient;
         private readonly HttpClientHandler _httpHandler;
+        private readonly IScriptOptionsProvider _scriptOptionsProvider;
+        private string _messageIngressUri;
 
-        public HttpMessagePublisher()
+        public HttpMessagePublisher(IScriptOptionsProvider scriptOptionsProvider)
         {
+            _scriptOptionsProvider = scriptOptionsProvider;
             _listenerSubject = new Subject<IMessage>();
 
             _httpHandler = new HttpClientHandler();
@@ -40,11 +44,14 @@ namespace Glimpse.Agent
 
         public async Task Process(IEnumerable<IMessage> messages)
         {
+            if (string.IsNullOrEmpty(_messageIngressUri))
+                _messageIngressUri = _scriptOptionsProvider.BuildInstance().MessageIngressTemplate;
+
             // TODO: Needs error handelling
             try
             {
                 // TODO: Shouldn't use this :( bad on perf, do manually
-                var response = await _httpClient.PostAsJsonAsync("http://localhost:5210/Glimpse/AgentMessage", messages);
+                var response = await _httpClient.PostAsJsonAsync(_messageIngressUri, messages);
 
                 // Check that response was successful or throw exception
                 response.EnsureSuccessStatusCode();

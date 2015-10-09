@@ -23,7 +23,7 @@ namespace Glimpse.Agent.Razor
         {
             output.PostContent.SetContentEncoded(
                 $@"<script src=""{_scriptOptions.HudScriptTemplate}"" data-request-id=""{_requestId.ToString("N")}"" data-client-template=""{_scriptOptions.ClientScriptTemplate}"" async></script>
-                   <script src=""{_scriptOptions.BrowserAgentScriptTemplate}"" data-request-id=""{_requestId.ToString("N")}"" data-action-template=""{_scriptOptions.HttpMessageTemplate}"" async></script>");
+                   <script src=""{_scriptOptions.BrowserAgentScriptTemplate}"" data-request-id=""{_requestId.ToString("N")}"" data-action-template=""{_scriptOptions.MessageIngressTemplate}"" async></script>");
         }
     }
 }

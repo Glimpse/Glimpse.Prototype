@@ -6,7 +6,7 @@
 
         public string HudScriptTemplate { get; set; }
 
-        public string HttpMessageTemplate { get; set; }
+        public string MessageIngressTemplate { get; set; }
 
         public string MetadataTemplate { get; set; }
 

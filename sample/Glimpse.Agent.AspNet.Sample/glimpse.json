@@ -1,0 +1,10 @@
+{
+"scriptOptions":
+    {
+        "browserAgentScriptTemplate" : "http://localhost:5210/glimpse/agent/agent.js?hash=fba26fa9",
+        "hudScriptTemplate" : "http://localhost:5210/glimpse/hud/hud.js?hash=fba26fa9",
+        "messageIngressTemplate" : "http://localhost:5210/glimpse/message-ingress/",
+        "metadataTemplate" : "http://localhost:5210/glimpse/metadata/?hash=fba26fa9",
+        "clientScriptTemplate" : "http://localhost:5210/glimpse/client/index.html?hash=fba26fa9{&requestId}"
+    }
+}

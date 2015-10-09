@@ -49,6 +49,8 @@ namespace Glimpse
             services.AddTransient<IInspectorFunctionManager, DefaultInspectorFunctionManager>();
             services.AddTransient<WebDiagnosticsInspector>();
 
+            services.AddSingleton<IScriptOptionsProvider, OptionsScriptOptionsProvider>();
+
             return services;
         }
     }

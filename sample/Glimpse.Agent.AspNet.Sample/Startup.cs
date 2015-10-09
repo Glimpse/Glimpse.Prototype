@@ -1,11 +1,15 @@
 ﻿using Glimpse.Agent;
+using Glimpse.Initialization;
 using Microsoft.AspNet.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse.Agent.Sample
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; set; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             /* Example of how to use fixed provider
@@ -34,6 +38,12 @@ namespace Glimpse.Agent.Sample
                     {
                         //options.IgnoredStatusCodes.Add(200);
                     });
+
+            // TODO: Make this happen automatically if the file exists.
+            Configuration = new ConfigurationBuilder()
+                .AddJsonFile("glimpse.json")
+                .Build();
+            services.Configure<ScriptOptions>(Configuration.GetSection("ScriptOptions"));
         }
 
         public void Configure(IApplicationBuilder app)

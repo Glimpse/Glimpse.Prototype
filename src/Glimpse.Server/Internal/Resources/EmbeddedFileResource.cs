@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using Glimpse.Server.Resources;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.FileProviders;
@@ -7,7 +8,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Glimpse.Server.Internal.Resources
 {
-    public class EmbeddedFileResource : IResourceStartup
+    public abstract class EmbeddedFileResource : IResourceStartup
     {
         public void Configure(IResourceBuilder resourceBuilder)
         {
@@ -18,15 +19,13 @@ namespace Glimpse.Server.Internal.Resources
                 RequestPath = "",
                 EnableDefaultFiles = true,
                 FileProvider =
-                    new EmbeddedFileProvider(typeof (EmbeddedFileResource).GetTypeInfo().Assembly,
-                        "Glimpse.Server.Internal.Resources.Embeded")
+                    new EmbeddedFileProvider(typeof (EmbeddedFileResource).GetTypeInfo().Assembly, BaseNamespace)
             });
 
-            resourceBuilder.RegisterResource("Client", "index.html?hash={hash}{&requestId}");
-            resourceBuilder.RegisterResource("Diagnostics", "index.html?hash={hash}{&requestId}");
-            resourceBuilder.RegisterResource("HudClient", "hud.js?hash={hash}");
-            // TODO: This is an "agent script", not a client script
-            resourceBuilder.RegisterResource("BrowserAgent", "scripts/BrowserAgent.js?hash={hash}");
+            foreach (var registration in Register)
+            {
+                resourceBuilder.RegisterResource(registration.Key, registration.Value);
+            }
         }
 
         private static void UseCaching(IResourceBuilder resourceBuilder)
@@ -45,11 +44,41 @@ namespace Glimpse.Server.Internal.Resources
 #endif
             resourceBuilder.AppBuilder.Use(async (ctx, next) =>
             {
-                ctx.Response.Headers.Add(HeaderNames.CacheControl, cacheControl.ToString());
+                ctx.Response.Headers[HeaderNames.CacheControl] = cacheControl.ToString();
                 await next();
             });
         }
 
-        public ResourceType Type => ResourceType.Client;
+        public abstract ResourceType Type { get; }
+
+        public abstract string BaseNamespace { get; }
+
+        public abstract IDictionary<string, string> Register { get; }
+    }
+
+    public class ClientEmbeddedFileResource : EmbeddedFileResource
+    {
+        public override ResourceType Type => ResourceType.Client;
+
+        public override string BaseNamespace => "Glimpse.Server.Internal.Resources.Embeded.Client";
+
+        public override IDictionary<string, string> Register => new Dictionary<string, string>
+        {
+            { "client", "index.html?hash={hash}{&requestId}"},
+            { "diagnostics", "index.html?hash={hash}{&requestId}" },
+            { "hud", "hud.js?hash={hash}" }
+        };
+    }
+
+    public class AgentEmbeddedFileResource : EmbeddedFileResource
+    {
+        public override ResourceType Type => ResourceType.Agent;
+
+        public override string BaseNamespace => "Glimpse.Server.Internal.Resources.Embeded.Agent";
+
+        public override IDictionary<string, string> Register => new Dictionary<string, string>
+        {
+            { "agent", "agent.js?hash={hash}"}
+        };
     }
 }
