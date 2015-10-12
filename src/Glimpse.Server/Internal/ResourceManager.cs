@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;
 using Glimpse.Internal.Extensions;
+using Tavis.UriTemplates;
 
 namespace Glimpse.Server.Internal
 {
@@ -27,7 +28,9 @@ namespace Glimpse.Server.Internal
 
         public ResourceManagerResult Match(HttpContext context)
         {
-            var path = context.Request.Path;
+            var request = context.Request;
+            var url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}";
+            var path = request.Path;
             var remainingPath = (PathString)null;
             var startingSegment = path.StartingSegment(out remainingPath);
             var parameters = (IDictionary<string, string>)null;
@@ -35,7 +38,7 @@ namespace Glimpse.Server.Internal
             
             if (!string.IsNullOrEmpty(startingSegment)
                 && _resourceTable.TryGetValue(startingSegment, out managerItem)
-                && MatchUriTemplate(managerItem.UriTemplate, remainingPath, out parameters))
+                && MatchUriTemplate(managerItem.UriTemplate, url, out parameters))
             {
                 return new ResourceManagerResult(parameters, managerItem.Resource, managerItem.Type);
             }
@@ -45,9 +48,17 @@ namespace Glimpse.Server.Internal
 
         public IReadOnlyDictionary<string, string> RegisteredUris => new ReadOnlyDictionary<string, string>(_templateTable);
 
-        private bool MatchUriTemplate(string uriTemplate, PathString remainingPath, out IDictionary<string, string> paramaters)
+        private bool MatchUriTemplate(UriTemplate uriTemplate, string url, out IDictionary<string, string> parameters)
         {
-            paramaters = new Dictionary<string, string>();
+            if (uriTemplate == null || string.IsNullOrEmpty(url))
+            {
+                parameters = new Dictionary<string, string>();
+            }
+            else
+            {
+                var parsed = uriTemplate.GetParameters(new Uri(url));
+                parameters = parsed.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToString());
+            }
 
             return true;
         }
@@ -57,13 +68,13 @@ namespace Glimpse.Server.Internal
             public ResourceManagerItem(ResourceType type, string uriTemplate, Func<HttpContext, IDictionary<string, string>, Task> resource)
             {
                 Type = type;
-                UriTemplate = uriTemplate;
+                UriTemplate = uriTemplate != null ? new UriTemplate(uriTemplate) : null;
                 Resource = resource;
             }
 
             public ResourceType Type { get; set; }
 
-            public string UriTemplate { get; }
+            public UriTemplate UriTemplate { get; }
 
             public Func<HttpContext, IDictionary<string, string>, Task> Resource { get; }
         }
