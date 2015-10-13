@@ -4,7 +4,7 @@
         "Glimpse.Common": "",
         "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-*",
         "Microsoft.AspNet.StaticFiles": "1.0.0-*",
-        "Tavis.UriTemplates": "0.6.5-beta"
+        "Tavis.UriTemplates": "0.6.6-beta"
     },
     "resource": "Internal/Resources/Embeded/**/*.*",
     "frameworks": {
