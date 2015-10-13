@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿ // ReSharper disable RedundantUsingDirective
+using System;
+// ReSharper restore RedundantUsingDirective
+using System.Collections.Generic;
 using System.Reflection;
 using Glimpse.Server.Resources;
 using Microsoft.AspNet.Builder;
