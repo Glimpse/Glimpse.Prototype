@@ -6,15 +6,14 @@ using Glimpse.Agent.Internal.Inspectors.Mvc;
 using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.OptionsModel;
+using System.Linq;
 
 namespace Glimpse
 {
-    public class GlimpseAgentServices
+    public static class GlimpseAgentServices
     {
-        public static IServiceCollection GetDefaultServices()
+        public static IServiceCollection AddAgentServices(this IServiceCollection services)
         {
-            var services = new ServiceCollection();
-
             //
             // Broker
             //
@@ -49,7 +48,8 @@ namespace Glimpse
             services.AddTransient<IInspectorFunctionManager, DefaultInspectorFunctionManager>();
             services.AddTransient<WebDiagnosticsInspector>();
 
-            services.AddSingleton<IScriptOptionsProvider, OptionsScriptOptionsProvider>();
+            if (!services.Any(s => s.ServiceType == typeof(IScriptOptionsProvider)))
+                services.AddSingleton<IScriptOptionsProvider, OptionsScriptOptionsProvider>();
 
             return services;
         }

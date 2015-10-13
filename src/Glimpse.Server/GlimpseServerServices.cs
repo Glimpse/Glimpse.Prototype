@@ -5,16 +5,16 @@ using Glimpse.Server.Internal;
 using Glimpse.Server.Resources;
 using Glimpse.Server.Storage;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.OptionsModel;
+using System.Linq;
 
 namespace Glimpse
 {
-    public class GlimpseServerServices
+    public static class GlimpseServerServices
     {
-        public static IServiceCollection GetDefaultServices()
+        public static IServiceCollection AddServerServices(this IServiceCollection services)
         {
-            var services = new ServiceCollection();
-
             //
             // Common
             //
@@ -31,16 +31,25 @@ namespace Glimpse
             services.AddTransient<IExtensionProvider<IResource>, DefaultExtensionProvider<IResource>>();
             services.AddTransient<IExtensionProvider<IResourceStartup>, DefaultExtensionProvider<IResourceStartup>>();
             services.AddSingleton<IAllowRemoteProvider, DefaultAllowRemoteProvider>();
-            services.AddSingleton<IScriptOptionsProvider, DefaultScriptOptionsProvider>();
             services.AddSingleton<IMetadataProvider, DefaultMetadataProvider>();
+
+            if (services.Any(s => s.ServiceType == typeof (IScriptOptionsProvider)))
+            {
+                services.Replace(new ServiceDescriptor(
+                    typeof (IScriptOptionsProvider),
+                    typeof (DefaultScriptOptionsProvider),
+                    ServiceLifetime.Singleton));
+            }
+            else
+            {
+                services.AddSingleton<IScriptOptionsProvider, DefaultScriptOptionsProvider>();
+            }
 
             return services;
         }
 
-        public static IServiceCollection GetLocalAgentServices()
+        public static IServiceCollection AddLocalAgentServices(this IServiceCollection services)
         {
-            var services = new ServiceCollection();
-
             //
             // Broker
             //

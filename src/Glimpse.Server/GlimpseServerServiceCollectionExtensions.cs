@@ -1,7 +1,6 @@
 ﻿using System;
 using Glimpse.Server;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Glimpse
 {
@@ -16,7 +15,7 @@ namespace Glimpse
         {
             services.AddOptions();
             
-            services.TryAdd(GlimpseServerServices.GetDefaultServices());
+            services.AddServerServices();
 
             if (setupAction != null)
             {
@@ -28,7 +27,7 @@ namespace Glimpse
 
         public static IServiceCollection WithLocalAgent(this GlimpseServerServiceCollectionBuilder services)
         { 
-            return services.Add(GlimpseServerServices.GetLocalAgentServices());
+            return services.AddLocalAgentServices();
         }
     }
 }
