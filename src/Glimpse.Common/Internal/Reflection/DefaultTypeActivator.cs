@@ -31,21 +31,29 @@ namespace Glimpse.Internal
 
         public IEnumerable<object> CreateInstances(IEnumerable<TypeInfo> types)
         {
-            var activated = types.Select(t => CreateInstance(t));
+            var activated = types.Select(CreateInstance).Where(o => o != null);
 
             return activated;
         }
 
         public IEnumerable<T> CreateInstances<T>(IEnumerable<TypeInfo> types)
         {
-            var activated = types.Select(t => (T)CreateInstance(t));
+            var activated = types.Select(t => (T)CreateInstance(t)).Where(o => o != null);
 
             return activated;
         }
 
         private object CreateInstance(TypeInfo type)
         {
-            return ActivatorUtilities.CreateInstance(_serviceProvider, type.AsType());
+            try
+            {
+                return ActivatorUtilities.CreateInstance(_serviceProvider, type.AsType());
+            }
+            catch (Exception exception)
+            {
+                // TODO: Notify user of failure somehow
+                return null;
+            }
         }
     }
 }

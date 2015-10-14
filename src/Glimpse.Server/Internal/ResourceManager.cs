@@ -22,7 +22,7 @@ namespace Glimpse.Server.Internal
 
         public void Register(string name, string uriTemplate, ResourceType type, Func<HttpContext, IDictionary<string, string>, Task> resource)
         {
-            _resourceTable.Add(name, new ResourceManagerItem(type, uriTemplate, resource));
+            _resourceTable.Add(name, new ResourceManagerItem(name, type, uriTemplate, resource));
             Register(name, uriTemplate);
         }
 
@@ -65,10 +65,10 @@ namespace Glimpse.Server.Internal
 
         private class ResourceManagerItem
         {
-            public ResourceManagerItem(ResourceType type, string uriTemplate, Func<HttpContext, IDictionary<string, string>, Task> resource)
+            public ResourceManagerItem(string name, ResourceType type, string uriTemplate, Func<HttpContext, IDictionary<string, string>, Task> resource)
             {
                 Type = type;
-                UriTemplate = uriTemplate != null ? new UriTemplate(uriTemplate) : null;
+                UriTemplate = uriTemplate != null ? new UriTemplate(name + "/" + uriTemplate) : null;
                 Resource = resource;
             }
 
