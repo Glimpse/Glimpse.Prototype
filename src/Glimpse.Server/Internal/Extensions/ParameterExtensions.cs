@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace Glimpse.Server.Internal.Extensions
 {
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public static class ParameterExtensions
     {
         public static IEnumerable<string> ParseEnumerable(this IDictionary<string, string> parameters, string name)
