@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
+using Glimpse.Server.Internal.Extensions;
 using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Http.Features;
@@ -23,7 +26,7 @@ namespace Glimpse.Server.Internal.Resources
             _senderSubject = new Subject<Container>();
 
             // setup heart beat to keep alive client connections
-            Observable.Interval(new TimeSpan(0, 0, 20), TaskPoolScheduler.Default).Subscribe(x => _senderSubject.OnNext(new Container("ping", "")));
+            Observable.Interval(new TimeSpan(0, 0, 20), TaskPoolScheduler.Default).Subscribe(x => _senderSubject.OnNext(Container.Ping()));
             
             // TODO: See if we can get Defered working there
             // lets subscribe, hope of the thread and then broadcast to all connections
@@ -33,7 +36,7 @@ namespace Glimpse.Server.Internal.Resources
 
         public void Configure(IResourceBuilder resourceBuilder)
         {
-            resourceBuilder.Run("message-stream", null, ResourceType.Client, async (context, dictionary) =>
+            resourceBuilder.Run("message-stream", "{?types}", ResourceType.Client, async (context, parameters) =>
             {
                 var continueTask = new TaskCompletionSource<bool>();
 
@@ -44,11 +47,17 @@ namespace Glimpse.Server.Internal.Resources
                     buffering.DisableRequestBuffering();
                 }
 
+                // Filter when types are present
+                var types = parameters.ParseEnumerable("types").ToArray();
+                Func<Container, bool> filter = c => true;
+                if (types.Length > 0)
+                    filter = c => c.Types.Intersect(types).Any();
+
                 context.Response.ContentType = "text/event-stream";
                 await context.Response.WriteAsync("retry: 5000\n\n");
                 await context.Response.Body.FlushAsync();
 
-                var unSubscribe = _senderSubject.Subscribe(async t =>
+                var unSubscribe = _senderSubject.Where(filter).Subscribe(async t =>
                 {
                     await _syncLock.WaitAsync();
 
@@ -78,18 +87,31 @@ namespace Glimpse.Server.Internal.Resources
 
         private void ProcessMessage(IMessage message)
         {
-            _senderSubject.OnNext(new Container("message", message.Payload));
+            _senderSubject.OnNext(Container.Message(message.Types, message.Payload));
         }
 
         private class Container
         {
-            public Container(string @event, string data)
+            private Container(string @event, IEnumerable<string> types, string data)
             {
                 Event = @event;
                 Data = data;
+                Types = types;
+            }
+
+            public static Container Ping()
+            {
+                return new Container("ping", Enumerable.Empty<string>(), "");
+            }
+
+            public static Container Message(IEnumerable<string> types, string data)
+            {
+                return new Container("message", types, data);
             }
 
             public string Data { get; }
+
+            public IEnumerable<string> Types { get; }
 
             public string Event { get; }
         }
