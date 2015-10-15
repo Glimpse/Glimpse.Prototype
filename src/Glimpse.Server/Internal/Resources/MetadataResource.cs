@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Glimpse.Internal;
+using Glimpse.Common.Internal.Serialization;
 using Glimpse.Server.Configuration;
 using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using Glimpse.Internal.Extensions;
-using Newtonsoft.Json.Serialization;
 
 namespace Glimpse.Server.Internal.Resources
 {
@@ -17,13 +16,10 @@ namespace Glimpse.Server.Internal.Resources
         private readonly JsonSerializer _jsonSerializer;
         private Metadata _metadata;
 
-        public MetadataResource(IMetadataProvider metadataProvider, JsonSerializer jsonSerializer)
+        public MetadataResource(IMetadataProvider metadataProvider, IJsonSerializerProvider serializerProvider)
         {
             _metadataProvider = metadataProvider;
-            _jsonSerializer = jsonSerializer;
-            _jsonSerializer.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            _jsonSerializer.Converters.Add(new TimeSpanConverter());
-            _jsonSerializer.Converters.Add(new StringValuesConverter());
+            _jsonSerializer = serializerProvider.GetJsonSerializer();
         }
 
         public async Task Invoke(HttpContext context, IDictionary<string, string> parameters)

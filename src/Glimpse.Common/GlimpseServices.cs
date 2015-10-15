@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Glimpse.Common;
+using Glimpse.Common.Internal.Serialization;
 using Microsoft.Extensions.DependencyInjection;
 using Glimpse.Internal;
 using Newtonsoft.Json;
@@ -31,6 +32,7 @@ namespace Glimpse
             // JSON.Net.
             //
             services.AddTransient<JsonSerializer, JsonSerializer>();
+            services.AddSingleton<IJsonSerializerProvider, DefaultJsonSerializerProvider>();
 
             return services;
         }

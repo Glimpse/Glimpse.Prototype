@@ -1,8 +1,7 @@
 using System.Linq;
-using Glimpse.Internal;
+using Glimpse.Common.Internal.Serialization;
 using Glimpse.Internal.Extensions;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Glimpse.Agent.Internal.Messaging
 {
@@ -10,13 +9,9 @@ namespace Glimpse.Agent.Internal.Messaging
     {
         private readonly JsonSerializer _jsonSerializer;
 
-        public DefaultMessagePayloadFormatter(JsonSerializer jsonSerializer)
+        public DefaultMessagePayloadFormatter(IJsonSerializerProvider serializerProvider)
         {
-            jsonSerializer.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            jsonSerializer.Converters.Add(new TimeSpanConverter());
-            jsonSerializer.Converters.Add(new StringValuesConverter());
-
-            _jsonSerializer = jsonSerializer;
+            _jsonSerializer = serializerProvider.GetJsonSerializer();
         }
         
         public virtual string Serialize(IMessage message, object payload)
