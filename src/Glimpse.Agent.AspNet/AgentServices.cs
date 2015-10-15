@@ -38,6 +38,7 @@ namespace Glimpse
             services.AddSingleton<IExtensionProvider<IInspectorFunction>, DefaultExtensionProvider<IInspectorFunction>>();
             services.AddSingleton<IExtensionProvider<IInspector>, DefaultExtensionProvider<IInspector>>();
             services.AddSingleton<IExtensionProvider<IAgentStartup>, DefaultExtensionProvider<IAgentStartup>>();
+            services.AddSingleton<IExtensionProvider<ITab>, DefaultExtensionProvider<ITab>>();
 
             //
             // Messages.
