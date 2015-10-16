@@ -34,8 +34,9 @@ namespace Glimpse.Server.Internal.Resources
 
                var list = await _storage.RetrieveByContextId(contextId.Value, types);
 
-                response.Headers[HeaderNames.ContentType] = "application/json";
-                await response.WriteAsync(list.ToJsonArray());
+                await context.RespondWith(
+                    new RawJson(list.ToJsonArray())
+                    .EnableCaching());
             });
         }
 
