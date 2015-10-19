@@ -49,7 +49,7 @@ namespace Glimpse.Internal
             {
                 return ActivatorUtilities.CreateInstance(_serviceProvider, type.AsType());
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 // TODO: Notify user of failure somehow
                 return null;

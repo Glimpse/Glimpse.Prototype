@@ -1,5 +1,4 @@
 ﻿using Glimpse.Agent.Internal.Inspectors.Mvc.Proxies;
-using Glimpse.Agent.Internal.Inspectors.Mvc.Proxies;
 using Glimpse.Internal;
 
 namespace Glimpse.Agent.Internal.Inspectors.Mvc

@@ -56,7 +56,7 @@ namespace Glimpse.Agent
                 // Check that response was successful or throw exception
                 response.EnsureSuccessStatusCode();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // TODO: Bad thing happened
             }

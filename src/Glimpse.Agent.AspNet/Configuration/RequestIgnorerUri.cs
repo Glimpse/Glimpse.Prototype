@@ -33,7 +33,7 @@ namespace Glimpse.Agent.Configuration
 
                 return false;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 // TODO: Log this occurance
                 // return true;
