@@ -56,15 +56,16 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         }
 
         [TelemetryName("Microsoft.AspNet.Mvc.AfterAction")]
-        public void OnAfterAction(IActionDescriptor actionDescriptor, IHttpContext httpContext)
+        public void OnAfterAction(object actionDescriptor, IHttpContext httpContext)
         {
             var timing = _broker.EndLogicalOperation<BeforeActionMessage>().Timing;
+            var typedActionDescriptor = ConvertActionDescriptor(actionDescriptor);
 
             var message = new AfterActionMessage()
             {
-                ActionId = actionDescriptor.Id,
-                ActionName = actionDescriptor.Name,
-                ActionControllerName = actionDescriptor.ControllerName,
+                ActionId = typedActionDescriptor.Id,
+                ActionName = typedActionDescriptor.Name,
+                ActionControllerName = typedActionDescriptor.ControllerName,
                 ActionEndTime = timing.End,
                 ActionDuration = timing.Elapsed
             };
