@@ -3,6 +3,8 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using GuidConverter = Glimpse.Common.Internal.Serialization.GuidConverter;
 
 namespace Glimpse.Internal.Extensions
 {
@@ -21,6 +23,14 @@ namespace Glimpse.Internal.Extensions
 
                 return stringWriter.ToString();
             }
+        }
+
+        public static void Configure(this JsonSerializer jsonSerializer)
+        {
+            jsonSerializer.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            jsonSerializer.Converters.Add(new TimeSpanConverter());
+            jsonSerializer.Converters.Add(new StringValuesConverter());
+            jsonSerializer.Converters.Add(new GuidConverter());
         }
     }
 }

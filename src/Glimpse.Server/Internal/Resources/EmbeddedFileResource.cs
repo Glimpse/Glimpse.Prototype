@@ -7,7 +7,6 @@ using Glimpse.Server.Resources;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.FileProviders;
 using Microsoft.AspNet.StaticFiles;
-using Microsoft.Net.Http.Headers;
 
 namespace Glimpse.Server.Internal.Resources
 {
@@ -15,9 +14,11 @@ namespace Glimpse.Server.Internal.Resources
     {
         public void Configure(IResourceBuilder resourceBuilder)
         {
-            UseCaching(resourceBuilder);
+            var appBuilder = resourceBuilder.AppBuilder;
 
-            resourceBuilder.AppBuilder.UseFileServer(new FileServerOptions
+            appBuilder.ModifyResponseWith(response => response.EnableCaching());
+
+            appBuilder.UseFileServer(new FileServerOptions
             {
                 RequestPath = "",
                 EnableDefaultFiles = true,
@@ -29,27 +30,6 @@ namespace Glimpse.Server.Internal.Resources
             {
                 resourceBuilder.RegisterResource(registration.Key, registration.Value);
             }
-        }
-
-        private static void UseCaching(IResourceBuilder resourceBuilder)
-        {
-#if !DEBUG
-            var cacheControl = new CacheControlHeaderValue
-            {
-                Public = true,
-                MaxAge = TimeSpan.FromDays(150)
-            };
-#else
-            var cacheControl = new CacheControlHeaderValue
-            {
-                NoCache = true,
-            };
-#endif
-            resourceBuilder.AppBuilder.Use(async (ctx, next) =>
-            {
-                ctx.Response.Headers[HeaderNames.CacheControl] = cacheControl.ToString();
-                await next();
-            });
         }
 
         public abstract ResourceType Type { get; }

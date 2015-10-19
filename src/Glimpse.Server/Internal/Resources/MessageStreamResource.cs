@@ -51,6 +51,8 @@ namespace Glimpse.Server.Internal.Resources
                 var contextId = parameters.ParseGuid("contextId");
                 var filter = GetStreamFilter(types, contextId);
 
+                //var sse = await context.RespondWith(new ServerSentEvent());
+
                 context.Response.ContentType = "text/event-stream";
                 await context.Response.WriteAsync("retry: 5000\n\n");
                 await context.Response.Body.FlushAsync();

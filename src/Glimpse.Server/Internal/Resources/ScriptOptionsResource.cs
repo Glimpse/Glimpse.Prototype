@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Glimpse.Initialization;
 using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;
-using Microsoft.Net.Http.Headers;
 
 namespace Glimpse.Server.Internal.Resources
 {
@@ -30,10 +29,9 @@ namespace Glimpse.Server.Internal.Resources
     }}
 }}";
 
-            var response = context.Response;
-            response.Headers[HeaderNames.ContentType] = "application/json";
-            response.Headers[HeaderNames.ContentDisposition] = "attachment; filename = glimpse.json";
-            await response.WriteAsync(json);
+            await context.RespondWith(
+                new RawJson(json)
+                .AsFile("glimpse.json"));
         }
 
         public string Name => "script-options";

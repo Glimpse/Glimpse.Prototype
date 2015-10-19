@@ -1,6 +1,5 @@
-using Glimpse.Internal;
+using Glimpse.Internal.Extensions;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Glimpse.Common.Internal.Serialization
 {
@@ -9,10 +8,7 @@ namespace Glimpse.Common.Internal.Serialization
         private readonly JsonSerializer _jsonSerializer;
         public DefaultJsonSerializerProvider(JsonSerializer jsonSerializer)
         {
-            jsonSerializer.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            jsonSerializer.Converters.Add(new TimeSpanConverter());
-            jsonSerializer.Converters.Add(new StringValuesConverter());
-            jsonSerializer.Converters.Add(new GuidConverter());
+            jsonSerializer.Configure();
             _jsonSerializer = jsonSerializer;
         }
 

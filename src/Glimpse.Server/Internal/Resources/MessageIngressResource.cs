@@ -22,7 +22,6 @@ namespace Glimpse.Server.Internal.Resources
 
         public async Task Invoke(HttpContext context, IDictionary<string, string> parameters)
         {
-            var response = context.Response;
             if (context.Request.Method.Equals("POST", StringComparison.OrdinalIgnoreCase))
             {
                 // TODO: Wrap in a try block and return Http Problem when required
@@ -32,16 +31,14 @@ namespace Glimpse.Server.Internal.Resources
                     _messageServerBus.SendMessage(message);
                 }
 
-                response.StatusCode = (int)HttpStatusCode.Accepted;
-                response.Headers[HeaderNames.ContentType] = "text/plain";
-                await response.WriteAsync($"Accepted: " + string.Join(", ", messages.Select(m => m.Id.ToString("N"))));
+                await context.RespondWith(
+                    new HttpStatusResponse(HttpStatusCode.Accepted, 
+                    "Accepted: " + string.Join(", ", messages.Select(m => m.Id.ToString("N")))));
             }
             else
             {
-                response.StatusCode = (int) HttpStatusCode.MethodNotAllowed;
-                response.Headers[HeaderNames.Allow] = "POST";
-                response.Headers[HeaderNames.ContentType] = "text/plain";
-                await response.WriteAsync("Please POST to this resource.");
+                await context.RespondWith(
+                    new InvalidMethodProblem(context.Request.Method, "POST"));
             }
         }
 

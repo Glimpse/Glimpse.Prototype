@@ -1,8 +1,9 @@
 ﻿// ReSharper disable RedundantUsingDirective
 using System;
 // ReSharper restore RedundantUsingDirective
-using System;
 using System.Threading.Tasks;
+using Glimpse.Server.Internal.Resources;
+using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 
@@ -10,9 +11,28 @@ namespace Glimpse.Server.Resources
 {
     public static class HttpContextExtensions
     {
+        public static IApplicationBuilder ModifyResponseWith(this IApplicationBuilder builder, Func<IResponse, IResponse> useFunc)
+        {
+            var nullImpl = new NullResponse();
+            var response = useFunc(nullImpl);
+
+            builder.Use(async (ctx, next) =>
+            {
+                await response.Respond(ctx);
+                await next();
+            });
+
+            return builder;
+        }
+
         public async static Task RespondWith(this HttpContext context, IResponse response)
         {
             await response.Respond(context);
+        }
+
+        public static IResponse AsFile(this IResponse response, string filename)
+        {
+            return new ResponseDecorator(response, ctx => ctx.Response.Headers[HeaderNames.ContentDisposition] = $"attachment; filename = ${filename}");
         }
 
         public static IResponse EnableCaching(this IResponse response, TimeSpan? timeSpan = null)
@@ -33,45 +53,6 @@ namespace Glimpse.Server.Resources
 #endif
                 ctx.Response.Headers[HeaderNames.CacheControl] = cacheControl.ToString();
             });
-        }
-    }
-
-    public interface IResponse
-    {
-        Task Respond(HttpContext context);
-    }
-
-    public class RawJson : IResponse
-    {
-        private readonly string _json;
-
-        public RawJson(string json)
-        {
-            _json = json;
-        }
-
-        public async Task Respond(HttpContext context)
-        {
-            var response = context.Response;
-            response.Headers[HeaderNames.ContentType] = "application/json";
-            await response.WriteAsync(_json);
-        }
-    }
-
-    public class ResponseDecorator : IResponse
-    {
-        private readonly IResponse _response;
-        private readonly Action<HttpContext> _decoration;
-        public ResponseDecorator(IResponse response, Action<HttpContext> decoration)
-        {
-            _response = response;
-            _decoration = decoration;
-        }
-
-        public async Task Respond(HttpContext context)
-        {
-            _decoration(context);
-            await _response.Respond(context);
         }
     }
 }
