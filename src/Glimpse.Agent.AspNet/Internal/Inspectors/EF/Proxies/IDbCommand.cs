@@ -2,10 +2,10 @@
 {
     public interface IDbCommand
     {
-        string CommandText { get; set; }
+        string CommandText { get; }
 
-        int CommandType { get; set; }
+        int CommandType { get; }
 
-        object Parameters { get; set; }
+        object Parameters { get; }
     }
 }
