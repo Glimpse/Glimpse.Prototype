@@ -43,17 +43,20 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         }
         
         [DiagnosticName("Microsoft.AspNet.Hosting.UnhandledException")]
-        public void OnUnhandledException(HttpContext httpContext, Exception exception)
+        public void OnHostingUnhandledException(HttpContext httpContext, Exception exception)
         {
             var message = new HostingExceptionMessage();
             ProcessEndRequest(message, httpContext);
+            ProcessException(message, exception, false);
 
-            // store the BaseException as the exception of record 
-            var baseException = exception.GetBaseException();
-            message.ExceptionIsHandelled = false;
-            message.ExceptionTypeName = baseException.GetType().Name;
-            message.ExceptionMessage = baseException.Message;
-            message.ExceptionDetails = _exceptionProcessor.GetErrorDetails(exception);
+            _broker.SendMessage(message);
+        }
+
+        [DiagnosticName("Microsoft.AspNet.Diagnostics.UnhandledException")]
+        public void OnDiagnosticsUnhandledException(HttpContext httpContext, Exception exception)
+        {
+            var message = new DiagnosticsExceptionMessage();
+            ProcessException(message, exception, false);
 
             _broker.SendMessage(message);
         }
@@ -75,6 +78,16 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             message.ResponseContentType = response.ContentType;
             message.ResponseStatusCode = response.StatusCode;
             message.ResponseEndTime = timing.End.ToUniversalTime();
+        }
+
+        private void ProcessException(IExceptionMessage message, Exception exception, bool isHandelled)
+        {
+            // store the BaseException as the exception of record 
+            var baseException = exception.GetBaseException();
+            message.ExceptionIsHandelled = isHandelled;
+            message.ExceptionTypeName = baseException.GetType().Name;
+            message.ExceptionMessage = baseException.Message;
+            message.ExceptionDetails = _exceptionProcessor.GetErrorDetails(exception);
         }
     }
 }
