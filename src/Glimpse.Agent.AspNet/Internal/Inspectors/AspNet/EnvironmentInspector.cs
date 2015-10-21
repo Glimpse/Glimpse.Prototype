@@ -8,7 +8,7 @@ namespace Glimpse.Agent.AspNet.Internal.Inspectors.AspNet
     public class EnvironmentInspector : Inspector
     {
         private readonly IAgentBroker _broker;
-        private EnvironmentMessage _message;
+        //private EnvironmentMessage _message;
 
         public EnvironmentInspector(IAgentBroker broker)
         {
