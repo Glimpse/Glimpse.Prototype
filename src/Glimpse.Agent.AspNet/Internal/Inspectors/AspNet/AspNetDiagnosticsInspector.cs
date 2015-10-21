@@ -61,6 +61,15 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             _broker.SendMessage(message);
         }
 
+        [DiagnosticName("Microsoft.AspNet.Diagnostics.HandledException")]
+        public void OnDiagnosticsHandledException(HttpContext httpContext, Exception exception)
+        {
+            var message = new DiagnosticsExceptionMessage();
+            ProcessException(message, exception, true);
+
+            _broker.SendMessage(message);
+        }
+
         private void ProcessEndRequest(EndRequestMessage message, HttpContext httpContext)
         {
             var timing = _broker.EndLogicalOperation<BeginRequestMessage>().Timing;
