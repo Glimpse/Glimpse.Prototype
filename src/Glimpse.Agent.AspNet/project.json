@@ -5,7 +5,7 @@
         "Microsoft.Extensions.TelemetryAdapter": "1.0.0-*",
         "Microsoft.AspNet.WebApi.Client": "5.2.2",
         "System.Net.Http": "4.0.0",
-        "System.Diagnostics.Tracing.Telemetry": "4.0.0-beta-*"
+        "System.Diagnostics.DiagnosticSource": "4.0.0-beta-*"
     },
     "frameworks" : {
         "dnx451": { 
