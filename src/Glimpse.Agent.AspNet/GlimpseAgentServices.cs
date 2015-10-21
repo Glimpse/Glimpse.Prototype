@@ -46,6 +46,7 @@ namespace Glimpse
             services.AddTransient<IAgentStartupManager, DefaultAgentStartupManager>();
             services.AddTransient<IRequestIgnorerManager, DefaultRequestIgnorerManager>();
             services.AddTransient<IInspectorFunctionManager, DefaultInspectorFunctionManager>();
+            services.AddTransient<IExceptionProcessor, ExceptionProcessor>();
             services.AddTransient<WebDiagnosticsInspector>();
 
             if (!services.Any(s => s.ServiceType == typeof(IScriptOptionsProvider)))

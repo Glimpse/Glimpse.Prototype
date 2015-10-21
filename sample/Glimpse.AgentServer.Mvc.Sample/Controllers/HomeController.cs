@@ -24,6 +24,8 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample.Controllers
         {
             ViewData["Message"] = "Your contact page.";
 
+            throw new Exception("This is a test exception");
+
             return View();
         }
 

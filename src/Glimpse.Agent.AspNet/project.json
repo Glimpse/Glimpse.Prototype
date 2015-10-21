@@ -3,6 +3,7 @@
     "dependencies": {
         "Glimpse.Common": "",
         "Microsoft.Extensions.DiagnosticAdapter": "1.0.0-*",
+        "Microsoft.AspNet.FileProviders.Physical": "1.0.0-*",
         "Microsoft.AspNet.WebApi.Client": "5.2.2",
         "System.Net.Http": "4.0.0",
         "System.Diagnostics.DiagnosticSource": "4.0.0-beta-*"

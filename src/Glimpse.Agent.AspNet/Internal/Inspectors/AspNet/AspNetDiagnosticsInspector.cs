@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Glimpse.Agent.Messages;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DiagnosticAdapter;
@@ -38,26 +36,45 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         [DiagnosticName("Microsoft.AspNet.Hosting.EndRequest")]
         public void OnEndRequest(HttpContext httpContext)
         {
+            var message = new EndRequestMessage();
+            ProcessEndRequest(message, httpContext);
+
+            _broker.SendMessage(message);
+        }
+        
+        [DiagnosticName("Microsoft.AspNet.Hosting.UnhandledException")]
+        public void OnUnhandledException(HttpContext httpContext, Exception exception)
+        {
+            var message = new HostingExceptionMessage();
+            ProcessEndRequest(message, httpContext);
+
+            // store the BaseException as the exception of record 
+            var baseException = exception.GetBaseException();
+            message.ExceptionIsHandelled = false;
+            message.ExceptionTypeName = baseException.GetType().Name;
+            message.ExceptionMessage = baseException.Message;
+            message.ExceptionDetails = _exceptionProcessor.GetErrorDetails(exception);
+
+            _broker.SendMessage(message);
+        }
+
+        private void ProcessEndRequest(EndRequestMessage message, HttpContext httpContext)
+        {
             var timing = _broker.EndLogicalOperation<BeginRequestMessage>().Timing;
 
             var request = httpContext.Request;
             var response = httpContext.Response;
 
-            var message = new EndRequestMessage
-            {
-                // TODO: check if there is a better way of doing this
-                RequestUrl = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}",
-                RequestPath = request.Path,
-                RequestQueryString = request.QueryString.Value,
-                ResponseDuration = Math.Round(timing.Elapsed.TotalMilliseconds, 2),
-                ResponseHeaders = response.Headers,
-                ResponseContentLength = response.ContentLength,
-                ResponseContentType = response.ContentType,
-                ResponseStatusCode = response.StatusCode,
-                ResponseEndTime = timing.End.ToUniversalTime()
-            };
-            
-            _broker.SendMessage(message);
+            // TODO: check if there is a better way of doing this
+            message.RequestUrl = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}";
+            message.RequestPath = request.Path;
+            message.RequestQueryString = request.QueryString.Value;
+            message.ResponseDuration = Math.Round(timing.Elapsed.TotalMilliseconds, 2);
+            message.ResponseHeaders = response.Headers;
+            message.ResponseContentLength = response.ContentLength;
+            message.ResponseContentType = response.ContentType;
+            message.ResponseStatusCode = response.StatusCode;
+            message.ResponseEndTime = timing.End.ToUniversalTime();
         }
     }
 }

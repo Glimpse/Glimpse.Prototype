@@ -12,9 +12,11 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         private readonly IAgentBroker _broker;
         private readonly IContextData<MessageContext> _contextData;
         private readonly ProxyAdapter _proxyAdapter;
+        private readonly IExceptionProcessor _exceptionProcessor;
 
-        public WebDiagnosticsInspector(IAgentBroker broker, IContextData<MessageContext> contextData)
+        public WebDiagnosticsInspector(IExceptionProcessor exceptionProcessor, IAgentBroker broker, IContextData<MessageContext> contextData)
         {
+            _exceptionProcessor = exceptionProcessor;
             _broker = broker;
             _contextData = contextData;
 
