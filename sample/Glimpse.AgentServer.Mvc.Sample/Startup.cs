@@ -95,7 +95,7 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample
             {
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
+                app.UseDatabaseErrorPage();
             }
             else
             {
