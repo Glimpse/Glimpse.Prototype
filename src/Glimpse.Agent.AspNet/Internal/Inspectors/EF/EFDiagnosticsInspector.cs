@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Glimpse.Agent.Internal.Inspectors.EF.Proxies;
 using Glimpse.Agent.Messages;
-using Microsoft.Extensions.TelemetryAdapter;
+using Microsoft.Extensions.DiagnosticAdapter;
 
 namespace Glimpse.Agent.Internal.Inspectors.Mvc
 {
     public partial class WebDiagnosticsInspector
     {
-        [TelemetryName("Microsoft.Data.Entity.BeforeExecuteCommand")]
+        [DiagnosticName("Microsoft.Data.Entity.BeforeExecuteCommand")]
         public void OnBeforeExecuteCommand(IDbCommand command, string executeMethod, bool isAsync)
         {
             var startDateTime = DateTime.UtcNow;
@@ -28,7 +28,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             _broker.SendMessage(message);
         }
 
-        [TelemetryName("Microsoft.Data.Entity.AfterExecuteCommand")]
+        [DiagnosticName("Microsoft.Data.Entity.AfterExecuteCommand")]
         public void OnAfterExecuteCommand(IDbCommand command, string executeMethod, bool isAsync)
         {
             var timing = _broker.EndLogicalOperation<BeforeExecuteCommandMessage>().Timing;
@@ -43,7 +43,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             _broker.SendMessage(message);
         }
 
-        [TelemetryName("Microsoft.Data.Entity.CommandExecutionError")]
+        [DiagnosticName("Microsoft.Data.Entity.CommandExecutionError")]
         public void OnAfterExecuteCommand(IDbCommand command, string executeMethod, bool isAsync, Exception exception)
         {
             var timing = _broker.EndLogicalOperation<BeforeExecuteCommandMessage>().Timing;

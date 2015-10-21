@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.Tracing;
+﻿using System.Diagnostics;
 using Glimpse.Agent;
 using Glimpse.Agent.Configuration;
 using Glimpse.Initialization;
@@ -19,7 +19,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         {
             var appServices = options.ApplicationServices;
 
-            var telemetryListener = appServices.GetRequiredService<TelemetryListener>();
+            var telemetryListener = appServices.GetRequiredService<DiagnosticListener>();
             telemetryListener.SubscribeWithAdapter(appServices.GetRequiredService<WebDiagnosticsInspector>(), IsEnabled);
         }
 

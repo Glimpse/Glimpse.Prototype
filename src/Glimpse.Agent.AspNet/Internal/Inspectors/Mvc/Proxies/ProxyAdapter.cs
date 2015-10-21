@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.Extensions.TelemetryAdapter.Internal;
+using Microsoft.Extensions.DiagnosticAdapter.Internal;
 
 namespace Glimpse.Agent.Internal.Inspectors.Mvc.Proxies
 {

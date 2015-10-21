@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Glimpse.Agent.Internal.Inspectors.Mvc.Proxies;
 using Glimpse.Agent.Messages;
-using Microsoft.Extensions.TelemetryAdapter;
+using Microsoft.Extensions.DiagnosticAdapter;
 
 namespace Glimpse.Agent.Internal.Inspectors.Mvc
 {
@@ -22,7 +22,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
 
         // NOTE: This event is the start of the action pipeline. The action has been selected, the route
         //       has been selected but no filters have run and model binding hasn't occured.
-        [TelemetryName("Microsoft.AspNet.Mvc.BeforeAction")]
+        [DiagnosticName("Microsoft.AspNet.Mvc.BeforeAction")]
         public void OnBeforeAction(object actionDescriptor, IHttpContext httpContext, IRouteData routeData)
         {
             var startDateTime = DateTime.UtcNow;
@@ -55,7 +55,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             _broker.SendMessage(message);
         }
 
-        [TelemetryName("Microsoft.AspNet.Mvc.AfterAction")]
+        [DiagnosticName("Microsoft.AspNet.Mvc.AfterAction")]
         public void OnAfterAction(object actionDescriptor, IHttpContext httpContext)
         {
             var timing = _broker.EndLogicalOperation<BeforeActionMessage>().Timing;
@@ -75,7 +75,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
 
         // NOTE: This event is the start of the action execution. The action has been selected, the route
         //       has been selected, filters have run and model binding has occured.
-        [TelemetryName("Microsoft.AspNet.Mvc.BeforeActionMethod")]
+        [DiagnosticName("Microsoft.AspNet.Mvc.BeforeActionMethod")]
         public void OnBeforeActionMethod(
             IActionContext actionContext,
             IDictionary<string, object> arguments)
@@ -100,7 +100,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             _broker.SendMessage(message);
         }
 
-        [TelemetryName("Microsoft.AspNet.Mvc.AfterActionMethod")]
+        [DiagnosticName("Microsoft.AspNet.Mvc.AfterActionMethod")]
         public void OnAfterActionMethod(
             IActionContext actionContext,
             IActionResult result)
@@ -122,7 +122,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
 
         // NOTE: This event is the start of the result pipeline. The action has been executed, but
         //       we haven't yet determined which view (if any) will handle the request
-        [TelemetryName("Microsoft.AspNet.Mvc.BeforeActionResult")]
+        [DiagnosticName("Microsoft.AspNet.Mvc.BeforeActionResult")]
         public void OnBeforeActionResult(
             IActionContext actionContext,
             object result)
@@ -134,7 +134,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             //var inheritancHierarchy = result.GetType().GetInheritancHierarchy().ToList();
 
             // TODO: currently looking to see if this switch code and ProxyAdapter can be
-            //       consumed by Microsoft.Extensions.TelemetryAdapter
+            //       consumed by Microsoft.Extensions.DiagnosticAdapter
             var message = (BeforeActionResultMessage)null;
             switch (result.GetType().FullName)
             {
@@ -206,7 +206,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             _broker.SendMessage(message);
         }
 
-        [TelemetryName("Microsoft.AspNet.Mvc.AfterActionResult")]
+        [DiagnosticName("Microsoft.AspNet.Mvc.AfterActionResult")]
         public void OnAfterActionResult(
             IActionContext actionContext,
             IActionResult result)
@@ -229,7 +229,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         // NOTE: This event is only fired when we dont find any matches at all. This executes
         //       at the end of the matching process. You will never get a ViewResultViewNotFound 
         //       and ViewResultViewFound event firing for the same view resolution.
-        [TelemetryName("Microsoft.AspNet.Mvc.ViewNotFound")]
+        [DiagnosticName("Microsoft.AspNet.Mvc.ViewNotFound")]
         public void OnViewResultViewNotFound(
             IActionContext actionContext,
             ActionResultTypes.IViewResult result,
@@ -255,7 +255,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         // NOTE: This event is only fired when we do find a match. This executes at the end of
         //       the matching process. You will never get a ViewResultViewNotFound and 
         //       ViewResultViewFound event firing for the same view resolution.
-        [TelemetryName("Microsoft.AspNet.Mvc.ViewFound")]
+        [DiagnosticName("Microsoft.AspNet.Mvc.ViewFound")]
         public void OnViewResultViewFound(
             IActionContext actionContext,
             ActionResultTypes.IViewResult result,
@@ -278,7 +278,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             _broker.SendMessage(message);
         }
 
-        [TelemetryName("Microsoft.AspNet.Mvc.BeforeView")]
+        [DiagnosticName("Microsoft.AspNet.Mvc.BeforeView")]
         public void OnBeforeView(IView view, IViewContext viewContext)
         {
             var startDateTime = DateTime.UtcNow;
@@ -301,7 +301,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             _broker.SendMessage(message);
         }
 
-        [TelemetryName("Microsoft.AspNet.Mvc.AfterView")]
+        [DiagnosticName("Microsoft.AspNet.Mvc.AfterView")]
         public void OnAfterView(IView view, IViewContext viewContext)
         {
             var timing = _broker.EndLogicalOperation<BeforeActionViewInvokedMessage>().Timing;

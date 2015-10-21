@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Glimpse.Agent.Messages;
 using Microsoft.AspNet.Http;
-using Microsoft.Extensions.TelemetryAdapter;
+using Microsoft.Extensions.DiagnosticAdapter;
 
 namespace Glimpse.Agent.Internal.Inspectors.Mvc
 {
     public partial class WebDiagnosticsInspector
     {
-        [TelemetryName("Microsoft.AspNet.Hosting.BeginRequest")]
+        [DiagnosticName("Microsoft.AspNet.Hosting.BeginRequest")]
         public void OnBeginRequest(HttpContext httpContext)
         {
             // TODO: Not sure if this is where this should live but it's the earlist hook point we have
@@ -35,7 +35,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             _broker.SendMessage(message);
         }
 
-        [TelemetryName("Microsoft.AspNet.Hosting.EndRequest")]
+        [DiagnosticName("Microsoft.AspNet.Hosting.EndRequest")]
         public void OnEndRequest(HttpContext httpContext)
         {
             var timing = _broker.EndLogicalOperation<BeginRequestMessage>().Timing;
