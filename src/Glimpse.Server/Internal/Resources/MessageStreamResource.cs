@@ -36,7 +36,7 @@ namespace Glimpse.Server.Internal.Resources
 
         public void Configure(IResourceBuilder resourceBuilder)
         {
-            resourceBuilder.Run("message-stream", "{?types}", ResourceType.Client, async (context, parameters) =>
+            resourceBuilder.Run("message-stream", "{?types,contextId}", ResourceType.Client, async (context, parameters) =>
             {
                 var continueTask = new TaskCompletionSource<bool>();
 
@@ -47,11 +47,9 @@ namespace Glimpse.Server.Internal.Resources
                     buffering.DisableRequestBuffering();
                 }
 
-                // Filter when types are present
                 var types = parameters.ParseEnumerable("types").ToArray();
-                Func<Container, bool> filter = c => true;
-                if (types.Length > 0)
-                    filter = c => c.Types.Intersect(types).Any();
+                var contextId = parameters.ParseGuid("contextId");
+                var filter = GetStreamFilter(types, contextId);
 
                 context.Response.ContentType = "text/event-stream";
                 await context.Response.WriteAsync("retry: 5000\n\n");
@@ -83,30 +81,46 @@ namespace Glimpse.Server.Internal.Resources
             });
         }
 
+        private static Func<Container, bool> GetStreamFilter(string[] types, Guid? contextId)
+        {
+            Func<Container, bool> filter = c => true;
+            // Filter when types are present
+            if (types.Length > 0)
+                filter = c => c.Types.Intersect(types).Any();
+
+            if (contextId.HasValue)
+                filter = c => c.ContextId == contextId;
+
+            if (types.Length > 0 && contextId.HasValue)
+                filter = c => c.Types.Intersect(types).Any() && c.ContextId == contextId;
+            return filter;
+        }
+
         public ResourceType Type => ResourceType.Client;
 
         private void ProcessMessage(IMessage message)
         {
-            _senderSubject.OnNext(Container.Message(message.Types, message.Payload));
+            _senderSubject.OnNext(Container.Message(message.Types, message.Payload, message.Context.Id));
         }
 
         private class Container
         {
-            private Container(string @event, IEnumerable<string> types, string data)
+            private Container(string @event, IEnumerable<string> types, string data, Guid? contextId)
             {
                 Event = @event;
                 Data = data;
                 Types = types;
+                ContextId = contextId;
             }
 
             public static Container Ping()
             {
-                return new Container("ping", Enumerable.Empty<string>(), "");
+                return new Container("ping", Enumerable.Empty<string>(), "", null);
             }
 
-            public static Container Message(IEnumerable<string> types, string data)
+            public static Container Message(IEnumerable<string> types, string data, Guid contextId)
             {
-                return new Container("message", types, data);
+                return new Container("message", types, data, contextId);
             }
 
             public string Data { get; }
@@ -114,6 +128,8 @@ namespace Glimpse.Server.Internal.Resources
             public IEnumerable<string> Types { get; }
 
             public string Event { get; }
+
+            public Guid? ContextId { get; }
         }
     }
 }
