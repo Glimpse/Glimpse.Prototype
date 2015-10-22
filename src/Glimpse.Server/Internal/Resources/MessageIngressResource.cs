@@ -25,6 +25,7 @@ namespace Glimpse.Server.Internal.Resources
             var response = context.Response;
             if (context.Request.Method.Equals("POST", StringComparison.OrdinalIgnoreCase))
             {
+                // TODO: Wrap in a try block and return Http Problem when required
                 var messages = ReadMessage(context.Request).ToArray();
                 foreach (var message in messages)
                 {
