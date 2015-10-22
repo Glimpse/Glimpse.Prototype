@@ -8,7 +8,7 @@ namespace Glimpse.Agent.AspNet.Internal.Inspectors.AspNet
     public class EnvironmentInspector : Inspector
     {
         private readonly IAgentBroker _broker;
-        //private EnvironmentMessage _message;
+        private EnvironmentMessage _message;
 
         public EnvironmentInspector(IAgentBroker broker)
         {
@@ -17,20 +17,22 @@ namespace Glimpse.Agent.AspNet.Internal.Inspectors.AspNet
 
         public override void Before(HttpContext context)
         {
-            //if (_message == null)
-            //{
-            //    _message = new EnvironmentMessage
-            //    {
-            //        Server = Environment.MachineName,
-            //        OperatingSystem = Environment.OSVersion.VersionString,
-            //        ProcessorCount = Environment.ProcessorCount,
-            //        Is64Bit = Environment.Is64BitOperatingSystem,
-            //        CommandLineArgs = Environment.GetCommandLineArgs(),
-            //        EnvironmentVariables = Environment.GetEnvironmentVariables()
-            //    };
-            //}
+            if (_message == null)
+            {
+                var time = DateTimeOffset.Now;
+                var timeZoneInfo = TimeZoneInfo.Local;
+                var isDaylightSavingTime = timeZoneInfo.IsDaylightSavingTime(time);
+                
+                _message = new EnvironmentMessage
+                {
+                    ServerName = Environment.GetEnvironmentVariable("COMPUTERNAME"), // TODO: make sure its cross plat
+                    ServerTime = time.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff"),
+                    ServerTimezoneOffset = time.ToString("zzz"),
+                    ServerDaylightSavingTime = isDaylightSavingTime
+                };
+            }
 
-            //_broker.SendMessage(_message);
+            _broker.SendMessage(_message);
         }
     }
 }
