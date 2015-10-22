@@ -3,12 +3,12 @@ using Microsoft.AspNet.Http;
 
 namespace Glimpse.Agent.AspNet.Internal.Tabs
 {
-    // TODO: Delete me. This tab isn't intended to stick around, it's just a sample of the ITab interface.
-    public class HeadersTab : ITab
+    // TODO: Delete me. This tab isn't intended to stick around, it's just a sample of a Tab.
+    public class HeadersTab : Tab
     {
-        public string Name => "Headers";
+        public override string Name => "Headers";
 
-        public object GetData(HttpContext context)
+        public override object GetData(HttpContext context)
         {
             return new
             {
