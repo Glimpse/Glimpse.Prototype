@@ -14,7 +14,7 @@
                 }
             },
             getRequestId: function() {
-                return document.getElementById('__glimpse_browser_agent').getAttribute('data-glimpse-id');
+                return document.getElementById('__glimpse_browser_agent').getAttribute('data-request-id');
             },
             getMessageIngressUrl: function() {
                 return document.getElementById('__glimpse_browser_agent').getAttribute('data-message-ingress-template');
@@ -29,25 +29,28 @@
     })();
     var publishMessage = (function() {
         var build = function(type, payload) {
-            return {
+            var message = {
                 id: common.getGuid(),
-                type: [type],
+                types: [type],
                 payload: payload,
                 context: {
                     id: common.getRequestId(),
                     type: 'Request'
                 }
-            }
+            };
+            message.payload = JSON.stringify(message);
+
+            return message;
         };
         var publish = function(message) {
             // TODO: should probably thow exception if getMessageIngressUrl isn't set
-            nanoajax.ajax({ url: common.getMessageIngressUrl(), method: 'POST', body: message }, function (code, responseText, request) {
+            nanoajax.ajax({ url: common.getMessageIngressUrl(), method: 'POST', body: JSON.stringify([ message ]) }, function (code, responseText, request) {
                 // not doing anything atm
             });
         };
 
         return function(type, payload) {
-            var message = build(type, JSON.stringify(payload));
+            var message = build(type, payload);
 
             publish(message);
         };
