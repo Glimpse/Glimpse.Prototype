@@ -7,8 +7,6 @@ namespace Glimpse.Server.Storage
 {
     public interface IQueryRequests
     {
-        Task<IEnumerable<string>> GetByRequestId(Guid id);
-
         Task<IEnumerable<string>> Query(RequestFilters filters);
 
         Task<IEnumerable<string>> Query(RequestFilters filters, params string[] types);

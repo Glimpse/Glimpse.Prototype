@@ -245,9 +245,19 @@ namespace Glimpse.Server.Storage
             return Task.Run(() => this.GetAllMessages().Where(m => m.Types.Intersect(types).Any()).Select(m => m.Payload));
         }
 
-        public Task<IEnumerable<string>> GetByRequestId(Guid id)
+        public Task<IEnumerable<string>> RetrieveByContextId(Guid id)
         {
             return Task.Run(() => GetMessagesByRequestId(id).Select(m => m.Payload));
+        }
+
+        public Task<IEnumerable<string>> RetrieveByContextId(Guid id, params string[] typeFilter)
+        {
+            Func<IMessage, bool> filter = _ => true;
+
+            if (typeFilter.Length > 0)
+                filter = m => m.Types.Intersect(typeFilter).Any();
+
+            return Task.Run(() => GetMessagesByRequestId(id).Where(filter).Select(m => m.Payload));
         }
 
         /// <summary>
