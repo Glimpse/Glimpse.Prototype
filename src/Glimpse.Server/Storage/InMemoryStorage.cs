@@ -393,27 +393,29 @@ namespace Glimpse.Server.Storage
         private void ParseAndUpdateIndicesFor(IMessage message)
         {
             var indices = message.Indices;
+            if (indices != null)
+            {
+                var duration = indices.GetValueOrDefault("request-duration") as double?;
+                if (duration != null) Duration = duration;
 
-            var duration = indices.GetValueOrDefault("request-duration") as double?;
-            if (duration != null) Duration = duration;
+                var url = indices.GetValueOrDefault("request-url") as string;
+                if (!string.IsNullOrWhiteSpace(url)) Url = url;
 
-            var url = indices.GetValueOrDefault("request-url") as string;
-            if (!string.IsNullOrWhiteSpace(url)) Url = url;
+                var method = indices.GetValueOrDefault("request-method") as string;
+                if (!string.IsNullOrWhiteSpace(method)) Method = method;
 
-            var method = indices.GetValueOrDefault("request-method") as string;
-            if (!string.IsNullOrWhiteSpace(method)) Method = method;
+                var userId = indices.GetValueOrDefault("request-userId") as string;
+                if (!string.IsNullOrWhiteSpace(userId)) UserId = userId;
 
-            var userId = indices.GetValueOrDefault("request-userId") as string;
-            if (!string.IsNullOrWhiteSpace(userId)) UserId = userId;
+                var statusCode = indices.GetValueOrDefault("request-statuscode") as int?;
+                if (statusCode != null) StatusCode = statusCode;
 
-            var statusCode = indices.GetValueOrDefault("request-statuscode") as int?;
-            if (statusCode != null) StatusCode = statusCode;
+                var dateTime = indices.GetValueOrDefault("request-datetime") as DateTime?;
+                if (dateTime != null) DateTime = dateTime;
 
-            var dateTime = indices.GetValueOrDefault("request-datetime") as DateTime?;
-            if (dateTime != null) DateTime = dateTime;
-
-            var messageTags = indices.GetValueOrDefault("request-tags") as IEnumerable<string> ?? Enumerable.Empty<string>();
-            _tags.AddRange(messageTags);
+                var messageTags = indices.GetValueOrDefault("request-tags") as IEnumerable<string> ?? Enumerable.Empty<string>();
+                _tags.AddRange(messageTags);
+            }
         }
     }
 
