@@ -102,8 +102,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
 
         [DiagnosticName("Microsoft.AspNet.Mvc.AfterActionMethod")]
         public void OnAfterActionMethod(
-            IActionContext actionContext,
-            IActionResult result)
+            IActionContext actionContext)
         {
             var timing = _broker.EndLogicalOperation<BeforeActionInvokedMessage>().Timing;
             var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
