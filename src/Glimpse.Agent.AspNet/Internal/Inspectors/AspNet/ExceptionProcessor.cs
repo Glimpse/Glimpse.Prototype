@@ -23,45 +23,53 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
 
         public IEnumerable<ExceptionDetails> GetErrorDetails(Exception ex)
         {
+            var result = new List<ExceptionDetails>();
+
             for (var scan = ex; scan != null; scan = scan.InnerException)
             {
-                yield return new ExceptionDetails
-                {
-                    Type = scan.GetType(),
-                    TypeName = scan.GetType().Name,
-                    Message = scan.Message,
-                    RawException = scan.ToString(),
-                    StackFrames = StackFrames(scan)
-                };
+                result.Add(new ExceptionDetails
+                    {
+                        Type = scan.GetType(),
+                        TypeName = scan.GetType().Name,
+                        Message = scan.Message,
+                        RawException = scan.ToString(),
+                        StackFrames = StackFrames(scan)
+                    });
             }
+
+            return result;
         }
 
         private IEnumerable<StackFrame> StackFrames(Exception ex)
         {
+            var result = new List<StackFrame>();
+
             var stackTrace = ex.StackTrace;
             if (!string.IsNullOrEmpty(stackTrace))
             {
                 var heap = new Chunk { Text = stackTrace + Environment.NewLine, End = stackTrace.Length + Environment.NewLine.Length };
                 for (var line = heap.Advance(Environment.NewLine); line.HasValue; line = heap.Advance(Environment.NewLine))
                 {
-                    yield return StackFrame(line);
+                    result.Add(StackFrame(line));
                 }
             }
+
+            return result;
         }
 
         private StackFrame StackFrame(Chunk line)
         {
             line.Advance("  at ");
-            string function = line.Advance(" in ").ToString();
+            var function = line.Advance(" in ").ToString();
 
             //exception message line format differences in .net and mono
             //On .net : at ConsoleApplication.Program.Main(String[] args) in D:\Program.cs:line 16
             //On Mono : at ConsoleApplication.Program.Main(String[] args) in d:\Program.cs:16
-            string file = !IsMono ?
+            var file = !IsMono ?
                 line.Advance(":line ").ToString() :
                 line.Advance(":").ToString();
 
-            int lineNumber = line.ToInt32();
+            var lineNumber = line.ToInt32();
 
             if (string.IsNullOrEmpty(file))
             {
@@ -151,14 +159,18 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
 
         private static IEnumerable<string> ReadLines(IFileInfo fileInfo)
         {
+            var result = new List<string>();
+
             using (var reader = new StreamReader(fileInfo.CreateReadStream()))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    yield return line;
+                    result.Add(line);
                 }
             }
+
+            return result;
         }
 
         internal class Chunk
@@ -171,7 +183,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
 
             public Chunk Advance(string delimiter)
             {
-                int indexOf = HasValue ? Text.IndexOf(delimiter, Start, End - Start, StringComparison.Ordinal) : -1;
+                var indexOf = HasValue ? Text.IndexOf(delimiter, Start, End - Start, StringComparison.Ordinal) : -1;
                 if (indexOf < 0)
                 {
                     return new Chunk();
