@@ -20,13 +20,11 @@ namespace Glimpse.Server.Internal.Resources
         {
             resourceBuilder.Run("context", "?contextId={contextId}{&types}", ResourceType.Client, async (context, parameters) =>
             {
-                var response = context.Response;
                 var contextId = parameters.ParseGuid("contextId");
 
                 if (!contextId.HasValue)
                 {
-                    response.StatusCode = 404;
-                    await response.WriteAsync("Required parameter 'contextId' is missing.");
+                    await context.RespondWith(new MissingParameterProblem("contextId").EnableCaching());
                     return;
                 }
 

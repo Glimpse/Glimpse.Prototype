@@ -20,8 +20,6 @@ namespace Glimpse.Server.Internal.Resources
 
         public async Task Invoke(HttpContext context, IDictionary<string, string> parameters)
         {
-            var response = context.Response;
-
             var types = parameters.ParseEnumerable("types").ToArray();
 
             if (types.Length == 0)
