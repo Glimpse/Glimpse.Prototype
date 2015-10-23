@@ -20,13 +20,11 @@ namespace Glimpse.Server.Internal.Resources
         {
             resourceBuilder.Run("context", "?contextId={contextId}{&types}", ResourceType.Client, async (context, parameters) =>
             {
-                var response = context.Response;
                 var contextId = parameters.ParseGuid("contextId");
 
                 if (!contextId.HasValue)
                 {
-                    response.StatusCode = 404;
-                    await response.WriteAsync("Required parameter 'contextId' is missing.");
+                    await context.RespondWith(new MissingParameterProblem("contextId").EnableCaching());
                     return;
                 }
 
@@ -34,8 +32,9 @@ namespace Glimpse.Server.Internal.Resources
 
                var list = await _storage.RetrieveByContextId(contextId.Value, types);
 
-                response.Headers[HeaderNames.ContentType] = "application/json";
-                await response.WriteAsync(list.ToJsonArray());
+                await context.RespondWith(
+                    new RawJson(list.ToJsonArray())
+                    .EnableCaching());
             });
         }
 

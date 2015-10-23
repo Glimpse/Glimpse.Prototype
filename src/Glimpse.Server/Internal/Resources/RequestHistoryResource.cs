@@ -6,7 +6,6 @@ using Glimpse.Server.Internal.Extensions;
 using Glimpse.Server.Resources;
 using Glimpse.Server.Storage;
 using Microsoft.AspNet.Http;
-using Microsoft.Net.Http.Headers;
 
 namespace Glimpse.Server.Internal.Resources
 {
@@ -24,7 +23,6 @@ namespace Glimpse.Server.Internal.Resources
 
         public async Task Invoke(HttpContext context, IDictionary<string, string> parameters)
         {
-            var response = context.Response;
             var filters = GetFilters(parameters);
 
             IEnumerable<string> list;
@@ -38,8 +36,8 @@ namespace Glimpse.Server.Internal.Resources
                 list = await _requests.Query(filters);
             }
 
-            response.Headers[HeaderNames.ContentType] = "application/json";
-            await response.WriteAsync(list.ToJsonArray());
+            await context.RespondWith(
+                new RawJson(list.ToJsonArray()));
         }
 
         public string Name => "request-history";

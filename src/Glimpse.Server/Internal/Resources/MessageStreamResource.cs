@@ -51,9 +51,8 @@ namespace Glimpse.Server.Internal.Resources
                 var contextId = parameters.ParseGuid("contextId");
                 var filter = GetStreamFilter(types, contextId);
 
-                context.Response.ContentType = "text/event-stream";
-                await context.Response.WriteAsync("retry: 5000\n\n");
-                await context.Response.Body.FlushAsync();
+                var sse = await context.RespondWith(new ServerSentEventResponse());
+                await sse.SetRetry(TimeSpan.FromSeconds(5));
 
                 var unSubscribe = _senderSubject.Where(filter).Subscribe(async t =>
                 {
@@ -61,9 +60,7 @@ namespace Glimpse.Server.Internal.Resources
 
                     try
                     {
-                        await context.Response.WriteAsync($"event: {t.Event}\n");
-                        await context.Response.WriteAsync($"data: [{t.Data}]\n\n");
-                        await context.Response.Body.FlushAsync();
+                        await sse.SendData(data: $"[{t.Data}]", @event: t.Event);
                     }
                     finally 
                     {

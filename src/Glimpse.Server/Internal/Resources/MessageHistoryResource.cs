@@ -20,21 +20,19 @@ namespace Glimpse.Server.Internal.Resources
 
         public async Task Invoke(HttpContext context, IDictionary<string, string> parameters)
         {
-            var response = context.Response;
-
             var types = parameters.ParseEnumerable("types").ToArray();
 
             if (types.Length == 0)
             {
-                response.StatusCode = 404;
-                await response.WriteAsync("Required parameter 'types' is missing.");
+                await context.RespondWith(
+                    new MissingParameterProblem("types")
+                    .EnableCaching());
                 return;
             }
 
             var list = await _store.RetrieveByType(types);
 
-            response.Headers[HeaderNames.ContentType] = "application/json";
-            await response.WriteAsync(list.ToJsonArray());
+            await context.RespondWith(new RawJson(list.ToJsonArray()));
         }
 
         public string Name => "message-history";
