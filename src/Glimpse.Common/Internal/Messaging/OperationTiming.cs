@@ -6,31 +6,32 @@ namespace Glimpse.Internal
 {
     public struct OperationTiming<T>
     {
-        private readonly Stopwatch _timer;
-
         public OperationTiming(Operation operation)
-            : this((T)operation.Item, operation.Start, DateTime.UtcNow, operation.Timer)
+            : this((T)operation.Item, operation.Start, DateTime.UtcNow, operation.Timer, operation.Offset)
         {
         }
 
-        public OperationTiming(T item, DateTime start, DateTime end, Stopwatch timer)
+        public OperationTiming(T item, DateTime start, DateTime end, Stopwatch timer, TimeSpan? offset)
         {
             timer.Stop();
 
             Item = item;
+            Offset = offset;
             Start = start;
             End = end;
-            _timer = timer;
+            Elapsed = timer.Elapsed;
+
+            timer.Stop();
         }
 
         public T Item { get; }
+
+        public TimeSpan? Offset { get; }
 
         public DateTime Start { get; }
 
         public DateTime End { get; }
 
-        public TimeSpan Elapsed => _timer.Elapsed;
-
-        public Timing Timing => new Timing(Start, End, _timer.Elapsed);
+        public TimeSpan Elapsed { get; }
     }
 }

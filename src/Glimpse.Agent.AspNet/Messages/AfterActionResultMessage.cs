@@ -14,5 +14,7 @@ namespace Glimpse.Agent.Messages
         public DateTime ActionResultEndTime { get; set; }
 
         public TimeSpan ActionResultDuration { get; set; }
+
+        public TimeSpan? ActionResultOffset { get; set; }
     }
 }

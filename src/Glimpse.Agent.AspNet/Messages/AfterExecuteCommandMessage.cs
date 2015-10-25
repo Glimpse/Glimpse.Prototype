@@ -9,6 +9,8 @@ namespace Glimpse.Agent.Messages
         public DateTime CommandEndTime { get; set; }
 
         public TimeSpan CommandDuration { get; set; }
+        
+        public TimeSpan? CommandOffset { get; set; }
     }
 
     public class AfterExecuteCommandExceptionMessage : AfterExecuteCommandMessage

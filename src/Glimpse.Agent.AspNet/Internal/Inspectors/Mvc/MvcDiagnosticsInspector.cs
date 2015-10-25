@@ -58,7 +58,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         [DiagnosticName("Microsoft.AspNet.Mvc.AfterAction")]
         public void OnAfterAction(object actionDescriptor, IHttpContext httpContext)
         {
-            var timing = _broker.EndLogicalOperation<BeforeActionMessage>().Timing;
+            var timing = _broker.EndLogicalOperation<BeforeActionMessage>();
             var typedActionDescriptor = ConvertActionDescriptor(actionDescriptor);
 
             var message = new AfterActionMessage()
@@ -67,7 +67,8 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 ActionName = typedActionDescriptor.Name,
                 ActionControllerName = typedActionDescriptor.ControllerName,
                 ActionEndTime = timing.End,
-                ActionDuration = timing.Elapsed
+                ActionDuration = timing.Elapsed,
+                ActionOffset = timing.Offset
             };
 
             _broker.SendMessage(message);
@@ -104,7 +105,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         public void OnAfterActionMethod(
             IActionContext actionContext)
         {
-            var timing = _broker.EndLogicalOperation<BeforeActionInvokedMessage>().Timing;
+            var timing = _broker.EndLogicalOperation<BeforeActionInvokedMessage>();
             var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
             var message = new AfterActionInvokedMessage()
@@ -113,7 +114,8 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 ActionName = actionDescriptor.Name,
                 ActionControllerName = actionDescriptor.ControllerName,
                 ActionInvokedEndTime = timing.End,
-                ActionInvokedDuration = timing.Elapsed
+                ActionInvokedDuration = timing.Elapsed,
+                ActionInvokedOffset = timing.Offset
             };
 
             _broker.SendMessage(message);
@@ -210,7 +212,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             IActionContext actionContext,
             IActionResult result)
         {
-            var timing = _broker.EndLogicalOperation<BeforeActionResultMessage>().Timing;
+            var timing = _broker.EndLogicalOperation<BeforeActionResultMessage>();
             var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
             var message = new AfterActionResultMessage()
@@ -219,7 +221,8 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 ActionName = actionDescriptor.Name,
                 ActionControllerName = actionDescriptor.ControllerName,
                 ActionResultEndTime = timing.End,
-                ActionResultDuration = timing.Elapsed
+                ActionResultDuration = timing.Elapsed,
+                ActionResultOffset = timing.Offset
             };
 
             _broker.SendMessage(message);
@@ -303,7 +306,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         [DiagnosticName("Microsoft.AspNet.Mvc.AfterView")]
         public void OnAfterView(IView view, IViewContext viewContext)
         {
-            var timing = _broker.EndLogicalOperation<BeforeActionViewInvokedMessage>().Timing;
+            var timing = _broker.EndLogicalOperation<BeforeActionViewInvokedMessage>();
             var actionDescriptor = ConvertActionDescriptor(viewContext.ActionDescriptor);
 
             var message = new AfterActionViewInvokedMessage
@@ -312,7 +315,8 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 ActionName = actionDescriptor.Name,
                 ActionControllerName = actionDescriptor.ControllerName,
                 ViewEndTime = timing.End,
-                ViewDuration = timing.Elapsed
+                ViewDuration = timing.Elapsed,
+                ViewOffset = timing.Offset
             };
 
             _broker.SendMessage(message);

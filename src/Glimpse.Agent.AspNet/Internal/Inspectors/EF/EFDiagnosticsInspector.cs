@@ -31,13 +31,14 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         [DiagnosticName("Microsoft.Data.Entity.AfterExecuteCommand")]
         public void OnAfterExecuteCommand(IDbCommand command, string executeMethod, bool isAsync)
         {
-            var timing = _broker.EndLogicalOperation<BeforeExecuteCommandMessage>().Timing;
+            var timing = _broker.EndLogicalOperation<BeforeExecuteCommandMessage>();
 
             var message = new AfterExecuteCommandMessage
             {
                 CommandHadException = false,
                 CommandDuration = timing.Elapsed,
-                CommandEndTime = timing.End
+                CommandEndTime = timing.End,
+                CommandOffset = timing.Offset
             };
 
             _broker.SendMessage(message);
@@ -46,14 +47,15 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         [DiagnosticName("Microsoft.Data.Entity.CommandExecutionError")]
         public void OnAfterExecuteCommand(IDbCommand command, string executeMethod, bool isAsync, Exception exception)
         {
-            var timing = _broker.EndLogicalOperation<BeforeExecuteCommandMessage>().Timing;
+            var timing = _broker.EndLogicalOperation<BeforeExecuteCommandMessage>();
 
             var message = new AfterExecuteCommandExceptionMessage
             {
                 //Exception = exception,
                 CommandHadException = true,
                 CommandDuration = timing.Elapsed,
-                CommandEndTime = timing.End
+                CommandEndTime = timing.End,
+                CommandOffset = timing.Offset
             };
 
             _broker.SendMessage(message);

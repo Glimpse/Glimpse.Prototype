@@ -28,7 +28,8 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 RequestContentType = request.ContentType,
                 RequestStartTime = requestDateTime
             };
-            
+
+            _broker.StartOffsetOperation();
             _broker.BeginLogicalOperation(message, requestDateTime);
             _broker.SendMessage(message);
         }
@@ -72,7 +73,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
 
         private void ProcessEndRequest(EndRequestMessage message, HttpContext httpContext)
         {
-            var timing = _broker.EndLogicalOperation<BeginRequestMessage>().Timing;
+            var timing = _broker.EndLogicalOperation<BeginRequestMessage>();
 
             var request = httpContext.Request;
             var response = httpContext.Response;
