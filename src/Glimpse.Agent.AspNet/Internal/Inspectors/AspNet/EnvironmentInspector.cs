@@ -2,16 +2,19 @@
 using Glimpse.Agent.AspNet.Messages;
 using Glimpse.Agent.Inspectors;
 using Microsoft.AspNet.Http;
+using Microsoft.Dnx.Runtime;
 
 namespace Glimpse.Agent.AspNet.Internal.Inspectors.AspNet
 {
     public class EnvironmentInspector : Inspector
     {
+        private readonly IRuntimeEnvironment _runtimeEnvironment;
         private readonly IAgentBroker _broker;
         private EnvironmentMessage _message;
 
-        public EnvironmentInspector(IAgentBroker broker)
+        public EnvironmentInspector(IRuntimeEnvironment runtimeEnvironment, IAgentBroker broker)
         {
+            _runtimeEnvironment = runtimeEnvironment;
             _broker = broker;
         }
 
@@ -28,7 +31,11 @@ namespace Glimpse.Agent.AspNet.Internal.Inspectors.AspNet
                     ServerName = Environment.GetEnvironmentVariable("COMPUTERNAME"), // TODO: make sure its cross plat
                     ServerTime = time.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff"),
                     ServerTimezoneOffset = time.ToString("zzz"),
-                    ServerDaylightSavingTime = isDaylightSavingTime
+                    ServerDaylightSavingTime = isDaylightSavingTime,
+                    RuntimeVersion = _runtimeEnvironment.RuntimeVersion,
+                    ServerOperatingSystem = _runtimeEnvironment.OperatingSystem,
+                    RuntimeType = _runtimeEnvironment.RuntimeType,
+                    RuntimeArchitecture = _runtimeEnvironment.RuntimeArchitecture
                 };
             }
 

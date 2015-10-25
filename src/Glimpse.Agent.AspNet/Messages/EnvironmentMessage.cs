@@ -11,5 +11,13 @@ namespace Glimpse.Agent.AspNet.Messages
         public string ServerTimezoneOffset { get; set; }
 
         public bool ServerDaylightSavingTime { get; set; }
+
+        public string ServerOperatingSystem { get; set; }
+
+        public string RuntimeVersion { get; set; }
+
+        public string RuntimeType { get; set; }
+
+        public string RuntimeArchitecture { get; set; }
     }
 }
