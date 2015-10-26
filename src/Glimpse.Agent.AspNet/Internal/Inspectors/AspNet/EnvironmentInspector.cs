@@ -2,7 +2,7 @@
 using Glimpse.Agent.AspNet.Messages;
 using Glimpse.Agent.Inspectors;
 using Microsoft.AspNet.Http;
-using Microsoft.Dnx.Runtime;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace Glimpse.Agent.AspNet.Internal.Inspectors.AspNet
 {
