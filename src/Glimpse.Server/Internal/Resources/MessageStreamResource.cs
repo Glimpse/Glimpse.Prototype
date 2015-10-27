@@ -54,13 +54,22 @@ namespace Glimpse.Server.Internal.Resources
                 var sse = await context.RespondWith(new ServerSentEventResponse());
                 await sse.SetRetry(TimeSpan.FromSeconds(5));
 
-                var unSubscribe = _senderSubject.Where(filter).Subscribe(async t =>
+                var unSubscribe = (IDisposable)null;
+                unSubscribe = _senderSubject.Where(filter).Subscribe(async t =>
                 {
                     await _syncLock.WaitAsync();
 
                     try
                     {
-                        await sse.SendData(data: $"[{t.Data}]", @event: t.Event);
+                        try
+                        {
+                            await sse.SendData(data: $"[{t.Data}]", @event: t.Event);
+                        }
+                        catch (Exception)
+                        {
+                            continueTask.SetResult(true);
+                            unSubscribe?.Dispose();  // TODO: Need to review this
+                        }
                     }
                     finally 
                     {
