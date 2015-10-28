@@ -65,6 +65,25 @@
     </div>
 </div>
 
+
+
+<div class="row">
+    @section Scripts {
+        <script type="text/javascript">
+            $(function() {
+                $('#ajax-request').click(function() {
+                    $.get('/home/AjaxRequest', null, function(data) {
+                        console.log(data);
+                    });
+                });
+            });
+        </script>
+    }
+    <span id="ajax-request">Trigger Ajax</span>
+</div>
+
+
+
 <div class="row">
     <div class="col-md-3">
         <h2>Application uses</h2>

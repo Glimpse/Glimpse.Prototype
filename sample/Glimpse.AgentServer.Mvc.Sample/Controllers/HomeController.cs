@@ -32,6 +32,12 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample.Controllers
             throw new Exception("This is a test exception");
         }
 
+        [HttpGet]
+        public IActionResult AjaxRequest()
+        {
+            return Json(new { North = "Test", Source = "MyName" });
+        }
+
         public IActionResult Error()
         {
             return View("~/Views/Shared/Error.cshtml");
