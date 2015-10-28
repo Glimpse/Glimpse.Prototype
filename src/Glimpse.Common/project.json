@@ -1,28 +1,40 @@
 {
-    "version": "1.0.0-*",
-    "dependencies": {
-        "Rx-Linq": "2.2.5",
-        "Rx-PlatformServices": "2.2.5",
-        "Newtonsoft.Json": "6.0.6",
-        "Microsoft.Extensions.PlatformAbstractions": "1.0.0-*",
-        "Microsoft.Extensions.DependencyInjection": "1.0.0-*",
-        "Microsoft.AspNet.Http.Abstractions": "1.0.0-*",
-        "Microsoft.Extensions.Logging": "1.0.0-*",
-        "Microsoft.Extensions.OptionsModel": "1.0.0-*"
+  "version": "2.0.0-*",
+  "authors": [ "nmolnar", "avanderhoorn" ],
+  "owners": [ "nmolnar", "avanderhoorn" ],
+  "title": "Glimpse Common",
+  "licenseUrl": "https://github.com/Glimpse/Glimpse.Prototype/blob/dev/LICENSE.txt",
+  "projectUrl": "http://getglimpse.com",
+  "iconUrl": "http://getglimpse.com/content/glimpse100.png",
+  "requireLicenseAcceptance": false,
+  "description": "This package contains common Glimpse interfaces and components, and is not intended for direct consumption.",
+  "summary": "Glimpse.Common contains common Glimpse interfaces and components, and is not intended for direct consumption.",
+  "releaseNotes": "Initial release of Glimpse.Common.",
+  "tags": [ "ASP.NET", "Web", "Debugging", "Diagnostics" ],
+
+  "dependencies": {
+    "Rx-Linq": "2.2.5",
+    "Rx-PlatformServices": "2.2.5",
+    "Newtonsoft.Json": "6.0.6",
+    "Microsoft.Extensions.PlatformAbstractions": "1.0.0-*",
+    "Microsoft.Extensions.DependencyInjection": "1.0.0-*",
+    "Microsoft.AspNet.Http.Abstractions": "1.0.0-*",
+    "Microsoft.Extensions.Logging": "1.0.0-*",
+    "Microsoft.Extensions.OptionsModel": "1.0.0-*"
+  },
+  "frameworks": {
+    "dnx451": {
+      "dependencies": {
+      }
     },
-    "frameworks": {
-        "dnx451": {
-            "dependencies": {
-            }
-        },
-        "dnxcore50": {
-            "dependencies": {
-                "System.Runtime": "4.0.21-beta-*",
-                "System.ObjectModel": "4.0.10",
-                "System.Threading": "4.0.11-beta-*",
-                "System.Text.RegularExpressions": "4.0.11-beta-*",
-                "System.Security.Cryptography.Algorithms": "4.0.0-beta-*"
-            }
-        }
+    "dnxcore50": {
+      "dependencies": {
+        "System.Runtime": "4.0.21-beta-*",
+        "System.ObjectModel": "4.0.10",
+        "System.Threading": "4.0.11-beta-*",
+        "System.Text.RegularExpressions": "4.0.11-beta-*",
+        "System.Security.Cryptography.Algorithms": "4.0.0-beta-*"
+      }
     }
+  }
 }

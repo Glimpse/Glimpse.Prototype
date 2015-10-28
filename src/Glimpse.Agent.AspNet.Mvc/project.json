@@ -1,5 +1,17 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "2.0.0-*",
+  "authors": [ "nmolnar", "avanderhoorn" ],
+  "owners": [ "nmolnar", "avanderhoorn" ],
+  "title": "Glimpse Agent for ASP.NET MVC",
+  "licenseUrl": "https://github.com/Glimpse/Glimpse.Prototype/blob/dev/LICENSE.txt",
+  "projectUrl": "http://getglimpse.com",
+  "iconUrl": "http://getglimpse.com/content/glimpse100.png",
+  "requireLicenseAcceptance": false,
+  "description": "This package contains Razor helpers to inject Glimpse into web applications.",
+  "summary": "Glimpse.Agent.AspNet.Mvc contains Razor helpers to inject Glimpse into web applications.",
+  "releaseNotes": "Initial release of Glimpse.Agent.AspNet.Mvc.",
+  "tags": [ "ASP.NET", "Web", "Debugging", "Diagnostics", "Razor" ],
+  
   "dependencies": {
     "Glimpse.Agent.AspNet": "", 
     "Microsoft.AspNet.Routing": "1.0.0-*",
