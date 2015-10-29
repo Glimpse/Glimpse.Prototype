@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Glimpse.Server.Internal;
 using Glimpse.Internal.Extensions;
 using Microsoft.AspNet.Http;
@@ -27,13 +28,12 @@ namespace Glimpse.Server.Configuration
 
             var request = _httpContextAccessor.HttpContext.Request;
             var baseUrl = $"{request.Scheme}://{request.Host}/{_serverOptions.BasePath}/";
-            var resources = _resourceManager.RegisteredUris.ToDictionary(kvp => kvp.Key.KebabCase(), kvp => $"{baseUrl}{kvp.Key}/{kvp.Value}");
+            IDictionary<string, string> resources = _resourceManager.RegisteredUris.ToDictionary(kvp => kvp.Key.KebabCase(), kvp => $"{baseUrl}{kvp.Key}/{kvp.Value}");
 
-            _metadata = new Metadata(resources);
+            if (_serverOptions.OverrideResources != null)
+                _serverOptions.OverrideResources(resources);
 
-            // TODO: Where to call user func?
-
-            return _metadata;
+            return new Metadata(resources);
         }
     }
 }
