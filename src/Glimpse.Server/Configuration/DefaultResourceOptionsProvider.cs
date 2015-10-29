@@ -6,16 +6,16 @@ using Tavis.UriTemplates;
 
 namespace Glimpse.Server.Configuration
 {
-    public class DefaultScriptOptionsProvider : IScriptOptionsProvider
+    public class DefaultResourceOptionsProvider : IResourceOptionsProvider
     {
         private readonly IMetadataProvider _metadataProvider;
 
-        public DefaultScriptOptionsProvider(IMetadataProvider metadataProvider)
+        public DefaultResourceOptionsProvider(IMetadataProvider metadataProvider)
         {
             _metadataProvider = metadataProvider;
         }
 
-        public ScriptOptions BuildInstance()
+        public ResourceOptions BuildInstance()
         {
             var metadata = _metadataProvider.BuildInstance();
             var resources = metadata.Resources;
@@ -27,7 +27,7 @@ namespace Glimpse.Server.Configuration
             var metadataTemplate = new UriTemplate(resources.GetValueOrDefault("metadata", string.Empty), true);
             var clientScriptTemplate = new UriTemplate(resources.GetValueOrDefault("client", string.Empty), true);
 
-            return new ScriptOptions
+            return new ResourceOptions
             {
                 BrowserAgentScriptTemplate = browserAgentScriptTemplate.ResolveWith(supportedParameters),
                 MessageIngressTemplate = httpMessageTemplate.ResolveWith(supportedParameters),

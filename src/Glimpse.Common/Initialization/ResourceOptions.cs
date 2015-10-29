@@ -1,6 +1,6 @@
 ﻿namespace Glimpse.Initialization
 {
-    public class ScriptOptions
+    public class ResourceOptions
     {
         public string BrowserAgentScriptTemplate { get; set; }
 

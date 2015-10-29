@@ -9,12 +9,12 @@ namespace Glimpse.Agent.Razor
     public class ScriptInjector : TagHelper
     {
         private readonly Guid _requestId;
-        private readonly ScriptOptions _scriptOptions;
+        private readonly ResourceOptions _resourceOptions;
 
-        public ScriptInjector(IGlimpseContextAccessor context, IScriptOptionsProvider scriptOptionsProvider)
+        public ScriptInjector(IGlimpseContextAccessor context, IResourceOptionsProvider resourceOptionsProvider)
         {
             _requestId = context.RequestId;
-            _scriptOptions = scriptOptionsProvider.BuildInstance();
+            _resourceOptions = resourceOptionsProvider.BuildInstance();
         }
 
         public override int Order => int.MaxValue;
@@ -22,8 +22,8 @@ namespace Glimpse.Agent.Razor
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.PostContent.SetHtmlContent(
-                $@"<script src=""{_scriptOptions.HudScriptTemplate}"" id=""__glimpse_hud"" data-request-id=""{_requestId.ToString("N")}"" data-client-template=""{_scriptOptions.ClientScriptTemplate}"" async></script>
-                   <script src=""{_scriptOptions.BrowserAgentScriptTemplate}"" id=""__glimpse_browser_agent"" data-request-id=""{_requestId.ToString("N")}"" data-message-ingress-template=""{_scriptOptions.MessageIngressTemplate}"" async></script>");
+                $@"<script src=""{_resourceOptions.HudScriptTemplate}"" id=""__glimpse_hud"" data-request-id=""{_requestId.ToString("N")}"" data-client-template=""{_resourceOptions.ClientScriptTemplate}"" async></script>
+                   <script src=""{_resourceOptions.BrowserAgentScriptTemplate}"" id=""__glimpse_browser_agent"" data-request-id=""{_requestId.ToString("N")}"" data-message-ingress-template=""{_resourceOptions.MessageIngressTemplate}"" async></script>");
         }
     }
 }

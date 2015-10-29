@@ -43,7 +43,7 @@ namespace Glimpse.Agent.Sample
             Configuration = new ConfigurationBuilder()
                 .AddJsonFile("glimpse.json")
                 .Build();
-            services.Configure<ScriptOptions>(Configuration.GetSection("ScriptOptions"));
+            services.Configure<ResourceOptions>(Configuration.GetSection("resources"));
         }
 
         public void Configure(IApplicationBuilder app)

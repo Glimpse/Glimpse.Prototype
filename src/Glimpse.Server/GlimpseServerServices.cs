@@ -33,16 +33,16 @@ namespace Glimpse
             services.AddSingleton<IAllowRemoteProvider, DefaultAllowRemoteProvider>();
             services.AddSingleton<IMetadataProvider, DefaultMetadataProvider>();
 
-            if (services.Any(s => s.ServiceType == typeof (IScriptOptionsProvider)))
+            if (services.Any(s => s.ServiceType == typeof (IResourceOptionsProvider)))
             {
                 services.Replace(new ServiceDescriptor(
-                    typeof (IScriptOptionsProvider),
-                    typeof (DefaultScriptOptionsProvider),
+                    typeof (IResourceOptionsProvider),
+                    typeof (DefaultResourceOptionsProvider),
                     ServiceLifetime.Singleton));
             }
             else
             {
-                services.AddSingleton<IScriptOptionsProvider, DefaultScriptOptionsProvider>();
+                services.AddSingleton<IResourceOptionsProvider, DefaultResourceOptionsProvider>();
             }
 
             return services;

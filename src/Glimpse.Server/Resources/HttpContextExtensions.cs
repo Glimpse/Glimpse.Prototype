@@ -35,7 +35,7 @@ namespace Glimpse.Server.Resources
 
         public static IResponse AsFile(this IResponse response, string filename)
         {
-            return new ResponseDecorator(response, ctx => ctx.Response.Headers[HeaderNames.ContentDisposition] = $"attachment; filename = ${filename}");
+            return new ResponseDecorator(response, ctx => ctx.Response.Headers[HeaderNames.ContentDisposition] = $"attachment; filename = {filename}");
         }
 
         public static IResponse EnableCaching(this IResponse response, TimeSpan? timeSpan = null)

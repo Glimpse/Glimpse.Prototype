@@ -49,8 +49,8 @@ namespace Glimpse
             services.AddTransient<IExceptionProcessor, ExceptionProcessor>();
             services.AddTransient<WebDiagnosticsInspector>();
 
-            if (!services.Any(s => s.ServiceType == typeof(IScriptOptionsProvider)))
-                services.AddSingleton<IScriptOptionsProvider, OptionsScriptOptionsProvider>();
+            if (!services.Any(s => s.ServiceType == typeof(IResourceOptionsProvider)))
+                services.AddSingleton<IResourceOptionsProvider, OptionsResourceOptionsProvider>();
 
             return services;
         }

@@ -1,5 +1,5 @@
 {
-"scriptOptions":
+"resources":
     {
         "browserAgentScriptTemplate" : "http://localhost:5210/glimpse/agent/agent.js?hash=fba26fa9",
         "hudScriptTemplate" : "http://localhost:5210/glimpse/hud/hud.js?hash=fba26fa9",
