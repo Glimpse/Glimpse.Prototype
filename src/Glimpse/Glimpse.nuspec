@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <iconUrl>http://getglimpse.com/content/glimpse100.png</iconUrl>
     <description>Glimpse is a web debugging and diagnostics tool used to gain a better understanding of whats happening inside of your ASP.NET web application.</description>
-    <summary>ASP.NET 4.5 web debugging and diagnostics tool.</summary>
+    <summary>ASP.NET web debugging and diagnostics tool.</summary>
     <releaseNotes>Add support for Glimpse 2.0.</releaseNotes>
     <tags>ASP.NET Web WebForms Glimpse diagnostics performance profiling timing</tags>
     <dependencies>
@@ -29,5 +29,7 @@
     <file src="lib\net35\*.*" target="lib\net35" />
     <file src="lib\net40\*.*" target="lib\net40" />
     <file src="lib\net45\*.*" target="lib\net45" />
+    <file src="lib\dnx451\*.*" target="lib\dnx451" />
+    <file src="lib\dnxcore50\*.*" target="lib\dnxcore50" />
   </files>
 </package>
