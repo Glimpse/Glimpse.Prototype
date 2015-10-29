@@ -24,7 +24,7 @@ namespace Glimpse.Server.Internal.Resources
         ""browserAgentScriptTemplate"" : ""{resourceOptions.BrowserAgentScriptTemplate}"",
         ""hudScriptTemplate"" : ""{resourceOptions.HudScriptTemplate}"",
         ""messageIngressTemplate"" : ""{resourceOptions.MessageIngressTemplate}"",
-        ""metadataTemplate"" : ""{resourceOptions.MetadataTemplate}"",
+        ""contextTemplate"" : ""{resourceOptions.ContextTemplate}"",
         ""clientScriptTemplate"" : ""{resourceOptions.ClientScriptTemplate}""
     }}
 }}";
