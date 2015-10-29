@@ -7,6 +7,8 @@ namespace Glimpse.Server
     {
         public bool AllowRemote { get; set; }
 
+        public string BasePath { get; set; } = "glimpse";
+
         public Func<HttpContext, bool> AllowClientAccess { get; set; }
 
         public Func<HttpContext, bool> AllowAgentAccess { get; set; }
