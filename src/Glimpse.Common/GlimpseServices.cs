@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Glimpse.Common;
+using Glimpse.Common.Initialization;
 using Glimpse.Common.Internal.Serialization;
+using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 using Glimpse.Internal;
 using Newtonsoft.Json;
@@ -21,6 +23,8 @@ namespace Glimpse
             services.AddTransient<IAssemblyProvider, DefaultAssemblyProvider>();
             services.AddTransient<ITypeService, DefaultTypeService>();
             // TODO: consider making above singleton 
+
+            services.AddSingleton<IExtensionProvider<IRegisterServices>, DefaultExtensionProvider<IRegisterServices>>();
 
             //
             // Context.
