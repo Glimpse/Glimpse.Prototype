@@ -16,6 +16,7 @@ namespace Glimpse.Agent
         private readonly ISubject<AgentBrokerPayload> _offSenderThreadInternalSubject;
         private readonly ISubject<AgentBrokerPayload> _publisherInternalSubject;
         private readonly IContextData<MessageContext> _context; 
+        private static readonly MessageContext ApplicationMessageContext = new MessageContext { Id = Guid.NewGuid(), Type = "Application" };
 
         public DefaultAgentBroker(IMessagePublisher messagePublisher, IMessageConverter messageConverter)
         {
@@ -63,7 +64,8 @@ namespace Glimpse.Agent
 
         private void PublishMessage(AgentBrokerPayload data)
         {
-            var message = _messageConverter.ConvertMessage(data.Payload, data.Context);
+            var context = data.Context ?? ApplicationMessageContext;
+            var message = _messageConverter.ConvertMessage(data.Payload, context);
 
             _messagePublisher.PublishMessage(message); // TODO: Hook into offThread
         }
