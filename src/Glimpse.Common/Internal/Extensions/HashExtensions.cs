@@ -63,7 +63,7 @@ namespace Glimpse.Internal.Extensions
                 }
             }
 
-            return crc.ToString("X");
+            return crc.ToString("X6");
         }
 
         // 32 Initial and Polynomial parameters the same as Glimpse 1.X
@@ -89,7 +89,7 @@ namespace Glimpse.Internal.Extensions
                 byte index = (byte)(((crc) & 0xff) ^ input[i]);
                 crc = (crc >> 8) ^ _crc32Cache[index];
             }
-            return (~crc).ToString("X");
+            return (~crc).ToString("X8");
         }
 
         static HashExtensions()
