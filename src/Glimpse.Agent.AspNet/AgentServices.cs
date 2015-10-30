@@ -1,19 +1,22 @@
-﻿using Glimpse.Agent;
+using Glimpse.Common.Initialization;
+using Microsoft.Extensions.DependencyInjection;
+using Glimpse.Agent;
 using Glimpse.Agent.Internal.Messaging;
 using Glimpse.Agent.Configuration;
 using Glimpse.Agent.Inspectors;
 using Glimpse.Agent.Internal.Inspectors.Mvc;
 using Glimpse.Initialization;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.OptionsModel;
 using System.Linq;
 
 namespace Glimpse
 {
-    public static class GlimpseAgentServices
+    public class AgentServices : IRegisterServices
     {
-        public static IServiceCollection AddAgentServices(this IServiceCollection services)
+        public void RegisterServices(GlimpseServiceCollectionBuilder services)
         {
+            services.AddOptions();
+
             //
             // Broker
             //
@@ -51,8 +54,6 @@ namespace Glimpse
 
             if (!services.Any(s => s.ServiceType == typeof(IResourceOptionsProvider)))
                 services.AddSingleton<IResourceOptionsProvider, OptionsResourceOptionsProvider>();
-
-            return services;
         }
     }
 }
