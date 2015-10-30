@@ -8,9 +8,9 @@ namespace Glimpse.Server
     {
         public bool AllowRemote { get; set; }
 
-        public string BasePath { get; set; } = "glimpse";
+        public string BasePath { get; set; }
 
-        public Action<IDictionary<string, string>> OverrideResources { get; set; } = _ => { };
+        public Action<IDictionary<string, string>> OverrideResources { get; set; }
 
         public Func<HttpContext, bool> AllowClientAccess { get; set; }
 

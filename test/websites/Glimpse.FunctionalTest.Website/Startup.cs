@@ -10,11 +10,7 @@ namespace Glimpse.FunctionalTest.Website
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddGlimpse()
-                .RunningAgentWeb()
-                .RunningServerWeb()
-                .WithLocalAgent();
+            services.AddGlimpse();
 
             services.AddMvc();
         }

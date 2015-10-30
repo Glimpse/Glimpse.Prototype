@@ -9,11 +9,7 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Simple.Sample
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddGlimpse()
-                .RunningAgentWeb()
-                .RunningServerWeb(settings => settings.AllowRemote = true) // Temp workaround for kestrel not implementing IHttpConnectionFeature
-                    .WithLocalAgent();
+            services.AddGlimpse();
 
             services.AddMvc();
         }

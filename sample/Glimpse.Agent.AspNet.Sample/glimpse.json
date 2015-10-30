@@ -1,10 +1,11 @@
 {
 "resources":
     {
-        "browserAgentScriptTemplate" : "http://localhost:5210/glimpse/agent/agent.js?hash=fba26fa9",
-        "hudScriptTemplate" : "http://localhost:5210/glimpse/hud/hud.js?hash=fba26fa9",
+        "browserAgentScriptTemplate" : "http://localhost:5210/glimpse/agent/agent.js?hash=abaae0c9",
+        "hudScriptTemplate" : "http://localhost:5210/glimpse/hud/hud.js?hash=abaae0c9",
         "messageIngressTemplate" : "http://localhost:5210/glimpse/message-ingress/",
+        "metadataTemplate" : "http://localhost:5210/glimpse/metadata/?hash=abaae0c9",
         "contextTemplate" : "http://localhost:5210/glimpse/context/?contextId={contextId}{&types}",
-        "clientScriptTemplate" : "http://localhost:5210/glimpse/client/index.html?hash=fba26fa9{&requestId}"
+        "clientScriptTemplate" : "http://localhost:5210/glimpse/client/index.html?hash=abaae0c9{&requestId,follow,metadataUri}"
     }
 }

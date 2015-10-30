@@ -39,10 +39,7 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-               .AddGlimpse()
-               .RunningServerWeb(settings => settings.AllowRemote = true) // Temp workaround for kestrel not implementing IHttpConnectionFeature
-                   .WithLocalAgent();
+            services.AddGlimpse();
 
             // Add Entity Framework services to the services container.
             services.AddEntityFramework()

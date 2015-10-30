@@ -1,4 +1,6 @@
-﻿using Glimpse.Initialization;
+using System.Linq;
+using Glimpse.Common.Initialization;
+using Glimpse.Initialization;
 using Glimpse.Server;
 using Glimpse.Server.Configuration;
 using Glimpse.Server.Internal;
@@ -7,14 +9,15 @@ using Glimpse.Server.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.OptionsModel;
-using System.Linq;
 
 namespace Glimpse
 {
-    public static class GlimpseServerServices
+    public class ServerServices : IRegisterServices
     {
-        public static IServiceCollection AddServerServices(this IServiceCollection services)
+        public void RegisterServices(GlimpseServiceCollectionBuilder services)
         {
+            services.AddOptions();
+
             //
             // Common
             //
@@ -33,29 +36,23 @@ namespace Glimpse
             services.AddSingleton<IAllowRemoteProvider, DefaultAllowRemoteProvider>();
             services.AddSingleton<IMetadataProvider, DefaultMetadataProvider>();
 
-            if (services.Any(s => s.ServiceType == typeof (IResourceOptionsProvider)))
+            if (!services.Any(s => s.ServiceType == typeof (IMessagePublisher)))
+            {
+                services.AddSingleton<IMessagePublisher, InProcessPublisher>();
+            }
+
+
+            if (services.Any(s => s.ServiceType == typeof(IResourceOptionsProvider)))
             {
                 services.Replace(new ServiceDescriptor(
-                    typeof (IResourceOptionsProvider),
-                    typeof (DefaultResourceOptionsProvider),
+                    typeof(IResourceOptionsProvider),
+                    typeof(DefaultResourceOptionsProvider),
                     ServiceLifetime.Singleton));
             }
             else
             {
                 services.AddSingleton<IResourceOptionsProvider, DefaultResourceOptionsProvider>();
             }
-
-            return services;
-        }
-
-        public static IServiceCollection AddLocalAgentServices(this IServiceCollection services)
-        {
-            //
-            // Broker
-            //
-            services.AddSingleton<IMessagePublisher, InProcessPublisher>();
-
-            return services;
         }
     }
 }
