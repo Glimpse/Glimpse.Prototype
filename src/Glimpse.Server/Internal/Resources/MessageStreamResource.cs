@@ -67,7 +67,7 @@ namespace Glimpse.Server.Internal.Resources
                         }
                         catch (Exception)
                         {
-                            continueTask.SetResult(true);
+                            continueTask.TrySetResult(true);
                             unSubscribe?.Dispose();  // TODO: Need to review this
                         }
                     }
