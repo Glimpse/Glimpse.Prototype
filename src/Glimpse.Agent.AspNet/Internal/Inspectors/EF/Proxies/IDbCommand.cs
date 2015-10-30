@@ -4,7 +4,7 @@
     {
         string CommandText { get; }
 
-        int CommandType { get; }
+        object CommandType { get; }
 
         object Parameters { get; }
     }

@@ -19,7 +19,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 CommandMethod = executeMethod,
                 CommandIsAsync = isAsync,
                 CommandText = command.CommandText,
-                CommandType = command.CommandType,
+                //CommandType = command.CommandType,
                 //CommandParameters = command.Parameters,
                 CommandStartTime = startDateTime
             };

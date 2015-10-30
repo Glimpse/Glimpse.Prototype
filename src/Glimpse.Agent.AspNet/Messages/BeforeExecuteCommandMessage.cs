@@ -6,7 +6,7 @@ namespace Glimpse.Agent.Messages
     {
         public string CommandText { get; set; }
 
-        public int CommandType { get; set; }
+        public object CommandType { get; set; }
 
         public object CommandParameters { get; set; }
 
