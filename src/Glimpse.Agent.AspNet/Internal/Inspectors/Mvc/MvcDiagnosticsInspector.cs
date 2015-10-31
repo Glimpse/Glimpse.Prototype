@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Glimpse.Agent.Internal.Inspectors.Mvc.Proxies;
 using Glimpse.Agent.Messages;
+using Glimpse.Internal;
 using Microsoft.Extensions.DiagnosticAdapter;
 
 namespace Glimpse.Agent.Internal.Inspectors.Mvc
@@ -94,7 +95,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 ActionTargetMethod = actionDescriptor.MethodInfo.Name,
                 ActionInvokedStartTime = startDateTime,
                 // TODO: Need to safely get the value
-                Binding = arguments?.Select(x => new BindingData { Type = x.Value?.GetType(), Name = x.Key, Value = x.Value }).ToList()
+                Binding = arguments?.Select(x => new BindingData { Type = TypeNameHelper.GetTypeDisplayName(x.Value, false), TypeFullName = TypeNameHelper.GetTypeDisplayName(x.Value), Name = x.Key, Value = x.Value }).ToList()
             };
 
             _broker.BeginLogicalOperation(message, startDateTime);
