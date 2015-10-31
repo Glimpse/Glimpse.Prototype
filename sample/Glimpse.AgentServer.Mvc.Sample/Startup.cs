@@ -7,8 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Glimpse.AgentServer.AspNet.Mvc.Sample.Models;
 using Glimpse.AgentServer.AspNet.Mvc.Sample.Services;
-using Glimpse.Server;
-using Glimpse.Agent;
 using Microsoft.Extensions.PlatformAbstractions;
 
 namespace Glimpse.AgentServer.AspNet.Mvc.Sample
@@ -67,8 +65,7 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample
         // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseGlimpseServer();
-            app.UseGlimpseAgent();
+            app.UseGlimpse();
 
             loggerFactory.MinimumLevel = LogLevel.Information;
             loggerFactory.AddConsole();

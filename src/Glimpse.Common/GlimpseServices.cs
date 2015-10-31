@@ -25,6 +25,7 @@ namespace Glimpse
             // TODO: consider making above singleton 
 
             services.AddSingleton<IExtensionProvider<IRegisterServices>, DefaultExtensionProvider<IRegisterServices>>();
+            services.AddSingleton<IExtensionProvider<IRegisterMiddleware>, DefaultExtensionProvider<IRegisterMiddleware>>();
 
             //
             // Context.

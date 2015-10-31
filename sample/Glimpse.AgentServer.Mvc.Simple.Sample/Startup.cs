@@ -16,8 +16,7 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Simple.Sample
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseGlimpseServer();
-            app.UseGlimpseAgent();
+            app.UseGlimpse();
             
             app.UseMvcWithDefaultRoute();
         }

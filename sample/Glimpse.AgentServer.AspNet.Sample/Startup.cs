@@ -14,8 +14,7 @@ namespace Glimpse.AspNet.Sample
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseGlimpseServer();
-            app.UseGlimpseAgent();
+            app.UseGlimpse();
 
             app.Use(next => new SamplePage().Invoke);
             /*

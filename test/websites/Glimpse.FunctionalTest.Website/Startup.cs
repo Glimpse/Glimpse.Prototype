@@ -17,8 +17,7 @@ namespace Glimpse.FunctionalTest.Website
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseGlimpseServer();
-            app.UseGlimpseAgent();
+            app.UseGlimpse();
 
             app.UseMvcWithDefaultRoute();
         }

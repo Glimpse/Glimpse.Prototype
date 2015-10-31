@@ -37,7 +37,7 @@ namespace Glimpse.Agent.Sample
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseGlimpseAgent();
+            app.UseGlimpse();
 
             app.UseWelcomePage();
         }

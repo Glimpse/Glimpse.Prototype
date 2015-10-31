@@ -13,7 +13,7 @@ namespace Glimpse.Server.AspNet.Sample
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseGlimpseServer();
+            app.UseGlimpse();
 
             app.Run(async context =>
             {
