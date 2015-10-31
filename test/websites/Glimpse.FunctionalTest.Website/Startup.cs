@@ -10,19 +10,14 @@ namespace Glimpse.FunctionalTest.Website
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddGlimpse()
-                .RunningAgentWeb()
-                .RunningServerWeb()
-                .WithLocalAgent();
+            services.AddGlimpse();
 
             services.AddMvc();
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseGlimpseServer();
-            app.UseGlimpseAgent();
+            app.UseGlimpse();
 
             app.UseMvcWithDefaultRoute();
         }

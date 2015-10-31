@@ -6,6 +6,7 @@ using Glimpse.Initialization;
 using Glimpse.Server.Configuration;
 using Glimpse.Server.Internal;
 using Glimpse.Server.Resources;
+using Microsoft.Extensions.OptionsModel;
 
 namespace Glimpse.Server
 {
@@ -13,13 +14,15 @@ namespace Glimpse.Server
     {
         private readonly IEnumerable<IAllowClientAccess> _authorizeClients;
         private readonly IEnumerable<IAllowAgentAccess> _authorizeAgents;
+        private readonly GlimpseServerOptions _serverOptions;
         private readonly RequestDelegate _next;
         private readonly RequestDelegate _branch;
 
-        public GlimpseServerMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IAllowClientAccess> authorizeClientProvider, IExtensionProvider<IAllowAgentAccess> authorizeAgentProvider, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IExtensionProvider<IResource> resourceProvider, IResourceManager resourceManager)
+        public GlimpseServerMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IAllowClientAccess> authorizeClientProvider, IExtensionProvider<IAllowAgentAccess> authorizeAgentProvider, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IExtensionProvider<IResource> resourceProvider, IResourceManager resourceManager, IOptions<GlimpseServerOptions> serverOptions)
         {
             _authorizeClients = authorizeClientProvider.Instances;
             _authorizeAgents = authorizeAgentProvider.Instances;
+            _serverOptions = serverOptions.Value;
 
             _next = next;
             _branch = BuildBranch(app, resourceStartupsProvider.Instances, resourceProvider.Instances, resourceManager);
@@ -33,7 +36,7 @@ namespace Glimpse.Server
         public RequestDelegate BuildBranch(IApplicationBuilder app, IEnumerable<IResourceStartup> resourceStartups, IEnumerable<IResource> resources, IResourceManager resourceManager)
         {
             var branchApp = app.New();
-            branchApp.Map("/glimpse", glimpseApp =>
+            branchApp.Map($"/{_serverOptions.BasePath}", glimpseApp =>
             {
                 // REGISTER: resource startups
                 foreach (var resourceStartup in resourceStartups)

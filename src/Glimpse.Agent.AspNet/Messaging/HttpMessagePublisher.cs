@@ -15,12 +15,12 @@ namespace Glimpse.Agent
         private readonly ISubject<IMessage> _listenerSubject;
         private readonly HttpClient _httpClient;
         private readonly HttpClientHandler _httpHandler;
-        private readonly IScriptOptionsProvider _scriptOptionsProvider;
+        private readonly IResourceOptionsProvider _resourceOptionsProvider;
         private string _messageIngressUri;
 
-        public HttpMessagePublisher(IScriptOptionsProvider scriptOptionsProvider)
+        public HttpMessagePublisher(IResourceOptionsProvider resourceOptionsProvider)
         {
-            _scriptOptionsProvider = scriptOptionsProvider;
+            _resourceOptionsProvider = resourceOptionsProvider;
             _listenerSubject = new Subject<IMessage>();
 
             _httpHandler = new HttpClientHandler();
@@ -45,7 +45,7 @@ namespace Glimpse.Agent
         public async Task Process(IEnumerable<IMessage> messages)
         {
             if (string.IsNullOrEmpty(_messageIngressUri))
-                _messageIngressUri = _scriptOptionsProvider.BuildInstance().MessageIngressTemplate;
+                _messageIngressUri = _resourceOptionsProvider.BuildInstance().MessageIngressTemplate;
 
             // TODO: Needs error handelling
             try

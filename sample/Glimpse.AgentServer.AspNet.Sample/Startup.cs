@@ -9,17 +9,12 @@ namespace Glimpse.AspNet.Sample
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddGlimpse()
-                .RunningAgentWeb()
-                .RunningServerWeb(settings => settings.AllowRemote = true) // Temp workaround for kestrel not implementing IHttpConnectionFeature
-                    .WithLocalAgent();
+            services.AddGlimpse();
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseGlimpseServer();
-            app.UseGlimpseAgent();
+            app.UseGlimpse();
 
             app.Use(next => new SamplePage().Invoke);
             /*

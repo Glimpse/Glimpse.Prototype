@@ -13,21 +13,12 @@ namespace Glimpse
 
         public static GlimpseServerServiceCollectionBuilder RunningServerWeb(this GlimpseServiceCollectionBuilder services, Action<GlimpseServerOptions> setupAction)
         {
-            services.AddOptions();
-            
-            services.AddServerServices();
-
             if (setupAction != null)
             {
                 services.Configure(setupAction);
             }
 
             return new GlimpseServerServiceCollectionBuilder(services);
-        }
-
-        public static IServiceCollection WithLocalAgent(this GlimpseServerServiceCollectionBuilder services)
-        { 
-            return services.AddLocalAgentServices();
         }
     }
 }

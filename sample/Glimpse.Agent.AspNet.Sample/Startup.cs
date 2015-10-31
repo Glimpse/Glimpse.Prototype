@@ -32,23 +32,12 @@ namespace Glimpse.Agent.Sample
             });
             */
 
-            services
-                .AddGlimpse()
-                    .RunningAgentWeb(options =>
-                    {
-                        //options.IgnoredStatusCodes.Add(200);
-                    });
-
-            // TODO: Make this happen automatically if the file exists.
-            Configuration = new ConfigurationBuilder()
-                .AddJsonFile("glimpse.json")
-                .Build();
-            services.Configure<ScriptOptions>(Configuration.GetSection("ScriptOptions"));
+            services.AddGlimpse();
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseGlimpseAgent();
+            app.UseGlimpse();
 
             app.UseWelcomePage();
         }

@@ -1,24 +1,31 @@
-﻿using Glimpse.Agent;
+using System.IO;
+using Glimpse.Common.Initialization;
+using Microsoft.Extensions.DependencyInjection;
+using Glimpse.Agent;
 using Glimpse.Agent.Internal.Messaging;
 using Glimpse.Agent.Configuration;
 using Glimpse.Agent.Inspectors;
 using Glimpse.Agent.Internal.Inspectors.Mvc;
 using Glimpse.Initialization;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.OptionsModel;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Glimpse
 {
-    public static class GlimpseAgentServices
+    public class AgentServices : IRegisterServices
     {
-        public static IServiceCollection AddAgentServices(this IServiceCollection services)
+        public void RegisterServices(GlimpseServiceCollectionBuilder services)
         {
+            services.AddOptions();
+
+            RegisterPublisher(services);
+
             //
             // Broker
             //
             services.AddSingleton<IAgentBroker, DefaultAgentBroker>();
-            services.AddTransient<IMessagePublisher, HttpMessagePublisher>();
 
             //
             // Options
@@ -49,10 +56,24 @@ namespace Glimpse
             services.AddTransient<IExceptionProcessor, ExceptionProcessor>();
             services.AddTransient<WebDiagnosticsInspector>();
 
-            if (!services.Any(s => s.ServiceType == typeof(IScriptOptionsProvider)))
-                services.AddSingleton<IScriptOptionsProvider, OptionsScriptOptionsProvider>();
+            if (!services.Any(s => s.ServiceType == typeof(IResourceOptionsProvider)))
+                services.AddSingleton<IResourceOptionsProvider, OptionsResourceOptionsProvider>();
+        }
 
-            return services;
+        private void RegisterPublisher(GlimpseServiceCollectionBuilder services)
+        {
+            var configurationBuilder = new ConfigurationBuilder();
+            var path = Path.Combine(configurationBuilder.GetBasePath(), "glimpse.json");
+
+            if (File.Exists(path))
+            {
+                var configuration = configurationBuilder.AddJsonFile("glimpse.json").Build();
+                services.Configure<ResourceOptions>(configuration.GetSection("resources"));
+
+                services.Replace(new ServiceDescriptor(typeof(IMessagePublisher), typeof(HttpMessagePublisher), ServiceLifetime.Transient));
+            }
+
+            // TODO: If I reach this line, than Glimpse has no way to send data from point A to B. Should we blow up?
         }
     }
 }

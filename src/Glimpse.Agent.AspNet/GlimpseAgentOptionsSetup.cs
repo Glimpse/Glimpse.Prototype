@@ -13,7 +13,7 @@ namespace Glimpse.Agent
         {
             // Set up IgnoredUris
             options.IgnoredUris.AddCompiled("^/__browserLink/requestData");
-            options.IgnoredUris.AddCompiled("^/Glimpse");
+            options.IgnoredUris.AddCompiled("^/Glimpse"); // TODO: Need to make sure this honor overridden basePath's
             options.IgnoredUris.AddCompiled("^/favicon.ico");
         }
     }

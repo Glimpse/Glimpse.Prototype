@@ -10,7 +10,9 @@ namespace Glimpse.Server
 
         public static void ConfigureGlimpseServerWebOptions(GlimpseServerOptions options)
         {
-            // TODO: Setup different settings here
+            options.AllowRemote = true;  // Temp workaround for kestrel not implementing IHttpConnectionFeature
+            options.BasePath = "glimpse";
+            options.OverrideResources = _ => { };
         }
     }
 }

@@ -47,8 +47,7 @@ namespace Glimpse.Server.Internal.Resources
 
         public override IDictionary<string, string> Register => new Dictionary<string, string>
         {
-            { "client", "index.html?hash={hash}{&requestId}"},
-            { "diagnostics", "index.html?hash={hash}{&requestId}" },
+            { "client", "index.html?hash={hash}{&requestId,follow,metadataUri}"},
             { "hud", "hud.js?hash={hash}" }
         };
     }
