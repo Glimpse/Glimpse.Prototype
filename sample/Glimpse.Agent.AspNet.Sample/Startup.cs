@@ -1,4 +1,5 @@
-﻿using Glimpse.Agent;
+﻿using System;
+using Glimpse.Agent;
 using Glimpse.Initialization;
 using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +9,14 @@ namespace Glimpse.Agent.Sample
 {
     public class Startup
     {
+        public Startup()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("\nGLIMPSE AGENT RUNNING ON PORT 5200");
+            Console.WriteLine("==================================\n");
+            Console.ResetColor();
+        }
+
         public IConfiguration Configuration { get; set; }
 
         public void ConfigureServices(IServiceCollection services)
