@@ -2,8 +2,8 @@
 {
     public interface IViewComponentDescriptor
     {
-        string Id { get; set; }
-        string FullName { get; set; }
-        string ShortName { get; set; }
+        string Id { get; }
+        string FullName { get; }
+        string ShortName { get; }
     }
 }
