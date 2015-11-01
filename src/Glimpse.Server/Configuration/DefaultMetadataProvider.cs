@@ -28,12 +28,14 @@ namespace Glimpse.Server.Configuration
 
             var request = _httpContextAccessor.HttpContext.Request;
             var baseUrl = $"{request.Scheme}://{request.Host}/{_serverOptions.BasePath}/";
-            IDictionary<string, string> resources = _resourceManager.RegisteredUris.ToDictionary(kvp => kvp.Key.KebabCase(), kvp => $"{baseUrl}{kvp.Key}/{kvp.Value}");
+            var resources = _resourceManager.RegisteredUris.ToDictionary(kvp => kvp.Key.KebabCase(), kvp => $"{baseUrl}{kvp.Key}/{kvp.Value}");
 
             if (_serverOptions.OverrideResources != null)
                 _serverOptions.OverrideResources(resources);
 
-            return new Metadata(resources);
+            _metadata = new Metadata(resources);
+
+            return _metadata;
         }
     }
 }
