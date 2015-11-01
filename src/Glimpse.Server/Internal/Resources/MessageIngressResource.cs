@@ -24,13 +24,26 @@ namespace Glimpse.Server.Internal.Resources
 
         public async Task Invoke(HttpContext context, IDictionary<string, string> parameters)
         {
+            IEnumerable <Message> messages = null;
             if (context.Request.Method.Equals("POST", StringComparison.OrdinalIgnoreCase))
             {
-                // TODO: Wrap in a try block and return Http Problem when required
-                var messages = ReadMessage(context.Request).ToArray();
-                foreach (var message in messages)
+                try
                 {
-                    _messageServerBus.SendMessage(message);
+                    messages = ReadMessage(context.Request).ToArray();
+                    foreach (var message in messages)
+                    {
+                        _messageServerBus.SendMessage(message);
+                    }
+                }
+                catch (JsonReaderException exception)
+                {
+                    await context.RespondWith(new InvalidJsonProblem(exception));
+                    return;
+                }
+                catch (Exception exception)
+                {
+                    await context.RespondWith(new ExceptionProblem(exception));
+                    return;
                 }
 
                 await context.RespondWith(

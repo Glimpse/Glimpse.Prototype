@@ -17,7 +17,6 @@ namespace Glimpse
 
         public IEnumerable<string> Types { get; set; } = Enumerable.Empty<string>();
 
-        [JsonConverter(typeof(RawStringConverter))]
         public string Payload { get; set; }
 
         public int Ordinal { get; set; } = 0;
