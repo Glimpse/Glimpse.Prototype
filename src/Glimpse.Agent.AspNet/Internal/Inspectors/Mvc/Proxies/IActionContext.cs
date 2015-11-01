@@ -1,11 +1,11 @@
-﻿namespace Glimpse.Agent.Internal.Inspectors.Mvc.Proxies
+﻿using Microsoft.AspNet.Http;
+
+namespace Glimpse.Agent.Internal.Inspectors.Mvc.Proxies
 {
     public interface IActionContext
     {
         object ActionDescriptor { get; }
-
-        IHttpContext HttpContext { get; }
-
+        HttpContext HttpContext { get; }
         IRouteData RouteData { get; }
     }
 }

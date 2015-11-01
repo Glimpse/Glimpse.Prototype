@@ -4,6 +4,7 @@ using System.Linq;
 using Glimpse.Agent.Internal.Inspectors.Mvc.Proxies;
 using Glimpse.Agent.Messages;
 using Glimpse.Internal;
+using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DiagnosticAdapter;
 
 namespace Glimpse.Agent.Internal.Inspectors.Mvc
@@ -24,7 +25,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         // NOTE: This event is the start of the action pipeline. The action has been selected, the route
         //       has been selected but no filters have run and model binding hasn't occured.
         [DiagnosticName("Microsoft.AspNet.Mvc.BeforeAction")]
-        public void OnBeforeAction(object actionDescriptor, IHttpContext httpContext, IRouteData routeData)
+        public void OnBeforeAction(object actionDescriptor, HttpContext httpContext, IRouteData routeData)
         {
             var startDateTime = DateTime.UtcNow;
             var typedActionDescriptor = ConvertActionDescriptor(actionDescriptor);
@@ -57,7 +58,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         }
 
         [DiagnosticName("Microsoft.AspNet.Mvc.AfterAction")]
-        public void OnAfterAction(object actionDescriptor, IHttpContext httpContext)
+        public void OnAfterAction(object actionDescriptor, HttpContext httpContext)
         {
             var timing = _broker.EndLogicalOperation<BeforeActionMessage>();
             var typedActionDescriptor = ConvertActionDescriptor(actionDescriptor);
