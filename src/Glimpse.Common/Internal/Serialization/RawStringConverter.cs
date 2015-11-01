@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Glimpse.Internal
 {
@@ -12,7 +13,7 @@ namespace Glimpse.Internal
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            return reader.Value;
+            return JObject.Load(reader).ToString();
         }
 
         public override bool CanConvert(Type objectType)

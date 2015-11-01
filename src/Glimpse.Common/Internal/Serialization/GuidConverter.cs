@@ -17,13 +17,13 @@ namespace Glimpse.Common.Internal.Serialization
                 writer.WriteNull();
         }
 
+        public override bool CanWrite => true;
+
+        public override bool CanRead => false;
+
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            Guid result;
-            var input = reader.Value as string;
-
-            Guid.TryParseExact(input, _guidFormat, out result);
-            return result;
+            throw new NotImplementedException("This method is not required.");
         }
 
         public override bool CanConvert(Type objectType)

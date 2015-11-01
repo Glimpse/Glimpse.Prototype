@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Glimpse.Common.Internal.Serialization;
 using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;
-using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 
 namespace Glimpse.Server.Internal.Resources
@@ -14,10 +14,12 @@ namespace Glimpse.Server.Internal.Resources
     public class MessageIngressResource : IResource
     {
         private readonly IServerBroker _messageServerBus;
+        private readonly JsonSerializer _jsonSerializer;
 
-        public MessageIngressResource(IServerBroker messageServerBus)
+        public MessageIngressResource(IServerBroker messageServerBus, IJsonSerializerProvider serializerProvider)
         {
             _messageServerBus = messageServerBus;
+            _jsonSerializer = serializerProvider.GetJsonSerializer();
         }
 
         public async Task Invoke(HttpContext context, IDictionary<string, string> parameters)
@@ -50,10 +52,13 @@ namespace Glimpse.Server.Internal.Resources
 
         private IEnumerable<Message> ReadMessage(HttpRequest request)
         {
-            var reader = new StreamReader(request.Body);
-            var text = reader.ReadToEnd();
+            IEnumerable<Message> messages = null;
 
-            var messages = JsonConvert.DeserializeObject<IEnumerable<Message>>(text);
+            using (var sr = new StreamReader(request.Body))
+            using (var tr = new JsonTextReader(sr))
+            {
+                messages = _jsonSerializer.Deserialize<IEnumerable<Message>>(tr);
+            }
 
             return messages;
         }
