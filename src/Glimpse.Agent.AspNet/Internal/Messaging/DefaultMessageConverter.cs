@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace Glimpse.Agent.Internal.Messaging
 {
@@ -8,8 +7,6 @@ namespace Glimpse.Agent.Internal.Messaging
     // As such, this type is marked internal to prevent tampering
     internal class DefaultMessageConverter : IMessageConverter
     {
-        private static int _ordinal = 0;
-        
         public DefaultMessageConverter(IMessagePayloadFormatter payloadFormatter, IMessageIndexProcessor indexProcessor, IMessageTypeProcessor typeProcessor)
         {
             PayloadFormatter = payloadFormatter;
@@ -23,12 +20,12 @@ namespace Glimpse.Agent.Internal.Messaging
 
         private IMessageTypeProcessor TypeProcessor { get; }
 
-        public IMessage ConvertMessage(object payload, MessageContext context)
+        public IMessage ConvertMessage(object payload, MessageContext context, int ordinal)
         {
             var message = new Message
             {
                 Id = Guid.NewGuid(),
-                Ordinal = Interlocked.Increment(ref _ordinal),
+                Ordinal = ordinal,
                 Types = GetTypes(payload),
                 Context = context,
                 Indices = GetIndices(payload)

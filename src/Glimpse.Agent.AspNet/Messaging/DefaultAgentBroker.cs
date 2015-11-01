@@ -2,6 +2,7 @@
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Threading;
 using Glimpse.Agent.Internal.Messaging;
 using Glimpse.Internal;
 
@@ -9,6 +10,7 @@ namespace Glimpse.Agent
 {
     public class DefaultAgentBroker : IAgentBroker
     {
+        private static int _ordinal = 0;
         private readonly IMessageConverter _messageConverter;
         private readonly IMessagePublisher _messagePublisher;
         private readonly ISubject<AgentBrokerPayload> _onSenderThreadSubject;
@@ -50,7 +52,7 @@ namespace Glimpse.Agent
         public void SendMessage(object payload)
         {
             // need to fetch context data here as we are about to start switching threads
-            var data = new AgentBrokerPayload(payload, _context.Value);
+            var data = new AgentBrokerPayload(payload, _context.Value, Interlocked.Increment(ref _ordinal));
             
             // non-blocking
             _publisherInternalSubject.OnNext(data);
@@ -65,7 +67,7 @@ namespace Glimpse.Agent
         private void PublishMessage(AgentBrokerPayload data)
         {
             var context = data.Context ?? ApplicationMessageContext;
-            var message = _messageConverter.ConvertMessage(data.Payload, context);
+            var message = _messageConverter.ConvertMessage(data.Payload, context, data.Ordinal);
 
             _messagePublisher.PublishMessage(message); // TODO: Hook into offThread
         }
