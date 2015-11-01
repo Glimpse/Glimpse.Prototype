@@ -322,6 +322,41 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
 
             _broker.SendMessage(message);
         }
+        
+        [DiagnosticName("Microsoft.AspNet.Mvc.BeforeViewComponent")]
+        public void OnBeforeViewComponent(IViewComponentContext viewComponentContext)
+        {
+            var startDateTime = DateTime.UtcNow;
+
+            var message = new BeforeViewComponentMessage
+            {
+                ComponentId = viewComponentContext.ViewComponentDescriptor.Id,
+                ComponentDisplayName = viewComponentContext.ViewComponentDescriptor.FullName,
+                ComponentName = viewComponentContext.ViewComponentDescriptor.ShortName,
+                ComponentStartTime = startDateTime,
+                Arguments = viewComponentContext.Arguments?.Select(x => new ArgumentData { Type = TypeNameHelper.GetTypeDisplayName(x, false), TypeFullName = TypeNameHelper.GetTypeDisplayName(x), Name = null, Value = SanitizeUserObjectsHelper.GetSafeObject(x) }).ToList()
+            };
+            
+            _broker.BeginLogicalOperation(message, startDateTime);
+            _broker.SendMessage(message);
+        }
+
+        [DiagnosticName("Microsoft.AspNet.Mvc.AfterViewComponent")]
+        public void OnAfterViewComponent(IViewComponentContext viewComponentContext)
+        {
+            var timing = _broker.EndLogicalOperation<BeforeViewComponentMessage>();
+
+            var message = new AfterViewComponentMessage
+            {
+                ComponentId = viewComponentContext.ViewComponentDescriptor.Id,
+                ComponentName = viewComponentContext.ViewComponentDescriptor.ShortName,
+                ComponentEndTime = timing.End,
+                ComponentDuration = timing.Elapsed,
+                ComponentOffset = timing.Offset
+            };
+
+            _broker.SendMessage(message);
+        }
 
         private IActionDescriptor ConvertActionDescriptor(object actionDescriptor)
         {
