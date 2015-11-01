@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Builder;
+﻿using System;
+using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
@@ -13,6 +14,14 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample
 {
     public class Startup
     {
+        public Startup()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("\nGLIMPSE AGENT+SERVER (MVC) RUNNING ON PORT 5000");
+            Console.WriteLine("===============================================\n");
+            Console.ResetColor();
+        }
+
         public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
             // Setup configuration sources.
