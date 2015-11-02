@@ -24,7 +24,19 @@ namespace Glimpse.Server.Internal.Resources
 
         public async Task Invoke(HttpContext context, IDictionary<string, string> parameters)
         {
-            IEnumerable <Message> messages = null;
+            if (context.Request.Method.Equals("OPTIONS", StringComparison.OrdinalIgnoreCase))
+            {
+                // CORS - this is super basic...
+                var headers = context.Response.Headers;
+                headers["Access-Control-Allow-Origin"] = "*";
+                headers["Access-Control-Allow-Methods"] = "POST";
+                headers["Access-Control-Allow-Headers"] = context.Request.Headers["Access-Control-Request-Headers"];
+                context.Response.StatusCode = 200;
+                await context.Response.WriteAsync("");
+                return;
+            }
+
+            IEnumerable<Message> messages = null;
             if (context.Request.Method.Equals("POST", StringComparison.OrdinalIgnoreCase))
             {
                 try
@@ -37,23 +49,25 @@ namespace Glimpse.Server.Internal.Resources
                 }
                 catch (JsonReaderException exception)
                 {
-                    await context.RespondWith(new InvalidJsonProblem(exception));
+                    await context.RespondWith(new InvalidJsonProblem(exception).EnableCors());
                     return;
                 }
                 catch (Exception exception)
                 {
-                    await context.RespondWith(new ExceptionProblem(exception));
+                    await context.RespondWith(new ExceptionProblem(exception).EnableCors());
                     return;
                 }
 
                 await context.RespondWith(
                     new HttpStatusResponse(HttpStatusCode.Accepted, 
-                    "Accepted: " + string.Join(", ", messages.Select(m => m.Id.ToString("N")))));
+                    "Accepted: " + string.Join(", ", messages.Select(m => m.Id.ToString("N"))))
+                    .EnableCors());
             }
             else
             {
                 await context.RespondWith(
-                    new InvalidMethodProblem(context.Request.Method, "POST"));
+                    new InvalidMethodProblem(context.Request.Method, "POST")
+                    .EnableCors());
             }
         }
 

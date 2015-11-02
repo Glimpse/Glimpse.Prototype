@@ -38,6 +38,14 @@ namespace Glimpse.Server.Resources
             return new ResponseDecorator(response, ctx => ctx.Response.Headers[HeaderNames.ContentDisposition] = $"attachment; filename = {filename}");
         }
 
+        public static IResponse EnableCors(this IResponse response)
+        {
+            return new ResponseDecorator(response, ctx =>
+            {
+                ctx.Response.Headers["Access-Control-Allow-Origin"] = "*"; // TODO: This can be improved!
+            });
+        }
+
         public static IResponse EnableCaching(this IResponse response, TimeSpan? timeSpan = null)
         {
             return new ResponseDecorator(response, ctx =>

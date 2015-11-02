@@ -24,7 +24,9 @@ namespace Glimpse.Server.Internal.Resources
 
                 if (!contextId.HasValue)
                 {
-                    await context.RespondWith(new MissingParameterProblem("contextId").EnableCaching());
+                    await context.RespondWith(new MissingParameterProblem("contextId")
+                        .EnableCaching()
+                        .EnableCors());
                     return;
                 }
 
@@ -34,7 +36,8 @@ namespace Glimpse.Server.Internal.Resources
 
                 await context.RespondWith(
                     new RawJson(list.ToJsonArray())
-                    .EnableCaching());
+                    .EnableCaching()
+                    .EnableCors());
             });
         }
 
