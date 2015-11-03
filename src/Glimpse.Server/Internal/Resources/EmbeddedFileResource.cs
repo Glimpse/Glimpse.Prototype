@@ -18,6 +18,8 @@ namespace Glimpse.Server.Internal.Resources
 
             appBuilder.ModifyResponseWith(response => response.EnableCaching());
 
+            appBuilder.ModifyResponseWith(res => res.EnableCors());
+
             appBuilder.UseFileServer(new FileServerOptions
             {
                 RequestPath = "",
