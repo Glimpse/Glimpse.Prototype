@@ -15,9 +15,9 @@
   "dependencies": {
     "Glimpse.Common": "",
     "Microsoft.AspNet.FileProviders.Physical": "1.0.0-*",
-    "Microsoft.AspNet.Hosting": "1.0.0-beta-*",
+    "Microsoft.AspNet.Hosting": "1.0.0-*",
     "Microsoft.AspNet.WebApi.Client": "5.2.2",
-    "Microsoft.Extensions.Configuration.Json": "1.0.0-beta-*",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-*",
     "Microsoft.Extensions.DiagnosticAdapter": "1.0.0-*",
     "System.Diagnostics.DiagnosticSource": "4.0.0-beta-*",
     "System.Net.Http": "4.0.0"
