@@ -2,6 +2,7 @@
 using Glimpse.Agent.Messages;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DiagnosticAdapter;
+using Microsoft.Extensions.Primitives;
 
 namespace Glimpse.Agent.Internal.Inspectors.Mvc
 {
@@ -16,6 +17,9 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             var request = httpContext.Request;
             var requestDateTime = DateTime.UtcNow;
 
+            var isAjax = StringValues.Empty;
+            httpContext.Request.Headers.TryGetValue("__glimpse-isAjax", out isAjax);
+
             var message = new BeginRequestMessage
             {
                 // TODO: check if there is a better way of doing this
@@ -26,7 +30,8 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                 RequestHeaders = request.Headers,
                 RequestContentLength = request.ContentLength,
                 RequestContentType = request.ContentType,
-                RequestStartTime = requestDateTime
+                RequestStartTime = requestDateTime,
+                RequestIsAjax = isAjax == "true"
             };
 
             _broker.StartOffsetOperation();

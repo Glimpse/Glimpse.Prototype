@@ -27,5 +27,7 @@ namespace Glimpse.Agent.Messages
 
         [PromoteToDateTime]
         public DateTime RequestStartTime { get; set; }
+
+        public bool RequestIsAjax { get; set; }
     }
 }
