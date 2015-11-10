@@ -24,9 +24,9 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc.Proxies
         public interface IObjectResult
         {
             int? StatusCode { get; }
-            object Value { get; }
-            IList<object> Formatters { get; }
-            IList<string> ContentTypes { get; }
+            //object Value { get; }
+            //IReadOnlyList<object> Formatters { get; }
+            //IReadOnlyList<string> ContentTypes { get; }
             Type DeclaredType { get; }
         }
 

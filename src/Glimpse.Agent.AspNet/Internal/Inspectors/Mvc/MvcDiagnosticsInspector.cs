@@ -168,13 +168,13 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                     message = new BeforeActionObjectResultMessage
                     {
                         StatusCode = objectResult.StatusCode,
-                        Value = objectResult.Value,
-                        Formatters = objectResult.Formatters?.Select(x => x.GetType()).ToList(),
-                        ContentTypes = objectResult.ContentTypes?.Select(x => x.ToString()).ToList()
+                        //Value = objectResult.Value,
+                        //Formatters = objectResult.Formatters?.Select(x => x.GetType()).ToList(),
+                        //ContentTypes = objectResult.ContentTypes?.Select(x => x.ToString()).ToList()
                     };
 
                     break;
-                case "Microsoft.AspNet.Mvc.FileResult":
+               /* case "Microsoft.AspNet.Mvc.FileResult":
                 case "Microsoft.AspNet.Mvc.FileContentResult":
                 case "Microsoft.AspNet.Mvc.FileStreamResult":
                     var fileResult = _proxyAdapter.Process<ActionResultTypes.IFileResult>("Microsoft.AspNet.Mvc.FileResult", result);
@@ -185,7 +185,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                         ContentType = fileResult.ContentType
                     };
 
-                    break;
+                    break;*/
                 default:
                     message = new BeforeActionResultMessage();
 
