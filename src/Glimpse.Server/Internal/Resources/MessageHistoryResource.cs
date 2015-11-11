@@ -31,7 +31,6 @@ namespace Glimpse.Server.Internal.Resources
             }
 
             var list = await _store.RetrieveByType(types);
-
             await context.RespondWith(new RawJson(list.ToJsonArray()));
         }
 

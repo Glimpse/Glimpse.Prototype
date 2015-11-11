@@ -10,8 +10,9 @@ namespace Glimpse.Server.Internal.Extensions
     {
         public static string ToJsonArray(this IEnumerable<string> jsonStringCollection)
         {
+            var array = jsonStringCollection.ToArray();
             var sb = new StringBuilder("[");
-            sb.Append(string.Join(",", jsonStringCollection.ToArray()));
+            sb.Append(string.Join(",", array));
             sb.Append("]");
             return sb.ToString();
         }

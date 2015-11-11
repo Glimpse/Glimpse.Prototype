@@ -32,7 +32,7 @@ namespace Glimpse.Server.Internal.Resources
 
                 var types = parameters.ParseEnumerable("types").ToArray();
 
-               var list = await _storage.RetrieveByContextId(contextId.Value, types);
+                var list = await _storage.RetrieveByContextId(contextId.Value, types);
 
                 await context.RespondWith(
                     new RawJson(list.ToJsonArray())
