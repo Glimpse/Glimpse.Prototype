@@ -23,11 +23,11 @@
     "Rx-PlatformServices": "2.2.5"
   },
   "frameworks": {
-    "dnx451": {
+    "net451": {
       "dependencies": {
       }
     },
-    "dnxcore50": {
+    "dotnet5.4": {
       "dependencies": {
         "System.ObjectModel": "4.0.10",
         "System.Runtime": "4.0.21-beta-*",

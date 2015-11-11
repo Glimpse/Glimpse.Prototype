@@ -20,11 +20,11 @@
   },
   "resource": "Internal/Resources/Embeded/**/*.*",
   "frameworks": {
-    "dnx451": {
+    "net451": {
       "dependencies": {
       }
     },
-    "dnxcore50": {
+    "dotnet5.4": {
       "dependencies": {
       }
     }
