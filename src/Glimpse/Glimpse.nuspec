@@ -18,10 +18,12 @@
       <group targetFramework="dnx451">
         <dependency id="Glimpse.Server" version="2.0.0-beta1" />
         <dependency id="Glimpse.Agent.AspNet" version="2.0.0-beta1" />
+	<dependency id="Glimpse.Agent.AspNet.Mvc" version="2.0.0-beta1" />
       </group>
       <group targetFramework="dnxcore50">
         <dependency id="Glimpse.Server" version="2.0.0-beta1" />
         <dependency id="Glimpse.Agent.AspNet" version="2.0.0-beta1" />
+	<dependency id="Glimpse.Agent.AspNet.Mvc" version="2.0.0-beta1" />
       </group>
     </dependencies>
   </metadata>
