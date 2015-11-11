@@ -32,9 +32,15 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc.Proxies
 
             if (subscription.ProxiedType == null)
             {
-                var proxiedType = ProxyTypeEmitter.GetProxyType(_cache, typeof(T), target.GetType());
+                lock (subscription)
+                {
+                    if (subscription.ProxiedType == null)
+                    {
+                        var proxiedType = ProxyTypeEmitter.GetProxyType(_cache, typeof(T), target.GetType());
 
-                subscription.ProxiedType = proxiedType;
+                        subscription.ProxiedType = proxiedType;
+                    }
+                }
             }
 
             var instance = (T)Activator.CreateInstance(subscription.ProxiedType, target);
