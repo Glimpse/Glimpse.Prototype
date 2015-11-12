@@ -1,7 +1,7 @@
 ﻿using Glimpse.Agent.Internal.Inspectors.Mvc.Proxies;
 using Glimpse.Internal;
 
-namespace Glimpse.Agent.Internal.Inspectors.Mvc
+namespace Glimpse.Agent.Internal.Inspectors
 {
     // NOTE: This has been setup as a partial class to prevent having multiple 
     //       listeners registered. Under the covers, Diagnostics Source will 

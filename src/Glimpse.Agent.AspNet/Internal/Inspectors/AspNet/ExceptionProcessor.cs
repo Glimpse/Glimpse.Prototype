@@ -7,7 +7,7 @@ using Glimpse.Agent.Messages;
 using Microsoft.AspNet.FileProviders;
 using Microsoft.Extensions.PlatformAbstractions;
 
-namespace Glimpse.Agent.Internal.Inspectors.Mvc
+namespace Glimpse.Agent.Internal.Inspectors
 {
     public class ExceptionProcessor : IExceptionProcessor
     {

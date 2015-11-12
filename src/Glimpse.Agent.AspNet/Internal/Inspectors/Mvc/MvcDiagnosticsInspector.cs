@@ -7,7 +7,7 @@ using Glimpse.Internal;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DiagnosticAdapter;
 
-namespace Glimpse.Agent.Internal.Inspectors.Mvc
+namespace Glimpse.Agent.Internal.Inspectors
 {
     public partial class WebDiagnosticsInspector
     {

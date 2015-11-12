@@ -5,10 +5,10 @@ using Glimpse.Agent;
 using Glimpse.Agent.Internal.Messaging;
 using Glimpse.Agent.Configuration;
 using Glimpse.Agent.Inspectors;
-using Glimpse.Agent.Internal.Inspectors.Mvc;
 using Glimpse.Initialization;
 using Microsoft.Extensions.OptionsModel;
 using System.Linq;
+using Glimpse.Agent.Internal.Inspectors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 

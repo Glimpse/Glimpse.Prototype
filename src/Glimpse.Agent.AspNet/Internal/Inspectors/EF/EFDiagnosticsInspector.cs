@@ -5,7 +5,7 @@ using Glimpse.Agent.Internal.Inspectors.EF.Proxies;
 using Glimpse.Agent.Messages;
 using Microsoft.Extensions.DiagnosticAdapter;
 
-namespace Glimpse.Agent.Internal.Inspectors.Mvc
+namespace Glimpse.Agent.Internal.Inspectors
 {
     public partial class WebDiagnosticsInspector
     {
