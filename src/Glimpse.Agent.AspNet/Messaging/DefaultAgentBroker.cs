@@ -20,11 +20,11 @@ namespace Glimpse.Agent
         private readonly IContextData<MessageContext> _context; 
         private static readonly MessageContext ApplicationMessageContext = new MessageContext { Id = Guid.NewGuid(), Type = "Application" };
 
-        public DefaultAgentBroker(IMessagePublisher messagePublisher, IMessageConverter messageConverter)
+        public DefaultAgentBroker(IMessagePublisher messagePublisher, IMessageConverter messageConverter, IContextData<MessageContext> context)
         {
             _messagePublisher = messagePublisher;
             _messageConverter = messageConverter;
-            _context = new ContextData<MessageContext>();
+            _context = context;
 
             _onSenderThreadSubject = new Subject<AgentBrokerPayload>();
             _offSenderThreadSubject = new Subject<AgentBrokerPayload>();

@@ -5,8 +5,8 @@ namespace Glimpse.Internal
 {
     public class OperationStack
     {
-        private readonly ContextData<OperationChain> _chainContext = new ContextData<OperationChain>();
-        private readonly ContextData<OperationOffset> _offsetContext = new ContextData<OperationOffset>();
+        private static readonly ContextData<OperationChain> _chainContext = new ContextData<OperationChain>();
+        private static readonly ContextData<OperationOffset> _offsetContext = new ContextData<OperationOffset>();
 
         public void StartOffset()
         {

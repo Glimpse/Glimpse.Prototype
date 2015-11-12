@@ -30,8 +30,8 @@ namespace Glimpse
             //
             // Context.
             //
-            services.AddTransient(typeof(IContextData<>), typeof(ContextData<>)); 
-            services.AddTransient<IGlimpseContextAccessor, DefaultGlimpseContextAccessor>(); 
+            services.AddSingleton(typeof(IContextData<>), typeof(ContextData<>)); 
+            services.AddSingleton<IGlimpseContextAccessor, DefaultGlimpseContextAccessor>(); 
 
             //
             // JSON.Net.
