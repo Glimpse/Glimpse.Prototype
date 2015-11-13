@@ -55,7 +55,7 @@ namespace Glimpse.Server.Internal.Resources
                 await sse.SetRetry(TimeSpan.FromSeconds(5));
 
                 var unSubscribe = (IDisposable)null;
-                unSubscribe = _senderSubject.Where(filter).Subscribe(async t =>
+                unSubscribe = _senderSubject.Where(c =>  c.Event == "ping" || filter(c)).Subscribe(async t =>
                 {
                     await _syncLock.WaitAsync();
 
