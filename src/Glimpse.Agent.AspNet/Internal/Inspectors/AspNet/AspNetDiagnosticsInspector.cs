@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Glimpse.Agent.Messages;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DiagnosticAdapter;
@@ -27,7 +28,7 @@ namespace Glimpse.Agent.Internal.Inspectors
                 RequestPath = request.Path,
                 RequestQueryString = request.QueryString.Value,
                 RequestMethod = request.Method,
-                RequestHeaders = request.Headers,
+                RequestHeaders = request.Headers.ToDictionary(h => h.Key, h => h.Value),
                 RequestContentLength = request.ContentLength,
                 RequestContentType = request.ContentType,
                 RequestStartTime = requestDateTime,
@@ -88,7 +89,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             message.RequestPath = request.Path;
             message.RequestQueryString = request.QueryString.Value;
             message.ResponseDuration = Math.Round(timing.Elapsed.TotalMilliseconds, 2);
-            message.ResponseHeaders = response.Headers;
+            message.ResponseHeaders = response.Headers.ToDictionary(h => h.Key, h => h.Value);
             message.ResponseContentLength = response.ContentLength;
             message.ResponseContentType = response.ContentType;
             message.ResponseStatusCode = response.StatusCode;

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Glimpse.Agent.Internal.Messaging;
-using Glimpse.Internal;
-using Microsoft.AspNet.Http;
 using Microsoft.Extensions.Primitives;
 
 namespace Glimpse.Agent.Messages
@@ -19,7 +16,7 @@ namespace Glimpse.Agent.Messages
         [PromoteToMethod]
         public string RequestMethod { get; set; }
 
-        public IDictionary<string, StringValues> RequestHeaders { get; set; }
+        public IReadOnlyDictionary<string, StringValues> RequestHeaders { get; set; }
 
         public long? RequestContentLength { get; set; }
 
