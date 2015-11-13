@@ -261,7 +261,7 @@ namespace Glimpse.Agent.Internal.Inspectors
         [DiagnosticName("Microsoft.AspNet.Mvc.ViewFound")]
         public void OnViewResultViewFound(
             IActionContext actionContext,
-            ActionResultTypes.IViewResult result,
+            object result,
             string viewName,
             IView view)
         {
