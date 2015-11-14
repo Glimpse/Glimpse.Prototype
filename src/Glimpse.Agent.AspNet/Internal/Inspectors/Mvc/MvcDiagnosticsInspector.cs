@@ -229,7 +229,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             IActionResult result)
         {
             var timing = _broker.EndLogicalOperation<BeforeActionResultMessage>();
-            if (timing == null)
+            if (timing != null)
             {
                 var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
