@@ -8,6 +8,10 @@ namespace Glimpse.Internal
         private static readonly ContextData<OperationChain> _chainContext = new ContextData<OperationChain>();
         private static readonly ContextData<OperationOffset> _offsetContext = new ContextData<OperationOffset>();
 
+        public OperationStack()
+        {
+        }
+
         public void StartOffset()
         {
             StartOffset(DateTime.UtcNow);
@@ -42,7 +46,8 @@ namespace Glimpse.Internal
             var current = _chainContext.Value;
             _chainContext.Value = current?.Next;
 
-            return new OperationTiming<T>(current?.Operation ?? default(Operation));
+            // TODO: this should never be null... so need to log this out
+            return current == null ? null : new OperationTiming<T>(current.Operation);
         }
 
         private class OperationChain

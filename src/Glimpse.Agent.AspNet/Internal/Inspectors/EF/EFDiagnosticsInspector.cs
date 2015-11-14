@@ -4,6 +4,7 @@ using System.Linq;
 using Glimpse.Agent.Internal.Inspectors.EF.Proxies;
 using Glimpse.Agent.Messages;
 using Microsoft.Extensions.DiagnosticAdapter;
+using Microsoft.Extensions.Logging;
 
 namespace Glimpse.Agent.Internal.Inspectors
 {
@@ -32,34 +33,45 @@ namespace Glimpse.Agent.Internal.Inspectors
         public void OnAfterExecuteCommand(IDbCommand command, string executeMethod, bool isAsync)
         {
             var timing = _broker.EndLogicalOperation<BeforeExecuteCommandMessage>();
-
-            var message = new AfterExecuteCommandMessage
+            if (timing != null)
             {
-                CommandHadException = false,
-                CommandDuration = timing.Elapsed,
-                CommandEndTime = timing.End,
-                CommandOffset = timing.Offset
-            };
+                var message = new AfterExecuteCommandMessage
+                {
+                    CommandHadException = false,
+                    CommandDuration = timing.Elapsed,
+                    CommandEndTime = timing.End,
+                    CommandOffset = timing.Offset
+                };
 
-            _broker.SendMessage(message);
+                _broker.SendMessage(message);
+            }
+            else
+            {
+                _logger.LogCritical("OnAfterExecuteCommand: Couldn't publish `AfterExecuteCommandMessage` as `BeforeExecuteCommandMessage` wasn't found in stack");
+            }
         }
 
         [DiagnosticName("Microsoft.Data.Entity.CommandExecutionError")]
         public void OnAfterExecuteCommand(IDbCommand command, string executeMethod, bool isAsync, Exception exception)
         {
             var timing = _broker.EndLogicalOperation<BeforeExecuteCommandMessage>();
-
-            var message = new AfterExecuteCommandExceptionMessage
+            if (timing != null)
             {
-                //Exception = exception,
-                CommandHadException = true,
-                CommandDuration = timing.Elapsed,
-                CommandEndTime = timing.End,
-                CommandOffset = timing.Offset
-            };
+                var message = new AfterExecuteCommandExceptionMessage
+                {
+                    //Exception = exception,
+                    CommandHadException = true,
+                    CommandDuration = timing.Elapsed,
+                    CommandEndTime = timing.End,
+                    CommandOffset = timing.Offset
+                };
 
-            _broker.SendMessage(message);
-
+                _broker.SendMessage(message);
+            }
+            else
+            {
+                _logger.LogCritical("OnAfterExecuteCommand: Couldn't publish `AfterExecuteCommandExceptionMessage` as `BeforeExecuteCommandMessage` wasn't found in stack");
+            }
         }
     }
 }

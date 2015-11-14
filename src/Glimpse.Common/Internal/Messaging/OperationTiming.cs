@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Glimpse.Internal
 {
-    public struct OperationTiming<T>
+    public class OperationTiming<T>
     {
         public OperationTiming(Operation operation)
             : this((T)operation.Item, operation.Start, DateTime.UtcNow, operation.Timer, operation.Offset)

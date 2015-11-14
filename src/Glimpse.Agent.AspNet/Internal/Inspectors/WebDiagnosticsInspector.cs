@@ -1,5 +1,6 @@
 ﻿using Glimpse.Agent.Internal.Inspectors.Mvc.Proxies;
 using Glimpse.Internal;
+using Microsoft.Extensions.Logging;
 
 namespace Glimpse.Agent.Internal.Inspectors
 {
@@ -13,12 +14,14 @@ namespace Glimpse.Agent.Internal.Inspectors
         private readonly IContextData<MessageContext> _contextData;
         private readonly ProxyAdapter _proxyAdapter;
         private readonly IExceptionProcessor _exceptionProcessor;
+        private readonly ILogger _logger;
 
-        public WebDiagnosticsInspector(IExceptionProcessor exceptionProcessor, IAgentBroker broker, IContextData<MessageContext> contextData)
+        public WebDiagnosticsInspector(IExceptionProcessor exceptionProcessor, IAgentBroker broker, IContextData<MessageContext> contextData, ILoggerFactory loggerFactory)
         {
             _exceptionProcessor = exceptionProcessor;
             _broker = broker;
             _contextData = contextData;
+            _logger = loggerFactory.CreateLogger<WebDiagnosticsInspector>();
 
             _proxyAdapter = new ProxyAdapter();
 

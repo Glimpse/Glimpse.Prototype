@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Glimpse.Internal
 {
-    public struct Operation
+    public class Operation
     {
         public Operation(object item, DateTime start, TimeSpan? offset)
         {
