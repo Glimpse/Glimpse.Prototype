@@ -17,7 +17,7 @@ namespace Glimpse.Agent.Inspectors
                 if (_broker == null)
                 {
                     var httpContextAccessor = new HttpContextAccessor();
-                    _broker = httpContextAccessor.HttpContext.ApplicationServices.GetService<IAgentBroker>();
+                    _broker = httpContextAccessor.HttpContext.RequestServices.GetService<IAgentBroker>();
                 }
 
                 return _broker;
