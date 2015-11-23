@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Linq;
 using Glimpse.Agent.Messages;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DiagnosticAdapter;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Primitives;
 
-namespace Glimpse.Agent.Internal.Inspectors.Mvc
+namespace Glimpse.Agent.Internal.Inspectors
 {
     public partial class WebDiagnosticsInspector
     {
@@ -16,17 +19,20 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             var request = httpContext.Request;
             var requestDateTime = DateTime.UtcNow;
 
+            var isAjax = StringValues.Empty;
+            httpContext.Request.Headers.TryGetValue("__glimpse-isAjax", out isAjax);
+
             var message = new BeginRequestMessage
             {
-                // TODO: check if there is a better way of doing this
-                RequestUrl = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}",
+                RequestUrl = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}", // TODO: check if there is a better way of doing this
                 RequestPath = request.Path,
                 RequestQueryString = request.QueryString.Value,
                 RequestMethod = request.Method,
-                RequestHeaders = request.Headers,
+                RequestHeaders = request.Headers.ToDictionary(h => h.Key, h => h.Value),
                 RequestContentLength = request.ContentLength,
                 RequestContentType = request.ContentType,
-                RequestStartTime = requestDateTime
+                RequestStartTime = requestDateTime,
+                RequestIsAjax = isAjax == "true"
             };
 
             _broker.StartOffsetOperation();
@@ -73,21 +79,31 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
 
         private void ProcessEndRequest(EndRequestMessage message, HttpContext httpContext)
         {
-            var timing = _broker.EndLogicalOperation<BeginRequestMessage>();
-
             var request = httpContext.Request;
             var response = httpContext.Response;
-
-            // TODO: check if there is a better way of doing this
-            message.RequestUrl = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}";
+            
+            message.RequestUrl = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}"; // TODO: check if there is a better way of doing this
             message.RequestPath = request.Path;
             message.RequestQueryString = request.QueryString.Value;
-            message.ResponseDuration = Math.Round(timing.Elapsed.TotalMilliseconds, 2);
-            message.ResponseHeaders = response.Headers;
+            message.ResponseHeaders = response.Headers.ToDictionary(h => h.Key, h => h.Value);
             message.ResponseContentLength = response.ContentLength;
             message.ResponseContentType = response.ContentType;
             message.ResponseStatusCode = response.StatusCode;
-            message.ResponseEndTime = timing.End.ToUniversalTime();
+
+            // in this case still want to publish but setting duration to 0
+            var timing = _broker.EndLogicalOperation<BeginRequestMessage>();
+            if (timing != null)
+            {
+                message.ResponseDuration = Math.Round(timing.Elapsed.TotalMilliseconds, 2);
+                message.ResponseEndTime = timing.End.ToUniversalTime();
+            }
+            else
+            {
+                message.ResponseDuration = 0.0;
+                message.ResponseEndTime = DateTime.UtcNow;
+
+                _logger.LogCritical("ProcessEndRequest: Still published `EndRequestMessage` but couldn't find `BeginRequestMessage` in stack");
+            }
         }
 
         private void ProcessException(IExceptionMessage message, Exception exception, bool isHandelled)

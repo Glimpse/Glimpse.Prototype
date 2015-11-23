@@ -13,27 +13,27 @@
   "tags": [ "ASP.NET", "Web", "Debugging", "Diagnostics" ],
 
   "dependencies": {
-    "Rx-Linq": "2.2.5",
-    "Rx-PlatformServices": "2.2.5",
+    "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
+    "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Logging": "1.0.0-rc1-final",
+    "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+    "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final",
     "Newtonsoft.Json": "6.0.6",
-    "Microsoft.Extensions.PlatformAbstractions": "1.0.0-*",
-    "Microsoft.Extensions.DependencyInjection": "1.0.0-*",
-    "Microsoft.AspNet.Http.Abstractions": "1.0.0-*",
-    "Microsoft.Extensions.Logging": "1.0.0-*",
-    "Microsoft.Extensions.OptionsModel": "1.0.0-*"
+    "Rx-Linq": "2.2.5",
+    "Rx-PlatformServices": "2.2.5"
   },
   "frameworks": {
-    "dnx451": {
+    "net451": {
       "dependencies": {
       }
     },
-    "dnxcore50": {
+    "dotnet5.4": {
       "dependencies": {
-        "System.Runtime": "4.0.21-beta-*",
-        "System.ObjectModel": "4.0.10",
-        "System.Threading": "4.0.11-beta-*",
-        "System.Text.RegularExpressions": "4.0.11-beta-*",
-        "System.Security.Cryptography.Algorithms": "4.0.0-beta-*"
+        "System.ObjectModel": "4.0.11-beta-23516",
+        "System.Runtime": "4.0.21-beta-23516",
+        "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516",
+        "System.Text.RegularExpressions": "4.0.11-beta-23516",
+        "System.Threading": "4.0.11-beta-23516"
       }
     }
   }

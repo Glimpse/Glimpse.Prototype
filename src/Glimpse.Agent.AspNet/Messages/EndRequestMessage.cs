@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Glimpse.Agent.Internal.Messaging;
-using Glimpse.Internal;
-using Microsoft.AspNet.Http;
 using Microsoft.Extensions.Primitives;
 
 namespace Glimpse.Agent.Messages
@@ -24,7 +21,7 @@ namespace Glimpse.Agent.Messages
         [PromoteToStatusCode]
         public int ResponseStatusCode { get; set; }
 
-        public IDictionary<string, StringValues> ResponseHeaders { get; set; }
+        public IReadOnlyDictionary<string, StringValues> ResponseHeaders { get; set; }
 
         [PromoteToDuration]
         public double? ResponseDuration { get; set; }

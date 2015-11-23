@@ -14,10 +14,10 @@
         "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:5210"
     },
     "dependencies": {
-        "Glimpse.Server": "",
-        "Microsoft.AspNet.Diagnostics": "1.0.0-*",
-        "Microsoft.AspNet.Server.WebListener": "1.0.0-*",
-        "Microsoft.AspNet.Server.Kestrel": "1.0.0-*"
+      "Glimpse.Server": "",
+      "Microsoft.AspNet.Diagnostics": "1.0.0-rc1-final",
+      "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
+      "Microsoft.AspNet.Server.WebListener": "1.0.0-rc1-final"
     },
     "frameworks" : {
         "dnx451": { },

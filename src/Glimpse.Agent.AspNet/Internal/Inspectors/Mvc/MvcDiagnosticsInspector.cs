@@ -6,8 +6,9 @@ using Glimpse.Agent.Messages;
 using Glimpse.Internal;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DiagnosticAdapter;
+using Microsoft.Extensions.Logging;
 
-namespace Glimpse.Agent.Internal.Inspectors.Mvc
+namespace Glimpse.Agent.Internal.Inspectors
 {
     public partial class WebDiagnosticsInspector
     {
@@ -61,19 +62,26 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         public void OnAfterAction(object actionDescriptor, HttpContext httpContext)
         {
             var timing = _broker.EndLogicalOperation<BeforeActionMessage>();
-            var typedActionDescriptor = ConvertActionDescriptor(actionDescriptor);
-
-            var message = new AfterActionMessage()
+            if (timing != null)
             {
-                ActionId = typedActionDescriptor.Id,
-                ActionName = typedActionDescriptor.Name,
-                ActionControllerName = typedActionDescriptor.ControllerName,
-                ActionEndTime = timing.End,
-                ActionDuration = timing.Elapsed,
-                ActionOffset = timing.Offset
-            };
+                var typedActionDescriptor = ConvertActionDescriptor(actionDescriptor);
 
-            _broker.SendMessage(message);
+                var message = new AfterActionMessage()
+                {
+                    ActionId = typedActionDescriptor.Id,
+                    ActionName = typedActionDescriptor.Name,
+                    ActionControllerName = typedActionDescriptor.ControllerName,
+                    ActionEndTime = timing.End,
+                    ActionDuration = timing.Elapsed,
+                    ActionOffset = timing.Offset
+                };
+
+                _broker.SendMessage(message);
+            }
+            else
+            {
+                _logger.LogCritical("OnAfterAction: Couldn't publish `AfterActionMessage` as `BeforeActionMessage` wasn't found in stack");
+            }
         }
 
         // NOTE: This event is the start of the action execution. The action has been selected, the route
@@ -107,19 +115,26 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             IActionContext actionContext)
         {
             var timing = _broker.EndLogicalOperation<BeforeActionInvokedMessage>();
-            var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
-
-            var message = new AfterActionInvokedMessage()
+            if (timing != null)
             {
-                ActionId = actionDescriptor.Id,
-                ActionName = actionDescriptor.Name,
-                ActionControllerName = actionDescriptor.ControllerName,
-                ActionInvokedEndTime = timing.End,
-                ActionInvokedDuration = timing.Elapsed,
-                ActionInvokedOffset = timing.Offset
-            };
+                var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
-            _broker.SendMessage(message);
+                var message = new AfterActionInvokedMessage()
+                {
+                    ActionId = actionDescriptor.Id,
+                    ActionName = actionDescriptor.Name,
+                    ActionControllerName = actionDescriptor.ControllerName,
+                    ActionInvokedEndTime = timing.End,
+                    ActionInvokedDuration = timing.Elapsed,
+                    ActionInvokedOffset = timing.Offset
+                };
+
+                _broker.SendMessage(message);
+            }
+            else
+            {
+                _logger.LogCritical("OnAfterActionMethod: Couldn't publish `AfterActionInvokedMessage` as `BeforeActionInvokedMessage` wasn't found in stack");
+            }
         }
 
         // NOTE: This event is the start of the result pipeline. The action has been executed, but
@@ -168,13 +183,13 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                     message = new BeforeActionObjectResultMessage
                     {
                         StatusCode = objectResult.StatusCode,
-                        Value = objectResult.Value,
-                        Formatters = objectResult.Formatters?.Select(x => x.GetType()).ToList(),
-                        ContentTypes = objectResult.ContentTypes?.Select(x => x.ToString()).ToList()
+                        //Value = objectResult.Value,
+                        //Formatters = objectResult.Formatters?.Select(x => x.GetType()).ToList(),
+                        //ContentTypes = objectResult.ContentTypes?.Select(x => x.ToString()).ToList()
                     };
 
                     break;
-                case "Microsoft.AspNet.Mvc.FileResult":
+               /* case "Microsoft.AspNet.Mvc.FileResult":
                 case "Microsoft.AspNet.Mvc.FileContentResult":
                 case "Microsoft.AspNet.Mvc.FileStreamResult":
                     var fileResult = _proxyAdapter.Process<ActionResultTypes.IFileResult>("Microsoft.AspNet.Mvc.FileResult", result);
@@ -185,7 +200,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
                         ContentType = fileResult.ContentType
                     };
 
-                    break;
+                    break;*/
                 default:
                     message = new BeforeActionResultMessage();
 
@@ -214,19 +229,26 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             IActionResult result)
         {
             var timing = _broker.EndLogicalOperation<BeforeActionResultMessage>();
-            var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
-
-            var message = new AfterActionResultMessage()
+            if (timing != null)
             {
-                ActionId = actionDescriptor.Id,
-                ActionName = actionDescriptor.Name,
-                ActionControllerName = actionDescriptor.ControllerName,
-                ActionResultEndTime = timing.End,
-                ActionResultDuration = timing.Elapsed,
-                ActionResultOffset = timing.Offset
-            };
+                var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
-            _broker.SendMessage(message);
+                var message = new AfterActionResultMessage()
+                {
+                    ActionId = actionDescriptor.Id,
+                    ActionName = actionDescriptor.Name,
+                    ActionControllerName = actionDescriptor.ControllerName,
+                    ActionResultEndTime = timing.End,
+                    ActionResultDuration = timing.Elapsed,
+                    ActionResultOffset = timing.Offset
+                };
+
+                _broker.SendMessage(message);
+            }
+            else
+            {
+                _logger.LogCritical("OnAfterActionResult: Couldn't publish `AfterActionResultMessage` as `BeforeActionResultMessage` wasn't found in stack");
+            }
         }
 
         // NOTE: This event is only fired when we dont find any matches at all. This executes
@@ -261,7 +283,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         [DiagnosticName("Microsoft.AspNet.Mvc.ViewFound")]
         public void OnViewResultViewFound(
             IActionContext actionContext,
-            ActionResultTypes.IViewResult result,
+            object result,
             string viewName,
             IView view)
         {
@@ -308,19 +330,26 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         public void OnAfterView(IView view, IViewContext viewContext)
         {
             var timing = _broker.EndLogicalOperation<BeforeActionViewInvokedMessage>();
-            var actionDescriptor = ConvertActionDescriptor(viewContext.ActionDescriptor);
-
-            var message = new AfterActionViewInvokedMessage
+            if (timing != null)
             {
-                ActionId = actionDescriptor.Id,
-                ActionName = actionDescriptor.Name,
-                ActionControllerName = actionDescriptor.ControllerName,
-                ViewEndTime = timing.End,
-                ViewDuration = timing.Elapsed,
-                ViewOffset = timing.Offset
-            };
+                var actionDescriptor = ConvertActionDescriptor(viewContext.ActionDescriptor);
 
-            _broker.SendMessage(message);
+                var message = new AfterActionViewInvokedMessage
+                {
+                    ActionId = actionDescriptor.Id,
+                    ActionName = actionDescriptor.Name,
+                    ActionControllerName = actionDescriptor.ControllerName,
+                    ViewEndTime = timing.End,
+                    ViewDuration = timing.Elapsed,
+                    ViewOffset = timing.Offset
+                };
+
+                _broker.SendMessage(message);
+            }
+            else
+            {
+                _logger.LogCritical("OnAfterView: Couldn't publish `AfterActionViewInvokedMessage` as `BeforeActionViewInvokedMessage` wasn't found in stack");
+            }
         }
         
         [DiagnosticName("Microsoft.AspNet.Mvc.BeforeViewComponent")]
@@ -345,17 +374,23 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         public void OnAfterViewComponent(IViewComponentContext viewComponentContext)
         {
             var timing = _broker.EndLogicalOperation<BeforeViewComponentMessage>();
-
-            var message = new AfterViewComponentMessage
+            if (timing != null)
             {
-                ComponentId = viewComponentContext.ViewComponentDescriptor.Id,
-                ComponentName = viewComponentContext.ViewComponentDescriptor.ShortName,
-                ComponentEndTime = timing.End,
-                ComponentDuration = timing.Elapsed,
-                ComponentOffset = timing.Offset
-            };
+                var message = new AfterViewComponentMessage
+                {
+                    ComponentId = viewComponentContext.ViewComponentDescriptor.Id,
+                    ComponentName = viewComponentContext.ViewComponentDescriptor.ShortName,
+                    ComponentEndTime = timing.End,
+                    ComponentDuration = timing.Elapsed,
+                    ComponentOffset = timing.Offset
+                };
 
-            _broker.SendMessage(message);
+                _broker.SendMessage(message);
+            }
+            else
+            {
+                _logger.LogCritical("OnAfterViewComponent: Couldn't publish `AfterViewComponentMessage` as `BeforeViewComponentMessage` wasn't found in stack");
+            }
         }
 
         private IActionDescriptor ConvertActionDescriptor(object actionDescriptor)

@@ -14,17 +14,17 @@
 
   "dependencies": {
     "Glimpse.Common": "",
-    "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-*",
-    "Microsoft.AspNet.StaticFiles": "1.0.0-*",
+    "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-rc1-final",
+    "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
     "Tavis.UriTemplates": "0.6.6-beta2"
   },
   "resource": "Internal/Resources/Embeded/**/*.*",
   "frameworks": {
-    "dnx451": {
+    "net451": {
       "dependencies": {
       }
     },
-    "dnxcore50": {
+    "dotnet5.4": {
       "dependencies": {
       }
     }

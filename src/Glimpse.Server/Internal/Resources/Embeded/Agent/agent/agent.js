@@ -138,9 +138,11 @@
                 // time spent on the network for the whole request/response
                 api.networkTime = api.networkRequestTime + api.networkResponseTime;
                 // time spent on the server processing the request
-                api.serverTime = timing.responseStart - timing.requestStart;
+                api.serverTime = timing.responseEnd - timing.requestStart;
                 // time spent on the browser handling the response
-                api.browserTime = timing.domComplete - timing.responseEnd;
+                api.browserTime = timing.loadEventEnd - timing.responseStart;
+                // total time 
+                api.total = timing.loadEventEnd - timing.navigationStart;
             }
 
             return api;

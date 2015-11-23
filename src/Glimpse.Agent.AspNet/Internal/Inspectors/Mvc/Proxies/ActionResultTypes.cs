@@ -23,17 +23,17 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc.Proxies
 
         public interface IObjectResult
         {
-            int? StatusCode { get; set; }
-            object Value { get; set; }
-            IList<object> Formatters { get; set; }
-            IList<string> ContentTypes { get; set; }
-            Type DeclaredType { get; set; }
+            int? StatusCode { get; }
+            //object Value { get; }
+            //IReadOnlyList<object> Formatters { get; }
+            //IReadOnlyList<string> ContentTypes { get; }
+            Type DeclaredType { get; }
         }
 
         public interface IFileResult
         {
-            string FileDownloadName { get; set; }
-            string ContentType { get; set; }
+            string FileDownloadName { get; }
+            string ContentType { get; }
         }
     }
 }

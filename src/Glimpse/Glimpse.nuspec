@@ -15,13 +15,15 @@
     <releaseNotes>Add support for Glimpse 2.0.</releaseNotes>
     <tags>ASP.NET Web WebForms Glimpse diagnostics performance profiling timing</tags>
     <dependencies>
-      <group targetFramework="dnx451">
-        <dependency id="Glimpse.Server" version="2.0.0-beta1" />
-        <dependency id="Glimpse.Agent.AspNet" version="2.0.0-beta1" />
+      <group targetFramework="net451">
+        <dependency id="Glimpse.Server" version="$version$" />
+        <dependency id="Glimpse.Agent.AspNet" version="$version$" />
+	<dependency id="Glimpse.Agent.AspNet.Mvc" version="$version$" />
       </group>
-      <group targetFramework="dnxcore50">
-        <dependency id="Glimpse.Server" version="2.0.0-beta1" />
-        <dependency id="Glimpse.Agent.AspNet" version="2.0.0-beta1" />
+      <group targetFramework="dotnet5.4">
+        <dependency id="Glimpse.Server" version="$version$" />
+        <dependency id="Glimpse.Agent.AspNet" version="$version$" />
+	<dependency id="Glimpse.Agent.AspNet.Mvc" version="$version$" />
       </group>
     </dependencies>
   </metadata>

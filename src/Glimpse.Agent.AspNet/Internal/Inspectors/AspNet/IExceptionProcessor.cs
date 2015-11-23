@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Glimpse.Agent.Messages;
 
-namespace Glimpse.Agent.Internal.Inspectors.Mvc
+namespace Glimpse.Agent.Internal.Inspectors
 {
     public interface IExceptionProcessor
     {

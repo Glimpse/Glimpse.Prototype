@@ -11,18 +11,15 @@
   "summary": "Glimpse.Agent.AspNet.Mvc contains Razor helpers to inject Glimpse into web applications.",
   "releaseNotes": "Initial release of Glimpse.Agent.AspNet.Mvc.",
   "tags": [ "ASP.NET", "Web", "Debugging", "Diagnostics", "Razor" ],
-  
+
   "dependencies": {
-    "Glimpse.Agent.AspNet": "", 
-    "Microsoft.AspNet.Routing": "1.0.0-*",
-    "Microsoft.Extensions.DiagnosticAdapter": "1.0.0-*",
-    "Microsoft.AspNet.Razor": "4.0.0-*",
-    "Microsoft.AspNet.Mvc.Razor.Host":  "6.0.0-*",
-    "System.Diagnostics.Tracing.Telemetry": "4.0.0-beta-*"
+    "Glimpse.Agent.AspNet": "",
+    "Microsoft.AspNet.Mvc.Razor.Host": "6.0.0-rc1-final",
+    "Microsoft.AspNet.Razor": "4.0.0-rc1-final"
   },
 
   "frameworks": {
-    "dnx451": { },
-    "dnxcore50": { }
+    "net451": { },
+    "dotnet5.4": { }
   }
 }
