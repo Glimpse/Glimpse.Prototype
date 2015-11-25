@@ -11,7 +11,9 @@
   "summary": "Glimpse.Agent.AspNet contains infrastructure and extensibility points for gathering diagnostics information from ASP.NET web applications.",
   "releaseNotes": "Initial release of Glimpse.Agent.AspNet.",
   "tags": [ "ASP.NET", "Web", "Debugging", "Diagnostics", "Agent", "MVC", "EF", "EntityFramework" ],
-
+  "compilationOptions": {
+    "define": [ "DNX" ]
+  },
   "dependencies": {
     "Glimpse.Common": "",
     "Microsoft.Extensions.DiagnosticAdapter": "1.0.0-*",
