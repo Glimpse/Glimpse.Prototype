@@ -18,14 +18,21 @@ namespace Glimpse
             //
             // Discovery & Reflection.
             //
+            // TODO: consider making above singleton 
+#if DNX
+            services.AddTransient<IAssemblyProvider, DefaultAssemblyProvider>();
+#endif
             services.AddTransient<ITypeActivator, DefaultTypeActivator>();
             services.AddTransient<ITypeSelector, DefaultTypeSelector>();
-            services.AddTransient<IAssemblyProvider, DefaultAssemblyProvider>();
             services.AddTransient<ITypeService, DefaultTypeService>();
-            // TODO: consider making above singleton 
 
+            //
+            // Extensions
+            //
             services.AddSingleton<IExtensionProvider<IRegisterServices>, DefaultExtensionProvider<IRegisterServices>>();
+#if DNX
             services.AddSingleton<IExtensionProvider<IRegisterMiddleware>, DefaultExtensionProvider<IRegisterMiddleware>>();
+#endif
 
             //
             // Context.
