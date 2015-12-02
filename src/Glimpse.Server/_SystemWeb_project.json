@@ -13,7 +13,7 @@
   "tags": [ "ASP.NET", "Web", "Debugging", "Diagnostics", "Server" ],
   "resource": "Internal/Resources/Embeded/**/*.*",
   "compilationOptions": {
-    "define": [ "DNX" ]
+    "define": [ "SystemWeb" ]
   },
   "dependencies": {
     "Glimpse.Common": "",
@@ -22,7 +22,6 @@
     "Tavis.UriTemplates": "0.6.6-beta2"
   },
   "frameworks": {
-    "net451": { },
-    "dotnet5.4": { }
+    "net451": { }
   }
 }

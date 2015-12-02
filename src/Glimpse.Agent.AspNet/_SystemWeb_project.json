@@ -1,4 +1,4 @@
-{
+﻿{
   "version": "2.0.0-*",
   "authors": [ "nmolnar", "avanderhoorn" ],
   "owners": [ "nmolnar", "avanderhoorn" ],
@@ -12,20 +12,16 @@
   "releaseNotes": "Initial release of Glimpse.Agent.AspNet.",
   "tags": [ "ASP.NET", "Web", "Debugging", "Diagnostics", "Agent", "MVC", "EF", "EntityFramework" ],
   "compilationOptions": {
-    "define": [ "DNX" ]
+    "define": [ "SystemWeb" ]
   },
   "dependencies": {
     "Glimpse.Common": "",
-    "Microsoft.AspNet.Hosting": "1.0.0-*",
     "Microsoft.AspNet.FileProviders.Physical": "1.0.0-*",
     "Microsoft.AspNet.WebApi.Client": "5.2.2",
-    "Microsoft.Extensions.DiagnosticAdapter": "1.0.0-*",
     "Microsoft.Extensions.Configuration.Json": "1.0.0-*",
-    "System.Net.Http": "4.0.0",
-    "System.Diagnostics.DiagnosticSource": "4.0.0-beta-*"
+    "System.Net.Http": "4.0.0"
   },
   "frameworks": {
-    "net451": { },
-    "dotnet5.4": { }
+    "net451": { }
   }
 }
