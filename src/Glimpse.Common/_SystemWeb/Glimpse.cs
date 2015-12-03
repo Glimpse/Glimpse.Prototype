@@ -9,14 +9,14 @@ namespace Glimpse
 {
     public static class Glimpse
     {
-        public static IServiceCollection Start()
+        public static GlimpseServiceCollectionBuilder Start()
         {
-            return Start(null);
+            return Start(new ServiceCollection());
         }
 
-        public static IServiceCollection Start(IServiceCollection serviceProvider)
+        public static GlimpseServiceCollectionBuilder Start(IServiceCollection serviceProvider)
         {
-            return null;
+            return serviceProvider.AddGlimpse();
         }
     }
 }
