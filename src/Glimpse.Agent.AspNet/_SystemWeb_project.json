@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "Glimpse.Common": "",
+    "SystemWebAdapter": "",
     "Microsoft.AspNet.FileProviders.Physical": "1.0.0-*",
     "Microsoft.AspNet.WebApi.Client": "5.2.2",
     "Microsoft.Extensions.Configuration.Json": "1.0.0-*",

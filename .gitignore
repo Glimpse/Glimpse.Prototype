@@ -235,3 +235,6 @@ $RECYCLE.BIN/
 project.lock.json
 .vs
 /src/Glimpse.*.Sample/wwwroot/lib/
+
+# Temp whilst we are prototyping SystemWebAdapter
+!wrap/**
