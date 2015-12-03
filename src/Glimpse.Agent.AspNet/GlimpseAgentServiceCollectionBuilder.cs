@@ -1,5 +1,4 @@
-﻿#if DNX
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse
 {
@@ -11,4 +10,3 @@ namespace Glimpse
         }
     }
 }
-#endif

@@ -1,5 +1,4 @@
-﻿#if DNX
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using Glimpse.Agent;
 
@@ -23,4 +22,3 @@ namespace Glimpse
         }
     }
 }
-#endif
