@@ -9,8 +9,8 @@
         "Microsoft.AspNet.Http": "1.0.0-*"
       },
       "bin": {
-        "assembly": "Wrap/SystemWebAdapter/SystemWebAdapter.dll",
-        "pdb": "Wrap\\SystemWebAdapter\\SystemWebAdapter.pdb"
+        "assembly": "SystemWebAdapter.dll",
+        "pdb": "SystemWebAdapter.pdb"
       }
     }
   }
