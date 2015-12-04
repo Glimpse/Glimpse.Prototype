@@ -19,9 +19,7 @@ namespace Glimpse
             // Discovery & Reflection.
             //
             // TODO: consider making above singleton 
-#if DNX
             services.AddTransient<IAssemblyProvider, DefaultAssemblyProvider>();
-#endif
             services.AddTransient<ITypeActivator, DefaultTypeActivator>();
             services.AddTransient<ITypeSelector, DefaultTypeSelector>();
             services.AddTransient<ITypeService, DefaultTypeService>();
