@@ -15,7 +15,7 @@ namespace Glimpse
         public static GlimpseServiceCollectionBuilder AddGlimpse(this IServiceCollection services, bool autoRegisterComponents)
         {
             // load in default services
-            services.TryAdd(GlimpseServices.GetDefaultServices());
+            services.TryAdd(CommonServices.GetDefaultServices());
             
             // run all other service registrations (i.e. agent and server)
             if (autoRegisterComponents)

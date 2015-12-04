@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace Glimpse
 {
-    public class GlimpseServices
+    public class CommonServices
     {
         public static IEnumerable<ServiceDescriptor> GetDefaultServices()
         {
