@@ -58,9 +58,12 @@ namespace Glimpse
             services.AddTransient<IRequestIgnorerManager, DefaultRequestIgnorerManager>();
 #if DNX
             services.AddTransient<IInspectorFunctionManager, DefaultInspectorFunctionManager>();
+            services.AddTransient<WebDiagnosticsInspector>();
             // TODO: make work outside of DNX
             services.AddTransient<IExceptionProcessor, ExceptionProcessor>();
-            services.AddTransient<WebDiagnosticsInspector>();
+#endif
+#if SystemWeb
+            services.AddSingleton<IInspectorRuntimeManager, InspectorRuntimeManager>();
 #endif
 
             // TODO: switch to tryadd 
