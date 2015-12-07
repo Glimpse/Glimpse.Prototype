@@ -22,8 +22,9 @@ namespace Glimpse.Server.Internal
 
         public void Register(string name, string uriTemplate, ResourceType type, Func<HttpContext, IDictionary<string, string>, Task> resource)
         {
-            _resourceTable.Add(name, new ResourceManagerItem(name, type, uriTemplate, resource));
             Register(name, uriTemplate);
+
+            _resourceTable.Add(name, new ResourceManagerItem(name, type, uriTemplate, resource));
         }
 
         public ResourceManagerResult Match(HttpContext context)
