@@ -36,7 +36,7 @@ namespace Glimpse.Server.Internal.Resources
 
         public void Configure(IResourceBuilder resourceBuilder)
         {
-            resourceBuilder.Run("message-stream", "{?types,contextId}", ResourceType.Client, async (context, parameters) =>
+            resourceBuilder.Register("message-stream", "{?types,contextId}", ResourceType.Client, async (context, parameters) =>
             {
                 var continueTask = new TaskCompletionSource<bool>();
 

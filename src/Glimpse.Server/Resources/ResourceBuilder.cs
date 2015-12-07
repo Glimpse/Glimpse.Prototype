@@ -18,14 +18,14 @@ namespace Glimpse.Server.Resources
 
         public IApplicationBuilder AppBuilder { get; }
         
-        public IResourceBuilder Run(string name, string uriTemplate, ResourceType type, Func<HttpContext, IDictionary<string, string>, Task> resource)
+        public IResourceBuilder Register(string name, string uriTemplate, ResourceType type, Func<HttpContext, IDictionary<string, string>, Task> resource)
         {
             ResourceManager.Register(name, uriTemplate, type, resource);
 
             return this;
         }
 
-        public IResourceBuilder RegisterResource(string name, string uriTemplate)
+        public IResourceBuilder Register(string name, string uriTemplate)
         {
             ResourceManager.Register(name, uriTemplate);
 

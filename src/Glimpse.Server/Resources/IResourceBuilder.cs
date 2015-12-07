@@ -10,8 +10,8 @@ namespace Glimpse.Server.Resources
     {
         IApplicationBuilder AppBuilder { get; }
         
-        IResourceBuilder Run(string name, string uriTemplate, ResourceType type, Func<HttpContext, IDictionary<string, string>, Task> resource);
+        IResourceBuilder Register(string name, string uriTemplate, ResourceType type, Func<HttpContext, IDictionary<string, string>, Task> resource);
 
-        IResourceBuilder RegisterResource(string name, string uriTemplate);
+        IResourceBuilder Register(string name, string uriTemplate);
     }
 }

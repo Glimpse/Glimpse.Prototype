@@ -30,7 +30,7 @@ namespace Glimpse.Server.Internal.Resources
 
             foreach (var registration in Register)
             {
-                resourceBuilder.RegisterResource(registration.Key, registration.Value);
+                resourceBuilder.Register(registration.Key, registration.Value);
             }
         }
 

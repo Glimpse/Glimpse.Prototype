@@ -18,7 +18,7 @@ namespace Glimpse.Server.Internal.Resources
 
         public void Configure(IResourceBuilder resourceBuilder)
         {
-            resourceBuilder.Run("context", "?contextId={contextId}{&types}", ResourceType.Client, async (context, parameters) =>
+            resourceBuilder.Register("context", "?contextId={contextId}{&types}", ResourceType.Client, async (context, parameters) =>
             {
                 var contextId = parameters.ParseGuid("contextId");
 
