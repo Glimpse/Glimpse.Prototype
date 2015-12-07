@@ -1,6 +1,5 @@
-﻿ // ReSharper disable RedundantUsingDirective
+﻿#if DNX
 using System;
-// ReSharper restore RedundantUsingDirective
 using System.Collections.Generic;
 using System.Reflection;
 using Glimpse.Server.Resources;
@@ -66,3 +65,4 @@ namespace Glimpse.Server.Internal.Resources
         };
     }
 }
+#endif

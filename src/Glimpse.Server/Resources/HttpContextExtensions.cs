@@ -1,8 +1,5 @@
-﻿
+﻿using System;
 using System.ComponentModel;
-// ReSharper disable RedundantUsingDirective
-using System;
-// ReSharper restore RedundantUsingDirective
 using System.Threading.Tasks;
 using Glimpse.Server.Internal.Resources;
 using Microsoft.AspNet.Builder;
