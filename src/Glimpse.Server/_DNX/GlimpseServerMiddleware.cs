@@ -13,20 +13,20 @@ namespace Glimpse.Server
 {
     public class GlimpseServerMiddleware
     {
-        private readonly IEnumerable<IAllowClientAccess> _authorizeClients;
-        private readonly IEnumerable<IAllowAgentAccess> _authorizeAgents;
+        private readonly IResourceRuntimeManager _resourceRuntimeManager;
+        private readonly IResourceAuthorization _resourceAuthorization;
         private readonly GlimpseServerOptions _serverOptions;
         private readonly RequestDelegate _next;
         private readonly RequestDelegate _branch;
 
-        public GlimpseServerMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IAllowClientAccess> authorizeClientProvider, IExtensionProvider<IAllowAgentAccess> authorizeAgentProvider, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IExtensionProvider<IResource> resourceProvider, IResourceManager resourceManager, IOptions<GlimpseServerOptions> serverOptions)
+        public GlimpseServerMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IResourceAuthorization resourceAuthorization, IResourceRuntimeManager resourceRuntimeManager, IResourceManager resourceManager, IOptions<GlimpseServerOptions> serverOptions)
         {
-            _authorizeClients = authorizeClientProvider.Instances;
-            _authorizeAgents = authorizeAgentProvider.Instances;
+            _resourceAuthorization = resourceAuthorization;
+            _resourceRuntimeManager = resourceRuntimeManager;
             _serverOptions = serverOptions.Value;
 
             _next = next;
-            _branch = BuildBranch(app, resourceStartupsProvider.Instances, resourceProvider.Instances, resourceManager);
+            _branch = BuildBranch(app, resourceStartupsProvider.Instances, resourceManager);
         }
         
         public async Task Invoke(HttpContext context)
@@ -34,7 +34,7 @@ namespace Glimpse.Server
             await _branch(context);
         }
 
-        public RequestDelegate BuildBranch(IApplicationBuilder app, IEnumerable<IResourceStartup> resourceStartups, IEnumerable<IResource> resources, IResourceManager resourceManager)
+        public RequestDelegate BuildBranch(IApplicationBuilder app, IEnumerable<IResourceStartup> resourceStartups, IResourceManager resourceManager)
         {
             var branchApp = app.New();
             branchApp.Map($"/{_serverOptions.BasePath}", glimpseApp =>
@@ -55,7 +55,7 @@ namespace Glimpse.Server
 
                         return context =>
                         {
-                            if (CanExecute(context, resourceStartup.Type))
+                            if (_resourceAuthorization.CanExecute(context, resourceStartup.Type))
                             {
                                 return startupBranch(context);
                             }
@@ -66,65 +66,14 @@ namespace Glimpse.Server
                 }
 
                 // REGISTER: resources
-                foreach (var resource in resources)
-                {
-                    resourceManager.Register(resource.Name, resource.Parameters?.GenerateUriTemplate(), resource.Type, resource.Invoke);
-                }
+                _resourceRuntimeManager.Register();
 
-                glimpseApp.Run(async context =>
-                {
-                    // RUN: resources
-                    var result = resourceManager.Match(context);
-                    if (result != null)
-                    {
-                        if (CanExecute(context, result.Type))
-                        {
-                            await result.Resource(context, result.Paramaters);
-                        }
-                        else
-                        {
-                            // TODO: Review, do we want a 401, 404 or continue users pipeline 
-                            context.Response.StatusCode = 401;
-                        }
-                    }
-                });
+                // RUN: resources
+                glimpseApp.Run(async context => { await _resourceRuntimeManager.ProcessRequest(context); });
             });
             branchApp.Use(subNext => { return async ctx => await _next(ctx); });
 
             return branchApp.Build();
-        }
-
-        public bool CanExecute(HttpContext context, ResourceType type)
-        {
-            return ResourceType.Agent == type ? AllowAgentAccess(context) : AllowClientAccess(context);
-        }
-        
-        private bool AllowClientAccess(HttpContext context)
-        {
-            foreach (var authorizeClient in _authorizeClients)
-            {
-                var allowed = authorizeClient.AllowUser(context);
-                if (!allowed)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-        
-        private bool AllowAgentAccess(HttpContext context)
-        {
-            foreach (var authorizeAgent in _authorizeAgents)
-            {
-                var allowed = authorizeAgent.AllowAgent(context);
-                if (!allowed)
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
     }
 }

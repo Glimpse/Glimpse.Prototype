@@ -24,6 +24,9 @@ namespace Glimpse
             services.AddSingleton<IServerBroker, DefaultServerBroker>();
             services.AddSingleton<IStorage, InMemoryStorage>();
             services.AddSingleton<IResourceManager, ResourceManager>();
+            services.TryAddSingleton<IMessagePublisher, InProcessPublisher>();
+            services.AddSingleton<IResourceRuntimeManager, ResourceRuntimeManager>();
+            services.AddSingleton<IResourceAuthorization, ResourceAuthorization>();
 
             //
             // Options
@@ -39,7 +42,6 @@ namespace Glimpse
             services.AddTransient<IExtensionProvider<IResourceStartup>, DefaultExtensionProvider<IResourceStartup>>();
 #endif
 
-            services.TryAddSingleton<IMessagePublisher, InProcessPublisher>();
 
             // this is done as we don't know the order in which things will be defined
             if (services.Any(s => s.ServiceType == typeof(IResourceOptionsProvider)))
