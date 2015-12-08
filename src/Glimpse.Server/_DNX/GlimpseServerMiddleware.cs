@@ -66,10 +66,9 @@ namespace Glimpse.Server
                 }
 
                 // REGISTER: resources
-                var resourceBuilder = new ResourceBuilder(glimpseApp, resourceManager);
                 foreach (var resource in resources)
                 {
-                    resourceBuilder.Register(resource.Name, resource.Parameters?.GenerateUriTemplate(), resource.Type, resource.Invoke);
+                    resourceManager.Register(resource.Name, resource.Parameters?.GenerateUriTemplate(), resource.Type, resource.Invoke);
                 }
 
                 glimpseApp.Run(async context =>
