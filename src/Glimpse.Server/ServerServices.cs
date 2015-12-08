@@ -25,8 +25,12 @@ namespace Glimpse
             services.AddSingleton<IStorage, InMemoryStorage>();
             services.AddSingleton<IResourceManager, ResourceManager>();
             services.TryAddSingleton<IMessagePublisher, InProcessPublisher>();
-            services.AddSingleton<IResourceRuntimeManager, ResourceRuntimeManager>();
             services.AddSingleton<IResourceAuthorization, ResourceAuthorization>();
+            services.AddSingleton<IResourceRuntimeManager, ResourceRuntimeManager>();
+#if DNX
+            services.AddSingleton<IResourceStartupRuntimeManager, ResourceStartupRuntimeManager>();
+#endif
+
 
             //
             // Options
@@ -37,7 +41,6 @@ namespace Glimpse
             services.AddTransient<IExtensionProvider<IResource>, DefaultExtensionProvider<IResource>>();
             services.AddSingleton<IAllowRemoteProvider, DefaultAllowRemoteProvider>();
             services.AddSingleton<IMetadataProvider, DefaultMetadataProvider>();
-
 #if DNX
             services.AddTransient<IExtensionProvider<IResourceStartup>, DefaultExtensionProvider<IResourceStartup>>();
 #endif

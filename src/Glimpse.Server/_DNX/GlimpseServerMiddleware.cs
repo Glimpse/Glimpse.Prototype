@@ -13,20 +13,20 @@ namespace Glimpse.Server
 {
     public class GlimpseServerMiddleware
     {
+        private readonly IResourceStartupRuntimeManager _resourceStartupRuntimeManager;
         private readonly IResourceRuntimeManager _resourceRuntimeManager;
-        private readonly IResourceAuthorization _resourceAuthorization;
         private readonly GlimpseServerOptions _serverOptions;
         private readonly RequestDelegate _next;
         private readonly RequestDelegate _branch;
 
-        public GlimpseServerMiddleware(RequestDelegate next, IApplicationBuilder app, IExtensionProvider<IResourceStartup> resourceStartupsProvider, IResourceAuthorization resourceAuthorization, IResourceRuntimeManager resourceRuntimeManager, IResourceManager resourceManager, IOptions<GlimpseServerOptions> serverOptions)
+        public GlimpseServerMiddleware(RequestDelegate next, IApplicationBuilder app, IResourceStartupRuntimeManager resourceStartupRuntimeManager, IResourceRuntimeManager resourceRuntimeManager, IResourceManager resourceManager, IOptions<GlimpseServerOptions> serverOptions)
         {
-            _resourceAuthorization = resourceAuthorization;
+            _resourceStartupRuntimeManager = resourceStartupRuntimeManager;
             _resourceRuntimeManager = resourceRuntimeManager;
             _serverOptions = serverOptions.Value;
 
             _next = next;
-            _branch = BuildBranch(app, resourceStartupsProvider.Instances, resourceManager);
+            _branch = BuildBranch(app);
         }
         
         public async Task Invoke(HttpContext context)
@@ -34,41 +34,16 @@ namespace Glimpse.Server
             await _branch(context);
         }
 
-        public RequestDelegate BuildBranch(IApplicationBuilder app, IEnumerable<IResourceStartup> resourceStartups, IResourceManager resourceManager)
+        public RequestDelegate BuildBranch(IApplicationBuilder app)
         {
             var branchApp = app.New();
             branchApp.Map($"/{_serverOptions.BasePath}", glimpseApp =>
             {
-                // REGISTER: resource startups
-                foreach (var resourceStartup in resourceStartups)
-                {
-                    var startupApp = glimpseApp.New();
+                // resource startups
+                _resourceStartupRuntimeManager.Setup(glimpseApp);
 
-                    var resourceBuilderStartup = new ResourceBuilder(startupApp, resourceManager);
-                    resourceStartup.Configure(resourceBuilderStartup);
-
-                    glimpseApp.Use(next =>
-                    {
-                        startupApp.Run(next);
-
-                        var startupBranch = startupApp.Build();
-
-                        return context =>
-                        {
-                            if (_resourceAuthorization.CanExecute(context, resourceStartup.Type))
-                            {
-                                return startupBranch(context);
-                            }
-
-                            return next(context);
-                        };
-                    });
-                }
-
-                // REGISTER: resources
+                // resources
                 _resourceRuntimeManager.Register();
-
-                // RUN: resources
                 glimpseApp.Run(async context => { await _resourceRuntimeManager.ProcessRequest(context); });
             });
             branchApp.Use(subNext => { return async ctx => await _next(ctx); });
