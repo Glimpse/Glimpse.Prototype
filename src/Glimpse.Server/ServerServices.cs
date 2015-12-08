@@ -32,9 +32,12 @@ namespace Glimpse
             services.AddTransient<IExtensionProvider<IAllowClientAccess>, DefaultExtensionProvider<IAllowClientAccess>>();
             services.AddTransient<IExtensionProvider<IAllowAgentAccess>, DefaultExtensionProvider<IAllowAgentAccess>>();
             services.AddTransient<IExtensionProvider<IResource>, DefaultExtensionProvider<IResource>>();
-            services.AddTransient<IExtensionProvider<IResourceStartup>, DefaultExtensionProvider<IResourceStartup>>();
             services.AddSingleton<IAllowRemoteProvider, DefaultAllowRemoteProvider>();
             services.AddSingleton<IMetadataProvider, DefaultMetadataProvider>();
+
+#if DNX
+            services.AddTransient<IExtensionProvider<IResourceStartup>, DefaultExtensionProvider<IResourceStartup>>();
+#endif
 
             // TODO: switch to TryAdd
             if (!services.Any(s => s.ServiceType == typeof (IMessagePublisher)))
