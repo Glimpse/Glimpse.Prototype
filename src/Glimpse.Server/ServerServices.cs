@@ -39,13 +39,9 @@ namespace Glimpse
             services.AddTransient<IExtensionProvider<IResourceStartup>, DefaultExtensionProvider<IResourceStartup>>();
 #endif
 
-            // TODO: switch to TryAdd
-            if (!services.Any(s => s.ServiceType == typeof (IMessagePublisher)))
-            {
-                services.AddSingleton<IMessagePublisher, InProcessPublisher>();
-            }
+            services.TryAddSingleton<IMessagePublisher, InProcessPublisher>();
 
-            // TODO: switch to TryAdd
+            // this is done as we don't know the order in which things will be defined
             if (services.Any(s => s.ServiceType == typeof(IResourceOptionsProvider)))
             {
                 services.Replace(new ServiceDescriptor(typeof(IResourceOptionsProvider), typeof(DefaultResourceOptionsProvider), ServiceLifetime.Singleton));

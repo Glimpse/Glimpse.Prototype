@@ -65,12 +65,7 @@ namespace Glimpse
 #if SystemWeb
             services.AddSingleton<IInspectorRuntimeManager, InspectorRuntimeManager>();
 #endif
-
-            // TODO: switch to tryadd 
-            if (!services.Any(s => s.ServiceType == typeof (IResourceOptionsProvider)))
-            {
-                services.AddSingleton<IResourceOptionsProvider, OptionsResourceOptionsProvider>();
-            }
+            services.TryAddSingleton<IResourceOptionsProvider, OptionsResourceOptionsProvider>();
         }
         
         private void RegisterPublisher(IServiceCollection services)
