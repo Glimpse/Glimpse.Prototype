@@ -8,13 +8,23 @@ namespace Glimpse
     public class GlimpseServerHandler : IHttpHandler
     {
         private readonly IResourceRuntimeManager _resourceRuntimeManager;
+        private static readonly object _hasRegisteredLock = new object();
+        private static bool _hasRegistered = false;
 
         public GlimpseServerHandler(IResourceRuntimeManager resourceRuntimeManager)
         {
             _resourceRuntimeManager = resourceRuntimeManager;
 
-            // TODO: Need to check if this only runs once or multiple times
-            _resourceRuntimeManager.Register();
+            if (!_hasRegistered)
+            {
+                lock (_hasRegisteredLock)
+                {
+                    if (!_hasRegistered)
+                    {
+                        _resourceRuntimeManager.Register();
+                    }
+                }
+            }
         }
 
         public bool IsReusable => true;
