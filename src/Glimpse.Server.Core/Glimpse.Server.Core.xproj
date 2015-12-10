@@ -6,8 +6,8 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.Props" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>06f2ef61-61d8-40c9-8bee-ebf64352de6f</ProjectGuid>
-    <RootNamespace>Glimpse.Agent.Web</RootNamespace>
+    <ProjectGuid>c6effa30-9d16-412c-8fd7-c87b909e030e</ProjectGuid>
+    <RootNamespace>Glimpse.Server.Core</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\..\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">..\..\artifacts\bin\$(MSBuildProjectName)\</OutputPath>
   </PropertyGroup>
@@ -19,7 +19,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties />
+      <UserProperties project_1json__JSONSchema="http://www.asp.net/media/4878834/project.json" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" />

@@ -6,13 +6,10 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.Props" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>c0fb7983-e851-4567-8540-153f9b7ec42d</ProjectGuid>
-    <RootNamespace>Glimpse</RootNamespace>
+    <ProjectGuid>06f2ef61-61d8-40c9-8bee-ebf64352de6f</ProjectGuid>
+    <RootNamespace>Glimpse.Agent.Core</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\..\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">..\..\artifacts\bin\$(MSBuildProjectName)\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AssemblyName>Glimpse.Common</AssemblyName>
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
