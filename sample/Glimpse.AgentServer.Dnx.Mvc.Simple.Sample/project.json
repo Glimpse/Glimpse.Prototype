@@ -4,7 +4,7 @@
     "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:5000"
   },
   "dependencies": {
-    "Glimpse.Agent.Core": "",
+    "Glimpse.Agent.Dnx": "",
     "Glimpse.Agent.Dnx.Mvc": "",
     "Glimpse.Server.Core": "",
     "Microsoft.AspNet.Mvc": "6.0.0-*",
