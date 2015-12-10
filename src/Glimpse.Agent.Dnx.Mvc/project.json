@@ -13,7 +13,7 @@
   "tags": [ "ASP.NET", "Web", "Debugging", "Diagnostics", "Razor" ],
 
   "dependencies": {
-    "Glimpse.Agent.AspNet": "",
+    "Glimpse.Agent.Core": "",
     "Microsoft.AspNet.Mvc.Razor.Host": "6.0.0-*",
     "Microsoft.AspNet.Razor": "4.0.0-*"
   },

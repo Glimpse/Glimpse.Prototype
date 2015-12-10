@@ -3,5 +3,8 @@
     "src",
     "test/websites",
     "wrap"
-  ]
+  ],
+  "sdk": {
+    "version": "1.0.0-rc2-16256"
+  }
 }
