@@ -1,4 +1,4 @@
-{
+﻿{
   "version": "2.0.0-*",
   "authors": [ "nmolnar", "avanderhoorn" ],
   "owners": [ "nmolnar", "avanderhoorn" ],
@@ -13,10 +13,7 @@
   "tags": [ "ASP.NET", "Web", "Debugging", "Diagnostics", "Server" ],
   "resource": "Internal/Resources/Embeded/**/*.*",
   "dependencies": {
-    "Glimpse.Common.Core": "",
-    "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-*",
-    "Microsoft.AspNet.StaticFiles": "1.0.0-*",
-    "Tavis.UriTemplates": "0.6.6-beta2"
+    "Glimpse.Server.Core": ""
   },
   "frameworks": {
     "net451": { },

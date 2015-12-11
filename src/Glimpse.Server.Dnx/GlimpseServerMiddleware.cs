@@ -1,5 +1,4 @@
-﻿#if DNX
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using System.Collections.Generic;
@@ -52,4 +51,3 @@ namespace Glimpse.Server
         }
     }
 }
-#endif

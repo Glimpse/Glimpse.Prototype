@@ -1,4 +1,3 @@
-#if DNX
 namespace Glimpse.Server.Resources
 {
     public interface IResourceStartup
@@ -8,4 +7,3 @@ namespace Glimpse.Server.Resources
         ResourceType Type { get; }
     }
 }
-#endif

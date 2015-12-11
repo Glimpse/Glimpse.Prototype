@@ -7,7 +7,7 @@
     "EntityFramework.MicrosoftSqlServer": "7.0.0-*",
     "Glimpse.Agent.Dnx": "",
     "Glimpse.Agent.Dnx.Mvc": "",
-    "Glimpse.Server.Core": "",
+    "Glimpse.Server.Dnx": "",
     "Microsoft.AspNet.Authentication.Cookies": "1.0.0-*",
     "Microsoft.AspNet.Authentication.Facebook": "1.0.0-*",
     "Microsoft.AspNet.Authentication.Google": "1.0.0-*",

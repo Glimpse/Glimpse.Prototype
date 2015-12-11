@@ -1,5 +1,4 @@
-﻿#if SystemWeb
-using System.Web;
+﻿using System.Web;
 using SystemWebAdapter;
 using Glimpse.Server.Resources;
 
@@ -46,4 +45,3 @@ namespace Glimpse
         }
     }
 }
-#endif

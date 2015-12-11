@@ -1,5 +1,4 @@
-﻿#if DNX
-using Microsoft.AspNet.Builder;
+﻿using Microsoft.AspNet.Builder;
 
 namespace Glimpse.Server.Resources
 {
@@ -8,4 +7,3 @@ namespace Glimpse.Server.Resources
         void Setup(IApplicationBuilder app);
     }
 }
-#endif

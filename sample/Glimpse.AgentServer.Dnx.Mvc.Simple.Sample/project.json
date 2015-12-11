@@ -6,7 +6,7 @@
   "dependencies": {
     "Glimpse.Agent.Dnx": "",
     "Glimpse.Agent.Dnx.Mvc": "",
-    "Glimpse.Server.Core": "",
+    "Glimpse.Server.Dnx": "",
     "Microsoft.AspNet.Mvc": "6.0.0-*",
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-*",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-*"

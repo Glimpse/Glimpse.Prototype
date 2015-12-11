@@ -1,5 +1,4 @@
-﻿#if DNX
-using System.Linq;
+﻿using System.Linq;
 using Glimpse.Server.Resources;
 using Glimpse.Server.Internal.Extensions;
 using Glimpse.Server.Storage;
@@ -45,4 +44,3 @@ namespace Glimpse.Server.Internal.Resources
         public ResourceType Type => ResourceType.Client;
     }
 }
-#endif

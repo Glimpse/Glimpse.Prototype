@@ -1,4 +1,3 @@
-#if DNX
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -34,4 +33,3 @@ namespace Glimpse.Server.Resources
         }
     }
 }
-#endif
