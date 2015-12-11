@@ -10,9 +10,6 @@ using Glimpse.Agent.Inspectors;
 using Glimpse.Common.Initialization;
 using Glimpse.Initialization;
 using System.Linq;
-#if DNX
-using Glimpse.Agent.Internal.Inspectors;
-#endif
 
 namespace Glimpse
 {
@@ -39,9 +36,6 @@ namespace Glimpse
             services.AddSingleton<IExtensionProvider<IRequestIgnorer>, DefaultExtensionProvider<IRequestIgnorer>>();
             services.AddSingleton<IExtensionProvider<IInspector>, DefaultExtensionProvider<IInspector>>();
             services.AddSingleton<IExtensionProvider<IAgentStartup>, DefaultExtensionProvider<IAgentStartup>>();
-#if DNX
-            services.AddSingleton<IExtensionProvider<IInspectorFunction>, DefaultExtensionProvider<IInspectorFunction>>();
-#endif
 
             //
             // Messages.
@@ -56,15 +50,6 @@ namespace Glimpse
             //
             services.AddTransient<IAgentStartupManager, DefaultAgentStartupManager>();
             services.AddTransient<IRequestIgnorerManager, DefaultRequestIgnorerManager>();
-#if DNX
-            services.AddTransient<IInspectorFunctionManager, DefaultInspectorFunctionManager>();
-            services.AddTransient<WebDiagnosticsInspector>();
-            // TODO: make work outside of DNX
-            services.AddTransient<IExceptionProcessor, ExceptionProcessor>();
-#endif
-#if SystemWeb
-            services.AddSingleton<IInspectorRuntimeManager, InspectorRuntimeManager>();
-#endif
             services.TryAddSingleton<IResourceOptionsProvider, OptionsResourceOptionsProvider>();
         }
         

@@ -27,11 +27,7 @@ namespace Glimpse
             services.TryAddSingleton<IMessagePublisher, InProcessPublisher>();
             services.AddSingleton<IResourceAuthorization, ResourceAuthorization>();
             services.AddSingleton<IResourceRuntimeManager, ResourceRuntimeManager>();
-#if DNX
-            services.AddSingleton<IResourceStartupRuntimeManager, ResourceStartupRuntimeManager>();
-#endif
-
-
+            
             //
             // Options
             //
@@ -41,11 +37,7 @@ namespace Glimpse
             services.AddTransient<IExtensionProvider<IResource>, DefaultExtensionProvider<IResource>>();
             services.AddSingleton<IAllowRemoteProvider, DefaultAllowRemoteProvider>();
             services.AddSingleton<IMetadataProvider, DefaultMetadataProvider>();
-#if DNX
-            services.AddTransient<IExtensionProvider<IResourceStartup>, DefaultExtensionProvider<IResourceStartup>>();
-#endif
-
-
+            
             // this is done as we don't know the order in which things will be defined
             if (services.Any(s => s.ServiceType == typeof(IResourceOptionsProvider)))
             {
