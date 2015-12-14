@@ -28,7 +28,7 @@ namespace Glimpse.Agent.Razor
 
                 newArray[original.Length] = new AddTagHelperChunk
                 {
-                    LookupText = "*, Glimpse.Agent.AspNet.Mvc"
+                    LookupText = "*, Glimpse.Agent.Dnx.Mvc"
                 };
 
                 _overriddenChunks = newArray;
