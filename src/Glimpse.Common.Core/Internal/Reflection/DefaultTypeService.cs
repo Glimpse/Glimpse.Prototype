@@ -9,7 +9,7 @@ namespace Glimpse.Internal
         private readonly ITypeActivator _typesActivator;
         private readonly ITypeSelector _typeDiscovery;
         private readonly IAssemblyProvider _assemblyProvider;
-        private readonly string _defaultLibrary = "Glimpse.Common";
+        private readonly string _defaultLibrary = "Glimpse.Common.Core";
          
         public DefaultTypeService(ITypeActivator typesActivator, ITypeSelector typeDiscovery, IAssemblyProvider assemblyProvider)
         {

@@ -3,16 +3,16 @@ using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Glimpse
+namespace Glimpse.Internal
 {
     public static class GlimpseServiceCollectionExtensions
     {
-        public static GlimpseServiceCollectionBuilder AddGlimpse(this IServiceCollection services)
+        public static GlimpseServiceCollectionBuilder AddGlimpseCore(this IServiceCollection services)
         {
-            return services.AddGlimpse(true);
+            return services.AddGlimpseCore(true);
         }
 
-        public static GlimpseServiceCollectionBuilder AddGlimpse(this IServiceCollection services, bool autoRegisterComponents)
+        public static GlimpseServiceCollectionBuilder AddGlimpseCore(this IServiceCollection services, bool autoRegisterComponents)
         {
             // load in default services
             services.TryAdd(CommonServices.GetDefaultServices());

@@ -1,17 +1,22 @@
-﻿using Glimpse.Internal;
+﻿using System.Collections.Generic;
+using Glimpse.Internal;
 using Glimpse.Common.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse
 {
-    public class CommonSystemWebServices : IRegisterServices
+    public static class CommonSystemWebServices
     {
-        public void RegisterServices(IServiceCollection services)
+        public static IEnumerable<ServiceDescriptor> GetDefaultServices()
         {
+            var services = new ServiceCollection();
+
             //
             // Discovery & Reflection.
             //
             services.AddTransient<IAssemblyProvider, AppDomainAssemblyProvider>();
+
+            return services;
         }
     }
 }

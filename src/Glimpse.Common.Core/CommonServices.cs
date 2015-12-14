@@ -4,10 +4,9 @@ using Glimpse.Common.Initialization;
 using Glimpse.Common.Internal.Serialization;
 using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;
-using Glimpse.Internal;
 using Newtonsoft.Json;
 
-namespace Glimpse
+namespace Glimpse.Internal
 {
     public class CommonServices
     {
