@@ -1,17 +1,15 @@
-﻿#if SystemWeb
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
 namespace Glimpse.Internal
 {
-    public class DefaultAssemblyProvider : IAssemblyProvider
+    public class AppDomainAssemblyProvider : IAssemblyProvider
     {
         public IEnumerable<Assembly> GetCandidateAssemblies(string coreLibrary)
         {
-            return AppDomain.CurrentDomain.GetAssemblies().Where(x => !ReflectionBlackList.IsBlackListed(x));
+            return AppDomain.CurrentDomain.GetAssemblies().Where(x => !AppDomainAssemblyBlackList.IsBlackListed(x));
         }
     }
 }
-#endif

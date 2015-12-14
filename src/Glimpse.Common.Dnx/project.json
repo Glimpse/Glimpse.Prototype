@@ -1,4 +1,4 @@
-{
+﻿{
   "version": "2.0.0-*",
   "authors": [ "nmolnar", "avanderhoorn" ],
   "owners": [ "nmolnar", "avanderhoorn" ],
@@ -11,19 +11,12 @@
   "summary": "Glimpse.Common contains common Glimpse interfaces and components, and is not intended for direct consumption.",
   "releaseNotes": "Initial release of Glimpse.Common.",
   "tags": [ "ASP.NET", "Web", "Debugging", "Diagnostics" ],
-  "compilationOptions": {
-    "define": ["SystemWeb"]
-  },
   "dependencies": {
-    "Microsoft.AspNet.Http.Abstractions": "1.0.0-*",
-    "Microsoft.Extensions.DependencyInjection": "1.0.0-*",
-    "Microsoft.Extensions.Logging": "1.0.0-*",
-    "Microsoft.Extensions.OptionsModel": "1.0.0-*",
-    "Newtonsoft.Json": "6.0.6",
-    "Rx-Linq": "2.2.5",
-    "Rx-PlatformServices": "2.2.5"
+    "Glimpse.Common.Core": "",
+    "Microsoft.Extensions.PlatformAbstractions": "1.0.0-*"
   },
   "frameworks": {
-    "net451": { }
+    "net451": { },
+    "dotnet5.4": { }
   }
 }

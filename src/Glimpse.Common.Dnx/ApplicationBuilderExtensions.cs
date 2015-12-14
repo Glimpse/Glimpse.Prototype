@@ -1,5 +1,4 @@
-﻿#if DNX
-using Glimpse.Common.Initialization;
+﻿using Glimpse.Common.Initialization;
 using Glimpse.Initialization;
 using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,4 +20,3 @@ namespace Glimpse
         }
     }
 }
-#endif

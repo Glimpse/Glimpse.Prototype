@@ -1,14 +1,13 @@
-﻿#if SystemWeb
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 
 namespace Glimpse.Internal
 {
-    public static class ReflectionBlackList
+    public static class AppDomainAssemblyBlackList
     {
         private readonly static HashSet<string> BlackList = new HashSet<string>();
 
-        static ReflectionBlackList()
+        static AppDomainAssemblyBlackList()
         {
             BlackList.Add("mscorlib");
             BlackList.Add("System.Web");
@@ -103,4 +102,3 @@ namespace Glimpse.Internal
         }
     }
 }
-#endif

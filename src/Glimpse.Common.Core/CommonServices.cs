@@ -18,8 +18,6 @@ namespace Glimpse
             //
             // Discovery & Reflection.
             //
-            // TODO: consider making above singleton 
-            services.AddTransient<IAssemblyProvider, DefaultAssemblyProvider>();
             services.AddTransient<ITypeActivator, DefaultTypeActivator>();
             services.AddTransient<ITypeSelector, DefaultTypeSelector>();
             services.AddTransient<ITypeService, DefaultTypeService>();
@@ -28,9 +26,6 @@ namespace Glimpse
             // Extensions
             //
             services.AddSingleton<IExtensionProvider<IRegisterServices>, DefaultExtensionProvider<IRegisterServices>>();
-#if DNX
-            services.AddSingleton<IExtensionProvider<IRegisterMiddleware>, DefaultExtensionProvider<IRegisterMiddleware>>();
-#endif
 
             //
             // Context.

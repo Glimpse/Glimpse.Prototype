@@ -13,7 +13,8 @@
   "tags": [ "ASP.NET", "Web", "Debugging", "Diagnostics", "Server" ],
   "resource": "Internal/Resources/Embeded/**/*.*",
   "dependencies": {
-    "Glimpse.Server.Core": ""
+    "Glimpse.Server.Core": "",
+    "Glimpse.Common.Dnx": ""
   },
   "frameworks": {
     "net451": { },

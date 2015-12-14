@@ -16,6 +16,7 @@
     "Microsoft.AspNet.FileProviders.Physical": "1.0.0-*",
     "Microsoft.AspNet.WebApi.Client": "5.2.2",
     "Microsoft.Extensions.Configuration.Json": "1.0.0-*",
+    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0-*",
     "System.Net.Http": "4.0.0"
   },
   "frameworks": {

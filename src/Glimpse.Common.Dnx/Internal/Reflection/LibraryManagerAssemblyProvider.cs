@@ -1,16 +1,15 @@
-﻿#if DNX
-using Microsoft.Extensions.PlatformAbstractions;
+﻿using Microsoft.Extensions.PlatformAbstractions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
 namespace Glimpse.Internal
 {
-    public class DefaultAssemblyProvider : IAssemblyProvider
+    public class LibraryManagerAssemblyProvider : IAssemblyProvider
     {
         private readonly ILibraryManager _manager;
 
-        public DefaultAssemblyProvider(ILibraryManager manager)
+        public LibraryManagerAssemblyProvider(ILibraryManager manager)
         {
             _manager = manager;
         }
@@ -25,4 +24,3 @@ namespace Glimpse.Internal
         }
     }
 }
-#endif

@@ -13,6 +13,7 @@
   "tags": [ "ASP.NET", "Web", "Debugging", "Diagnostics", "Agent", "MVC", "EF", "EntityFramework" ],
   "dependencies": {
     "Glimpse.Agent.Core": "",
+    "Glimpse.Common.Dnx": "",
     "Microsoft.AspNet.Hosting": "1.0.0-*",
     "Microsoft.Extensions.DiagnosticAdapter": "1.0.0-*",
     "System.Diagnostics.DiagnosticSource": "4.0.0-beta-*"

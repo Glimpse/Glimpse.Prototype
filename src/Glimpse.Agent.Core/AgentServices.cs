@@ -61,7 +61,8 @@ namespace Glimpse
             if (File.Exists(path))
             {
                 var configuration = configurationBuilder.AddJsonFile("glimpse.json").Build();
-                services.Configure<ResourceOptions>(configuration.GetSection("resources"));
+                var section = configuration.GetSection("resources");
+                services.Configure<ResourceOptions>(section);
 
                 services.Replace(new ServiceDescriptor(typeof(IMessagePublisher), typeof(HttpMessagePublisher), ServiceLifetime.Transient));
             }

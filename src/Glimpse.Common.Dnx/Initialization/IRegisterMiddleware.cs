@@ -1,5 +1,4 @@
-﻿#if DNX
-using Microsoft.AspNet.Builder;
+﻿using Microsoft.AspNet.Builder;
 
 namespace Glimpse.Common.Initialization
 {
@@ -8,4 +7,3 @@ namespace Glimpse.Common.Initialization
         void RegisterMiddleware(IApplicationBuilder appBuilder);
     }
 }
-#endif
