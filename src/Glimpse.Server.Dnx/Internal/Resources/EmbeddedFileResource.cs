@@ -22,8 +22,7 @@ namespace Glimpse.Server.Internal.Resources
             {
                 RequestPath = "",
                 EnableDefaultFiles = true,
-                FileProvider =
-                    new EmbeddedFileProvider(typeof (EmbeddedFileResource).GetTypeInfo().Assembly, BaseNamespace)
+                FileProvider = new EmbeddedFileProvider(typeof(IResourceManager).GetTypeInfo().Assembly, BaseNamespace)
             });
 
             foreach (var registration in Register)
@@ -43,7 +42,7 @@ namespace Glimpse.Server.Internal.Resources
     {
         public override ResourceType Type => ResourceType.Client;
 
-        public override string BaseNamespace => "Glimpse.Server.Internal.Resources.Embeded.Client";
+        public override string BaseNamespace => "Glimpse.Server.Core.Internal.Resources.Embeded.Client";
 
         public override IDictionary<string, string> Register => new Dictionary<string, string>
         {
@@ -56,7 +55,7 @@ namespace Glimpse.Server.Internal.Resources
     {
         public override ResourceType Type => ResourceType.Agent;
 
-        public override string BaseNamespace => "Glimpse.Server.Internal.Resources.Embeded.Agent";
+        public override string BaseNamespace => "Glimpse.Server.Core.Internal.Resources.Embeded.Agent";
 
         public override IDictionary<string, string> Register => new Dictionary<string, string>
         {
