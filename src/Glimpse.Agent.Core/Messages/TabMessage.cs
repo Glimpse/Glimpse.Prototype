@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Glimpse.Common.Messaging;
+using Glimpse.Messaging;
 
 namespace Glimpse.Agent.AspNet.Messages
 {

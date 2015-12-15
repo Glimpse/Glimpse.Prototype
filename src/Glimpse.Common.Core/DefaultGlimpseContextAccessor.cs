@@ -1,5 +1,6 @@
 ﻿using System;
 using Glimpse.Internal;
+using Glimpse.Platform;
 
 namespace Glimpse.Common
 {

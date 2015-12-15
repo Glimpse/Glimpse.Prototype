@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Glimpse.Common.Messaging
+namespace Glimpse.Messaging
 {
     public interface IMessageTypeProvider
     {

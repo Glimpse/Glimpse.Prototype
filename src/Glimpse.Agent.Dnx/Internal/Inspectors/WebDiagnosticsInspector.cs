@@ -1,5 +1,6 @@
 ﻿using Glimpse.Agent.Internal.Inspectors.Mvc.Proxies;
 using Glimpse.Internal;
+using Glimpse.Platform;
 using Microsoft.Extensions.Logging;
 
 namespace Glimpse.Agent.Internal.Inspectors

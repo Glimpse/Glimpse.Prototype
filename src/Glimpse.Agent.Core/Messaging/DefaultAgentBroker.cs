@@ -5,6 +5,7 @@ using System.Reactive.Subjects;
 using System.Threading;
 using Glimpse.Agent.Internal.Messaging;
 using Glimpse.Internal;
+using Glimpse.Platform;
 
 namespace Glimpse.Agent
 {
