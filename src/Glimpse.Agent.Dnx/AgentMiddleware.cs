@@ -10,7 +10,7 @@ namespace Glimpse.Agent
         public void RegisterMiddleware(IApplicationBuilder appBuilder)
         {
             var manager = appBuilder.ApplicationServices.GetRequiredService<IAgentStartupManager>();
-            manager.Run(new StartupOptions(appBuilder));
+            manager.Run(new StartupOptions(appBuilder.ApplicationServices));
 
             appBuilder.UseMiddleware<GlimpseAgentMiddleware>(appBuilder);
         }

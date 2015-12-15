@@ -1,17 +1,14 @@
 ﻿using System;
-using Microsoft.AspNet.Builder;
 
 namespace Glimpse.Initialization
 {
     public class StartupOptions : IStartupOptions
     {
-        public StartupOptions(IApplicationBuilder builder)
+        public StartupOptions(IServiceProvider serviceProvider)
         {
-            Builder = builder;
+            ApplicationServices = serviceProvider;
         }
 
-        private IApplicationBuilder Builder { get; }
-
-        public IServiceProvider ApplicationServices => Builder.ApplicationServices;
+        public IServiceProvider ApplicationServices { get; }
     }
 }
