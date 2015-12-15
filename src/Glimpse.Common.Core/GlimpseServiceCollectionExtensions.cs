@@ -1,4 +1,5 @@
 ﻿using Glimpse.Initialization;
+using Glimpse.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 

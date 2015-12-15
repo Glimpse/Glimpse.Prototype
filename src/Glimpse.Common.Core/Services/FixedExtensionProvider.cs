@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Glimpse.Initialization;
 
-namespace Glimpse.Initialization
+namespace Glimpse.Services
 {
     public class FixedExtensionProvider<T> : IExtensionProvider<T>
         where T : class

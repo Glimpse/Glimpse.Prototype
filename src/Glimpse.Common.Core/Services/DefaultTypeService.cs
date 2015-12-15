@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Glimpse.Internal;
 
-namespace Glimpse.Internal
+namespace Glimpse.Services
 {
     public class DefaultTypeService : ITypeService
     {

@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Glimpse.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Glimpse.Internal
+namespace Glimpse.Services
 {
     public class DefaultTypeActivator : ITypeActivator
     {

@@ -9,6 +9,7 @@ using Glimpse.Agent.Configuration;
 using Glimpse.Agent.Inspectors;
 using Glimpse.Initialization;
 using System.Linq;
+using Glimpse.Services;
 
 namespace Glimpse
 {

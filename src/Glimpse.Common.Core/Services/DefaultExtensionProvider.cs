@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Glimpse.Initialization;
 using Glimpse.Internal;
 
-namespace Glimpse.Initialization
+namespace Glimpse.Services
 {
     public class DefaultExtensionProvider<T> : IExtensionProvider<T>
         where T : class

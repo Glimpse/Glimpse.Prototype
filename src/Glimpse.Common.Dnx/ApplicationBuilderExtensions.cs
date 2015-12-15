@@ -1,5 +1,6 @@
 ﻿using Glimpse.Common.Initialization;
 using Glimpse.Initialization;
+using Glimpse.Services;
 using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Glimpse.Internal
+namespace Glimpse.Services
 {
     public interface ITypeService
     {

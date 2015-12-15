@@ -2,6 +2,7 @@
 using Glimpse.Internal;
 using Glimpse.Common.Initialization;
 using Glimpse.Initialization;
+using Glimpse.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 

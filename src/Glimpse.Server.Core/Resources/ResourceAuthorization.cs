@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Glimpse.Initialization;
 using Glimpse.Server.Configuration;
+using Glimpse.Services;
 using Microsoft.AspNet.Http;
 
 namespace Glimpse.Server.Resources
