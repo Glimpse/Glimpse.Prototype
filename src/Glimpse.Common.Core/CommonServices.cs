@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Glimpse.Common;
-using Glimpse.Common.Initialization;
 using Glimpse.Common.Internal.Serialization;
 using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;

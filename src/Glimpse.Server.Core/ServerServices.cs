@@ -1,5 +1,4 @@
 using System.Linq;
-using Glimpse.Common.Initialization;
 using Glimpse.Initialization;
 using Glimpse.Server;
 using Glimpse.Server.Configuration;

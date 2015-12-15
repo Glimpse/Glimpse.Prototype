@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Glimpse.Common.Initialization
+namespace Glimpse.Initialization
 {
     public interface IRegisterServices
     {

@@ -1,5 +1,5 @@
 ﻿using Glimpse.Agent.Inspectors;
-using Glimpse.Common.Initialization;
+using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse

@@ -7,7 +7,6 @@ using Glimpse.Agent;
 using Glimpse.Agent.Internal.Messaging;
 using Glimpse.Agent.Configuration;
 using Glimpse.Agent.Inspectors;
-using Glimpse.Common.Initialization;
 using Glimpse.Initialization;
 using System.Linq;
 

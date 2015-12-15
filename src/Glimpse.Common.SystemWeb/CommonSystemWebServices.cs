@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Glimpse.Internal;
-using Glimpse.Common.Initialization;
+using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse
