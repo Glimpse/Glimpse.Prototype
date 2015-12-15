@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Glimpse.Internal;
 
-namespace Glimpse.Services
+namespace Glimpse.Platform
 {
     public class DefaultTypeSelector : ITypeSelector
     {

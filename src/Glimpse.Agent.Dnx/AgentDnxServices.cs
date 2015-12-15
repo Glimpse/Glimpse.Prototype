@@ -2,7 +2,7 @@
 using Glimpse.Agent.Internal.Inspectors;
 using Glimpse.Common.Initialization;
 using Glimpse.Initialization;
-using Glimpse.Services;
+using Glimpse.Platform;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse

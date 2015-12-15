@@ -5,7 +5,7 @@ using System.Reflection;
 using Glimpse.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Glimpse.Services
+namespace Glimpse.Platform
 {
     public class DefaultTypeActivator : ITypeActivator
     {

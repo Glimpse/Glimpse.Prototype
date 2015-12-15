@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace Glimpse.Services
+namespace Glimpse.Platform
 {
     public static class AppDomainAssemblyBlackList
     {

@@ -1,6 +1,6 @@
 ﻿using System;
-using Glimpse.Common.Internal.Messaging;
 using Glimpse.Internal;
+using Glimpse.Messaging;
 
 namespace Glimpse.Agent
 {

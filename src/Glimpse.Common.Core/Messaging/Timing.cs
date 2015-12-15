@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Glimpse.Internal
+namespace Glimpse.Messaging
 {
     public struct Timing
     {

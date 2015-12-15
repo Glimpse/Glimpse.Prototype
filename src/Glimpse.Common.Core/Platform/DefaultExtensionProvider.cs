@@ -3,7 +3,7 @@ using System.Linq;
 using Glimpse.Initialization;
 using Glimpse.Internal;
 
-namespace Glimpse.Services
+namespace Glimpse.Platform
 {
     public class DefaultExtensionProvider<T> : IExtensionProvider<T>
         where T : class

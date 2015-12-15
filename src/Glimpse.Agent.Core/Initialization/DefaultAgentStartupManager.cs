@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Glimpse.Initialization;
-using Glimpse.Services;
+using Glimpse.Platform;
 
 namespace Glimpse.Initialization
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Glimpse.Initialization;
-using Glimpse.Services;
+using Glimpse.Platform;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Glimpse.Internal;
 
-namespace Glimpse.Services
+namespace Glimpse.Platform
 {
     public class DefaultTypeService : ITypeService
     {

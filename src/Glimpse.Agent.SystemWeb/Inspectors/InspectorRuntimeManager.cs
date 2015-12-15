@@ -2,7 +2,7 @@
 using Microsoft.AspNet.Http;
 using Glimpse.Agent.Configuration;
 using Glimpse.Initialization;
-using Glimpse.Services;
+using Glimpse.Platform;
 
 namespace Glimpse.Agent.Inspectors
 {

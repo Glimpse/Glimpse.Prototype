@@ -1,7 +1,7 @@
 ﻿using Glimpse.Common.Initialization;
 using Glimpse.Initialization;
 using Glimpse.Server.Resources;
-using Glimpse.Services;
+using Glimpse.Platform;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse

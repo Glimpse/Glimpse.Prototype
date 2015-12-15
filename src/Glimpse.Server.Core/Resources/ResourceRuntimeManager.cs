@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Glimpse.Initialization;
 using Glimpse.Server.Internal;
-using Glimpse.Services;
+using Glimpse.Platform;
 using Microsoft.AspNet.Http;
 
 namespace Glimpse.Server.Resources

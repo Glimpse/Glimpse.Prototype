@@ -1,7 +1,7 @@
 ﻿using System;
-using Glimpse.Common.Internal.Messaging;
+using Glimpse.Internal;
 
-namespace Glimpse.Internal
+namespace Glimpse.Messaging
 {
     public class OperationStack
     {

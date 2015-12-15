@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 
-namespace Glimpse.Internal
+namespace Glimpse.Messaging
 {
     public class OperationTiming<T>
     {

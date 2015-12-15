@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Glimpse.Initialization;
-using Glimpse.Services;
+using Glimpse.Platform;
 
 namespace Glimpse.Agent.Inspectors
 {

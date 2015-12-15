@@ -2,7 +2,7 @@
 using System.Linq;
 using Glimpse.Initialization;
 
-namespace Glimpse.Services
+namespace Glimpse.Platform
 {
     public class FixedExtensionProvider<T> : IExtensionProvider<T>
         where T : class
