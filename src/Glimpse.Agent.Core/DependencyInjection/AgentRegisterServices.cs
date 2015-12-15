@@ -11,9 +11,9 @@ using Glimpse.Initialization;
 using System.Linq;
 using Glimpse.Platform;
 
-namespace Glimpse
+namespace Glimpse.DependencyInjection
 {
-    public class AgentServices : IRegisterServices
+    public class AgentRegisterServices : IRegisterServices
     {
         public void RegisterServices(IServiceCollection services)
         {

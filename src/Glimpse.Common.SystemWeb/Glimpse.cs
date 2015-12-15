@@ -4,21 +4,21 @@ namespace Glimpse
 {
     public static class Glimpse
     {
-        public static GlimpseServiceCollectionBuilder Start()
+        public static IGlimpseBuilder Start()
         {
             return Start(new ServiceCollection());
         }
 
-        public static GlimpseServiceCollectionBuilder Start(IServiceCollection serviceProvider)
+        public static IGlimpseBuilder Start(IServiceCollection serviceProvider)
         {
             return serviceProvider.AddGlimpse();
         }
-        public static GlimpseServiceCollectionBuilder Start(bool autoRegisterComponents)
+        public static IGlimpseBuilder Start(bool autoRegisterComponents)
         {
             return Start(new ServiceCollection(), autoRegisterComponents);
         }
 
-        public static GlimpseServiceCollectionBuilder Start(IServiceCollection serviceProvider, bool autoRegisterComponents)
+        public static IGlimpseBuilder Start(IServiceCollection serviceProvider, bool autoRegisterComponents)
         {
             return serviceProvider.AddGlimpse(autoRegisterComponents);
         }

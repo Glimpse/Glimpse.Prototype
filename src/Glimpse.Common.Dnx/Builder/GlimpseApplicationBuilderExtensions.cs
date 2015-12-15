@@ -4,9 +4,9 @@ using Glimpse.Platform;
 using Microsoft.AspNet.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Glimpse
+namespace Microsoft.AspNet.Builder
 {
-    public static class ApplicationBuilderExtensions
+    public static class GlimpseApplicationBuilderExtensions
     {
         public static IApplicationBuilder UseGlimpse(this IApplicationBuilder appBuilder)
         {

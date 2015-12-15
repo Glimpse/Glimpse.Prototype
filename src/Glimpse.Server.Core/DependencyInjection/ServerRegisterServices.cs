@@ -10,9 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.OptionsModel;
 
-namespace Glimpse
+namespace Glimpse.DependencyInjection
 {
-    public class ServerServices : IRegisterServices
+    public class ServerRegisterServices : IRegisterServices
     {
         public void RegisterServices(IServiceCollection services)
         {

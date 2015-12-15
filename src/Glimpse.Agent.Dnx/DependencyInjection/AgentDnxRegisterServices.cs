@@ -5,9 +5,9 @@ using Glimpse.Initialization;
 using Glimpse.Platform;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Glimpse
+namespace Glimpse.DependencyInjection
 {
-    public class AgentDnxServices : IRegisterServices
+    public class AgentDnxRegisterServices : IRegisterServices
     {
         public void RegisterServices(IServiceCollection services)
         {

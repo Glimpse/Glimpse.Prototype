@@ -6,6 +6,7 @@ using Glimpse.Agent.Messages;
 using Glimpse.Common;
 using Glimpse.Internal.Extensions;
 using Glimpse.Internal;
+using Glimpse.Platform;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Http.Features;
 

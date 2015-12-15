@@ -1,8 +1,7 @@
 ﻿using System;
-using Glimpse.Internal;
-using Glimpse.Platform;
+using Glimpse.Common;
 
-namespace Glimpse.Common
+namespace Glimpse.Platform
 {
     public class DefaultGlimpseContextAccessor : IGlimpseContextAccessor
     {

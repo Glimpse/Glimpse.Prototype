@@ -1,33 +1,28 @@
-﻿using System.Collections.Generic;
-using Glimpse.Internal;
-using Glimpse.Common.Initialization;
-using Glimpse.Initialization;
+﻿using Glimpse.Common.Initialization;
 using Glimpse.Platform;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 
-namespace Glimpse
+namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class CommonDnxServices
+    public static class GlimpseDnxServiceCollectionExtensions
     {
-        public static IEnumerable<ServiceDescriptor> GetDefaultServices()
+        public static IGlimpseBuilder AddGlimpse(this IServiceCollection services)
         {
-            var services = new ServiceCollection();
+            return services.AddGlimpse(true);
+        }
 
+        public static IGlimpseBuilder AddGlimpse(this IServiceCollection services, bool autoRegisterComponents)
+        {
             //
-            // Discovery & Reflection.
+            // Platform
             //
             services.AddSingleton(PlatformServices.Default.AssemblyLoadContextAccessor);
             services.AddSingleton(PlatformServices.Default.AssemblyLoaderContainer);
             services.AddSingleton(PlatformServices.Default.LibraryManager);
             services.AddTransient<IAssemblyProvider, LibraryManagerAssemblyProvider>();
-
-            //
-            // Extensions
-            //
             services.AddSingleton<IExtensionProvider<IRegisterMiddleware>, DefaultExtensionProvider<IRegisterMiddleware>>();
-
-            return services;
+            
+            return (IGlimpseBuilder)services.AddGlimpseCore(autoRegisterComponents);
         }
     }
 }

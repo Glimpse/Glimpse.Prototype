@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Glimpse.Internal;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
+using Glimpse.Platform;
 
 namespace Glimpse.AgentServer.Dnx.Sample
 {

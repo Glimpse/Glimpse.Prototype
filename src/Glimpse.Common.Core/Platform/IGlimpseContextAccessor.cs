@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Glimpse.Common
+namespace Glimpse.Platform
 {
     public interface IGlimpseContextAccessor
     {

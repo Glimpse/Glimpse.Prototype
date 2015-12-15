@@ -2,9 +2,9 @@
 using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Glimpse
+namespace Glimpse.DependencyInjection
 {
-    public class AgentSystemWebServices : IRegisterServices
+    public class AgentSystemWebRegisterServices : IRegisterServices
     {
         public void RegisterServices(IServiceCollection services)
         {

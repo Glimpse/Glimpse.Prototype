@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Glimpse.Agent.Inspectors;
 using Glimpse.Common;
+using Glimpse.Platform;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.Primitives;
 
