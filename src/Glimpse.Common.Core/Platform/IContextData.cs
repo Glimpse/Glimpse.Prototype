@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Glimpse.Internal
+﻿namespace Glimpse.Platform
 {
     public interface IContextData<T>
     {
