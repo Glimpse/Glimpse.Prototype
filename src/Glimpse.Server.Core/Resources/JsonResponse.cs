@@ -5,15 +5,17 @@ using Newtonsoft.Json;
 
 namespace Glimpse.Server.Resources
 {
-    public class Json : IResponse
+    public class JsonResponse : IResponse
     {
         private readonly object _obj;
         private readonly string _contentType;
-        public Json(object obj) : this(obj, "application/json")
+
+        public JsonResponse(object obj) 
+            : this(obj, "application/json")
         {
         }
 
-        public Json(object obj, string contentType)
+        public JsonResponse(object obj, string contentType)
         {
             _obj = obj;
             _contentType = contentType;
@@ -26,7 +28,7 @@ namespace Glimpse.Server.Resources
 
             var json = jsonSerializer.Serialize(_obj);
 
-            var response = new RawJson(json, _contentType);
+            var response = new RawJsonResponse(json, _contentType);
             await response.Respond(context);
         }
     }

@@ -3,10 +3,10 @@ using System.Net;
 
 namespace Glimpse.Server.Resources
 {
-    public class MissingParameterProblem : Problem
+    public class MissingParameterProblemResponse : ProblemResponse
     {
         private readonly string _parameterName;
-        public MissingParameterProblem(string parameterName)
+        public MissingParameterProblemResponse(string parameterName)
         {
             _parameterName = parameterName;
         }

@@ -25,13 +25,13 @@ namespace Glimpse.Server.Internal.Resources
             if (types.Length == 0)
             {
                 await context.RespondWith(
-                    new MissingParameterProblem("types")
+                    new MissingParameterProblemResponse("types")
                     .EnableCaching());
                 return;
             }
 
             var list = await _store.RetrieveByType(types);
-            await context.RespondWith(new RawJson(list.ToJsonArray()));
+            await context.RespondWith(new RawJsonResponse(list.ToJsonArray()));
         }
 
         public string Name => "message-history";

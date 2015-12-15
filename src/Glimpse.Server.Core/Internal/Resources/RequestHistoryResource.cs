@@ -37,7 +37,7 @@ namespace Glimpse.Server.Internal.Resources
             }
 
             await context.RespondWith(
-                new RawJson(list.ToJsonArray()));
+                new RawJsonResponse(list.ToJsonArray()));
         }
 
         public string Name => "request-history";

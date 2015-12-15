@@ -31,7 +31,7 @@ namespace Glimpse.Server.Internal.Resources
 }}";
 
             await context.RespondWith(
-                new RawJson(json)
+                new RawJsonResponse(json)
                 .AsFile("glimpse.json"));
         }
 

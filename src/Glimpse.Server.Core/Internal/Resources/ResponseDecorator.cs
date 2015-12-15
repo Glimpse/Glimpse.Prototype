@@ -9,6 +9,7 @@ namespace Glimpse.Server.Internal.Resources
     {
         private readonly IResponse _response;
         private readonly Action<HttpContext> _decoration;
+
         public ResponseDecorator(IResponse response, Action<HttpContext> decoration)
         {
             _response = response;

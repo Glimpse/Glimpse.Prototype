@@ -5,9 +5,9 @@ using Microsoft.AspNet.Http;
 
 namespace Glimpse.Server.Resources
 {
-    public abstract class Problem : IResponse
+    public abstract class ProblemResponse : IResponse
     {
-        protected Problem()
+        protected ProblemResponse()
         {
             Extensions = new Dictionary<string, object>();
         }
@@ -31,7 +31,7 @@ namespace Glimpse.Server.Resources
             Extensions["Title"] = Title;
             Extensions["Details"] = Details;
 
-            var response = new Json(Extensions, "application/problem+json");
+            var response = new JsonResponse(Extensions, "application/problem+json");
             await response.Respond(context);
         }
     }

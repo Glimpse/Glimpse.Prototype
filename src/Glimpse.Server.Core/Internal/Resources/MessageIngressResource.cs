@@ -49,12 +49,12 @@ namespace Glimpse.Server.Internal.Resources
                 }
                 catch (JsonReaderException exception)
                 {
-                    await context.RespondWith(new InvalidJsonProblem(exception).EnableCors());
+                    await context.RespondWith(new InvalidJsonProblemResponse(exception).EnableCors());
                     return;
                 }
                 catch (Exception exception)
                 {
-                    await context.RespondWith(new ExceptionProblem(exception).EnableCors());
+                    await context.RespondWith(new ExceptionProblemResponse(exception).EnableCors());
                     return;
                 }
 
@@ -66,7 +66,7 @@ namespace Glimpse.Server.Internal.Resources
             else
             {
                 await context.RespondWith(
-                    new InvalidMethodProblem(context.Request.Method, "POST")
+                    new InvalidMethodProblemResponse(context.Request.Method, "POST")
                     .EnableCors());
             }
         }

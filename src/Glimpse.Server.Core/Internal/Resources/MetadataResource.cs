@@ -20,7 +20,7 @@ namespace Glimpse.Server.Internal.Resources
         {
             var metadata = GetMetadata();
 
-            await context.RespondWith(new Json(metadata));
+            await context.RespondWith(new JsonResponse(metadata));
         }
 
         private Metadata GetMetadata()

@@ -24,7 +24,7 @@ namespace Glimpse.Server.Internal.Resources
 
                 if (!contextId.HasValue)
                 {
-                    await context.RespondWith(new MissingParameterProblem("contextId")
+                    await context.RespondWith(new MissingParameterProblemResponse("contextId")
                         .EnableCaching()
                         .EnableCors());
                     return;
@@ -35,7 +35,7 @@ namespace Glimpse.Server.Internal.Resources
                 var list = await _storage.RetrieveByContextId(contextId.Value, types);
 
                 await context.RespondWith(
-                    new RawJson(list.ToJsonArray())
+                    new RawJsonResponse(list.ToJsonArray())
                     .EnableCaching()
                     .EnableCors());
             });

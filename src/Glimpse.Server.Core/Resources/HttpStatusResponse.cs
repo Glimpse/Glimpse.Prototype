@@ -10,11 +10,13 @@ namespace Glimpse.Server.Resources
         private readonly int _statusCode;
         private readonly string _message;
 
-        public HttpStatusResponse(HttpStatusCode statusCode) : this((int)statusCode, null)
+        public HttpStatusResponse(HttpStatusCode statusCode) 
+            : this((int)statusCode, null)
         {
         }
 
-        public HttpStatusResponse(HttpStatusCode statusCode, string message) : this((int)statusCode, message)
+        public HttpStatusResponse(HttpStatusCode statusCode, string message) 
+            : this((int)statusCode, message)
         {
         }
 
