@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Glimpse.Common.Internal.Serialization
+namespace Glimpse.Internal.Serialization
 {
     public class GuidConverter : JsonConverter
     {

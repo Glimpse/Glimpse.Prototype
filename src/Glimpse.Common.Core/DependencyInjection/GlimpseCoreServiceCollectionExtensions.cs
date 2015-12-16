@@ -1,8 +1,7 @@
 ﻿using Glimpse;
-using Glimpse.Common;
-using Glimpse.Common.Internal.Serialization;
 using Glimpse.Initialization;
 using Glimpse.Internal;
+using Glimpse.Internal.Serialization;
 using Glimpse.Platform;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Newtonsoft.Json;

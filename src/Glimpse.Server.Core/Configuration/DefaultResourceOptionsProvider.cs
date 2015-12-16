@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Glimpse.Configuration;
 using Glimpse.Initialization;
 using Glimpse.Internal.Extensions;
 using Glimpse.Server.Internal.Extensions;

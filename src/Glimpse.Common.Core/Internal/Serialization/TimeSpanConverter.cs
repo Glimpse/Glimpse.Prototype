@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Glimpse.Internal
+namespace Glimpse.Internal.Serialization
 {
     public class TimeSpanConverter : JsonConverter
     {

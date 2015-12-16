@@ -1,7 +1,7 @@
 using Glimpse.Internal.Extensions;
 using Newtonsoft.Json;
 
-namespace Glimpse.Common.Internal.Serialization
+namespace Glimpse.Internal.Serialization
 {
     public class DefaultJsonSerializerProvider : IJsonSerializerProvider
     {

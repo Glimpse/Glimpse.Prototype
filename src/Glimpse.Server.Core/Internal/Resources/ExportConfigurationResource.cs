@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Glimpse.Configuration;
 using Glimpse.Initialization;
 using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;

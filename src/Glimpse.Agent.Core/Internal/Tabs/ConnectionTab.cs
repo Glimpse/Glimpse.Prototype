@@ -22,6 +22,6 @@
 //            };
 //        }
 
-//        public override Execute ExecuteWhen => Execute.BeforeResponse;
+//        public override TabExecute TabExecuteWhen => TabExecute.BeforeResponse;
 //    }
 //}

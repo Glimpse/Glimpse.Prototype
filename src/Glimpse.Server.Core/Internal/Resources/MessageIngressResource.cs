@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Glimpse.Common.Internal.Serialization;
+using Glimpse.Internal.Serialization;
 using Glimpse.Server.Resources;
 using Microsoft.AspNet.Http;
 using Newtonsoft.Json;

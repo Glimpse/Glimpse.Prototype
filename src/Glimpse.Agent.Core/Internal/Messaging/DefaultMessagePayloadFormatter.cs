@@ -1,6 +1,6 @@
 using System.Linq;
-using Glimpse.Common.Internal.Serialization;
 using Glimpse.Internal.Extensions;
+using Glimpse.Internal.Serialization;
 using Newtonsoft.Json;
 
 namespace Glimpse.Agent.Internal.Messaging

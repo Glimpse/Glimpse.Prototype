@@ -1,4 +1,6 @@
-﻿namespace Glimpse.Initialization
+﻿using Glimpse.Initialization;
+
+namespace Glimpse.Configuration
 {
     public interface IResourceOptionsProvider
     {

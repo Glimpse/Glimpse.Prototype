@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.OptionsModel;
+﻿using Glimpse.Initialization;
+using Microsoft.Extensions.OptionsModel;
 
-namespace Glimpse.Initialization
+namespace Glimpse.Configuration
 {
     public class OptionsResourceOptionsProvider : IResourceOptionsProvider
     {

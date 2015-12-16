@@ -1,4 +1,4 @@
-﻿namespace Glimpse.Initialization
+﻿namespace Glimpse.Configuration
 {
     public class ResourceOptions
     {

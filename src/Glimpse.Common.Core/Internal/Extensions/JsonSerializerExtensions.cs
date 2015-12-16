@@ -2,9 +2,11 @@
 using System.Globalization;
 using System.IO;
 using System.Text;
+using Glimpse.Internal.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using GuidConverter = Glimpse.Common.Internal.Serialization.GuidConverter;
+using GuidConverter = Glimpse.Internal.Serialization.GuidConverter;
+using TimeSpanConverter = Glimpse.Internal.Serialization.TimeSpanConverter;
 
 namespace Glimpse.Internal.Extensions
 {
