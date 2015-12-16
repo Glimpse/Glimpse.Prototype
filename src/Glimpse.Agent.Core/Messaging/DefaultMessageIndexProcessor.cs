@@ -6,15 +6,15 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Glimpse.Agent.Internal.Messaging
+namespace Glimpse.Agent.Messaging
 {
     public class DefaultMessageIndexProcessor : IMessageIndexProcessor
     {
-        private readonly static Type _objectType = typeof(object);
-        private readonly static Type _dictionaryType = typeof(Dictionary<string, object>);
-        private readonly static MethodInfo _addMethodInfo = _dictionaryType.GetMethod("Add", new[] { typeof(string), typeof(object) });
-        private readonly static ConstructorInfo _constructorInfo = typeof(ReadOnlyDictionary<string, object>).GetConstructor(new[] { _dictionaryType });
-        private readonly static ConcurrentDictionary<Type, Func<object, IReadOnlyDictionary<string, object>>> _methodCache = new ConcurrentDictionary<Type, Func<object, IReadOnlyDictionary<string, object>>>();
+        private static readonly Type _objectType = typeof(object);
+        private static readonly Type _dictionaryType = typeof(Dictionary<string, object>);
+        private static readonly MethodInfo _addMethodInfo = _dictionaryType.GetMethod("Add", new[] { typeof(string), typeof(object) });
+        private static readonly ConstructorInfo _constructorInfo = typeof(ReadOnlyDictionary<string, object>).GetConstructor(new[] { _dictionaryType });
+        private static readonly ConcurrentDictionary<Type, Func<object, IReadOnlyDictionary<string, object>>> _methodCache = new ConcurrentDictionary<Type, Func<object, IReadOnlyDictionary<string, object>>>();
 
         public virtual IReadOnlyDictionary<string, object> Derive(object payload)
         {

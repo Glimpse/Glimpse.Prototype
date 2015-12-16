@@ -1,4 +1,4 @@
-﻿namespace Glimpse.Agent.Internal.Messaging
+﻿namespace Glimpse.Agent.Messaging
 {
     // TODO: Review as I don't love passing IMessage into this, but
     //       not sure if there is a better way of doing it.

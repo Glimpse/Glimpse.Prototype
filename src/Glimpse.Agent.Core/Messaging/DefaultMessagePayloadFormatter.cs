@@ -3,7 +3,7 @@ using Glimpse.Internal.Extensions;
 using Glimpse.Internal.Serialization;
 using Newtonsoft.Json;
 
-namespace Glimpse.Agent.Internal.Messaging
+namespace Glimpse.Agent.Messaging
 {
     public class DefaultMessagePayloadFormatter : IMessagePayloadFormatter
     {

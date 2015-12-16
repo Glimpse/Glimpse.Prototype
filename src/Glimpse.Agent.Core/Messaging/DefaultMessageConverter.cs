@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Glimpse.Agent.Internal.Messaging
+namespace Glimpse.Agent.Messaging
 {
-    // Glimpse servers & clients depend on this behavior. 
-    // As such, this type is marked internal to prevent tampering
-    internal class DefaultMessageConverter : IMessageConverter
+    public class DefaultMessageConverter : IMessageConverter
     {
         public DefaultMessageConverter(IMessagePayloadFormatter payloadFormatter, IMessageIndexProcessor indexProcessor, IMessageTypeProcessor typeProcessor)
         {

@@ -4,11 +4,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.OptionsModel;
 using Glimpse.Agent;
-using Glimpse.Agent.Internal.Messaging;
 using Glimpse.Agent.Configuration;
 using Glimpse.Agent.Inspectors;
 using Glimpse.Initialization;
 using System.Linq;
+using Glimpse.Agent.Messaging;
 using Glimpse.Configuration;
 using Glimpse.Platform;
 

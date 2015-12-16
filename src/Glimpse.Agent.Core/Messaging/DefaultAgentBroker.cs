@@ -3,7 +3,7 @@ using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading;
-using Glimpse.Agent.Internal.Messaging;
+using Glimpse.Agent.Messaging;
 using Glimpse.Internal;
 using Glimpse.Platform;
 
