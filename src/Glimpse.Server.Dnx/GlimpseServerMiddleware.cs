@@ -6,7 +6,7 @@ using Glimpse.Initialization;
 using Glimpse.Server.Configuration;
 using Glimpse.Server.Internal;
 using Glimpse.Server.Resources;
-using Microsoft.Extensions.OptionsModel;
+using Microsoft.Extensions.Options;
 
 namespace Glimpse.Server
 {

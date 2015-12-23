@@ -15,7 +15,7 @@
     "Microsoft.AspNet.Http.Abstractions": "1.0.0-*",
     "Microsoft.Extensions.DependencyInjection": "1.0.0-*",
     "Microsoft.Extensions.Logging": "1.0.0-*",
-    "Microsoft.Extensions.OptionsModel": "1.0.0-*",
+    "Microsoft.Extensions.Options": "1.0.0-*",
     "Newtonsoft.Json": "6.0.6",
     "Rx-Linq": "2.2.5",
     "Rx-PlatformServices": "2.2.5"

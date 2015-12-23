@@ -1,0 +1,469 @@
+{
+  "locked": false,
+  "version": 2,
+  "targets": {
+    ".NETFramework,Version=v4.5.1": {
+      "Microsoft.AspNet.Http/1.0.0-rc2-16091": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc2-16091",
+          "Microsoft.AspNet.WebUtilities": "1.0.0-rc2-16091",
+          "Microsoft.Net.Http.Headers": "1.0.0-rc2-16091"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Http.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Http.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Http.Abstractions/1.0.0-rc2-16091": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Http.Features": "1.0.0-rc2-16091",
+          "System.Text.Encodings.Web": "4.0.0-rc2-23622"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core",
+          "System.IO",
+          "System.Runtime"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Http.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Http.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Http.Features/1.0.0-rc2-16091": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "1.0.0-rc2-15956"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Http.Features.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Http.Features.dll": {}
+        }
+      },
+      "Microsoft.AspNet.WebUtilities/1.0.0-rc2-16091": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "1.0.0-rc2-15956",
+          "System.Text.Encodings.Web": "4.0.0-rc2-23622"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core",
+          "System.Runtime"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.WebUtilities.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.WebUtilities.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Primitives/1.0.0-rc2-15956": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.Extensions.Primitives.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.Extensions.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Net.Http.Headers/1.0.0-rc2-16091": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.Net.Http.Headers.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.Net.Http.Headers.dll": {}
+        }
+      },
+      "System.Text.Encodings.Web/4.0.0-rc2-23622": {
+        "type": "package",
+        "compile": {
+          "lib/dotnet5.1/System.Text.Encodings.Web.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.1/System.Text.Encodings.Web.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.5.1/win7-x86": {
+      "Microsoft.AspNet.Http/1.0.0-rc2-16091": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc2-16091",
+          "Microsoft.AspNet.WebUtilities": "1.0.0-rc2-16091",
+          "Microsoft.Net.Http.Headers": "1.0.0-rc2-16091"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Http.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Http.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Http.Abstractions/1.0.0-rc2-16091": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Http.Features": "1.0.0-rc2-16091",
+          "System.Text.Encodings.Web": "4.0.0-rc2-23622"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core",
+          "System.IO",
+          "System.Runtime"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Http.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Http.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Http.Features/1.0.0-rc2-16091": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "1.0.0-rc2-15956"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Http.Features.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Http.Features.dll": {}
+        }
+      },
+      "Microsoft.AspNet.WebUtilities/1.0.0-rc2-16091": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "1.0.0-rc2-15956",
+          "System.Text.Encodings.Web": "4.0.0-rc2-23622"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core",
+          "System.Runtime"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.WebUtilities.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.WebUtilities.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Primitives/1.0.0-rc2-15956": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.Extensions.Primitives.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.Extensions.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Net.Http.Headers/1.0.0-rc2-16091": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.Net.Http.Headers.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.Net.Http.Headers.dll": {}
+        }
+      },
+      "System.Text.Encodings.Web/4.0.0-rc2-23622": {
+        "type": "package",
+        "compile": {
+          "lib/dotnet5.1/System.Text.Encodings.Web.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.1/System.Text.Encodings.Web.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.5.1/win7-x64": {
+      "Microsoft.AspNet.Http/1.0.0-rc2-16091": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc2-16091",
+          "Microsoft.AspNet.WebUtilities": "1.0.0-rc2-16091",
+          "Microsoft.Net.Http.Headers": "1.0.0-rc2-16091"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Http.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Http.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Http.Abstractions/1.0.0-rc2-16091": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Http.Features": "1.0.0-rc2-16091",
+          "System.Text.Encodings.Web": "4.0.0-rc2-23622"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core",
+          "System.IO",
+          "System.Runtime"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Http.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Http.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Http.Features/1.0.0-rc2-16091": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "1.0.0-rc2-15956"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Http.Features.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Http.Features.dll": {}
+        }
+      },
+      "Microsoft.AspNet.WebUtilities/1.0.0-rc2-16091": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "1.0.0-rc2-15956",
+          "System.Text.Encodings.Web": "4.0.0-rc2-23622"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core",
+          "System.Runtime"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.WebUtilities.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.WebUtilities.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Primitives/1.0.0-rc2-15956": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.Extensions.Primitives.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.Extensions.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Net.Http.Headers/1.0.0-rc2-16091": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.Net.Http.Headers.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.Net.Http.Headers.dll": {}
+        }
+      },
+      "System.Text.Encodings.Web/4.0.0-rc2-23622": {
+        "type": "package",
+        "compile": {
+          "lib/dotnet5.1/System.Text.Encodings.Web.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.1/System.Text.Encodings.Web.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Microsoft.AspNet.Http/1.0.0-rc2-16091": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "7mH9HUn3/xYIktBAmUUZezGQqGEn3JYHUBmgace/fySlhhOI2ugTPBa9+nALQTfmNVGkBpZI8FmVuLCdWv+Wuw==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.AspNet.Http.dll",
+        "lib/dotnet5.4/Microsoft.AspNet.Http.xml",
+        "lib/net451/Microsoft.AspNet.Http.dll",
+        "lib/net451/Microsoft.AspNet.Http.xml",
+        "Microsoft.AspNet.Http.1.0.0-rc2-16091.nupkg",
+        "Microsoft.AspNet.Http.1.0.0-rc2-16091.nupkg.sha512",
+        "Microsoft.AspNet.Http.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.Http.Abstractions/1.0.0-rc2-16091": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "E9xf80TNdEW/gfhpYvEk0V5BPs405De8ReconWejjmCJs5CWKHDBpwGZlhGqNvJHDdleFzEbKu7e21m3nX7t3Q==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.AspNet.Http.Abstractions.dll",
+        "lib/dotnet5.4/Microsoft.AspNet.Http.Abstractions.xml",
+        "lib/net451/Microsoft.AspNet.Http.Abstractions.dll",
+        "lib/net451/Microsoft.AspNet.Http.Abstractions.xml",
+        "Microsoft.AspNet.Http.Abstractions.1.0.0-rc2-16091.nupkg",
+        "Microsoft.AspNet.Http.Abstractions.1.0.0-rc2-16091.nupkg.sha512",
+        "Microsoft.AspNet.Http.Abstractions.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.Http.Features/1.0.0-rc2-16091": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "ngngrkNphIa6o+BBZpx6UDD7UOPTWma45fsw0RuM0B07RDucpSIFF+siSKHeGNUiAljI4SV5Mn8SxTagwdia5w==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.AspNet.Http.Features.dll",
+        "lib/dotnet5.4/Microsoft.AspNet.Http.Features.xml",
+        "lib/net451/Microsoft.AspNet.Http.Features.dll",
+        "lib/net451/Microsoft.AspNet.Http.Features.xml",
+        "Microsoft.AspNet.Http.Features.1.0.0-rc2-16091.nupkg",
+        "Microsoft.AspNet.Http.Features.1.0.0-rc2-16091.nupkg.sha512",
+        "Microsoft.AspNet.Http.Features.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.WebUtilities/1.0.0-rc2-16091": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "q7fEQaqBj7LGYhADiHoPZVAS6WM16UEqlliYfT7v43RqdFbk8JOv+VDVOUd1Sivq1nWF19iU/vR+OsdqJEjKzg==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.AspNet.WebUtilities.dll",
+        "lib/dotnet5.4/Microsoft.AspNet.WebUtilities.xml",
+        "lib/net451/Microsoft.AspNet.WebUtilities.dll",
+        "lib/net451/Microsoft.AspNet.WebUtilities.xml",
+        "Microsoft.AspNet.WebUtilities.1.0.0-rc2-16091.nupkg",
+        "Microsoft.AspNet.WebUtilities.1.0.0-rc2-16091.nupkg.sha512",
+        "Microsoft.AspNet.WebUtilities.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.Primitives/1.0.0-rc2-15956": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "n+F/c8bzpEbarjCtRmeixDzDPCaoMOoJ79kE4FFkyjpmZoNSSI7Yx8eEeCOSCOVsZjBPc3N5cEoIwTKQ/ccPvg==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.Extensions.Primitives.dll",
+        "lib/net451/Microsoft.Extensions.Primitives.dll",
+        "lib/netcore50/Microsoft.Extensions.Primitives.dll",
+        "Microsoft.Extensions.Primitives.1.0.0-rc2-15956.nupkg",
+        "Microsoft.Extensions.Primitives.1.0.0-rc2-15956.nupkg.sha512",
+        "Microsoft.Extensions.Primitives.nuspec"
+      ]
+    },
+    "Microsoft.Net.Http.Headers/1.0.0-rc2-16091": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "g4ixmbuRvRDNtbSFEMMkGM26Bbj6g/KBn314jIli9NGI03g5dRAHVW5hXJgnYFpfHKejMwW7naFWCEebGnzSnA==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.Net.Http.Headers.dll",
+        "lib/dotnet5.4/Microsoft.Net.Http.Headers.xml",
+        "lib/net451/Microsoft.Net.Http.Headers.dll",
+        "lib/net451/Microsoft.Net.Http.Headers.xml",
+        "Microsoft.Net.Http.Headers.1.0.0-rc2-16091.nupkg",
+        "Microsoft.Net.Http.Headers.1.0.0-rc2-16091.nupkg.sha512",
+        "Microsoft.Net.Http.Headers.nuspec"
+      ]
+    },
+    "System.Text.Encodings.Web/4.0.0-rc2-23622": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "3U8Y9x6X5SkefU2qyS7wOfOV1qC+adeNwChMI2tzW0kLe0VAsMJVDTu2q/bvgGPm+diriV5EKX5xUwPWLQ6AFQ==",
+      "files": [
+        "lib/dotnet5.1/System.Text.Encodings.Web.dll",
+        "System.Text.Encodings.Web.4.0.0-rc2-23622.nupkg",
+        "System.Text.Encodings.Web.4.0.0-rc2-23622.nupkg.sha512",
+        "System.Text.Encodings.Web.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [],
+    ".NETFramework,Version=v4.5.1": [
+      "Microsoft.AspNet.Http >= 1.0.0-*",
+      "fx/System.Web "
+    ]
+  }
+}

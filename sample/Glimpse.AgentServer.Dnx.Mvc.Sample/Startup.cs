@@ -17,7 +17,7 @@ namespace Glimpse.AgentServer.Dnx.Mvc.Sample
         public Startup()
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("\nGLIMPSE AGENT+SERVER (MVC) RUNNING ON PORT 5000");
+            Console.WriteLine("\nGLIMPSE AGENT+SERVER (MVC) RUNNING ON PORT 5100");
             Console.WriteLine("===============================================\n");
             Console.ResetColor();
         }
@@ -135,6 +135,16 @@ namespace Glimpse.AgentServer.Dnx.Mvc.Sample
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
+        }
+
+        public static void Main(string[] args)
+        {
+            var application = new WebApplicationBuilder()
+                .UseConfiguration(WebApplicationConfiguration.GetDefault(args))
+                .UseStartup<Startup>()
+                .Build();
+
+            application.Run();
         }
     }
 }

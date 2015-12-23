@@ -2,7 +2,7 @@ using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.OptionsModel;
+using Microsoft.Extensions.Options;
 using Glimpse.Agent;
 using Glimpse.Agent.Configuration;
 using Glimpse.Agent.Inspectors;

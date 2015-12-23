@@ -2,7 +2,7 @@
 using Glimpse.Agent;
 using Glimpse.Initialization;
 using Microsoft.AspNet.Builder;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse.Agent.Dnx.Sample
@@ -16,9 +16,7 @@ namespace Glimpse.Agent.Dnx.Sample
             Console.WriteLine("==================================\n");
             Console.ResetColor();
         }
-
-        public IConfiguration Configuration { get; set; }
-
+        
         public void ConfigureServices(IServiceCollection services)
         {
             /* Example of how to use fixed provider
@@ -49,6 +47,16 @@ namespace Glimpse.Agent.Dnx.Sample
             app.UseGlimpse();
 
             app.UseWelcomePage();
+        }
+
+        public static void Main(string[] args)
+        {
+            var application = new WebApplicationBuilder()
+                .UseConfiguration(WebApplicationConfiguration.GetDefault(args))
+                .UseStartup<Startup>()
+                .Build();
+
+            application.Run();
         }
     }
 }

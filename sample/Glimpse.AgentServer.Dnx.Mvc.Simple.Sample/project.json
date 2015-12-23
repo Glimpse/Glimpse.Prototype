@@ -1,28 +1,28 @@
 ﻿{
-  "commands": {
-    "web": "Microsoft.AspNet.Hosting server=Microsoft.AspNet.Server.WebListener server.urls=http://localhost:5000",
-    "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:5000"
-  },
+  "version": "1.0.0-*",
   "dependencies": {
     "Glimpse.Agent.Dnx": "",
     "Glimpse.Agent.Dnx.Mvc": "",
     "Glimpse.Server.Dnx": "",
+    "Microsoft.AspNet.Hosting": "1.0.0-*",
     "Microsoft.AspNet.Mvc": "6.0.0-*",
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-*",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-*"
   },
-  "exclude": [
-    "wwwroot"
-  ],
   "frameworks": {
     "dnx451": { },
     "dnxcore50": { }
   },
+  "exclude": "wwwroot/**/*.*",
   "packExclude": [
     "**.kproj",
     "**.user",
     "**.vspscc"
   ],
-  "version": "1.0.0-*",
-  "webroot": "wwwroot"
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
+  "commands": {
+    "web": "Glimpse.AgentServer.Dnx.Mvc.Simple.Sample"
+  }
 }

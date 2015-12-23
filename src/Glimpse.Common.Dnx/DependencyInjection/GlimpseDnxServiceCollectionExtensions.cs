@@ -1,5 +1,8 @@
 ﻿using Glimpse.Common.Initialization;
 using Glimpse.Platform;
+using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Http.Internal;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.PlatformAbstractions;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -19,6 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton(PlatformServices.Default.AssemblyLoadContextAccessor);
             services.AddSingleton(PlatformServices.Default.AssemblyLoaderContainer);
             services.AddSingleton(PlatformServices.Default.LibraryManager);
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IAssemblyProvider, LibraryManagerAssemblyProvider>();
             services.AddSingleton<IExtensionProvider<IRegisterMiddleware>, DefaultExtensionProvider<IRegisterMiddleware>>();
             

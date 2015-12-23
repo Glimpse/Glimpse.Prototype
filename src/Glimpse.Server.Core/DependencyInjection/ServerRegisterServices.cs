@@ -9,7 +9,7 @@ using Glimpse.Server.Storage;
 using Glimpse.Platform;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.OptionsModel;
+using Microsoft.Extensions.Options;
 
 namespace Glimpse.DependencyInjection
 {

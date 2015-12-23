@@ -3,7 +3,7 @@ using System.Linq;
 using Glimpse.Server.Internal;
 using Glimpse.Internal.Extensions;
 using Microsoft.AspNet.Http;
-using Microsoft.Extensions.OptionsModel;
+using Microsoft.Extensions.Options;
 
 namespace Glimpse.Server.Configuration
 {
