@@ -12,6 +12,8 @@ namespace Glimpse.AgentServer.SystemWeb.Mvc.Sample
     {
         protected void Application_Start()
         {
+            Glimpse.Start();
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
