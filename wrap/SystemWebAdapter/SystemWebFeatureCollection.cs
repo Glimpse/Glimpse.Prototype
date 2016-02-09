@@ -214,6 +214,12 @@ namespace SystemWebAdapter
             set { }
         }
 
+        bool IHttpConnectionFeature.IsLocal
+        {
+            get { return false; }
+            set { }
+        }
+
         // IHttpRequestIdentifierFeature
         string IHttpRequestIdentifierFeature.TraceIdentifier
         {
