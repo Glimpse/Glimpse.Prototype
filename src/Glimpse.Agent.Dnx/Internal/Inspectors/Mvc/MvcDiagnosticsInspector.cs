@@ -363,7 +363,7 @@ namespace Glimpse.Agent.Internal.Inspectors
                 ComponentDisplayName = viewComponentContext.ViewComponentDescriptor.FullName,
                 ComponentName = viewComponentContext.ViewComponentDescriptor.ShortName,
                 ComponentStartTime = startDateTime,
-                Arguments = viewComponentContext.Arguments?.Select(x => new ArgumentData { Type = TypeNameHelper.GetTypeDisplayName(x, false), TypeFullName = TypeNameHelper.GetTypeDisplayName(x), Name = null, Value = SanitizeUserObjectsHelper.GetSafeObject(x) }).ToList()
+                Arguments = viewComponentContext.Arguments?.Select(x => new ArgumentData { Type = TypeNameHelper.GetTypeDisplayName(x.Value, false), TypeFullName = TypeNameHelper.GetTypeDisplayName(x.Value), Name = null, Value = SanitizeUserObjectsHelper.GetSafeObject(x.Value) }).ToList()
             };
             
             _broker.BeginLogicalOperation(message, startDateTime);

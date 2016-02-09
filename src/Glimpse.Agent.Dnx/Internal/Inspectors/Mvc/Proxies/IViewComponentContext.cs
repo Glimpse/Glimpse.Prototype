@@ -1,9 +1,11 @@
-﻿namespace Glimpse.Agent.Internal.Inspectors.Mvc.Proxies
+﻿using System.Collections.Generic;
+
+namespace Glimpse.Agent.Internal.Inspectors.Mvc.Proxies
 {
     public interface IViewComponentContext
     {
         IViewComponentDescriptor ViewComponentDescriptor { get; }
 
-        object[] Arguments { get; }
+        IDictionary<string, object> Arguments { get; }
     }
 }
