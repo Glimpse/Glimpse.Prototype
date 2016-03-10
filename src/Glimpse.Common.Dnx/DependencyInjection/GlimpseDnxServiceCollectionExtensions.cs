@@ -19,9 +19,9 @@ namespace Microsoft.Extensions.DependencyInjection
             //
             // Platform
             //
-            services.AddSingleton(PlatformServices.Default.AssemblyLoadContextAccessor);
-            services.AddSingleton(PlatformServices.Default.AssemblyLoaderContainer);
-            services.AddSingleton(PlatformServices.Default.LibraryManager);
+            services.AddSingleton(DnxPlatformServices.Default.AssemblyLoadContextAccessor);
+            services.AddSingleton(DnxPlatformServices.Default.AssemblyLoaderContainer);
+            services.AddSingleton(DnxPlatformServices.Default.LibraryManager);
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IAssemblyProvider, LibraryManagerAssemblyProvider>();
             services.AddSingleton<IExtensionProvider<IRegisterMiddleware>, DefaultExtensionProvider<IRegisterMiddleware>>();
