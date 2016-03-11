@@ -24,15 +24,11 @@ namespace Glimpse.Agent.Internal.Inspectors
 
             var message = new BeginRequestMessage
             {
-                RequestUrl = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}", // TODO: check if there is a better way of doing this
-                RequestPath = request.Path,
-                RequestQueryString = request.QueryString.Value,
-                RequestMethod = request.Method,
-                RequestHeaders = request.Headers.ToDictionary(h => h.Key, h => h.Value),
-                RequestContentLength = request.ContentLength,
-                RequestContentType = request.ContentType,
-                RequestStartTime = requestDateTime,
-                RequestIsAjax = isAjax == "true"
+                Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}", // TODO: check if there is a better way of doing this
+                Method = request.Method,
+                Headers = request.Headers.ToDictionary(h => h.Key, h => h.Value),
+                StartTime = requestDateTime,
+                IsAjax = isAjax == "true"
             };
 
             _broker.StartOffsetOperation();
@@ -82,25 +78,22 @@ namespace Glimpse.Agent.Internal.Inspectors
             var request = httpContext.Request;
             var response = httpContext.Response;
             
-            message.RequestUrl = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}"; // TODO: check if there is a better way of doing this
-            message.RequestPath = request.Path;
-            message.RequestQueryString = request.QueryString.Value;
-            message.ResponseHeaders = response.Headers.ToDictionary(h => h.Key, h => h.Value);
-            message.ResponseContentLength = response.ContentLength;
-            message.ResponseContentType = response.ContentType;
-            message.ResponseStatusCode = response.StatusCode;
+            message.Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}"; // TODO: check if there is a better way of doing this
+            message.Headers = response.Headers.ToDictionary(h => h.Key, h => h.Value);
+            message.ContentType = response.ContentType;
+            message.StatusCode = response.StatusCode;
 
             // in this case still want to publish but setting duration to 0
             var timing = _broker.EndLogicalOperation<BeginRequestMessage>();
             if (timing != null)
             {
-                message.ResponseDuration = Math.Round(timing.Elapsed.TotalMilliseconds, 2);
-                message.ResponseEndTime = timing.End.ToUniversalTime();
+                message.Duration = Math.Round(timing.Elapsed.TotalMilliseconds, 2);
+                message.EndTime = timing.End.ToUniversalTime();
             }
             else
             {
-                message.ResponseDuration = 0.0;
-                message.ResponseEndTime = DateTime.UtcNow;
+                message.Duration = 0.0;
+                message.EndTime = DateTime.UtcNow;
 
                 _logger.LogCritical("ProcessEndRequest: Still published `EndRequestMessage` but couldn't find `BeginRequestMessage` in stack");
             }

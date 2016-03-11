@@ -7,25 +7,19 @@ namespace Glimpse.Agent.Messages
     public class EndRequestMessage
     {
         [PromoteToUrl]
-        public string RequestUrl { get; set; }
-
-        public string RequestPath { get; set; }
-
-        public string RequestQueryString { get; set; }
-
-        public long? ResponseContentLength { get; set; }
+        public string Url { get; set; }
 
         [PromoteToContentType]
-        public string ResponseContentType { get; set; }
+        public string ContentType { get; set; }
 
         [PromoteToStatusCode]
-        public int ResponseStatusCode { get; set; }
+        public int StatusCode { get; set; }
 
-        public IReadOnlyDictionary<string, StringValues> ResponseHeaders { get; set; }
+        public IReadOnlyDictionary<string, StringValues> Headers { get; set; }
 
         [PromoteToDuration]
-        public double? ResponseDuration { get; set; }
+        public double? Duration { get; set; }
 
-        public DateTime ResponseEndTime { get; set; }
+        public DateTime EndTime { get; set; }
     }
 }

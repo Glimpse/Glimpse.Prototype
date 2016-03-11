@@ -7,24 +7,16 @@ namespace Glimpse.Agent.Messages
     public class BeginRequestMessage
     {
         [PromoteToUrl]
-        public string RequestUrl { get; set; }
-
-        public string RequestPath { get; set; }
-
-        public string RequestQueryString { get; set; }
+        public string Url { get; set; }
 
         [PromoteToMethod]
-        public string RequestMethod { get; set; }
+        public string Method { get; set; }
 
-        public IReadOnlyDictionary<string, StringValues> RequestHeaders { get; set; }
-
-        public long? RequestContentLength { get; set; }
-
-        public string RequestContentType { get; set; }
+        public IReadOnlyDictionary<string, StringValues> Headers { get; set; }
 
         [PromoteToDateTime]
-        public DateTime RequestStartTime { get; set; }
+        public DateTime StartTime { get; set; }
 
-        public bool RequestIsAjax { get; set; }
+        public bool IsAjax { get; set; }
     }
 }
