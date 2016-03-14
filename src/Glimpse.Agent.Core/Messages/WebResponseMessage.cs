@@ -4,7 +4,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Glimpse.Agent.Messages
 {
-    public class EndRequestMessage
+    public class WebResponseMessage
     {
         [PromoteToUrl]
         public string Url { get; set; }

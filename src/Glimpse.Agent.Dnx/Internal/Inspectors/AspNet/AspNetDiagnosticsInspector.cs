@@ -22,7 +22,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             var isAjax = StringValues.Empty;
             httpContext.Request.Headers.TryGetValue("__glimpse-isAjax", out isAjax);
 
-            var message = new BeginRequestMessage
+            var message = new WebRequestMessage
             {
                 Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}", // TODO: check if there is a better way of doing this
                 Method = request.Method,
@@ -39,7 +39,7 @@ namespace Glimpse.Agent.Internal.Inspectors
         [DiagnosticName("Microsoft.AspNet.Hosting.EndRequest")]
         public void OnEndRequest(HttpContext httpContext)
         {
-            var message = new EndRequestMessage();
+            var message = new WebResponseMessage();
             ProcessEndRequest(message, httpContext);
 
             _broker.SendMessage(message);
@@ -73,7 +73,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             _broker.SendMessage(message);
         }
 
-        private void ProcessEndRequest(EndRequestMessage message, HttpContext httpContext)
+        private void ProcessEndRequest(WebResponseMessage message, HttpContext httpContext)
         {
             var request = httpContext.Request;
             var response = httpContext.Response;
@@ -84,7 +84,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             message.StatusCode = response.StatusCode;
 
             // in this case still want to publish but setting duration to 0
-            var timing = _broker.EndLogicalOperation<BeginRequestMessage>();
+            var timing = _broker.EndLogicalOperation<WebRequestMessage>();
             if (timing != null)
             {
                 message.Duration = Math.Round(timing.Elapsed.TotalMilliseconds, 2);
@@ -95,7 +95,7 @@ namespace Glimpse.Agent.Internal.Inspectors
                 message.Duration = 0.0;
                 message.EndTime = DateTime.UtcNow;
 
-                _logger.LogCritical("ProcessEndRequest: Still published `EndRequestMessage` but couldn't find `BeginRequestMessage` in stack");
+                _logger.LogCritical("ProcessEndRequest: Still published `WebResponseMessage` but couldn't find `WebRequestMessage` in stack");
             }
         }
 
