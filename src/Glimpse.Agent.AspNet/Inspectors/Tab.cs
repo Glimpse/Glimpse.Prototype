@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using Glimpse.Agent.AspNet.Messages;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Http.Internal;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace Glimpse.Agent.Inspectors
 {
@@ -16,9 +17,9 @@ namespace Glimpse.Agent.Inspectors
             {
                 if (_broker == null)
                 {
-                    // TODO: this doesn't work
                     var httpContextAccessor = new HttpContextAccessor();
-                    _broker = httpContextAccessor.HttpContext.ApplicationServices.GetService<IAgentBroker>();
+                    var requestServicesFeature = httpContextAccessor.HttpContext.Features.Get<IServiceProvidersFeature>();
+                    _broker = requestServicesFeature.RequestServices.GetService<IAgentBroker>();
                 }
 
                 return _broker;

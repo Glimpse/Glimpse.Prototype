@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using Glimpse.Server;
-using Microsoft.AspNet.Http;
-using Microsoft.Extensions.OptionsModel;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 
 namespace Glimpse.Server.Configuration
 {

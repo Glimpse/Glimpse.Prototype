@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Concurrency;
@@ -8,8 +8,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Glimpse.Server.Internal.Extensions;
 using Glimpse.Server.Resources;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Http.Features;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace Glimpse.Server.Internal.Resources
 {

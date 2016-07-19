@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Glimpse.Internal;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
 
-namespace Glimpse.AspNet.Sample
+namespace Glimpse.AgentServer.AspNet.Sample
 {
     public class SamplePage
     {

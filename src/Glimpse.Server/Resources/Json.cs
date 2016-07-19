@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Glimpse.Internal.Extensions;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace Glimpse.Server.Resources

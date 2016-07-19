@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Glimpse.Server.Internal.Extensions;
 using Glimpse.Server.Resources;
 using Glimpse.Server.Storage;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 
 namespace Glimpse.Server.Internal.Resources
 {

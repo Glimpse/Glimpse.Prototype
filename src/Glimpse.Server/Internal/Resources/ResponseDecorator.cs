@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Glimpse.Server.Resources;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 
 namespace Glimpse.Server.Internal.Resources
 {

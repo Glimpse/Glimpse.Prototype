@@ -1,17 +1,39 @@
-﻿{
-    "version": "1.0.0-*",
-    "packExclude": [
-        "**.kproj",
-        "**.user",
-        "**.vspscc"
-    ],
-    "resource": [ "Resources" ],
-    "dependencies": {
-        "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-*",
-        "Microsoft.AspNet.StaticFiles": "1.0.0-*"
-    },
-    "frameworks": {
-        "dnx451": { },
-        "dnxcore50": { }
+{
+  "version": "1.0.0-*",
+  "packExclude": [
+    "**.kproj",
+    "**.user",
+    "**.vspscc"
+  ],
+  "dependencies": {
+    "Microsoft.Extensions.FileProviders.Embedded": "1.0.0",
+    "Microsoft.AspNetCore.StaticFiles": "1.0.0"
+  },
+  "frameworks": {
+    "net452": {},
+    "netstandard1.5": {
+      "imports": [
+        "dnxcore50",
+        "portable-net45+win8"
+      ],
+      "dependencies": {
+        "NETStandard.Library": "1.5.0-rc2-24027"
+      }
     }
+  },
+  "buildOptions": {
+    "preserveCompilationContext": true,
+    "embed": {
+      "include": [
+        "Resources"
+      ]
+    },
+    "copyToOutput": {
+      "include": []
+    }
+  },
+  "publishOptions": {
+    "include": []
+  },
+  "tools": {}
 }

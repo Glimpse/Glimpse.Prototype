@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
+using System;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse.Server.AspNet.Sample

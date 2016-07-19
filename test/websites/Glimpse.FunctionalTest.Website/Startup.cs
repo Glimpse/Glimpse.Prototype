@@ -1,7 +1,7 @@
-﻿using System.Diagnostics.Tracing;
+using System.Diagnostics.Tracing;
 using Glimpse.Agent;
 using Glimpse.Server;
-using Microsoft.AspNet.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse.FunctionalTest.Website

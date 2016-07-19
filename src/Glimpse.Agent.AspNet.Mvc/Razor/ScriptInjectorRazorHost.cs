@@ -1,14 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNet.Mvc.Razor;
-using Microsoft.AspNet.Mvc.Razor.Directives;
-using Microsoft.AspNet.Razor.Chunks;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.Razor.Directives;
+using Microsoft.AspNetCore.Razor.Chunks;
+using Microsoft.AspNetCore.Razor.Compilation.TagHelpers;
 
 namespace Glimpse.Agent.Razor
 {
     public class ScriptInjectorRazorHost : MvcRazorHost
     {
-        public ScriptInjectorRazorHost(IChunkTreeCache codeTreeCache) : base(codeTreeCache)
+        public ScriptInjectorRazorHost(IChunkTreeCache codeTreeCache, ITagHelperDescriptorResolver resolver) 
+            : base(codeTreeCache, resolver)
         {
         }
 

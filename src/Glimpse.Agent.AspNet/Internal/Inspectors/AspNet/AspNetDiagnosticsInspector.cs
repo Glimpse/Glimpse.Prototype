@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Linq;
 using Glimpse.Agent.Messages;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DiagnosticAdapter;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;

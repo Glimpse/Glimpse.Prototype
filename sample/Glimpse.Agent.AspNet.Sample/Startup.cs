@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using Glimpse.Agent;
 using Glimpse.Initialization;
-using Microsoft.AspNet.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Glimpse.Agent.Sample
+namespace Glimpse.Agent.AspNet.Sample
 {
     public class Startup
     {

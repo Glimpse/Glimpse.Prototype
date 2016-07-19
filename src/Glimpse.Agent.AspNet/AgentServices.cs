@@ -6,7 +6,7 @@ using Glimpse.Agent.Internal.Messaging;
 using Glimpse.Agent.Configuration;
 using Glimpse.Agent.Inspectors;
 using Glimpse.Initialization;
-using Microsoft.Extensions.OptionsModel;
+using Microsoft.Extensions.Options;
 using System.Linq;
 using Glimpse.Agent.Internal.Inspectors;
 using Microsoft.Extensions.Configuration;
@@ -63,12 +63,13 @@ namespace Glimpse
         private void RegisterPublisher(GlimpseServiceCollectionBuilder services)
         {
             var configurationBuilder = new ConfigurationBuilder();
-            var path = Path.Combine(configurationBuilder.GetBasePath(), "glimpse.json");
+            var fileProvider = configurationBuilder.GetFileProvider();
 
-            if (File.Exists(path))
+            if (fileProvider.GetFileInfo("glimpse.json").Exists)
             {
                 var configuration = configurationBuilder.AddJsonFile("glimpse.json").Build();
-                services.Configure<ResourceOptions>(configuration.GetSection("resources"));
+                var section = configuration.GetSection("resources");
+                services.Configure<ResourceOptions>(section);
 
                 services.Replace(new ServiceDescriptor(typeof(IMessagePublisher), typeof(HttpMessagePublisher), ServiceLifetime.Transient));
             }

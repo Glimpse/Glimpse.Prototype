@@ -1,16 +1,28 @@
-﻿{
-  "compilationOptions": {
-    "warningsAsErrors": "true"
+{
+  "buildOptions": {
+    "warningsAsErrors": true
   },
   "dependencies": {
-    "Glimpse.FunctionalTest.Website": "",
-    "Microsoft.AspNet.TestHost": "1.0.0-*",
-    "xunit.runner.aspnet": "2.0.0-aspnet-*"
+    "dotnet-test-xunit": "2.2.0-*",
+    //"Glimpse.FunctionalTest.Website": "1.0.0-*",
+    "Microsoft.AspNetCore.TestHost": "1.0.0",
+    "Moq": "4.6.25-*",
+    "xunit": "2.2.0-*"
   },
-    "commands": {
-        "test": "xunit.runner.aspnet"
+  "testRunner": "xunit",
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": "dotnet5.4",
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0",
+          "type": "platform"
+        },
+        "System.Diagnostics.TraceSource": "4.0.0"
+      }
     },
-    "frameworks": {
-        "dnx451": { }
+    "net451": {
+      "dependencies": {}
     }
+  }
 }

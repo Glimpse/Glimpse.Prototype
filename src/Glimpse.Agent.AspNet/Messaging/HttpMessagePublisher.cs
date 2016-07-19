@@ -10,6 +10,16 @@ using Glimpse.Initialization;
 
 namespace Glimpse.Agent
 {
+    public static class HttpClientExtensions
+    {
+        public static Task<HttpResponseMessage> PostAsJsonAsync<T>(this HttpClient client, string requestUri, T value)
+        {
+            // TODO: Need to get this working.
+            return null;
+        }
+    }
+
+
     public class HttpMessagePublisher : IMessagePublisher, IDisposable
     {
         private readonly ISubject<IMessage> _listenerSubject;

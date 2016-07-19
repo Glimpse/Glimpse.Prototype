@@ -1,12 +1,12 @@
-﻿ // ReSharper disable RedundantUsingDirective
+ // ReSharper disable RedundantUsingDirective
 using System;
 // ReSharper restore RedundantUsingDirective
 using System.Collections.Generic;
 using System.Reflection;
 using Glimpse.Server.Resources;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.FileProviders;
-using Microsoft.AspNet.StaticFiles;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.StaticFiles;
 
 namespace Glimpse.Server.Internal.Resources
 {

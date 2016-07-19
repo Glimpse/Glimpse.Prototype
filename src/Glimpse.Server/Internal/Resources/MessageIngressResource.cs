@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Glimpse.Common.Internal.Serialization;
 using Glimpse.Server.Resources;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace Glimpse.Server.Internal.Resources

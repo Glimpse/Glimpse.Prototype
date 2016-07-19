@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Glimpse.Agent.Internal.Inspectors.Mvc.Proxies;
 using Glimpse.Agent.Messages;
 using Glimpse.Internal;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DiagnosticAdapter;
 using Microsoft.Extensions.Logging;
 

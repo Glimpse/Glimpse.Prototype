@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Builder;
+using Microsoft.AspNetCore.Builder;
 
 namespace Glimpse.Common.Initialization
 {

@@ -1,5 +1,5 @@
-﻿using Glimpse.Server;
-using Microsoft.Extensions.OptionsModel;
+using Glimpse.Server;
+using Microsoft.Extensions.Options;
 
 namespace Glimpse.Server.Configuration
 {
