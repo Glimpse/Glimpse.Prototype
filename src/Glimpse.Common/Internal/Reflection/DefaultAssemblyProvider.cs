@@ -74,7 +74,7 @@ namespace Glimpse.Internal
                 var classification = DependencyClassification.Unknown;
                 if (referenceAssemblies.Contains(library.Name))
                 {
-                    classification = DependencyClassification.MvcReference;
+                    classification = DependencyClassification.GlimpseReference;
                 }
 
                 return new Dependency(library, classification);
@@ -94,7 +94,7 @@ namespace Glimpse.Internal
                     {
                         var dependencyClassification = ComputeClassification(candidateDependency.Name);
                         if (dependencyClassification == DependencyClassification.Candidate ||
-                            dependencyClassification == DependencyClassification.MvcReference)
+                            dependencyClassification == DependencyClassification.GlimpseReference)
                         {
                             classification = DependencyClassification.Candidate;
                             break;
@@ -111,7 +111,9 @@ namespace Glimpse.Internal
             {
                 foreach (var dependency in _dependencies)
                 {
-                    if (ComputeClassification(dependency.Key) == DependencyClassification.Candidate)
+                    var classification = ComputeClassification(dependency.Key);
+                    if (classification == DependencyClassification.Candidate
+                        || classification == DependencyClassification.GlimpseReference)
                     {
                         yield return dependency.Value.Library;
                     }
@@ -141,7 +143,7 @@ namespace Glimpse.Internal
                 Unknown = 0,
                 Candidate = 1,
                 NotCandidate = 2,
-                MvcReference = 3
+                GlimpseReference = 3
             }
         }
     }
