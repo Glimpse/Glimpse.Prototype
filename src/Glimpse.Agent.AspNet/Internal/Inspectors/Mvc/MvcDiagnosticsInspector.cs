@@ -35,7 +35,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             {
                 ActionId = typedActionDescriptor.Id,
                 ActionDisplayName = typedActionDescriptor.DisplayName,
-                ActionName = typedActionDescriptor.Name,
+                ActionName = typedActionDescriptor.ActionName,
                 ActionControllerName = typedActionDescriptor.ControllerName,
                 ActionStartTime = startDateTime,
                 RouteData = routeData.Values?.ToDictionary(x => x.Key, x => x.Value?.ToString())
@@ -69,7 +69,7 @@ namespace Glimpse.Agent.Internal.Inspectors
                 var message = new AfterActionMessage()
                 {
                     ActionId = typedActionDescriptor.Id,
-                    ActionName = typedActionDescriptor.Name,
+                    ActionName = typedActionDescriptor.ActionName,
                     ActionControllerName = typedActionDescriptor.ControllerName,
                     ActionEndTime = timing.End,
                     ActionDuration = timing.Elapsed,
@@ -98,7 +98,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             {
                 ActionId = actionDescriptor.Id,
                 ActionDisplayName = actionDescriptor.DisplayName,
-                ActionName = actionDescriptor.Name,
+                ActionName = actionDescriptor.ActionName,
                 ActionControllerName = actionDescriptor.ControllerName,
                 ActionTargetClass = actionDescriptor.ControllerTypeInfo.Name,
                 ActionTargetMethod = actionDescriptor.MethodInfo.Name,
@@ -122,7 +122,7 @@ namespace Glimpse.Agent.Internal.Inspectors
                 var message = new AfterActionInvokedMessage()
                 {
                     ActionId = actionDescriptor.Id,
-                    ActionName = actionDescriptor.Name,
+                    ActionName = actionDescriptor.ActionName,
                     ActionControllerName = actionDescriptor.ControllerName,
                     ActionInvokedEndTime = timing.End,
                     ActionInvokedDuration = timing.Elapsed,
@@ -215,7 +215,7 @@ namespace Glimpse.Agent.Internal.Inspectors
 
             message.ActionId = actionDescriptor.Id;
             message.ActionDisplayName = actionDescriptor.DisplayName;
-            message.ActionName = actionDescriptor.Name;
+            message.ActionName = actionDescriptor.ActionName;
             message.ActionControllerName = actionDescriptor.ControllerName;
             message.ActionResultStartTime = startDateTime;
 
@@ -236,7 +236,7 @@ namespace Glimpse.Agent.Internal.Inspectors
                 var message = new AfterActionResultMessage()
                 {
                     ActionId = actionDescriptor.Id,
-                    ActionName = actionDescriptor.Name,
+                    ActionName = actionDescriptor.ActionName,
                     ActionControllerName = actionDescriptor.ControllerName,
                     ActionResultEndTime = timing.End,
                     ActionResultDuration = timing.Elapsed,
@@ -266,7 +266,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             var message = new ActionViewNotFoundMessage()
             {
                 ActionId = actionDescriptor.Id,
-                ActionName = actionDescriptor.Name,
+                ActionName = actionDescriptor.ActionName,
                 ActionControllerName = actionDescriptor.ControllerName,
                 ViewName = viewName,
                 ViewSearchedLocations = searchedLocations,
@@ -292,7 +292,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             var message = new ActionViewDidFoundMessage
             {
                 ActionId = actionDescriptor.Id,
-                ActionName = actionDescriptor.Name,
+                ActionName = actionDescriptor.ActionName,
                 ActionControllerName = actionDescriptor.ControllerName,
                 ViewName = viewName,
                 ViewPath = view.Path,
@@ -312,7 +312,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             var message = new BeforeActionViewInvokedMessage
             {
                 ActionId = actionDescriptor.Id,
-                ActionName = actionDescriptor.Name,
+                ActionName = actionDescriptor.ActionName,
                 ActionControllerName = actionDescriptor.ControllerName,
                 ViewPath = view.Path,
                 //ViewData = new ViewResult {      // TODO: because we switch threads, we need to make sure we get
@@ -337,7 +337,7 @@ namespace Glimpse.Agent.Internal.Inspectors
                 var message = new AfterActionViewInvokedMessage
                 {
                     ActionId = actionDescriptor.Id,
-                    ActionName = actionDescriptor.Name,
+                    ActionName = actionDescriptor.ActionName,
                     ActionControllerName = actionDescriptor.ControllerName,
                     ViewEndTime = timing.End,
                     ViewDuration = timing.Elapsed,

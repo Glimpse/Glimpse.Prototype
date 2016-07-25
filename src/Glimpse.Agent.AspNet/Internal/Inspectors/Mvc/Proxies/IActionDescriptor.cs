@@ -7,7 +7,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc.Proxies
     {
         string Id { get; }
         string DisplayName { get; }
-        string Name { get; }
+        string ActionName { get; }
         string ControllerName { get; }
         Type ControllerTypeInfo { get; }
         MethodInfo MethodInfo { get; }
