@@ -45234,7 +45234,7 @@
 	            var uri = metadata.resources['message-history']
 	                .fill({
 	                    hash: metadata.hash,
-	                    types: Object.keys(messageProcessor.getSummaryMessagesStructure())
+	                    types: Object.keys(messageProcessor.getSummaryMessagesStructure()).join('|')
 	                });
 	            
 	            request
@@ -45380,7 +45380,7 @@
 	    return {
 	        check: function(metadata) {
 	            if (!connection) {
-	                connection = createSocket(metadata, { types: Object.keys(messageProcessor.getSummaryMessagesStructure()) });
+	                connection = createSocket(metadata, { types: Object.keys(messageProcessor.getSummaryMessagesStructure()).join('|') });
 	            }
 	        }
 	    };
