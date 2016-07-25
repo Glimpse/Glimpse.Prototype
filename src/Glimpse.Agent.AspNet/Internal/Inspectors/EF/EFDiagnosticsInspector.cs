@@ -10,7 +10,7 @@ namespace Glimpse.Agent.Internal.Inspectors
 {
     public partial class WebDiagnosticsInspector
     {
-        [DiagnosticName("Microsoft.Data.Entity.BeforeExecuteCommand")]
+        [DiagnosticName("Microsoft.EntityFrameworkCore.BeforeExecuteCommand")]
         public void OnBeforeExecuteCommand(IDbCommand command, string executeMethod, bool isAsync)
         {
             var startDateTime = DateTime.UtcNow;
@@ -29,7 +29,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             _broker.SendMessage(message);
         }
 
-        [DiagnosticName("Microsoft.Data.Entity.AfterExecuteCommand")]
+        [DiagnosticName("Microsoft.EntityFrameworkCore.AfterExecuteCommand")]
         public void OnAfterExecuteCommand(IDbCommand command, string executeMethod, bool isAsync)
         {
             var timing = _broker.EndLogicalOperation<BeforeExecuteCommandMessage>();
@@ -51,7 +51,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             }
         }
 
-        [DiagnosticName("Microsoft.Data.Entity.CommandExecutionError")]
+        [DiagnosticName("Microsoft.EntityFrameworkCore.CommandExecutionError")]
         public void OnAfterExecuteCommand(IDbCommand command, string executeMethod, bool isAsync, Exception exception)
         {
             var timing = _broker.EndLogicalOperation<BeforeExecuteCommandMessage>();
