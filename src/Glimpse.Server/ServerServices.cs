@@ -36,7 +36,7 @@ namespace Glimpse
             services.AddSingleton<IAllowRemoteProvider, DefaultAllowRemoteProvider>();
             services.AddSingleton<IMetadataProvider, DefaultMetadataProvider>();
 
-            if (!services.Any(s => s.ServiceType == typeof (IMessagePublisher)))
+            if (!services.Any(s => s.ServiceType == typeof(IMessagePublisher)))
             {
                 services.AddSingleton<IMessagePublisher, InProcessPublisher>();
             }
