@@ -8,6 +8,7 @@
   "description": "This package contains common Glimpse interfaces and components, and is not intended for direct consumption.",
   "dependencies": {
     "Microsoft.AspNetCore.Hosting.Abstractions": "1.0.0",
+    "Microsoft.AspNetCore.Http": "1.0.0",
     "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
     "Microsoft.Extensions.DependencyModel": "1.0.0",
     "Microsoft.Extensions.DependencyInjection": "1.0.0",
