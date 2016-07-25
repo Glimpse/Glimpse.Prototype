@@ -20,7 +20,7 @@ namespace Glimpse.AgentServer.AspNet.Sample
 
             response.Headers[HeaderNames.ContentType] = "text/html";
 
-            await response.WriteAsync($"<html><body><h1>Agent Test</h1><script src='/Glimpse/Browser/Agent' id='glimpse' data-glimpse-id='{_context?.Value?.Id}'></script></body></html>");
+            await response.WriteAsync($"<html><body><h1>Agent Test</h1><script src='/glimpse/agent/agent.js?hash=213' id='glimpse' data-glimpse-id='{_context?.Value?.Id}'></script></body></html>");
         }
     }
 }
