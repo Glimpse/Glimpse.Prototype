@@ -1,7 +1,7 @@
 ﻿{
   "userSecretsId": "aspnet-Glimpse.AgentServer.AspNet.Mvc.Sample-dbd166cf-e778-4976-a0f5-6c3de1011986",
   "dependencies": {
-    "Glimpse.Agent.AspNet": "2.0.0-*",
+    "Glimpse.Agent.AspNet.Mvc": "2.0.0-*",
     "Glimpse.Server": "2.0.0-*",
     "Microsoft.NETCore.App": {
       "version": "1.0.0",

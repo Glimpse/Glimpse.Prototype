@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "Glimpse.Agent.AspNet": "2.0.0-*",
+    "Glimpse.Agent.AspNet.Mvc": "2.0.0-*",
     "Glimpse.Server": "2.0.0-*",
     "Microsoft.NETCore.App": {
       "version": "1.0.0",
