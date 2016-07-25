@@ -6,6 +6,8 @@ using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 using Glimpse.Internal;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Glimpse
 {
@@ -14,6 +16,11 @@ namespace Glimpse
         public static IEnumerable<ServiceDescriptor> GetDefaultServices()
         {
             var services = new ServiceCollection();
+
+            //
+            // System
+            //
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             //
             // Discovery & Reflection.
