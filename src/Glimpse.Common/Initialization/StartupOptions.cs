@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.AspNet.Builder;
+using System;
+using Microsoft.AspNetCore.Builder;
 
 namespace Glimpse.Initialization
 {

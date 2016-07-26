@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Glimpse.Server.Resources;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using Glimpse.Internal.Extensions;
 using Tavis.UriTemplates;
 

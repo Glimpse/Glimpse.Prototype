@@ -8,7 +8,7 @@ using Glimpse.Server.Resources;
 using Glimpse.Server.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.OptionsModel;
+using Microsoft.Extensions.Options;
 
 namespace Glimpse
 {
@@ -36,7 +36,7 @@ namespace Glimpse
             services.AddSingleton<IAllowRemoteProvider, DefaultAllowRemoteProvider>();
             services.AddSingleton<IMetadataProvider, DefaultMetadataProvider>();
 
-            if (!services.Any(s => s.ServiceType == typeof (IMessagePublisher)))
+            if (!services.Any(s => s.ServiceType == typeof(IMessagePublisher)))
             {
                 services.AddSingleton<IMessagePublisher, InProcessPublisher>();
             }

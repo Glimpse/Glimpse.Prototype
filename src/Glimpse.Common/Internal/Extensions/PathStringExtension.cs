@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using Microsoft.AspNet.Http;
+using System.ComponentModel;
+using Microsoft.AspNetCore.Http;
 
 namespace Glimpse.Internal.Extensions
 {

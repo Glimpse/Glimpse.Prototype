@@ -4,8 +4,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using Glimpse.Agent.Messages;
-using Microsoft.AspNet.FileProviders;
-using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Glimpse.Agent.Internal.Inspectors
 {
@@ -15,10 +15,10 @@ namespace Glimpse.Agent.Internal.Inspectors
         private static readonly bool IsMono = Type.GetType("Mono.Runtime") != null;
         private readonly IFileProvider _fileProvider;
 
-        public ExceptionProcessor(IApplicationEnvironment appEnvironment)
+        public ExceptionProcessor(IHostingEnvironment hostingEnvironment)
         {
             // TODO: Allow the user to configure which provider should be used
-            _fileProvider = new PhysicalFileProvider(appEnvironment.ApplicationBasePath);
+            _fileProvider = hostingEnvironment.ContentRootFileProvider;
         }
 
         public IEnumerable<ExceptionDetails> GetErrorDetails(Exception ex)

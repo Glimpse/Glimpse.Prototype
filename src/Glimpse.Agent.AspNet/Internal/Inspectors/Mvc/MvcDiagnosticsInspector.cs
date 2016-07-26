@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Glimpse.Agent.Internal.Inspectors.Mvc.Proxies;
 using Glimpse.Agent.Messages;
 using Glimpse.Internal;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DiagnosticAdapter;
 using Microsoft.Extensions.Logging;
 
@@ -14,18 +14,18 @@ namespace Glimpse.Agent.Internal.Inspectors
     {
         partial void MvcOnCreated()
         {
-            _proxyAdapter.Register("Microsoft.AspNet.Mvc.ViewResult");
-            _proxyAdapter.Register("Microsoft.AspNet.Mvc.ContentResult");
-            _proxyAdapter.Register("Microsoft.AspNet.Mvc.ObjectResult");
-            _proxyAdapter.Register("Microsoft.AspNet.Routing.Template.TemplateRoute");
-            _proxyAdapter.Register("Microsoft.AspNet.Mvc.Controllers.ControllerActionDescriptor");
-            _proxyAdapter.Register("Microsoft.AspNet.Mvc.Abstractions.ActionDescriptor");
-            _proxyAdapter.Register("Microsoft.AspNet.Mvc.FileResult");
+            _proxyAdapter.Register("Microsoft.AspNetCore.Mvc.ViewResult");
+            _proxyAdapter.Register("Microsoft.AspNetCore.Mvc.ContentResult");
+            _proxyAdapter.Register("Microsoft.AspNetCore.Mvc.ObjectResult");
+            _proxyAdapter.Register("Microsoft.AspNetCore.Routing.Template.TemplateRoute"); // TODO: this might have been renamed
+            _proxyAdapter.Register("Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor");
+            _proxyAdapter.Register("Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor");
+            _proxyAdapter.Register("Microsoft.AspNetCore.Mvc.FileResult");
         }
 
         // NOTE: This event is the start of the action pipeline. The action has been selected, the route
         //       has been selected but no filters have run and model binding hasn't occured.
-        [DiagnosticName("Microsoft.AspNet.Mvc.BeforeAction")]
+        [DiagnosticName("Microsoft.AspNetCore.Mvc.BeforeAction")]
         public void OnBeforeAction(object actionDescriptor, HttpContext httpContext, IRouteData routeData)
         {
             var startDateTime = DateTime.UtcNow;
@@ -35,7 +35,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             {
                 ActionId = typedActionDescriptor.Id,
                 ActionDisplayName = typedActionDescriptor.DisplayName,
-                ActionName = typedActionDescriptor.Name,
+                ActionName = typedActionDescriptor.ActionName,
                 ActionControllerName = typedActionDescriptor.ControllerName,
                 ActionStartTime = startDateTime,
                 RouteData = routeData.Values?.ToDictionary(x => x.Key, x => x.Value?.ToString())
@@ -58,7 +58,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             _broker.SendMessage(message);
         }
 
-        [DiagnosticName("Microsoft.AspNet.Mvc.AfterAction")]
+        [DiagnosticName("Microsoft.AspNetCore.Mvc.AfterAction")]
         public void OnAfterAction(object actionDescriptor, HttpContext httpContext)
         {
             var timing = _broker.EndLogicalOperation<BeforeActionMessage>();
@@ -69,7 +69,7 @@ namespace Glimpse.Agent.Internal.Inspectors
                 var message = new AfterActionMessage()
                 {
                     ActionId = typedActionDescriptor.Id,
-                    ActionName = typedActionDescriptor.Name,
+                    ActionName = typedActionDescriptor.ActionName,
                     ActionControllerName = typedActionDescriptor.ControllerName,
                     ActionEndTime = timing.End,
                     ActionDuration = timing.Elapsed,
@@ -86,7 +86,7 @@ namespace Glimpse.Agent.Internal.Inspectors
 
         // NOTE: This event is the start of the action execution. The action has been selected, the route
         //       has been selected, filters have run and model binding has occured.
-        [DiagnosticName("Microsoft.AspNet.Mvc.BeforeActionMethod")]
+        [DiagnosticName("Microsoft.AspNetCore.Mvc.BeforeActionMethod")]
         public void OnBeforeActionMethod(
             IActionContext actionContext,
             IDictionary<string, object> arguments)
@@ -98,7 +98,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             {
                 ActionId = actionDescriptor.Id,
                 ActionDisplayName = actionDescriptor.DisplayName,
-                ActionName = actionDescriptor.Name,
+                ActionName = actionDescriptor.ActionName,
                 ActionControllerName = actionDescriptor.ControllerName,
                 ActionTargetClass = actionDescriptor.ControllerTypeInfo.Name,
                 ActionTargetMethod = actionDescriptor.MethodInfo.Name,
@@ -110,7 +110,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             _broker.SendMessage(message);
         }
 
-        [DiagnosticName("Microsoft.AspNet.Mvc.AfterActionMethod")]
+        [DiagnosticName("Microsoft.AspNetCore.Mvc.AfterActionMethod")]
         public void OnAfterActionMethod(
             IActionContext actionContext)
         {
@@ -122,7 +122,7 @@ namespace Glimpse.Agent.Internal.Inspectors
                 var message = new AfterActionInvokedMessage()
                 {
                     ActionId = actionDescriptor.Id,
-                    ActionName = actionDescriptor.Name,
+                    ActionName = actionDescriptor.ActionName,
                     ActionControllerName = actionDescriptor.ControllerName,
                     ActionInvokedEndTime = timing.End,
                     ActionInvokedDuration = timing.Elapsed,
@@ -139,7 +139,7 @@ namespace Glimpse.Agent.Internal.Inspectors
 
         // NOTE: This event is the start of the result pipeline. The action has been executed, but
         //       we haven't yet determined which view (if any) will handle the request
-        [DiagnosticName("Microsoft.AspNet.Mvc.BeforeActionResult")]
+        [DiagnosticName("Microsoft.AspNetCore.Mvc.BeforeActionResult")]
         public void OnBeforeActionResult(
             IActionContext actionContext,
             object result)
@@ -155,8 +155,8 @@ namespace Glimpse.Agent.Internal.Inspectors
             var message = (BeforeActionResultMessage)null;
             switch (result.GetType().FullName)
             {
-                case "Microsoft.AspNet.Mvc.ViewResult":
-                    var viewResult = _proxyAdapter.Process<ActionResultTypes.IViewResult>("Microsoft.AspNet.Mvc.ViewResult", result);
+                case "Microsoft.AspNetCore.Mvc.ViewResult":
+                    var viewResult = _proxyAdapter.Process<ActionResultTypes.IViewResult>("Microsoft.AspNetCore.Mvc.ViewResult", result);
 
                     message = new BeforeActionViewResultMessage
                     {
@@ -166,8 +166,8 @@ namespace Glimpse.Agent.Internal.Inspectors
                     };
 
                     break;
-                case "Microsoft.AspNet.Mvc.ContentResult":
-                    var contentResult = _proxyAdapter.Process<ActionResultTypes.IContentResult>("Microsoft.AspNet.Mvc.ContentResult", result);
+                case "Microsoft.AspNetCore.Mvc.ContentResult":
+                    var contentResult = _proxyAdapter.Process<ActionResultTypes.IContentResult>("Microsoft.AspNetCore.Mvc.ContentResult", result);
 
                     message = new BeforeActionContentResultMessage
                     {
@@ -177,8 +177,8 @@ namespace Glimpse.Agent.Internal.Inspectors
                     };
 
                     break;
-                case "Microsoft.AspNet.Mvc.ObjectResult":
-                    var objectResult = _proxyAdapter.Process<ActionResultTypes.IObjectResult>("Microsoft.AspNet.Mvc.ContentResult", result);
+                case "Microsoft.AspNetCore.Mvc.ObjectResult":
+                    var objectResult = _proxyAdapter.Process<ActionResultTypes.IObjectResult>("Microsoft.AspNetCore.Mvc.ContentResult", result);
 
                     message = new BeforeActionObjectResultMessage
                     {
@@ -189,10 +189,10 @@ namespace Glimpse.Agent.Internal.Inspectors
                     };
 
                     break;
-               /* case "Microsoft.AspNet.Mvc.FileResult":
-                case "Microsoft.AspNet.Mvc.FileContentResult":
-                case "Microsoft.AspNet.Mvc.FileStreamResult":
-                    var fileResult = _proxyAdapter.Process<ActionResultTypes.IFileResult>("Microsoft.AspNet.Mvc.FileResult", result);
+               /* case "Microsoft.AspNetCore.Mvc.FileResult":
+                case "Microsoft.AspNetCore.Mvc.FileContentResult":
+                case "Microsoft.AspNetCore.Mvc.FileStreamResult":
+                    var fileResult = _proxyAdapter.Process<ActionResultTypes.IFileResult>("Microsoft.AspNetCore.Mvc.FileResult", result);
 
                     message = new BeforeActionFileResultMessage
                     {
@@ -208,14 +208,14 @@ namespace Glimpse.Agent.Internal.Inspectors
             }
 
             // TODO: Need to implement the following 
-            // https://github.com/aspnet/Mvc/blob/dev/src/Microsoft.AspNet.Mvc.Formatters.Json/JsonResult.cs
-            // https://github.com/aspnet/Mvc/blob/dev/src/Microsoft.AspNet.Mvc.Core/RedirectResult.cs
-            // https://github.com/aspnet/Mvc/blob/dev/src/Microsoft.AspNet.Mvc.Core/RedirectToRouteResult.cs
-            // https://github.com/aspnet/Mvc/blob/dev/src/Microsoft.AspNet.Mvc.Core/HttpStatusCodeResult.cs
+            // https://github.com/aspnet/Mvc/blob/dev/src/Microsoft.AspNetCore.Mvc.Formatters.Json/JsonResult.cs
+            // https://github.com/aspnet/Mvc/blob/dev/src/Microsoft.AspNetCore.Mvc.Core/RedirectResult.cs
+            // https://github.com/aspnet/Mvc/blob/dev/src/Microsoft.AspNetCore.Mvc.Core/RedirectToRouteResult.cs
+            // https://github.com/aspnet/Mvc/blob/dev/src/Microsoft.AspNetCore.Mvc.Core/HttpStatusCodeResult.cs
 
             message.ActionId = actionDescriptor.Id;
             message.ActionDisplayName = actionDescriptor.DisplayName;
-            message.ActionName = actionDescriptor.Name;
+            message.ActionName = actionDescriptor.ActionName;
             message.ActionControllerName = actionDescriptor.ControllerName;
             message.ActionResultStartTime = startDateTime;
 
@@ -223,7 +223,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             _broker.SendMessage(message);
         }
 
-        [DiagnosticName("Microsoft.AspNet.Mvc.AfterActionResult")]
+        [DiagnosticName("Microsoft.AspNetCore.Mvc.AfterActionResult")]
         public void OnAfterActionResult(
             IActionContext actionContext,
             IActionResult result)
@@ -236,7 +236,7 @@ namespace Glimpse.Agent.Internal.Inspectors
                 var message = new AfterActionResultMessage()
                 {
                     ActionId = actionDescriptor.Id,
-                    ActionName = actionDescriptor.Name,
+                    ActionName = actionDescriptor.ActionName,
                     ActionControllerName = actionDescriptor.ControllerName,
                     ActionResultEndTime = timing.End,
                     ActionResultDuration = timing.Elapsed,
@@ -254,7 +254,7 @@ namespace Glimpse.Agent.Internal.Inspectors
         // NOTE: This event is only fired when we dont find any matches at all. This executes
         //       at the end of the matching process. You will never get a ViewResultViewNotFound 
         //       and ViewResultViewFound event firing for the same view resolution.
-        [DiagnosticName("Microsoft.AspNet.Mvc.ViewNotFound")]
+        [DiagnosticName("Microsoft.AspNetCore.Mvc.ViewNotFound")]
         public void OnViewResultViewNotFound(
             IActionContext actionContext,
             ActionResultTypes.IViewResult result,
@@ -266,7 +266,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             var message = new ActionViewNotFoundMessage()
             {
                 ActionId = actionDescriptor.Id,
-                ActionName = actionDescriptor.Name,
+                ActionName = actionDescriptor.ActionName,
                 ActionControllerName = actionDescriptor.ControllerName,
                 ViewName = viewName,
                 ViewSearchedLocations = searchedLocations,
@@ -280,7 +280,7 @@ namespace Glimpse.Agent.Internal.Inspectors
         // NOTE: This event is only fired when we do find a match. This executes at the end of
         //       the matching process. You will never get a ViewResultViewNotFound and 
         //       ViewResultViewFound event firing for the same view resolution.
-        [DiagnosticName("Microsoft.AspNet.Mvc.ViewFound")]
+        [DiagnosticName("Microsoft.AspNetCore.Mvc.ViewFound")]
         public void OnViewResultViewFound(
             IActionContext actionContext,
             object result,
@@ -292,7 +292,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             var message = new ActionViewDidFoundMessage
             {
                 ActionId = actionDescriptor.Id,
-                ActionName = actionDescriptor.Name,
+                ActionName = actionDescriptor.ActionName,
                 ActionControllerName = actionDescriptor.ControllerName,
                 ViewName = viewName,
                 ViewPath = view.Path,
@@ -303,7 +303,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             _broker.SendMessage(message);
         }
 
-        [DiagnosticName("Microsoft.AspNet.Mvc.BeforeView")]
+        [DiagnosticName("Microsoft.AspNetCore.Mvc.BeforeView")]
         public void OnBeforeView(IView view, IViewContext viewContext)
         {
             var startDateTime = DateTime.UtcNow;
@@ -312,7 +312,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             var message = new BeforeActionViewInvokedMessage
             {
                 ActionId = actionDescriptor.Id,
-                ActionName = actionDescriptor.Name,
+                ActionName = actionDescriptor.ActionName,
                 ActionControllerName = actionDescriptor.ControllerName,
                 ViewPath = view.Path,
                 //ViewData = new ViewResult {      // TODO: because we switch threads, we need to make sure we get
@@ -326,7 +326,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             _broker.SendMessage(message);
         }
 
-        [DiagnosticName("Microsoft.AspNet.Mvc.AfterView")]
+        [DiagnosticName("Microsoft.AspNetCore.Mvc.AfterView")]
         public void OnAfterView(IView view, IViewContext viewContext)
         {
             var timing = _broker.EndLogicalOperation<BeforeActionViewInvokedMessage>();
@@ -337,7 +337,7 @@ namespace Glimpse.Agent.Internal.Inspectors
                 var message = new AfterActionViewInvokedMessage
                 {
                     ActionId = actionDescriptor.Id,
-                    ActionName = actionDescriptor.Name,
+                    ActionName = actionDescriptor.ActionName,
                     ActionControllerName = actionDescriptor.ControllerName,
                     ViewEndTime = timing.End,
                     ViewDuration = timing.Elapsed,
@@ -352,7 +352,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             }
         }
         
-        [DiagnosticName("Microsoft.AspNet.Mvc.BeforeViewComponent")]
+        [DiagnosticName("Microsoft.AspNetCore.Mvc.BeforeViewComponent")]
         public void OnBeforeViewComponent(IViewComponentContext viewComponentContext)
         {
             var startDateTime = DateTime.UtcNow;
@@ -370,7 +370,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             _broker.SendMessage(message);
         }
 
-        [DiagnosticName("Microsoft.AspNet.Mvc.AfterViewComponent")]
+        [DiagnosticName("Microsoft.AspNetCore.Mvc.AfterViewComponent")]
         public void OnAfterViewComponent(IViewComponentContext viewComponentContext)
         {
             var timing = _broker.EndLogicalOperation<BeforeViewComponentMessage>();
@@ -402,11 +402,11 @@ namespace Glimpse.Agent.Internal.Inspectors
             //       we use a lot.
             switch (actionDescriptor.GetType().FullName)
             {
-                case "Microsoft.AspNet.Mvc.Controllers.ControllerActionDescriptor":
-                    typedActionDescriptor = _proxyAdapter.Process<IActionDescriptor>("Microsoft.AspNet.Mvc.Controllers.ControllerActionDescriptor", actionDescriptor);
+                case "Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor":
+                    typedActionDescriptor = _proxyAdapter.Process<IActionDescriptor>("Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor", actionDescriptor);
                     break;
-                case "Microsoft.AspNet.Mvc.Abstractions.ActionDescriptor":
-                    typedActionDescriptor = _proxyAdapter.Process<IActionDescriptor>("Microsoft.AspNet.Mvc.Abstractions.ActionDescriptor", actionDescriptor);
+                case "Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor":
+                    typedActionDescriptor = _proxyAdapter.Process<IActionDescriptor>("Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor", actionDescriptor);
                     break;
             }
 

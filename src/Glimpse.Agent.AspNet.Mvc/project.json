@@ -1,25 +1,45 @@
-﻿{
+{
   "version": "2.0.0-*",
-  "authors": [ "nmolnar", "avanderhoorn" ],
-  "owners": [ "nmolnar", "avanderhoorn" ],
+  "authors": [
+    "nmolnar",
+    "avanderhoorn"
+  ],
   "title": "Glimpse Agent for ASP.NET MVC",
-  "licenseUrl": "https://github.com/Glimpse/Glimpse.Prototype/blob/dev/LICENSE.txt",
-  "projectUrl": "http://getglimpse.com",
-  "iconUrl": "http://getglimpse.com/content/glimpse100.png",
-  "requireLicenseAcceptance": false,
   "description": "This package contains Razor helpers to inject Glimpse into web applications.",
-  "summary": "Glimpse.Agent.AspNet.Mvc contains Razor helpers to inject Glimpse into web applications.",
-  "releaseNotes": "Initial release of Glimpse.Agent.AspNet.Mvc.",
-  "tags": [ "ASP.NET", "Web", "Debugging", "Diagnostics", "Razor" ],
-
   "dependencies": {
-    "Glimpse.Agent.AspNet": "",
-    "Microsoft.AspNet.Mvc.Razor.Host": "6.0.0-rc1-final",
-    "Microsoft.AspNet.Razor": "4.0.0-rc1-final"
+    "Glimpse.Agent.AspNet": "2.0.0-*",
+    "Microsoft.AspNetCore.Mvc.Razor.Host": "1.0.0",
+    "Microsoft.AspNetCore.Razor": "1.0.0"
   },
-
   "frameworks": {
-    "net451": { },
-    "dotnet5.4": { }
+    "net451": {
+      "dependencies": {}
+    },
+    "netstandard1.6": {
+      "dependencies": {}
+    }
+  },
+  "buildOptions": {
+    "preserveCompilationContext": true
+  },
+  "packOptions": {
+    "iconUrl": "http://getglimpse.com/content/glimpse100.png",
+    "licenseUrl": "https://github.com/Glimpse/Glimpse.Prototype/blob/dev/LICENSE.txt",
+    "owners": [
+      "avanderhoorn",
+      "nmolnar"
+    ],
+    "projectUrl": "http://getglimpse.com",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Glimpse/Glimpse.Prototype"
+    },
+    "tags": [
+      "ASP.NET",
+      "Web",
+      "Debugging",
+      "Diagnostics",
+      "Razor"
+    ]
   }
 }

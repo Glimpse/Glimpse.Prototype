@@ -1,5 +1,5 @@
-﻿using Glimpse.Common.Initialization;
-using Microsoft.AspNet.Builder;
+using Glimpse.Common.Initialization;
+using Microsoft.AspNetCore.Builder;
 
 namespace Glimpse.Server
 {

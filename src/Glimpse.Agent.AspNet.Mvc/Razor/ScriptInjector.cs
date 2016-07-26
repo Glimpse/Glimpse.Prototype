@@ -1,7 +1,7 @@
 using System;
 using Glimpse.Common;
 using Glimpse.Initialization;
-using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Glimpse.Agent.Razor
 {

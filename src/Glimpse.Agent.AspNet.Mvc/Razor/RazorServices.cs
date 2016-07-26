@@ -1,6 +1,6 @@
 using Glimpse.Agent.Razor;
 using Glimpse.Common.Initialization;
-using Microsoft.AspNet.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Glimpse.Agent.AspNet.Mvc.Razor

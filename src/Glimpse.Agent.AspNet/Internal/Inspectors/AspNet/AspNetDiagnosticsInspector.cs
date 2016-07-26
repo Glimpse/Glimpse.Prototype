@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Linq;
 using Glimpse.Agent.Messages;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DiagnosticAdapter;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
@@ -10,7 +10,7 @@ namespace Glimpse.Agent.Internal.Inspectors
 {
     public partial class WebDiagnosticsInspector
     {
-        [DiagnosticName("Microsoft.AspNet.Hosting.BeginRequest")]
+        [DiagnosticName("Microsoft.AspNetCore.Hosting.BeginRequest")]
         public void OnBeginRequest(HttpContext httpContext)
         {
             // TODO: Not sure if this is where this should live but it's the earlist hook point we have
@@ -40,7 +40,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             _broker.SendMessage(message);
         }
 
-        [DiagnosticName("Microsoft.AspNet.Hosting.EndRequest")]
+        [DiagnosticName("Microsoft.AspNetCore.Hosting.EndRequest")]
         public void OnEndRequest(HttpContext httpContext)
         {
             var message = new EndRequestMessage();
@@ -49,7 +49,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             _broker.SendMessage(message);
         }
         
-        [DiagnosticName("Microsoft.AspNet.Hosting.UnhandledException")]
+        [DiagnosticName("Microsoft.AspNetCore.Hosting.UnhandledException")]
         public void OnHostingUnhandledException(HttpContext httpContext, Exception exception)
         {
             var message = new HostingExceptionMessage();
@@ -59,7 +59,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             _broker.SendMessage(message);
         }
 
-        [DiagnosticName("Microsoft.AspNet.Diagnostics.UnhandledException")]
+        [DiagnosticName("Microsoft.AspNetCore.Diagnostics.UnhandledException")]
         public void OnDiagnosticsUnhandledException(HttpContext httpContext, Exception exception)
         {
             var message = new DiagnosticsExceptionMessage();
@@ -68,7 +68,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             _broker.SendMessage(message);
         }
 
-        [DiagnosticName("Microsoft.AspNet.Diagnostics.HandledException")]
+        [DiagnosticName("Microsoft.AspNetCore.Diagnostics.HandledException")]
         public void OnDiagnosticsHandledException(HttpContext httpContext, Exception exception)
         {
             var message = new DiagnosticsExceptionMessage();

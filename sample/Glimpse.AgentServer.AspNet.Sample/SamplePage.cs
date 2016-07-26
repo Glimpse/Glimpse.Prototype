@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Glimpse.Internal;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
 
-namespace Glimpse.AspNet.Sample
+namespace Glimpse.AgentServer.AspNet.Sample
 {
     public class SamplePage
     {
@@ -20,7 +20,7 @@ namespace Glimpse.AspNet.Sample
 
             response.Headers[HeaderNames.ContentType] = "text/html";
 
-            await response.WriteAsync($"<html><body><h1>Agent Test</h1><script src='/Glimpse/Browser/Agent' id='glimpse' data-glimpse-id='{_context?.Value?.Id}'></script></body></html>");
+            await response.WriteAsync($"<html><body><h1>Agent Test</h1><script src='/glimpse/agent/agent.js?hash=213' id='glimpse' data-glimpse-id='{_context?.Value?.Id}'></script></body></html>");
         }
     }
 }

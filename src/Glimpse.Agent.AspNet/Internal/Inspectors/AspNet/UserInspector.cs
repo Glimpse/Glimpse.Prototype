@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.Globalization;
 using System.Text;
 using Glimpse.Agent.Inspectors;
@@ -6,8 +6,8 @@ using Glimpse.Agent.Messages;
 using Glimpse.Common;
 using Glimpse.Internal.Extensions;
 using Glimpse.Internal;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Http.Features;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace Glimpse.Agent.Internal.Inspectors.Mvc
 {
