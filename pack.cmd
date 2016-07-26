@@ -8,17 +8,23 @@ del /Q /S src\Glimpse.Agent.AspNet.Mvc\bin\Release
 
 md dist
 
-call dnu restore .\src\Glimpse.Common\project.json .\src\Glimpse.Server\project.json .\src\Glimpse.Agent.AspNet\project.json .\src\Glimpse.Agent.AspNet.Mvc\project.json
+call dotnet restore .\src\Glimpse.Common\project.json
+call dotnet restore .\src\Glimpse.Server\project.json
+call dotnet restore .\src\Glimpse.Agent.AspNet\project.json
+call dotnet restore .\src\Glimpse.Agent.AspNet.Mvc\project.json
 
 REM get time
-For /f "tokens=2-4 delims=/ " %%a in ('date /t') do (set mydate=%%c%%a%%b)
-For /f "tokens=1-2 delims=/:" %%a in ("%TIME%") do (set mytime=%%a%%b)
+For /f "tokens=2-4 delims=/ " %%a in ('date /t') do (set DATE=%%c%%a%%b)
+For /f "tokens=1-2 delims=/:" %%a in ("%TIME%") do (set TIME=%%a%%b)
 
-set DNX_BUILD_VERSION=beta1
+set MILESTONE=beta2-%DATE%%TIME%
 
-call dnu pack .\src\Glimpse.Common\project.json .\src\Glimpse.Server\project.json .\src\Glimpse.Agent.AspNet\project.json .\src\Glimpse.Agent.AspNet.Mvc\project.json --configuration Release
+call dotnet pack .\src\Glimpse.Common\project.json --configuration Release --version-suffix %MILESTONE%
+call dotnet pack .\src\Glimpse.Server\project.json --configuration Release --version-suffix %MILESTONE%
+call dotnet pack .\src\Glimpse.Agent.AspNet\project.json --configuration Release --version-suffix %MILESTONE%
+call dotnet pack .\src\Glimpse.Agent.AspNet.Mvc\project.json --configuration Release --version-suffix %MILESTONE%
 
-call nuget pack src\Glimpse\Glimpse.nuspec -OutputDirectory dist -version 2.0.0-%DNX_BUILD_VERSION%
+call nuget pack src\Glimpse\Glimpse.nuspec -OutputDirectory dist -version 2.0.0-%MILESTONE%
 
 copy /Y src\Glimpse.Common\bin\Release\*.nupkg dist
 copy /Y src\Glimpse.Server\bin\Release\*.nupkg dist
