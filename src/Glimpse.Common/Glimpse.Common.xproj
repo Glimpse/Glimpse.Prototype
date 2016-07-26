@@ -6,11 +6,12 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>c0fb7983-e851-4567-8540-153f9b7ec42d</ProjectGuid>
-    <RootNamespace>Glimpse</RootNamespace>
+    <ProjectGuid>dd4bf653-2388-464d-a8e8-3fca4b52c455</ProjectGuid>
+    <RootNamespace>Glimpse.Common</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>
+
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
