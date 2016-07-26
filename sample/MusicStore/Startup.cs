@@ -35,7 +35,7 @@ namespace MusicStore
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddGlimpse();
+            services.AddGlimpse();
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
@@ -99,7 +99,7 @@ namespace MusicStore
         //The allowed values are Development,Staging and Production
         public void ConfigureDevelopment(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            //app.UseGlimpse();
+            app.UseGlimpse();
 
             loggerFactory.AddConsole(minLevel: LogLevel.Information);
 
@@ -119,7 +119,7 @@ namespace MusicStore
         //The allowed values are Development,Staging and Production
         public void ConfigureStaging(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            //app.UseGlimpse();
+            app.UseGlimpse();
 
             loggerFactory.AddConsole(minLevel: LogLevel.Warning);
 
@@ -135,7 +135,7 @@ namespace MusicStore
         //The allowed values are Development,Staging and Production
         public void ConfigureProduction(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            //app.UseGlimpse();
+            app.UseGlimpse();
 
             loggerFactory.AddConsole(minLevel: LogLevel.Warning);
 
