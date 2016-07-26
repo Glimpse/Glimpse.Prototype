@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Glimpse.Agent;
 using Glimpse.Agent.Configuration;
 using Glimpse.Initialization;
@@ -19,8 +21,13 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         {
             var appServices = options.ApplicationServices;
 
-            var telemetryListener = appServices.GetRequiredService<DiagnosticListener>();
-            telemetryListener.SubscribeWithAdapter(appServices.GetRequiredService<WebDiagnosticsInspector>(), IsEnabled);
+            //var telemetryListener = appServices.GetRequiredService<DiagnosticListener>();
+            //telemetryListener.SubscribeWithAdapter(appServices.GetRequiredService<WebDiagnosticsInspector>(), IsEnabled);
+
+            var listenerSubscription = DiagnosticListener.AllListeners.Subscribe(listener =>
+            {
+                listener.SubscribeWithAdapter(appServices.GetRequiredService<WebDiagnosticsInspector>(), IsEnabled);
+            });
         }
 
         private bool IsEnabled(string topic)
