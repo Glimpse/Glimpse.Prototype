@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Newtonsoft.Json;
 
 namespace Glimpse.Internal
@@ -15,7 +16,7 @@ namespace Glimpse.Internal
                 result = Math.Round(convertedNullable.Value.TotalMilliseconds, 2);
             }
             
-            writer.WriteRawValue(result.ToString());
+            writer.WriteRawValue(result.ToString(CultureInfo.InvariantCulture));
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
