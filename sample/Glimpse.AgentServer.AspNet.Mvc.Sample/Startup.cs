@@ -32,7 +32,7 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample
             if (env.IsDevelopment())
             {
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
-                builder.AddUserSecrets();
+                builder.AddUserSecrets("Glimpse.AgentServer.AspNet.Mvc.Sample-a4796cf2-1fe0-48ad-a23e-dc4587a17a50");
             }
 
             builder.AddEnvironmentVariables();
@@ -73,7 +73,6 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-                app.UseBrowserLink();
             }
             else
             {

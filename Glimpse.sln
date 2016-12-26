@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26014.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6AD4BC4F-CA12-4EE0-A6D5-BBE4B9CC56EC}"
 	ProjectSection(SolutionItems) = preProject
@@ -10,7 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6AD4BC4F-CA1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{618A5846-961D-4DBE-8850-678F01CB61D1}"
 	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
 		NuGet.Config = NuGet.Config
 	EndProjectSection
 EndProject
@@ -20,31 +19,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "websites", "websites", "{C3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{4F6B131C-CBEE-44D2-891A-FD88998A3331}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Common", "src\Glimpse.Common\Glimpse.Common.xproj", "{DD4BF653-2388-464D-A8E8-3FCA4B52C455}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glimpse.Common", "src\Glimpse.Common\Glimpse.Common.csproj", "{DD4BF653-2388-464D-A8E8-3FCA4B52C455}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Server", "src\Glimpse.Server\Glimpse.Server.xproj", "{A74FEDE1-4271-409C-B2D3-283737F11662}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glimpse.Server", "src\Glimpse.Server\Glimpse.Server.csproj", "{A74FEDE1-4271-409C-B2D3-283737F11662}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.AspNet", "src\Glimpse.Agent.AspNet\Glimpse.Agent.AspNet.xproj", "{5D988584-DEBD-49D3-9AD4-95545529B313}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glimpse.Agent.AspNet", "src\Glimpse.Agent.AspNet\Glimpse.Agent.AspNet.csproj", "{5D988584-DEBD-49D3-9AD4-95545529B313}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.AspNet.Mvc", "src\Glimpse.Agent.AspNet.Mvc\Glimpse.Agent.AspNet.Mvc.xproj", "{CE0B4F2B-3177-4F9E-901A-8CD16E548371}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glimpse.Agent.AspNet.Mvc", "src\Glimpse.Agent.AspNet.Mvc\Glimpse.Agent.AspNet.Mvc.csproj", "{CE0B4F2B-3177-4F9E-901A-8CD16E548371}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Agent.AspNet.Sample", "sample\Glimpse.Agent.AspNet.Sample\Glimpse.Agent.AspNet.Sample.xproj", "{6CE73129-30C8-4EF2-B412-4F7506010416}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glimpse.Agent.AspNet.Sample", "sample\Glimpse.Agent.AspNet.Sample\Glimpse.Agent.AspNet.Sample.csproj", "{6CE73129-30C8-4EF2-B412-4F7506010416}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Server.AspNet.Sample", "sample\Glimpse.Server.AspNet.Sample\Glimpse.Server.AspNet.Sample.xproj", "{B8804A87-F6A5-492B-97EF-F7BF84D527EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glimpse.Server.AspNet.Sample", "sample\Glimpse.Server.AspNet.Sample\Glimpse.Server.AspNet.Sample.csproj", "{B8804A87-F6A5-492B-97EF-F7BF84D527EC}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.AgentServer.AspNet.Sample", "sample\Glimpse.AgentServer.AspNet.Sample\Glimpse.AgentServer.AspNet.Sample.xproj", "{5F871434-72A9-41CC-B3CC-E213DEAE3927}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glimpse.AgentServer.AspNet.Sample", "sample\Glimpse.AgentServer.AspNet.Sample\Glimpse.AgentServer.AspNet.Sample.csproj", "{5F871434-72A9-41CC-B3CC-E213DEAE3927}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.AgentServer.AspNet.Mvc.Sample", "sample\Glimpse.AgentServer.AspNet.Mvc.Sample\Glimpse.AgentServer.AspNet.Mvc.Sample.xproj", "{4836AEEE-3189-40A3-9EE3-C917FBD6C746}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glimpse.AgentServer.AspNet.Mvc.Sample", "sample\Glimpse.AgentServer.AspNet.Mvc.Sample\Glimpse.AgentServer.AspNet.Mvc.Sample.csproj", "{4836AEEE-3189-40A3-9EE3-C917FBD6C746}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.AgentServer.AspNet.Mvc.Simple.Sample", "sample\Glimpse.AgentServer.AspNet.Mvc.Simple.Sample\Glimpse.AgentServer.AspNet.Mvc.Simple.Sample.xproj", "{65FCF640-C83F-4414-851E-CD5A10BCFC17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glimpse.AgentServer.AspNet.Mvc.Simple.Sample", "sample\Glimpse.AgentServer.AspNet.Mvc.Simple.Sample\Glimpse.AgentServer.AspNet.Mvc.Simple.Sample.csproj", "{65FCF640-C83F-4414-851E-CD5A10BCFC17}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MusicStore", "sample\MusicStore\MusicStore.xproj", "{81216DFD-3A01-4351-BF03-4FDC59B72762}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicStore", "sample\MusicStore\MusicStore.csproj", "{81216DFD-3A01-4351-BF03-4FDC59B72762}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.FunctionalTest.Website", "test\websites\Glimpse.FunctionalTest.Website\Glimpse.FunctionalTest.Website.xproj", "{0AD53640-DDAC-4F27-B236-B732B72C0CA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glimpse.FunctionalTest.Website", "test\websites\Glimpse.FunctionalTest.Website\Glimpse.FunctionalTest.Website.csproj", "{0AD53640-DDAC-4F27-B236-B732B72C0CA0}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.FunctionalTest", "test\Glimpse.FunctionalTest\Glimpse.FunctionalTest.xproj", "{0E1D8B8D-A560-47CF-8CE7-DC7FEA6226D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glimpse.FunctionalTest", "test\Glimpse.FunctionalTest\Glimpse.FunctionalTest.csproj", "{0E1D8B8D-A560-47CF-8CE7-DC7FEA6226D1}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Glimpse.Prototype.UnitTest", "test\Glimpse.Prototype.UnitTest\Glimpse.Prototype.UnitTest.xproj", "{E617C9BC-502D-41E3-9F0C-20487EEBA148}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glimpse.Prototype.UnitTest", "test\Glimpse.Prototype.UnitTest\Glimpse.Prototype.UnitTest.csproj", "{E617C9BC-502D-41E3-9F0C-20487EEBA148}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

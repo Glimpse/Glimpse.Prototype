@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Net.Http.Server;
@@ -31,7 +32,8 @@ namespace MusicStore
                     // modify the applicationHost.config to enable NTLM.
                     builder.UseWebListener(options =>
                     {
-                        options.Listener.AuthenticationManager.AuthenticationSchemes = AuthenticationSchemes.NTLM;
+                        options.ListenerSettings.Authentication.Schemes = AuthenticationSchemes.NTLM;
+                        options.ListenerSettings.Authentication.AllowAnonymous = false;
                     });
                 }
                 else

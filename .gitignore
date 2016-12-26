@@ -6,6 +6,8 @@
 *.user
 *.sln.docstates
 launchSettings.json
+debugSettings.json
+runtimeconfig.template.json
 
 # Build results
 [Dd]ebug/
