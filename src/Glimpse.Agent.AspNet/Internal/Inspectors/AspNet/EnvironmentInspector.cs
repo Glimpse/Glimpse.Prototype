@@ -1,8 +1,8 @@
 using System;
+using System.Runtime.InteropServices;
 using Glimpse.Agent.AspNet.Messages;
 using Glimpse.Agent.Inspectors;
 using Microsoft.AspNetCore.Http;
-using System.Runtime.InteropServices;
 
 namespace Glimpse.Agent.AspNet.Internal.Inspectors.AspNet
 {
@@ -26,7 +26,7 @@ namespace Glimpse.Agent.AspNet.Internal.Inspectors.AspNet
 
                 _message = new EnvironmentMessage
                 {
-                    ServerName = Environment.GetEnvironmentVariable("COMPUTERNAME"), // TODO: make sure its cross plat
+                    ServerName = Environment.MachineName,
                     ServerTime = time.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff"),
                     ServerTimezoneOffset = time.ToString("zzz"),
                     ServerDaylightSavingTime = isDaylightSavingTime,
