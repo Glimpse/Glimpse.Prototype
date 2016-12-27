@@ -17,7 +17,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             _proxyAdapter.Register("Microsoft.AspNetCore.Mvc.ViewResult");
             _proxyAdapter.Register("Microsoft.AspNetCore.Mvc.ContentResult");
             _proxyAdapter.Register("Microsoft.AspNetCore.Mvc.ObjectResult");
-            _proxyAdapter.Register("Microsoft.AspNetCore.Routing.Template.TemplateRoute"); // TODO: this might have been renamed
+            _proxyAdapter.Register("Microsoft.AspNetCore.Routing.Route");
             _proxyAdapter.Register("Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor");
             _proxyAdapter.Register("Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor");
             _proxyAdapter.Register("Microsoft.AspNetCore.Mvc.FileResult");
@@ -44,9 +44,9 @@ namespace Glimpse.Agent.Internal.Inspectors
             // NOTE: Template data is only available in the TemplateRoute, so we need to try and 
             //       promote that type into something we can use
             var router = routeData.Routers[routeData.Routers.Count - 2];
-            if (router.GetType().FullName == "Microsoft.AspNet.Routing.Template.TemplateRoute")
+            if (router.GetType().FullName == "Microsoft.AspNetCore.Routing.Route")
             {
-                var templateRoute = _proxyAdapter.Process<IRouter>("Microsoft.AspNet.Routing.Template.TemplateRoute", router);
+                var templateRoute = _proxyAdapter.Process<IRouter>("Microsoft.AspNetCore.Routing.Route", router);
                 
                 message.RouteName = templateRoute.Name;
                 message.RoutePattern = templateRoute.RouteTemplate;
