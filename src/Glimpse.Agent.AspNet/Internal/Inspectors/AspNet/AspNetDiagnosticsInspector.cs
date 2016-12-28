@@ -17,23 +17,50 @@ namespace Glimpse.Agent.Internal.Inspectors
             _contextData.Value = new MessageContext { Id = Guid.NewGuid(), Type = "Request" };
 
             var request = httpContext.Request;
+            var requestHeaders = request.GetTypedHeaders();
             var requestDateTime = DateTime.UtcNow;
-
+            
+            // build message
+            var message = new WebRequestMessage
+            {
+                Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}", // TODO: check if there is a better way of doing this
+                Method = request.Method,
+                Headers = request.Headers.ToDictionary(h => h.Key, h => h.Value),
+                StartTime = requestDateTime
+            };
+            
+            // add ajax
             var isAjax = StringValues.Empty;
             httpContext.Request.Headers.TryGetValue("__glimpse-isAjax", out isAjax);
+            message.IsAjax = isAjax == "true";
 
-            var message = new BeginRequestMessage
+            // add protocol
+            message.Protocol = new RequestProtocol();
+            if (!string.IsNullOrEmpty(request.Protocol))
             {
-                RequestUrl = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}", // TODO: check if there is a better way of doing this
-                RequestPath = request.Path,
-                RequestQueryString = request.QueryString.Value,
-                RequestMethod = request.Method,
-                RequestHeaders = request.Headers.ToDictionary(h => h.Key, h => h.Value),
-                RequestContentLength = request.ContentLength,
-                RequestContentType = request.ContentType,
-                RequestStartTime = requestDateTime,
-                RequestIsAjax = isAjax == "true"
+                var protocol = request.Protocol.Split('/');
+                message.Protocol.Identifier = protocol[0];
+                if (protocol.Length > 0)
+                {
+                    message.Protocol.Version = protocol[1];
+                }
+            }
+
+            // add body
+            message.Body = new RequestBody
+            {
+                IsTruncated = false
+                //Content = request.Body, // TODO: need to read this safely
             };
+            if (request.HasFormContentType)
+            {
+                message.Body.Form = request.Form;
+            }
+            var contentType = requestHeaders.ContentType;
+            if (contentType != null)
+            {
+                message.Body.Encoding = contentType.Encoding.ToString();
+            }
 
             _broker.StartOffsetOperation();
             _broker.BeginLogicalOperation(message, requestDateTime);
@@ -43,7 +70,7 @@ namespace Glimpse.Agent.Internal.Inspectors
         [DiagnosticName("Microsoft.AspNetCore.Hosting.EndRequest")]
         public void OnEndRequest(HttpContext httpContext)
         {
-            var message = new EndRequestMessage();
+            var message = new WebResponseMessage();
             ProcessEndRequest(message, httpContext);
 
             _broker.SendMessage(message);
@@ -76,33 +103,44 @@ namespace Glimpse.Agent.Internal.Inspectors
 
             _broker.SendMessage(message);
         }
-
-        private void ProcessEndRequest(EndRequestMessage message, HttpContext httpContext)
+        
+        private void ProcessEndRequest(WebResponseMessage message, HttpContext httpContext)
         {
             var request = httpContext.Request;
             var response = httpContext.Response;
-            
-            message.RequestUrl = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}"; // TODO: check if there is a better way of doing this
-            message.RequestPath = request.Path;
-            message.RequestQueryString = request.QueryString.Value;
-            message.ResponseHeaders = response.Headers.ToDictionary(h => h.Key, h => h.Value);
-            message.ResponseContentLength = response.ContentLength;
-            message.ResponseContentType = response.ContentType;
-            message.ResponseStatusCode = response.StatusCode;
+            var responseHeaders = response.GetTypedHeaders();
 
-            // in this case still want to publish but setting duration to 0
-            var timing = _broker.EndLogicalOperation<BeginRequestMessage>();
+            // build message
+            message.Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}"; // TODO: check if there is a better way of doing this
+            message.Headers = response.Headers.ToDictionary(h => h.Key, h => h.Value);
+            message.StatusCode = response.StatusCode;
+
+            // add body
+            message.Body = new ResponseBody
+            {
+                IsTruncated = false
+                //Content = request.Body, // TODO: need to read this safely
+            };
+            var contentType = responseHeaders.ContentType;
+            if (contentType != null)
+            {
+                message.Body.Encoding = contentType.Encoding.ToString();
+            }
+
+            // add timing data
+            var timing = _broker.EndLogicalOperation<WebRequestMessage>();
             if (timing != null)
             {
-                message.ResponseDuration = Math.Round(timing.Elapsed.TotalMilliseconds, 2);
-                message.ResponseEndTime = timing.End.ToUniversalTime();
+                message.Duration = Math.Round(timing.Elapsed.TotalMilliseconds, 2);
+                message.EndTime = timing.End.ToUniversalTime();
             }
             else
             {
-                message.ResponseDuration = 0.0;
-                message.ResponseEndTime = DateTime.UtcNow;
+                // in this case still want to publish but setting duration to 0
+                message.Duration = 0.0;
+                message.EndTime = DateTime.UtcNow;
 
-                _logger.LogCritical("ProcessEndRequest: Still published `EndRequestMessage` but couldn't find `BeginRequestMessage` in stack");
+                _logger.LogCritical("ProcessEndRequest: Still published `WebResponseMessage` but couldn't find `BeginRequestMessage` in stack");
             }
         }
 

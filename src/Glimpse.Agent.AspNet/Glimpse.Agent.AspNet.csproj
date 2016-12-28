@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
     <Description>The infrastructure and extensibility points required to enable Glimpse to gather diagnostics information from ASP.NET web applications.</Description>
     <AssemblyTitle>Glimpse Agent for ASP.NET</AssemblyTitle>
