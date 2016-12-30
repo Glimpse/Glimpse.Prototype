@@ -25,11 +25,15 @@ namespace Glimpse.Agent.Internal.Inspectors
 
             _proxyAdapter = new ProxyAdapter();
 
-            AspNetOnCreated();
+            HostingOnCreated();
+            MiddlewareOnCreated();
             MvcOnCreated();
         }
 
-        partial void AspNetOnCreated();
+        partial void HostingOnCreated();
+
+        partial void MiddlewareOnCreated();
+
         partial void MvcOnCreated();
     }
 }

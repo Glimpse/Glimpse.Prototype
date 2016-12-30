@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Glimpse.Agent.Messages
 {
-    public class DiagnosticsExceptionMessage : IExceptionMessage
+    public class MiddlewareEndExceptionMessage : MiddlewareEndMessage, IExceptionMessage
     {
         public bool ExceptionIsHandelled { get; set; }
 

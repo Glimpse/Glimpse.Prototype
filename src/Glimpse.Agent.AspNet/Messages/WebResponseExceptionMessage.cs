@@ -2,7 +2,7 @@
 
 namespace Glimpse.Agent.Messages
 {
-    public class HostingExceptionMessage : WebResponseMessage, IExceptionMessage
+    public class WebResponseExceptionMessage : WebResponseMessage, IExceptionMessage
     {
         public bool ExceptionIsHandelled { get; set; }
 

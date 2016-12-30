@@ -71,7 +71,7 @@ namespace Glimpse.Agent.Internal.Inspectors
         public void OnEndRequest(HttpContext httpContext)
         {
             var message = new WebResponseMessage();
-            ProcessEndRequest(message, httpContext);
+            ProcessEnd(message, httpContext);
 
             _broker.SendMessage(message);
         }
@@ -79,8 +79,8 @@ namespace Glimpse.Agent.Internal.Inspectors
         [DiagnosticName("Microsoft.AspNetCore.Hosting.UnhandledException")]
         public void OnHostingUnhandledException(HttpContext httpContext, Exception exception)
         {
-            var message = new HostingExceptionMessage();
-            ProcessEndRequest(message, httpContext);
+            var message = new WebResponseExceptionMessage();
+            ProcessEnd(message, httpContext);
             ProcessException(message, exception, false);
 
             _broker.SendMessage(message);
@@ -89,7 +89,8 @@ namespace Glimpse.Agent.Internal.Inspectors
         [DiagnosticName("Microsoft.AspNetCore.Diagnostics.UnhandledException")]
         public void OnDiagnosticsUnhandledException(HttpContext httpContext, Exception exception)
         {
-            var message = new DiagnosticsExceptionMessage();
+            var message = new WebResponseExceptionMessage();
+            ProcessEnd(message, httpContext);
             ProcessException(message, exception, false);
 
             _broker.SendMessage(message);
@@ -98,13 +99,14 @@ namespace Glimpse.Agent.Internal.Inspectors
         [DiagnosticName("Microsoft.AspNetCore.Diagnostics.HandledException")]
         public void OnDiagnosticsHandledException(HttpContext httpContext, Exception exception)
         {
-            var message = new DiagnosticsExceptionMessage();
+            var message = new WebResponseExceptionMessage();
+            ProcessEnd(message, httpContext);
             ProcessException(message, exception, true);
 
             _broker.SendMessage(message);
         }
         
-        private void ProcessEndRequest(WebResponseMessage message, HttpContext httpContext)
+        private void ProcessEnd(WebResponseMessage message, HttpContext httpContext)
         {
             var request = httpContext.Request;
             var response = httpContext.Response;
