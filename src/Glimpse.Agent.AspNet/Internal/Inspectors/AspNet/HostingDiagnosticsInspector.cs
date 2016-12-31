@@ -9,12 +9,19 @@ using Microsoft.AspNetCore.Http.Internal;
 using System.IO;
 using System.Text;
 using Microsoft.Net.Http.Headers;
+using System.Text.RegularExpressions;
 
 namespace Glimpse.Agent.Internal.Inspectors
 {
     public partial class WebDiagnosticsInspector
     {
         private static int MaxBodySize = 132000;
+        private static Regex[] MineTypesToCapture = new[] {
+            new Regex(@"/^text\//"),
+            new Regex(@"/^application\/.*?xml/"),
+            new Regex(@"/^application\/json/"),
+            new Regex(@"/^application\/javascript/")
+        };
 
         [DiagnosticName("Microsoft.AspNetCore.Hosting.BeginRequest")]
         public void OnBeginRequest(HttpContext httpContext)
@@ -153,28 +160,32 @@ namespace Glimpse.Agent.Internal.Inspectors
         {
             if (contentType != null)
             {
-                webBody.Encoding = contentType.Encoding.ToString();
-  
-                if (webBody.Encoding == "UTF8")
+                webBody.Encoding = contentType.Encoding?.WebName;
+
+                if (body != null)
                 {
-                    // read content
-                    using (var reader = new StreamReader(body, Encoding.UTF8, true, 1024, true))
+                    webBody.Size = body.Length;
+
+                    // process only text based content
+                    if (webBody.Encoding == "utf-8"
+                        || MineTypesToCapture.Any(regex => regex.IsMatch(contentType.MediaType)))
                     {
-                        webBody.Content = reader.ReadToEnd();
+                        // read text content
+                        using (var reader = new StreamReader(body))
+                        {
+                            webBody.Content = reader.ReadToEnd();
+                        }
+
+                        // set position back to 0 so others can read
+                        body.Position = 0;
+                        
+                        if (!string.IsNullOrEmpty(webBody.Content) 
+                            && webBody.Content.Length > MaxBodySize)
+                        {
+                            webBody.Content = webBody.Content.Substring(0, MaxBodySize);
+                            webBody.IsTruncated = true;
+                        }
                     }
-
-                    // set position back to 0 so others can read
-                    body.Position = 0;
-
-                    // trim if needed
-                    if (!string.IsNullOrEmpty(webBody.Content) && webBody.Content.Length > MaxBodySize)
-                    {
-                        webBody.Content = webBody.Content.Substring(0, MaxBodySize);
-                        webBody.IsTruncated = true;
-                    }
-
-                    // recird size
-                    webBody.Size = webBody.Content != null ? webBody.Content.Length : 0;
                 }
             }
         }

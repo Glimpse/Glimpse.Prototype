@@ -8,7 +8,7 @@ namespace Glimpse.Agent.Messages
 {
     public class WebBody
     {
-        public int Size { get; set; }
+        public long Size { get; set; }
 
         public string Content { get; set; }
 
