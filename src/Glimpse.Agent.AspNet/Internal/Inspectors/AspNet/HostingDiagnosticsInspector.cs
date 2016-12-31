@@ -172,6 +172,9 @@ namespace Glimpse.Agent.Internal.Inspectors
                         webBody.Content = webBody.Content.Substring(0, MaxBodySize);
                         webBody.IsTruncated = true;
                     }
+
+                    // recird size
+                    webBody.Size = webBody.Content != null ? webBody.Content.Length : 0;
                 }
             }
         }
