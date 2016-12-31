@@ -5,11 +5,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DiagnosticAdapter;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
+using Microsoft.AspNetCore.Http.Internal;
+using System.IO;
+using System.Text;
+using Microsoft.Net.Http.Headers;
 
 namespace Glimpse.Agent.Internal.Inspectors
 {
     public partial class WebDiagnosticsInspector
     {
+        private static int MaxBodySize = 132000;
+
         [DiagnosticName("Microsoft.AspNetCore.Hosting.BeginRequest")]
         public void OnBeginRequest(HttpContext httpContext)
         {
@@ -19,7 +25,10 @@ namespace Glimpse.Agent.Internal.Inspectors
             var request = httpContext.Request;
             var requestHeaders = request.GetTypedHeaders();
             var requestDateTime = DateTime.UtcNow;
-            
+
+            // set things up so we can read the body
+            request.EnableRewind();
+
             // build message
             var message = new WebRequestMessage
             {
@@ -35,7 +44,7 @@ namespace Glimpse.Agent.Internal.Inspectors
             message.IsAjax = isAjax == "true";
 
             // add protocol
-            message.Protocol = new RequestProtocol();
+            message.Protocol = new WebRequestProtocol();
             if (!string.IsNullOrEmpty(request.Protocol))
             {
                 var protocol = request.Protocol.Split('/');
@@ -47,20 +56,12 @@ namespace Glimpse.Agent.Internal.Inspectors
             }
 
             // add body
-            message.Body = new RequestBody
-            {
-                IsTruncated = false
-                //Content = request.Body, // TODO: need to read this safely
-            };
+            message.Body = new WebRequestBody();
             if (request.HasFormContentType)
             {
                 message.Body.Form = request.Form;
             }
-            var contentType = requestHeaders.ContentType;
-            if (contentType != null)
-            {
-                message.Body.Encoding = contentType.Encoding.ToString();
-            }
+            ReadBody(message.Body, requestHeaders.ContentType, request.Body);
 
             _broker.StartOffsetOperation();
             _broker.BeginLogicalOperation(message, requestDateTime);
@@ -118,16 +119,8 @@ namespace Glimpse.Agent.Internal.Inspectors
             message.StatusCode = response.StatusCode;
 
             // add body
-            message.Body = new ResponseBody
-            {
-                IsTruncated = false
-                //Content = request.Body, // TODO: need to read this safely
-            };
-            var contentType = responseHeaders.ContentType;
-            if (contentType != null)
-            {
-                message.Body.Encoding = contentType.Encoding.ToString();
-            }
+            message.Body = new WebBody();
+            ReadBody(message.Body, responseHeaders.ContentType, response.Body);
 
             // add timing data
             var timing = _broker.EndLogicalOperation<WebRequestMessage>();
@@ -154,6 +147,33 @@ namespace Glimpse.Agent.Internal.Inspectors
             message.ExceptionTypeName = baseException.GetType().Name;
             message.ExceptionMessage = baseException.Message;
             message.ExceptionDetails = _exceptionProcessor.GetErrorDetails(exception);
+        }
+
+        private void ReadBody(WebBody webBody, MediaTypeHeaderValue contentType, Stream body)
+        {
+            if (contentType != null)
+            {
+                webBody.Encoding = contentType.Encoding.ToString();
+  
+                if (webBody.Encoding == "UTF8")
+                {
+                    // read content
+                    using (var reader = new StreamReader(body, Encoding.UTF8, true, 1024, true))
+                    {
+                        webBody.Content = reader.ReadToEnd();
+                    }
+
+                    // set position back to 0 so others can read
+                    body.Position = 0;
+
+                    // trim if needed
+                    if (!string.IsNullOrEmpty(webBody.Content) && webBody.Content.Length > MaxBodySize)
+                    {
+                        webBody.Content = webBody.Content.Substring(0, MaxBodySize);
+                        webBody.IsTruncated = true;
+                    }
+                }
+            }
         }
     }
 }

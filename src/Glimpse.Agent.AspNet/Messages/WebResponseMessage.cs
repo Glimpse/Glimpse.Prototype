@@ -14,22 +14,11 @@ namespace Glimpse.Agent.Messages
 
         public IReadOnlyDictionary<string, StringValues> Headers { get; set; }
 
-        public ResponseBody Body { get; set; }
+        public WebBody Body { get; set; }
 
         [PromoteToDuration]
         public double? Duration { get; set; }
 
         public DateTime EndTime { get; set; }
-    }
-
-    public class ResponseBody
-    {
-        public int Size { get; set; }
-
-        public string Content { get; set; }
-
-        public string Encoding { get; set; }
-
-        public bool IsTruncated { get; set; }
     }
 }
