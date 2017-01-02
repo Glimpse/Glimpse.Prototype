@@ -12,8 +12,6 @@ namespace Glimpse.Agent.Internal.Inspectors
 {
     public class BodyInsepector : IInspectorFunction
     {
-        private const string RawRequestBodyKey = "__GlimpseRawRequestBody";
-        private const string RawResponseBodyKey = "__GlimpseRawResponseBody";
         private const int MaxBodySize = 132000;
         private static Regex[] MineTypesToCapture = new[] {
             new Regex(@"^text\/"),
@@ -35,11 +33,14 @@ namespace Glimpse.Agent.Internal.Inspectors
                 var request = httpContext.Request;
                 var response = httpContext.Response;
 
-                // request
+                // request/response
                 var requestContent = (string)null;
+                var requestSize = 0L;
                 var requestHeaders = request.GetTypedHeaders();
                 var requestContentType = requestHeaders.ContentType;
                 var requestShouldReadBody = ShouldReadBody(requestContentType, request.Body);
+                var requestBodyStream = (Stream)null;
+                var responseBodyStream = (Stream)null;
 
                 // request setup/read - don't wrap unless we need to
                 if (requestShouldReadBody && !request.Body.CanSeek)
@@ -47,8 +48,10 @@ namespace Glimpse.Agent.Internal.Inspectors
                     var newRequestBodyStream = new MemoryStream();
                     await request.Body.CopyToAsync(newRequestBodyStream);
 
-                    httpContext.Items.Add(RawRequestBodyKey, request.Body);
+                    requestBodyStream = request.Body;
                     request.Body = newRequestBodyStream;
+
+                    requestSize = request.Body.Length;
 
                     request.Body.Seek(0, SeekOrigin.Begin);
                     requestContent = await new StreamReader(request.Body).ReadToEndAsync();
@@ -56,12 +59,12 @@ namespace Glimpse.Agent.Internal.Inspectors
                 }
 
                 // request write 
-                RequestWrite(request, requestContentType, requestContent);
+                RequestWrite(request, requestContentType, requestSize, requestContent);
 
                 // response setup - we don't yet know the content type
                 if (!response.Body.CanSeek)
                 {
-                    httpContext.Items.Add(RawResponseBodyKey, response.Body);
+                    responseBodyStream = response.Body;
                     response.Body = new MemoryStream();
                 }
 
@@ -69,6 +72,7 @@ namespace Glimpse.Agent.Internal.Inspectors
 
                 // response
                 var responseContent = (string)null;
+                var responseSize = 0L;
                 var responseHeaders = response.GetTypedHeaders();
                 var responseContentType = responseHeaders.ContentType;
                 var responseShouldReadBody = ShouldReadBody(responseContentType, response.Body);
@@ -76,29 +80,30 @@ namespace Glimpse.Agent.Internal.Inspectors
                 // response read/teardown
                 if (response.Body.CanSeek)
                 {
+                    responseSize = response.Body.Length;
+
+                    response.Body.Seek(0, SeekOrigin.Begin);
                     if (responseShouldReadBody)
                     {
-                        response.Body.Seek(0, SeekOrigin.Begin);
                         responseContent = await new StreamReader(response.Body).ReadToEndAsync();
                         response.Body.Seek(0, SeekOrigin.Begin);
                     }
-
-                    var rawResponseBodyStream = (object)null;
-                    if (httpContext.Items.TryGetValue(RawResponseBodyKey, out rawResponseBodyStream))
+                    
+                    if (responseBodyStream != null)
                     {
-                        await response.Body.CopyToAsync((Stream)rawResponseBodyStream);
+                        await response.Body.CopyToAsync(responseBodyStream);
                     }
                 }
 
                 // response write 
-                ResponseWrite(response, responseContentType, responseContent);
+                ResponseWrite(response, responseContentType, responseSize, responseContent);
             });
         }
 
-        private void RequestWrite(HttpRequest request, MediaTypeHeaderValue contentType, string content)
+        private void RequestWrite(HttpRequest request, MediaTypeHeaderValue contentType, long size, string content)
         {
             var webBody = new WebRequestBody();
-            ProcessBody(webBody, contentType, content);
+            ProcessBody(webBody, contentType, size, content);
 
             if (request.HasFormContentType)
             {
@@ -109,30 +114,26 @@ namespace Glimpse.Agent.Internal.Inspectors
             //_broker.SendMessage(message);
         }
 
-        private void ResponseWrite(HttpResponse response, MediaTypeHeaderValue contentType, string content)
+        private void ResponseWrite(HttpResponse response, MediaTypeHeaderValue contentType, long size, string content)
         {
             var webBody = new WebBody();
-            ProcessBody(webBody, contentType, content);
+            ProcessBody(webBody, contentType, size, content);
 
             // TODO: need to build message
             //_broker.SendMessage(message);
         }
 
-        private void ProcessBody(WebBody webBody, MediaTypeHeaderValue contentType, string content)
+        private void ProcessBody(WebBody webBody, MediaTypeHeaderValue contentType, long size, string content)
         {
             webBody.Encoding = contentType?.Encoding?.WebName;
             webBody.Content = content;
-            
-            if (webBody.Content != null)
-            {
-                webBody.Size = webBody.Content.Length;
+            webBody.Size = size;
 
-                if (webBody.Content != string.Empty
-                    && webBody.Content.Length > MaxBodySize)
-                {
-                    webBody.Content = webBody.Content.Substring(0, MaxBodySize);
-                    webBody.IsTruncated = true;
-                }
+            if (!string.IsNullOrEmpty(webBody.Content)
+                && webBody.Content.Length > MaxBodySize)
+            {
+                webBody.Content = webBody.Content.Substring(0, MaxBodySize);
+                webBody.IsTruncated = true;
             }
         }
 
