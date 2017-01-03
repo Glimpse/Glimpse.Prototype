@@ -94,7 +94,7 @@ namespace Glimpse.Agent.Internal.Inspectors
                         await response.Body.CopyToAsync(responseBodyStream);
                     }
                 }
-
+                
                 // response write 
                 ResponseWrite(response, responseContentType, responseSize, responseContent);
             });
@@ -104,7 +104,7 @@ namespace Glimpse.Agent.Internal.Inspectors
         {
             var webBody = new WebRequestBody();
             ProcessBody(webBody, contentType, size, content);
-
+            
             if (request.HasFormContentType)
             {
                 webBody.Form = request.Form;
