@@ -128,6 +128,5 @@ namespace Glimpse.Agent.Internal.Inspectors
 
             public string PackageName { get; set; }
         }
-
     }
 }
