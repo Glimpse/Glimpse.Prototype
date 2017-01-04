@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
     <Description>The infrastructure and extensibility points required to enable Glimpse to serve data and content.</Description>
     <AssemblyTitle>Glimpse Server</AssemblyTitle>
@@ -22,12 +22,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Glimpse.Common\Glimpse.Common.csproj" />
+    <ProjectReference Include="..\Tavis.UriTemplates\Tavis.UriTemplates.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NETStandard.Library" Version="1.6.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.0.0" />
-    <PackageReference Include="Tavis.UriTemplates" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
     <Reference Include="System" />
