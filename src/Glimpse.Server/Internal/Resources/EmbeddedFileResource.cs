@@ -60,7 +60,7 @@ namespace Glimpse.Server.Internal.Resources
         public override IDictionary<string, string> Register => new Dictionary<string, string>
         {
             { "client", "?baseUrl=" + BaseUrl + "&hash={hash}{&requestId,follow,metadataUri}" },
-            { "hud", "hud.js?hash={hash}" }
+            { "hud", "main.js?hash={hash}" }
         };
     }
 
