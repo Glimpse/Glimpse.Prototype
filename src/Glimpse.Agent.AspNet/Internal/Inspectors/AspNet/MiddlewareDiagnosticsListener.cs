@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Glimpse.Agent.Internal.Inspectors
 {
-    public partial class WebDiagnosticsInspector
+    public partial class WebDiagnosticsListener
     {
         private static IDictionary<string, MiddlewareInfo> MiddlewarePackageStartsWithMap = new Dictionary<string, MiddlewareInfo> {
             { "Microsoft.AspNetCore.Builder.UseExtensions+", new MiddlewareInfo { ShortName = "UseExtensions", PackageName = "" } },

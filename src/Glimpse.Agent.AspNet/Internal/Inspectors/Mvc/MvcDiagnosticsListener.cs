@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Glimpse.Agent.Internal.Inspectors
 {
-    public partial class WebDiagnosticsInspector
+    public partial class WebDiagnosticsListener
     {
         partial void MvcOnCreated()
         {

@@ -26,7 +26,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
 
             var listenerSubscription = DiagnosticListener.AllListeners.Subscribe(listener =>
             {
-                listener.SubscribeWithAdapter(appServices.GetRequiredService<WebDiagnosticsInspector>(), IsEnabled);
+                listener.SubscribeWithAdapter(appServices.GetRequiredService<WebDiagnosticsListener>(), IsEnabled);
             });
         }
 

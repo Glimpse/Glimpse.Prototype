@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Glimpse.Agent.Internal.Inspectors
 {
-    public partial class WebDiagnosticsInspector
+    public partial class WebDiagnosticsListener
     {
         [DiagnosticName("Microsoft.EntityFrameworkCore.BeforeExecuteCommand")]
         public void OnBeforeExecuteCommand(IDbCommand command, string executeMethod, bool isAsync)

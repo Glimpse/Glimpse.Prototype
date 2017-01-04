@@ -59,7 +59,7 @@ namespace Glimpse
             services.AddTransient<IRequestIgnorerManager, DefaultRequestIgnorerManager>();
             services.AddTransient<IInspectorFunctionManager, DefaultInspectorFunctionManager>();
             services.AddTransient<IExceptionProcessor, ExceptionProcessor>();
-            services.AddTransient<WebDiagnosticsInspector>();
+            services.AddTransient<WebDiagnosticsListener>();
 
             if (!services.Any(s => s.ServiceType == typeof(IResourceOptionsProvider)))
                 services.AddSingleton<IResourceOptionsProvider, OptionsResourceOptionsProvider>();

@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 
 namespace Glimpse.Agent.Internal.Inspectors
 {
-    public partial class WebDiagnosticsInspector
+    public partial class WebDiagnosticsListener
     {
 
         [DiagnosticName("Microsoft.AspNetCore.Hosting.BeginRequest")]
