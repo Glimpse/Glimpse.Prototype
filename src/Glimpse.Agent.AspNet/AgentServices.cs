@@ -23,6 +23,11 @@ namespace Glimpse
             RegisterPublisher(services);
 
             //
+            // System Analysis
+            //
+            services.AddMiddlewareAnalysis();
+
+            //
             // Broker
             //
             services.AddSingleton<IAgentBroker, DefaultAgentBroker>();

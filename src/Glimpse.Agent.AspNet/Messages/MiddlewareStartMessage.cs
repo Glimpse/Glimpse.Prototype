@@ -8,7 +8,7 @@ namespace Glimpse.Agent.Messages
 
         public string Name { get; set; }
 
-        public string PacakgeName { get; set; }
+        public string PackageName { get; set; }
 
         public string DisplaName { get; set; }
     }
