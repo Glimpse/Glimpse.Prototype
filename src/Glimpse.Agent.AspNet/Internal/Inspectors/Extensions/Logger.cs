@@ -41,7 +41,13 @@ namespace Glimpse.Agent.Internal.Inspectors
                 message.Level = logLevel.ToString(); // TODO: validate that this gives us the correct value
                 message.CategoryName = CategoryName;
                 message.Message = formatter(state, exception);
-                
+
+                //var structure = state as IEnumerable<KeyValuePair<string, object>>;
+                //if (structure != null)
+                //{
+                //    message.Message = new[] { message.Message, structure };
+                //}
+
                 Agent.Broker.SendMessage(message);
             }
         }
