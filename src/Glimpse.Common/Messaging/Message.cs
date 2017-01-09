@@ -29,13 +29,9 @@ namespace Glimpse
             set { _indices = value; }
         }
 
-        public MessageAgentDetails Agent = MessageAgentDetails.Default;
-    }
-
-    public class MessageAgentDetails
-    {
-        public readonly static MessageAgentDetails Default = new MessageAgentDetails();
-
-        public string Soruce { get { return "server"; } }
+        public MessageAgent Agent
+        {
+            get { return MessageAgent.Default; }
+        }
     }
 }

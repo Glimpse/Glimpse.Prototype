@@ -18,5 +18,7 @@ namespace Glimpse
         MessageContext Context { get; }
         
         IReadOnlyDictionary<string, object> Indices { get; }
+
+        MessageAgent Agent { get; }
     }
 }

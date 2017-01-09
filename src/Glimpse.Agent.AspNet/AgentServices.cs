@@ -1,4 +1,3 @@
-using System.IO;
 using Glimpse.Common.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 using Glimpse.Agent;
@@ -23,13 +22,10 @@ namespace Glimpse
             RegisterPublisher(services);
 
             //
-            // System Analysis
+            // Common
             //
             services.AddMiddlewareAnalysis();
-
-            //
-            // Broker
-            //
+            services.AddTransient<IGlimpseAgent, GlimpseAgent>();
             services.AddSingleton<IAgentBroker, DefaultAgentBroker>();
 
             //
@@ -45,7 +41,7 @@ namespace Glimpse
             services.AddSingleton<IExtensionProvider<IAgentStartup>, DefaultExtensionProvider<IAgentStartup>>();
 
             //
-            // Messages.
+            // Messages
             //
             services.AddSingleton<IMessageConverter, DefaultMessageConverter>();
             services.AddTransient<IMessagePayloadFormatter, DefaultMessagePayloadFormatter>();

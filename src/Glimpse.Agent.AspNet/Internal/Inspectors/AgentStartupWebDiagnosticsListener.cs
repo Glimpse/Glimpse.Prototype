@@ -6,11 +6,11 @@ using Glimpse.Agent.Configuration;
 using Glimpse.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Glimpse.Agent.Internal.Inspectors.Mvc
+namespace Glimpse.Agent.Internal.Inspectors
 {
-    public class AgentStartupWebDiagnosticsInspector : IAgentStartup
+    public class AgentStartupWebDiagnosticsListener : IAgentStartup
     {
-        public AgentStartupWebDiagnosticsInspector(IRequestIgnorerManager requestIgnorerManager)
+        public AgentStartupWebDiagnosticsListener(IRequestIgnorerManager requestIgnorerManager)
         {
             RequestIgnorerManager = requestIgnorerManager;
         }
@@ -20,10 +20,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
         public void Run(IStartupOptions options)
         {
             var appServices = options.ApplicationServices;
-
-            //var telemetryListener = appServices.GetRequiredService<DiagnosticListener>();
-            //telemetryListener.SubscribeWithAdapter(appServices.GetRequiredService<WebDiagnosticsInspector>(), IsEnabled);
-
+            
             var listenerSubscription = DiagnosticListener.AllListeners.Subscribe(listener =>
             {
                 listener.SubscribeWithAdapter(appServices.GetRequiredService<WebDiagnosticsListener>(), IsEnabled);
