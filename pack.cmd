@@ -8,21 +8,21 @@ del /Q /S src\Glimpse.Agent.AspNet.Mvc\bin\Release
 
 md dist
 
-call dotnet restore .\src\Glimpse.Common\Glimpse.Common.csproj
-call dotnet restore .\src\Glimpse.Server\Glimpse.Server.csproj
-call dotnet restore .\src\Glimpse.Agent.AspNet\Glimpse.Agent.AspNet.csproj
-call dotnet restore .\src\Glimpse.Agent.AspNet.Mvc\Glimpse.Agent.AspNet.Mvc.csproj
-
 REM get time
 For /f "tokens=2-4 delims=/ " %%a in ('date /t') do (set DATE=%%c%%a%%b)
 For /f "tokens=1-2 delims=/:" %%a in ("%TIME%") do (set TIME=%%a%%b)
 
 set MILESTONE=0-beta2-%DATE%%TIME%
 
-call dotnet pack .\src\Glimpse.Common\Glimpse.Common.csproj --configuration Release --version-suffix %MILESTONE%
-call dotnet pack .\src\Glimpse.Server\Glimpse.Server.csproj --configuration Release --version-suffix %MILESTONE%
-call dotnet pack .\src\Glimpse.Agent.AspNet\Glimpse.Agent.AspNet.csproj --configuration Release --version-suffix %MILESTONE%
-call dotnet pack .\src\Glimpse.Agent.AspNet.Mvc\Glimpse.Agent.AspNet.Mvc.csproj --configuration Release --version-suffix %MILESTONE%
+call dotnet restore .\src\Glimpse.Common\Glimpse.Common.csproj /p:VersionSuffix=%MILESTONE%
+call dotnet restore .\src\Glimpse.Server\Glimpse.Server.csproj /p:VersionSuffix=%MILESTONE%
+call dotnet restore .\src\Glimpse.Agent.AspNet\Glimpse.Agent.AspNet.csproj /p:VersionSuffix=%MILESTONE%
+call dotnet restore .\src\Glimpse.Agent.AspNet.Mvc\Glimpse.Agent.AspNet.Mvc.csproj /p:VersionSuffix=%MILESTONE%
+
+call dotnet pack .\src\Glimpse.Common\Glimpse.Common.csproj --configuration Release
+call dotnet pack .\src\Glimpse.Server\Glimpse.Server.csproj --configuration Release
+call dotnet pack .\src\Glimpse.Agent.AspNet\Glimpse.Agent.AspNet.csproj --configuration Release
+call dotnet pack .\src\Glimpse.Agent.AspNet.Mvc\Glimpse.Agent.AspNet.Mvc.csproj --configuration Release
 
 call nuget pack src\Glimpse\Glimpse.nuspec -OutputDirectory dist -version 2.0.%MILESTONE%
 

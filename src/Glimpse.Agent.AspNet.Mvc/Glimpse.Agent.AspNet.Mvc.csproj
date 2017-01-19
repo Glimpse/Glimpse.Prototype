@@ -18,7 +18,6 @@
   <ItemGroup>
     <Compile Include="**\*.cs" />
     <EmbeddedResource Include="**\*.resx" />
-    <EmbeddedResource Include="compiler\resources\**\*" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Glimpse.Agent.AspNet\Glimpse.Agent.AspNet.csproj" />

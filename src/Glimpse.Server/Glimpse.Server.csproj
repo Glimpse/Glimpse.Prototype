@@ -17,8 +17,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="**\*.cs" />
-    <EmbeddedResource Include="**\*.resx" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
-    <EmbeddedResource Include="Internal\Resources\Embeded\**\*.*;compiler\resources\**\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
+    <EmbeddedResource Include="**\*.resx" />
+    <EmbeddedResource Include="Internal\Resources\Embeded\**\*.*" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Glimpse.Common\Glimpse.Common.csproj" />
