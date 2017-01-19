@@ -16,9 +16,6 @@
     <ProjectReference Include="..\..\src\Glimpse.Common\Glimpse.Common.csproj">
       <FromP2P>true</FromP2P>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Tavis.UriTemplates\Tavis.UriTemplates.csproj">
-      <FromP2P>true</FromP2P>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.App" Version="1.0.1" />
