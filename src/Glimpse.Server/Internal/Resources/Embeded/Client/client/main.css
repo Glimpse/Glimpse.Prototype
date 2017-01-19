@@ -571,7 +571,149 @@ button {
 .ShellStatusBarView__statusBarButton___36JYf:hover .ShellStatusBarView__statusBarButtonIcon___2rzrL, .ShellStatusBarView__statusBarButtonActive___2e5wz .ShellStatusBarView__statusBarButtonIcon___2rzrL {
     color: #ffffff;
 }
-.RequestsView__requests___3-dOH {
+.Common__table___3VuJF {
+    width: 100%;
+    border-spacing: 0px;
+    border-collapse: separate;
+    table-layout: fixed;
+}
+
+.Common__table___3VuJF > thead > tr > th {
+    text-align: left;
+    font-weight: bold;
+    padding: 0.4rem 0.75rem;
+    white-space: nowrap;
+}
+
+.Common__table___3VuJF > thead > tr > th + th {
+    border-left-width: 1px;
+    border-left-style: solid;
+}
+
+.Common__table___3VuJF > tbody > tr {
+    vertical-align: top;
+}
+
+.Common__table___3VuJF > tbody > tr > td {
+    padding: 0.4rem 0.75rem;
+}
+
+.Common__table___3VuJF > tbody > tr:nth-child(even) {
+}
+
+.Common__table___3VuJF > tbody > tr.Common__tableSelectableRow___1M8AJ {
+    cursor: pointer;
+    outline: none;
+}
+
+.Common__table___3VuJF > tbody > tr.Common__tableSelectableRow___1M8AJ:hover {
+}
+
+.Common__table___3VuJF > tbody > tr.Common__tableSelectedRow___2_thp.Common__tableSelectableRow___1M8AJ {
+}
+
+.Common__table___3VuJF > tbody > tr > td.Common__tableNoPadding___1qbZU {
+    padding: 0px;
+}
+
+.Common__table___3VuJF > tbody > tr > td.Common__tableNoData___1Ybo- {
+    padding-left: 0.75rem;
+}
+
+.Common__table___3VuJF .Common__tableHeadSpacer___3blY1 {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    height: 0.25rem;
+}
+
+.Common__table___3VuJF .Common__tableHeadSpacer___3blY1.Common__tableHeadSpacerNoLine___2U--z {
+    border-bottom-color: transparent;
+}
+
+.Common__noData___24Ofu {
+}
+
+.Common__paramName___2AdZT {
+    font-weight: bold;
+}
+
+.Common__paramValue___hBbfe {
+}
+
+.Common__paramOverwritten___3hFN0 {
+    text-decoration: line-through;
+}
+
+.Common__detailTitle___NvF1H {
+    font-size: 1.75rem;
+    margin-bottom: 1.25rem;
+    margin-top: 0.75rem;
+    font-weight: bold;
+}
+
+.Common__trimText___3taHb {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.Common__noWrapText___1FafM {
+    white-space: nowrap;
+}
+td.Common__noWrapText___1FafM {
+    overflow: hidden;
+}
+
+.Common__contextSection___3EHB5 {
+    margin-top: 3rem;
+}
+
+.Common__contextSection___3EHB5:first-child {
+    margin-top: 1rem;
+}
+
+.Common__contextSection___3EHB5 .Common__detailTitle___NvF1H {
+    margin-top: 0;
+}
+
+.Common__modal___d4R-Y {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    overflow: auto;
+    outline: none;
+    padding: 20px;
+}
+
+.Common__modalOverlay___18I25 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+.Common__modalInner___34bsi {
+    position: relative;
+}
+
+.Common__modalClose___3OSi_ {
+    position: absolute;
+    right: 0;
+    margin-right: 0.25rem;
+}
+
+.Common__modalCloseIcon___19nYg {
+    height: 1.5rem;
+    width: 1.5rem;
+}.DebugInputButton__input___qdvph {
+    display: block;
+    width: 100%;
+    height: calc(100vh - 18rem);
+}.RequestsView__requests___3-dOH {
     display: flex;
     flex-direction: row;
     flex-grow: 1;
@@ -695,113 +837,15 @@ button {
     margin-right: 2px;
 }
 
-.RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT .RequestsSideBarRequestView__requestDetailLine___2XTl3 {
+svg.RequestsSideBarRequestView__requestClientIcon___2xIKF {
+    height: 0.85rem;
+    width: 0.85rem;
+    margin-right: 0.25rem;
 }
 
-.RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT .RequestsSideBarRequestView__requestSummaryLine___2EClN {
-}.Common__table___3VuJF {
-    width: 100%;
-    border-spacing: 0px;
-    border-collapse: separate;
-    table-layout: fixed;
-}
-
-.Common__table___3VuJF > thead > tr > th {
-    text-align: left;
-    font-weight: bold;
-    padding: 0.4rem 0.75rem;
-    white-space: nowrap;
-}
-
-.Common__table___3VuJF > thead > tr > th + th {
-    border-left-width: 1px;
-    border-left-style: solid;
-}
-
-.Common__table___3VuJF > tbody > tr {
-    vertical-align: top;
-}
-
-.Common__table___3VuJF > tbody > tr > td {
-    padding: 0.4rem 0.75rem;
-}
-
-.Common__table___3VuJF > tbody > tr:nth-child(even) {
-}
-
-.Common__table___3VuJF > tbody > tr.Common__tableSelectableRow___1M8AJ {
-    cursor: pointer;
-    outline: none;
-}
-
-.Common__table___3VuJF > tbody > tr.Common__tableSelectableRow___1M8AJ:hover {
-}
-
-.Common__table___3VuJF > tbody > tr.Common__tableSelectedRow___2_thp.Common__tableSelectableRow___1M8AJ {
-}
-
-.Common__table___3VuJF > tbody > tr > td.Common__tableNoPadding___1qbZU {
-    padding: 0px;
-}
-
-.Common__table___3VuJF > tbody > tr > td.Common__tableNoData___1Ybo- {
-    padding-left: 0.75rem;
-}
-
-.Common__table___3VuJF .Common__tableHeadSpacer___3blY1 {
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    height: 0.25rem;
-}
-
-.Common__table___3VuJF .Common__tableHeadSpacer___3blY1.Common__tableHeadSpacerNoLine___2U--z {
-    border-bottom-color: transparent;
-}
-
-.Common__noData___24Ofu {
-}
-
-.Common__paramName___2AdZT {
-    font-weight: bold;
-}
-
-.Common__paramValue___hBbfe {
-}
-
-.Common__paramOverwritten___3hFN0 {
-    text-decoration: line-through;
-}
-
-.Common__detailTitle___NvF1H {
-    font-size: 1.75rem;
-    margin-bottom: 1.25rem;
-    margin-top: 0.75rem;
-    font-weight: bold;
-}
-
-.Common__trimText___3taHb {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.Common__noWrapText___1FafM {
-    white-space: nowrap;
-}
-td.Common__noWrapText___1FafM {
-    overflow: hidden;
-}
-
-.Common__contextSection___3EHB5 {
-    margin-top: 3rem;
-}
-
-.Common__contextSection___3EHB5:first-child {
-    margin-top: 1rem;
-}
-
-.Common__contextSection___3EHB5 .Common__detailTitle___NvF1H {
-    margin-top: 0;
+.RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT .RequestsSideBarRequestView__requestSummaryLine___2EClN,
+.RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT .RequestsSideBarRequestView__requestDetailLine___2XTl3,
+.RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT svg.RequestsSideBarRequestView__requestClientIcon___2xIKF {
 }.StatusLabel__statusLabelContainer___HL8YZ {
     display: flex;
     align-items: center;
@@ -818,7 +862,7 @@ td.Common__noWrapText___1FafM {
 }
 
 .StatusLabel__statusLabelBlueIcon___3MafR {
-    color: #618fbb;
+    color: #1ba1e2;
 }
 
 .StatusLabel__statusLabelGreenIcon___1UTQJ {
@@ -826,7 +870,7 @@ td.Common__noWrapText___1FafM {
 }
 
 .StatusLabel__statusLabelYellowIcon___1mw3d {
-    color: #facb00;
+    color: #f8a800;
 }
 
 .StatusLabel__statusLabelRedIcon___ClZQ1 {
@@ -847,7 +891,18 @@ td.Common__noWrapText___1FafM {
 svg.UrlText__urlProtocolHttps___BT4-U {
     margin-left: -2px;
     margin-right: 2px;
-}.RequestsDetailsView__detail___8iEPv {
+}.ClientLabel__clientLabelContainer___2XZsr {
+    display: flex;
+    align-items: center;
+}
+
+.ClientLabel__clientLabelIcon___1bPcZ {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    margin-right: 5px;
+}
+.RequestsDetailsView__detail___8iEPv {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -873,8 +928,6 @@ svg.UrlText__urlProtocolHttps___BT4-U {
     flex: none;
     width: 14%;
     display: flex;
-    flex-direction: column;
-    flex-grow: 1;
 }
 
 .RequestsDetailsView__detailContentDetail___1ugzx {
@@ -961,7 +1014,7 @@ svg.UrlText__urlProtocolHttps___BT4-U {
     overflow-y: auto;
     height: 35vh;
     width: 100%;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
 }.RequestsDetailsOverviewView__overview___1s-8L {
     display: flex;
     flex-direction: column;
@@ -1000,17 +1053,6 @@ svg.UrlText__urlProtocolHttps___BT4-U {
 
 .RequestsDetailsOverviewView__overviewDetailTitle___1czqF {
     margin: 0.5rem 0 0.125rem;
-}
-.ClientLabel__clientLabelContainer___2XZsr {
-    display: flex;
-    align-items: center;
-}
-
-.ClientLabel__clientLabelIcon___1bPcZ {
-    width: 1rem;
-    height: 1rem;
-    flex-shrink: 0;
-    margin-right: 5px;
 }
 .ExpandCollapseButton__expandCollapseButton___Jv2kS {
     display: flex;
@@ -1150,7 +1192,8 @@ that the padding is the same, even if technically speaking it isn't.
 .Logging__logTimeSpanIcon___3q9S0 {
     flex: none;
     margin-right: 0.35rem;
-    width: 1.2rem;
+    width: 1rem;
+    margin-top: 0.25rem;
 }
 
 .Logging__logTimeSpanIconPath___108a4 {
@@ -1186,23 +1229,23 @@ that the padding is the same, even if technically speaking it isn't.
     background-image: linear-gradient(to right, #f1f1f1 3px, transparent 3px);
 }
 .AgentIcon__icon___j4EHh {
-    width: 1.25rem;
+    width: 1rem;
     margin-right: 0.219rem;
+    margin-top: 0.25rem;
 }
 
 .AgentIcon__iconPathClient___3a-DF {
-    fill: transparent;
 }
 
 .AgentIcon__iconPathServer___3FuE5 {
-    fill: transparent;
 }.LevelIcon__icon___ZKaom {
     width: 1rem;
     margin-right: 0.25rem;
+    margin-top: 0.25rem;
 }
 
 .LevelIcon__iconPathWarning___cJASc {
-    fill: #f28300;
+    fill: #facb00;
 }
 
 .LevelIcon__iconPathError___3Qjzs {
@@ -1407,13 +1450,11 @@ that the padding is the same, even if technically speaking it isn't.
 
 .FilterButton__filterButtonIcon___ZRxNh {
     margin-right: 0.219rem;
-    width: 1.25rem;
+    width: 1rem;
 }.LoggingFilterBar__agentBrowserIcon___32h-c {
-    fill: transparent;
 }
 
 .LoggingFilterBar__agentServerIcon___3TNK2 {
-    fill: transparent;
 }.StackFrame__stackFrame___15Fsj {
     display: flex;
     flex-direction: row;
@@ -1670,7 +1711,6 @@ that the padding is the same, even if technically speaking it isn't.
 
 .CookiesView__iconCookieFalse___3QPGJ {
 }.BodyView__body___3gwfM {
-    padding: 0.5rem 0;
 }
 
 .BodyView__metadata___F6gZG {
@@ -1678,6 +1718,7 @@ that the padding is the same, even if technically speaking it isn't.
     padding-bottom: 0.5rem;
     display: flex;
     align-items: center;
+    margin-top: 0.5rem;
 }
 
 .BodyView__metadataSpacer___nRl5T {
@@ -1744,15 +1785,15 @@ that the padding is the same, even if technically speaking it isn't.
     flex-direction: column;
 }
 
-.RequestMiddleware__middlewareOperation___WNDow + .RequestMiddleware__middlewareOperation___WNDow {
-    margin-top: 0.75rem;
-}
-
-.RequestMiddleware__middlewareModifiedItem___3r1LC {
-
+.RequestMiddleware__middlewareModifiedItem___3r1LC, .RequestMiddleware__middlewareOperation___WNDow {
     display: flex;
     flex-direction: row;
     width: 100%;
+}
+
+.RequestMiddleware__middlewareOperation___WNDow + .RequestMiddleware__middlewareOperation___WNDow,
+.RequestMiddleware__middlewareModifiedItem___3r1LC + .RequestMiddleware__middlewareModifiedItem___3r1LC  {
+    margin-top: 0.75rem;
 }
 
 .RequestMiddleware__middlewareIcon___zxsGk {
@@ -1891,31 +1932,7 @@ that the padding is the same, even if technically speaking it isn't.
 .RequestResponseTabStrip__stripItemContent___1nDKI:hover {
     overflow-x: auto;
     overflow-x: overlay;
-}.RequestResponseTabStripModal__modal___1-YVM {
-    position: absolute;
-    top: 40px;
-    left: 40px;
-    right: 40px;
-    bottom: 40px;
-    overflow: auto;
-    outline: none;
-    padding: 20px;
-}
-
-.RequestResponseTabStripModal__modalOverlay___1r1G5 {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.85);
-}
-
-.RequestResponseTabStripModal__modalInner___1mHRQ {
-    position: relative;
-}
-
-.RequestResponseTabStripModal__expand___1yRqS {
+}.RequestResponseTabStripModal__expand___1yRqS {
 }
 
 .RequestResponseTabStripModal__expandIcon___1fe5W {
@@ -1923,17 +1940,6 @@ that the padding is the same, even if technically speaking it isn't.
     width: 1rem;
     vertical-align: bottom;
     margin-right: 0.5rem;
-}
-
-.RequestResponseTabStripModal__close___1ZUsl {
-    position: absolute;
-    right: 0;
-    margin-right: 0.25rem;
-}
-
-.RequestResponseTabStripModal__closeIcon___11e3G {
-    height: 1.5rem;
-    width: 1.5rem;
 }
 
 .RequestResponseTabStripModal__title___14DNw {
@@ -2092,4 +2098,4 @@ that the padding is the same, even if technically speaking it isn't.
     overflow: auto;
     height: 200px;
     width: 95%;
-}.dark button {color: #f1f1f1; } .dark ::-webkit-scrollbar-thumb {background: rgba(70, 70, 70, 0.5); } .dark .ShellView__shellContent___vo90n {background-color: #1b1b1c; color: #f1f1f1; } .dark .ShellView__shellContentActivityBar___hrU73 {background-color: #2d2d30; } .dark .ShellActivityBarView__activityBarButton___2v3pv {color: #848484; } .dark .ShellActivityBarView__activityBarButton___2v3pv:hover {color: #f1f1f1; } .dark .ShellActivityBarView__activityBarButton___2v3pv:active {border-color: #0e6198; } .dark .ShellActivityBarView__activityBarButtonActive___1ysdE {color: #f1f1f1; } .dark .ShellStatusBarView__statusBar___d0l8w {background-color: #007acc; color: #f1f1f1; } .dark .ShellStatusBarView__statusBarButton___36JYf:hover {background-color: #278bcf; } .dark .SideBar__sideBar___2UI2S {background-color: #252526; border-right-color: #46464a; } .dark .SideBarSection__sideBarTitleHolder___2Tbjp {background-color: #2d2d30; border-top-color: #46464a; } .dark .SideBarSection__sideBarTitleIsImportant___w_-zs .SideBarSection__sideBarTitle___pJVSt {border-left-color: #0e6198; } .dark .SideBarSection__sideBarNoRecords___8BDPu {color: #999999; } .dark .RequestsSideBarRequestView__requestButton___3EwbS:hover {background-color: #3f3f46; } .dark .RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT {background-color: #0e6198; } .dark .RequestsSideBarRequestView__requestSummaryLine___2EClN {color: #f1f1f1; } .dark .RequestsSideBarRequestView__requestDetailLine___2XTl3 {color: #999999; } .dark .RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT .RequestsSideBarRequestView__requestDetailLine___2XTl3 {color: #ffffff; } .dark .RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT .RequestsSideBarRequestView__requestSummaryLine___2EClN {color: #ffffff; } .dark .Common__table___3VuJF > thead > tr > th + th {border-left-color: #46464A; } .dark .Common__table___3VuJF > tbody > tr:nth-child(even) {background-color: #212123; } .dark .Common__table___3VuJF > tbody > tr.Common__tableSelectableRow___1M8AJ:hover {background-color: #3f3f46; } .dark .Common__table___3VuJF > tbody > tr.Common__tableSelectedRow___2_thp.Common__tableSelectableRow___1M8AJ {background-color: #0e6198; } .dark .Common__table___3VuJF > tbody > tr > td.Common__tableNoData___1Ybo- {color: #999999; } .dark .Common__table___3VuJF .Common__tableHeadSpacer___3blY1 {border-bottom-color: #46464A; } .dark .Common__noData___24Ofu {color: #999999; } .dark .Common__paramValue___hBbfe {color: #aaaaaa; } .dark .Common__paramOverwritten___3hFN0 {color: #aaaaaa; text-decoration-color: #0e6198; -moz-text-decoration-color: #0e6198; -webkit-text-decoration-color: #0e6198; } .dark .UrlText__urlProtocolHttpsColor___1iwZP {color: #71B252; } .dark .RequestsDetailsView__detailTitle___2ZX0b {border-bottom-color: #46464A; } .dark .TabStrip__stripButton___2pizC:hover {color: #3399ff; } .dark .TabStrip__stripButtonActive___1O88B {color: #3399ff; } .dark .TabStrip__stripPlain___3JjMv .TabStrip__stripButtonActive___1O88B {border-bottom-color: #3399ff; } .dark .TabStrip__stripTabs___16pyx {border-bottom-color: #46464A; } .dark .TabStrip__stripTabs___16pyx .TabStrip__stripButtonActive___1O88B {background-color: #1b1b1c; border-top-color: #46464A; border-right-color: #46464A; border-left-color: #46464A; } .dark .RequestsDetailsOverviewView__overview___1s-8L {border-color: #46464A; } .dark .RequestsDetailsOverviewView__overviewDetailTitle___1czqF {color: #999999; } .dark .ClientLabel__clientLabelIcon___1bPcZ {color: #f1f1f1; } .dark .ExpandCollapseButton__expandCollapseButtonIcon___12o5i {color: #f1f1f1; } .dark .Logging__logViewExpandCollapseAll___2KOc- {border-left-color: #46464A; } .dark .Logging__logNoMessages___2M5NZ {color: #999999; } .dark .Logging__logContent___sabR- a {color: #3399ff; } .dark .Logging__logContent___sabR- a:active {color: #007acc; } .dark .Logging__logTimeSpanIconPath___108a4 {fill: #999999; } .dark .Logging__logGroup___1TV7j.Logging__logGroupLine___1BRe6:before {border-left-color: #f1f1f1; } .dark .AgentIcon__iconPathClient___3a-DF {stroke: #79d7f2; } .dark .AgentIcon__iconPathServer___3FuE5 {stroke: #903f8b; } .dark .ExpandCollapseAllBar__expandCollapseAllIconPath___3_Lkq {fill: #f1f1f1; } .dark .JsonTable__jsonTableFaderEven___2daXG {background-image: linear-gradient(to bottom, transparent, #212123 40%); } .dark .JsonTable__jsonTableFaderOdd___1w2yC {background-image: linear-gradient(to bottom, transparent, #1b1b1c 40%); } .dark .JsonTable__jsonTable___2veE9 > thead {border-bottom-color: #46464A; } .dark .JsonTable__jsonTableHeaderCount___3Fqv1 {color: #999999; } .dark .LoggingLabel__loggingLabelUnnamed___1gjW8 {color: #999999; } .dark .token {border-color: #808080; } .dark .token.tokenString {color: #cd917a; } .dark .token.tokenInteger {color: #b6cda9; } .dark .LoggingTimeSpan__logTimeSpanDuration___2YBv8 {border-left-color: #46464A; border-right-color: #46464A; } .dark .FilterBar__filterGroup___2GLr4 {border-left-color: #46464A; } .dark .FilterBar__filterShowAll___rIBiy, .dark .FilterBar__filterShowAll___rIBiy:hover, .dark .FilterBar__filterShowAll___rIBiy:active {color: #3399ff; } .dark .FilterBar__filterShowAll___rIBiy:active {color: #007acc; } .dark .FilterButton__filterButton___1waRX, .dark .FilterButton__filterButtonShown___dM8it, .dark .FilterButton__filterButtonNotShown___kr-em {color: #f1f1f1; } .dark .FilterButton__filterButtonShown___dM8it {border-color: #3399FF; } .dark .FilterButton__filterButtonShown___dM8it:hover {border-color: #137CC9; background-color: #3F3F46; } .dark .FilterButton__filterButtonNotShown___kr-em:hover {background-color: #3F3F46; } .dark .FilterButton__filterButtonNotShown___kr-em:active {background-color: #007acc; } .dark .LoggingFilterBar__agentBrowserIcon___32h-c {stroke: #79d7f2; } .dark .LoggingFilterBar__agentServerIcon___3TNK2 {stroke: #903f8b; } .dark .DetailBiPanel__detail___24y3T {border-top-color: #0e6198; } .dark .DetailBiPanel__detailMargin___2KlbB {background-color: #46464A; } .dark .DetailBiPanel__detailPanelTitle___FHOIq {background-color: #2d2d30; color: #f1f1f1; } .dark .CodeView__codeView___QXLAq > pre > code {color: #f1f1f1; } .dark .FixedWidthLeftColumnTable__fixedWidthLeftColumnTableScrollableFade___2pza5 {background-image: linear-gradient(to left, transparent, #1b1b1c 90%); } .dark .FixedWidthLeftColumnTable__fixedWidthLeftColumnTableNameHeader___2VaBz {border-right-color: #46464A; } .dark .CookiesView__iconCookieTrue___295Gw {fill: #71b252; } .dark .CookiesView__iconCookieFalse___3QPGJ {fill: #b03b00; } .dark .BodyView__metadataSpacer___nRl5T {border-left: 1px solid #46464a; } .dark .InformationLabel__message___2kkkx {color: #999999; } .dark .InformationLabel__messageIcon___1MokF {color: #3399ff; } .dark .RequestMiddleware__middlewareRequestIcon___Fic3s {color: #ff7bac; } .dark .RequestMiddleware__middlewareResponseIcon___3kupI {color: #deaf8f; } .dark .RequestMiddleware__middlewareOperationType___Uza3O {color: #999999; } .dark .RequestMiddleware__middlewareNameAnonymous___2zluq {color: #999999; } .dark .RequestResourceTable__requestResourceTablePercentage___18e3W {color: #999999; } .dark .RequestResourceTable__requestResourceTableTotalCell___3vsUm {border-top-color: #46464A; } .dark .RequestResourceTable__requestResourceTableColor1___pgfd8 {background-color: #71B252; } .dark .RequestResourceTable__requestResourceTableColor2___2EjnU {background-color: #BF3F00; } .dark .RequestResourceTable__requestResourceTableColor3___2_5Qt {background-color: #FCB714; } .dark .RequestResourceTable__requestResourceTableColor4___eBo2n {background-color: #903F8B; } .dark .RequestResourceTable__requestResourceTableColor5___3WWFb {background-color: #117AD1; } .dark .RequestResourceTable__requestResourceTableColor6___ABqc1 {background-color: #79D7F2; } .dark .RequestResourceTable__requestResourceTableColor7___1zEV8 {background-color: #B5B5B5; } .dark .RequestResponseTabStrip__stripContainer___1yjz4 {border-bottom: 1px solid #515152; } .dark .RequestResponseTabStrip__stripItemLeft___bkEF4 {border-right: 1px solid #515152; } .dark .RequestResponseTabStripModal__modal___1-YVM {border: 1px solid #515152; background: #1b1b1c; color: #f1f1f1; } .dark .RequestResponseTabStripModal__title___14DNw {border-right: 1px solid #46464a; } .dark .ServiceView__serviceDuration___VxP0I {color: #999999; } .dark .ExpansionBar__expansionBar___1MJFU {color: #f1f1f1; background-color: #2d2d30; border-top-color: #46464a; } .dark .ExpansionBar__expansionBar___1MJFU:hover {background-color: #3f3f46; } .dark .ExpansionBar__expansionBar___1MJFU:active {background-color: #007acc; } .dark .ServiceBarChart__serviceBarChart___3LYEB {color: #f1f1f1; } .light button {color: #1e1e1e; } .light ::-webkit-scrollbar-thumb {background: rgba(206, 206, 206, 0.5); } .light .ShellView__shellContent___vo90n {background-color: #ffffff; color: #1e1e1e; } .light .ShellView__shellContentActivityBar___hrU73 {background-color: #cecece; } .light .ShellActivityBarView__activityBarButton___2v3pv {color: #848484; } .light .ShellActivityBarView__activityBarButton___2v3pv:hover {color: #1e1e1e; } .light .ShellActivityBarView__activityBarButton___2v3pv:active {border-color: #3399ff; } .light .ShellActivityBarView__activityBarButtonActive___1ysdE {color: #1e1e1e; } .light .ShellStatusBarView__statusBar___d0l8w {background-color: #007acc; color: #f1f1f1; } .light .ShellStatusBarView__statusBarButton___36JYf:hover {background-color: #278bcf; } .light .SideBar__sideBar___2UI2S {background-color: #f4f4f4; border-right-color: #e0e0e0; } .light .SideBarSection__sideBarTitleHolder___2Tbjp {background-color: #cecece; border-top-color: #e0e0e0; } .light .SideBarSection__sideBarTitleIsImportant___w_-zs .SideBarSection__sideBarTitle___pJVSt {border-left-color: #3399ff; } .light .SideBarSection__sideBarNoRecords___8BDPu {color: #6d6d6d; } .light .RequestsSideBarRequestView__requestButton___3EwbS:hover {background-color: #eaf0ff; } .light .RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT {background-color: #3399ff; } .light .RequestsSideBarRequestView__requestSummaryLine___2EClN {color: #1e1e1e; } .light .RequestsSideBarRequestView__requestDetailLine___2XTl3 {color: #6d6d6d; } .light .RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT .RequestsSideBarRequestView__requestDetailLine___2XTl3 {color: #ffffff; } .light .RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT .RequestsSideBarRequestView__requestSummaryLine___2EClN {color: #ffffff; } .light .Common__table___3VuJF > thead > tr > th + th {border-left-color: #e0e0e0; } .light .Common__table___3VuJF > tbody > tr:nth-child(even) {background-color: #f4f4f4; } .light .Common__table___3VuJF > tbody > tr.Common__tableSelectableRow___1M8AJ:hover {background-color: #eaf0ff; } .light .Common__table___3VuJF > tbody > tr.Common__tableSelectedRow___2_thp.Common__tableSelectableRow___1M8AJ {background-color: #3399ff; } .light .Common__table___3VuJF > tbody > tr > td.Common__tableNoData___1Ybo- {color: #6d6d6d; } .light .Common__table___3VuJF .Common__tableHeadSpacer___3blY1 {border-bottom-color: #e0e0e0; } .light .Common__noData___24Ofu {color: #6d6d6d; } .light .Common__paramValue___hBbfe {color: #1e1e1e; } .light .Common__paramOverwritten___3hFN0 {color: #1e1e1e; text-decoration-color: #3399ff; -moz-text-decoration-color: #3399ff; -webkit-text-decoration-color: #3399ff; } .light .UrlText__urlProtocolHttpsColor___1iwZP {color: #1a7f17; } .light .RequestsDetailsView__detailTitle___2ZX0b {border-bottom-color: #e0e0e0; } .light .TabStrip__stripButton___2pizC:hover {color: #0e70c0; } .light .TabStrip__stripButtonActive___1O88B {color: #0e70c0; } .light .TabStrip__stripPlain___3JjMv .TabStrip__stripButtonActive___1O88B {border-bottom-color: #0e70c0; } .light .TabStrip__stripTabs___16pyx {border-bottom-color: #0e70c0; } .light .TabStrip__stripTabs___16pyx .TabStrip__stripButtonActive___1O88B {background-color: #ffffff; border-top-color: #0e70c0; border-right-color: #0e70c0; border-left-color: #0e70c0; } .light .RequestsDetailsOverviewView__overview___1s-8L {border-color: #e0e0e0; } .light .RequestsDetailsOverviewView__overviewDetailTitle___1czqF {color: #6d6d6d; } .light .ClientLabel__clientLabelIcon___1bPcZ {color: #1e1e1e; } .light .ExpandCollapseButton__expandCollapseButtonIcon___12o5i {color: #1e1e1e; } .light .Logging__logViewExpandCollapseAll___2KOc- {border-left-color: #e0e0e0; } .light .Logging__logNoMessages___2M5NZ {color: #6d6d6d; } .light .Logging__logContent___sabR- a {color: #0e70c0; } .light .Logging__logContent___sabR- a:active {color: #dce0ec; } .light .Logging__logTimeSpanIconPath___108a4 {fill: #6d6d6d; } .light .Logging__logGroup___1TV7j.Logging__logGroupLine___1BRe6:before {border-left-color: #1e1e1e; } .light .AgentIcon__iconPathClient___3a-DF {stroke: #79d7f2; } .light .AgentIcon__iconPathServer___3FuE5 {stroke: #903f8b; } .light .ExpandCollapseAllBar__expandCollapseAllIconPath___3_Lkq {fill: #1e1e1e; } .light .JsonTable__jsonTableFaderEven___2daXG {background-image: linear-gradient(to bottom, transparent, #f4f4f4 40%); } .light .JsonTable__jsonTableFaderOdd___1w2yC {background-image: linear-gradient(to bottom, transparent, #ffffff 40%); } .light .JsonTable__jsonTable___2veE9 > thead {border-bottom-color: #e0e0e0; } .light .JsonTable__jsonTableHeaderCount___3Fqv1 {color: #6d6d6d; } .light .LoggingLabel__loggingLabelUnnamed___1gjW8 {color: #6d6d6d; } .light .token {border-color: #808080; } .light .token.tokenString {color: #B84803; } .light .token.tokenInteger {color: #198844; } .light .LoggingTimeSpan__logTimeSpanDuration___2YBv8 {border-left-color: #e0e0e0; border-right-color: #e0e0e0; } .light .FilterBar__filterGroup___2GLr4 {border-left-color: #e0e0e0; } .light .FilterBar__filterShowAll___rIBiy, .light .FilterBar__filterShowAll___rIBiy:hover, .light .FilterBar__filterShowAll___rIBiy:active {color: #0e70c0; } .light .FilterBar__filterShowAll___rIBiy:active {color: #dce0ec; } .light .FilterButton__filterButton___1waRX, .light .FilterButton__filterButtonShown___dM8it, .light .FilterButton__filterButtonNotShown___kr-em {color: #1e1e1e; } .light .FilterButton__filterButtonShown___dM8it {border-color: #3399FF; } .light .FilterButton__filterButtonShown___dM8it:hover {border-color: #137CC9; background-color: #eaf0ff; } .light .FilterButton__filterButtonNotShown___kr-em:hover {background-color: #eaf0ff; } .light .FilterButton__filterButtonNotShown___kr-em:active {background-color: #007acc; } .light .LoggingFilterBar__agentBrowserIcon___32h-c {stroke: #79d7f2; } .light .LoggingFilterBar__agentServerIcon___3TNK2 {stroke: #903f8b; } .light .DetailBiPanel__detail___24y3T {border-top-color: #3399ff; } .light .DetailBiPanel__detailMargin___2KlbB {background-color: #e0e0e0; } .light .DetailBiPanel__detailPanelTitle___FHOIq {background-color: #848484; color: #1e1e1e; } .light .CodeView__codeView___QXLAq > pre > code {color: #1e1e1e; } .light .FixedWidthLeftColumnTable__fixedWidthLeftColumnTableScrollableFade___2pza5 {background-image: linear-gradient(to left, transparent, #ffffff 90%); } .light .FixedWidthLeftColumnTable__fixedWidthLeftColumnTableNameHeader___2VaBz {border-right-color: #e0e0e0; } .light .CookiesView__iconCookieTrue___295Gw {fill: #71b252; } .light .CookiesView__iconCookieFalse___3QPGJ {fill: #b03b00; } .light .BodyView__metadataSpacer___nRl5T {border-left: 1px solid #e0e0e0; } .light .InformationLabel__message___2kkkx {color: #6d6d6d; } .light .InformationLabel__messageIcon___1MokF {color: #0e70c0; } .light .RequestMiddleware__middlewareRequestIcon___Fic3s {color: #ff7bac; } .light .RequestMiddleware__middlewareResponseIcon___3kupI {color: #deaf8f; } .light .RequestMiddleware__middlewareOperationType___Uza3O {color: #6d6d6d; } .light .RequestMiddleware__middlewareNameAnonymous___2zluq {color: #6d6d6d; } .light .RequestResourceTable__requestResourceTablePercentage___18e3W {color: #6d6d6d; } .light .RequestResourceTable__requestResourceTableTotalCell___3vsUm {border-top-color: #e0e0e0; } .light .RequestResourceTable__requestResourceTableColor1___pgfd8 {background-color: #71B252; } .light .RequestResourceTable__requestResourceTableColor2___2EjnU {background-color: #BF3F00; } .light .RequestResourceTable__requestResourceTableColor3___2_5Qt {background-color: #FCB714; } .light .RequestResourceTable__requestResourceTableColor4___eBo2n {background-color: #903F8B; } .light .RequestResourceTable__requestResourceTableColor5___3WWFb {background-color: #117AD1; } .light .RequestResourceTable__requestResourceTableColor6___ABqc1 {background-color: #79D7F2; } .light .RequestResourceTable__requestResourceTableColor7___1zEV8 {background-color: #B5B5B5; } .light .RequestResponseTabStrip__stripContainer___1yjz4 {border-bottom: 1px solid #515152; } .light .RequestResponseTabStrip__stripItemLeft___bkEF4 {border-right: 1px solid #515152; } .light .RequestResponseTabStripModal__modal___1-YVM {border: 1px solid #515152; background: #ffffff; color: #1e1e1e; } .light .RequestResponseTabStripModal__title___14DNw {border-right: 1px solid #e0e0e0; } .light .ServiceView__serviceDuration___VxP0I {color: #6d6d6d; } .light .ExpansionBar__expansionBar___1MJFU {color: #1e1e1e; background-color: #848484; border-top-color: #e0e0e0; } .light .ExpansionBar__expansionBar___1MJFU:hover {background-color: #eaf0ff; } .light .ExpansionBar__expansionBar___1MJFU:active {background-color: #007acc; } .light .ServiceBarChart__serviceBarChart___3LYEB {color: #1e1e1e; } 
+}.dark button {color: #f1f1f1; } .dark ::-webkit-scrollbar-thumb {background: rgba(70, 70, 70, 0.5); } .dark .ShellView__shellContent___vo90n {background-color: #1b1b1c; color: #f1f1f1; } .dark .ShellView__shellContentActivityBar___hrU73 {background-color: #2d2d30; } .dark .ShellActivityBarView__activityBarButton___2v3pv {color: #848484; } .dark .ShellActivityBarView__activityBarButton___2v3pv:hover {color: #f1f1f1; } .dark .ShellActivityBarView__activityBarButton___2v3pv:active {border-color: #0e6198; } .dark .ShellActivityBarView__activityBarButtonActive___1ysdE {color: #f1f1f1; } .dark .ShellStatusBarView__statusBar___d0l8w {background-color: #007acc; color: #f1f1f1; } .dark .ShellStatusBarView__statusBarButton___36JYf:hover {background-color: #278bcf; } .dark .Common__table___3VuJF > thead > tr > th + th {border-left-color: #46464A; } .dark .Common__table___3VuJF > tbody > tr:nth-child(even) {background-color: #212123; } .dark .Common__table___3VuJF > tbody > tr.Common__tableSelectableRow___1M8AJ:hover {background-color: #3f3f46; } .dark .Common__table___3VuJF > tbody > tr.Common__tableSelectedRow___2_thp.Common__tableSelectableRow___1M8AJ {background-color: #0e6198; } .dark .Common__table___3VuJF > tbody > tr > td.Common__tableNoData___1Ybo- {color: #999999; } .dark .Common__table___3VuJF .Common__tableHeadSpacer___3blY1 {border-bottom-color: #46464A; } .dark .Common__noData___24Ofu {color: #999999; } .dark .Common__paramValue___hBbfe {color: #aaaaaa; } .dark .Common__paramOverwritten___3hFN0 {color: #aaaaaa; text-decoration-color: #0e6198; -moz-text-decoration-color: #0e6198; -webkit-text-decoration-color: #0e6198; } .dark .Common__modal___d4R-Y {border: 1px solid #515152; background: #1b1b1c; color: #f1f1f1; } .dark .SideBar__sideBar___2UI2S {background-color: #252526; border-right-color: #46464a; } .dark .SideBarSection__sideBarTitleHolder___2Tbjp {background-color: #2d2d30; border-top-color: #46464a; } .dark .SideBarSection__sideBarTitleIsImportant___w_-zs .SideBarSection__sideBarTitle___pJVSt {border-left-color: #0e6198; } .dark .SideBarSection__sideBarNoRecords___8BDPu {color: #999999; } .dark .RequestsSideBarRequestView__requestButton___3EwbS:hover {background-color: #3f3f46; } .dark .RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT {background-color: #0e6198; } .dark .RequestsSideBarRequestView__requestSummaryLine___2EClN {color: #f1f1f1; } .dark .RequestsSideBarRequestView__requestDetailLine___2XTl3 {color: #999999; } .dark svg.RequestsSideBarRequestView__requestClientIcon___2xIKF {color: #999999; } .dark .RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT .RequestsSideBarRequestView__requestSummaryLine___2EClN, .dark .RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT .RequestsSideBarRequestView__requestDetailLine___2XTl3, .dark .RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT svg.RequestsSideBarRequestView__requestClientIcon___2xIKF {color: #ffffff; } .dark .UrlText__urlProtocolHttpsColor___1iwZP {color: #71B252; } .dark .ClientLabel__clientLabelIcon___1bPcZ {color: #f1f1f1; } .dark .RequestsDetailsView__detailTitle___2ZX0b {border-bottom-color: #46464A; } .dark .TabStrip__stripButton___2pizC:hover {color: #3399ff; } .dark .TabStrip__stripButtonActive___1O88B {color: #3399ff; } .dark .TabStrip__stripPlain___3JjMv .TabStrip__stripButtonActive___1O88B {border-bottom-color: #3399ff; } .dark .TabStrip__stripTabs___16pyx {border-bottom-color: #46464A; } .dark .TabStrip__stripTabs___16pyx .TabStrip__stripButtonActive___1O88B {background-color: #1b1b1c; border-top-color: #46464A; border-right-color: #46464A; border-left-color: #46464A; } .dark .RequestsDetailsOverviewView__overview___1s-8L {border-color: #46464A; } .dark .RequestsDetailsOverviewView__overviewDetailTitle___1czqF {color: #999999; } .dark .ExpandCollapseButton__expandCollapseButtonIcon___12o5i {color: #f1f1f1; } .dark .Logging__logViewExpandCollapseAll___2KOc- {border-left-color: #46464A; } .dark .Logging__logNoMessages___2M5NZ {color: #999999; } .dark .Logging__logContent___sabR- a {color: #3399ff; } .dark .Logging__logContent___sabR- a:active {color: #007acc; } .dark .Logging__logTimeSpanIconPath___108a4 {fill: #999999; } .dark .Logging__logGroup___1TV7j.Logging__logGroupLine___1BRe6:before {border-left-color: #f1f1f1; } .dark .AgentIcon__iconPathClient___3a-DF {fill: #79d7f2; } .dark .AgentIcon__iconPathServer___3FuE5 {fill: #903f8b; } .dark .ExpandCollapseAllBar__expandCollapseAllIconPath___3_Lkq {fill: #f1f1f1; } .dark .JsonTable__jsonTableFaderEven___2daXG {background-image: linear-gradient(to bottom, transparent, #212123 40%); } .dark .JsonTable__jsonTableFaderOdd___1w2yC {background-image: linear-gradient(to bottom, transparent, #1b1b1c 40%); } .dark .JsonTable__jsonTable___2veE9 > thead {border-bottom-color: #46464A; } .dark .JsonTable__jsonTableHeaderCount___3Fqv1 {color: #999999; } .dark .LoggingLabel__loggingLabelUnnamed___1gjW8 {color: #999999; } .dark .token {border-color: #808080; } .dark .token.tokenString {color: #cd917a; } .dark .token.tokenInteger {color: #b6cda9; } .dark .LoggingTimeSpan__logTimeSpanDuration___2YBv8 {border-left-color: #46464A; border-right-color: #46464A; } .dark .FilterBar__filterGroup___2GLr4 {border-left-color: #46464A; } .dark .FilterBar__filterShowAll___rIBiy, .dark .FilterBar__filterShowAll___rIBiy:hover, .dark .FilterBar__filterShowAll___rIBiy:active {color: #3399ff; } .dark .FilterBar__filterShowAll___rIBiy:active {color: #007acc; } .dark .FilterButton__filterButton___1waRX, .dark .FilterButton__filterButtonShown___dM8it, .dark .FilterButton__filterButtonNotShown___kr-em {color: #f1f1f1; } .dark .FilterButton__filterButtonShown___dM8it {border-color: #3399FF; } .dark .FilterButton__filterButtonShown___dM8it:hover {border-color: #137CC9; background-color: #3F3F46; } .dark .FilterButton__filterButtonNotShown___kr-em:hover {background-color: #3F3F46; } .dark .FilterButton__filterButtonNotShown___kr-em:active {background-color: #007acc; } .dark .LoggingFilterBar__agentBrowserIcon___32h-c {fill: #79d7f2; } .dark .LoggingFilterBar__agentServerIcon___3TNK2 {fill: #903f8b; } .dark .DetailBiPanel__detail___24y3T {border-top-color: #0e6198; } .dark .DetailBiPanel__detailMargin___2KlbB {background-color: #46464A; } .dark .DetailBiPanel__detailPanelTitle___FHOIq {background-color: #2d2d30; color: #f1f1f1; } .dark .CodeView__codeView___QXLAq > pre > code {color: #f1f1f1; } .dark .FixedWidthLeftColumnTable__fixedWidthLeftColumnTableScrollableFade___2pza5 {background-image: linear-gradient(to left, transparent, #1b1b1c 90%); } .dark .FixedWidthLeftColumnTable__fixedWidthLeftColumnTableNameHeader___2VaBz {border-right-color: #46464A; } .dark .CookiesView__iconCookieTrue___295Gw {fill: #71b252; } .dark .CookiesView__iconCookieFalse___3QPGJ {fill: #b03b00; } .dark .BodyView__metadataSpacer___nRl5T {border-left: 1px solid #46464a; } .dark .InformationLabel__message___2kkkx {color: #999999; } .dark .InformationLabel__messageIcon___1MokF {color: #3399ff; } .dark .RequestMiddleware__middlewareRequestIcon___Fic3s {color: #ff7bac; } .dark .RequestMiddleware__middlewareResponseIcon___3kupI {color: #deaf8f; } .dark .RequestMiddleware__middlewareOperationType___Uza3O {color: #999999; } .dark .RequestMiddleware__middlewareNameAnonymous___2zluq {color: #999999; } .dark .RequestResourceTable__requestResourceTablePercentage___18e3W {color: #999999; } .dark .RequestResourceTable__requestResourceTableTotalCell___3vsUm {border-top-color: #46464A; } .dark .RequestResourceTable__requestResourceTableColor1___pgfd8 {background-color: #71B252; } .dark .RequestResourceTable__requestResourceTableColor2___2EjnU {background-color: #BF3F00; } .dark .RequestResourceTable__requestResourceTableColor3___2_5Qt {background-color: #FCB714; } .dark .RequestResourceTable__requestResourceTableColor4___eBo2n {background-color: #903F8B; } .dark .RequestResourceTable__requestResourceTableColor5___3WWFb {background-color: #117AD1; } .dark .RequestResourceTable__requestResourceTableColor6___ABqc1 {background-color: #79D7F2; } .dark .RequestResourceTable__requestResourceTableColor7___1zEV8 {background-color: #B5B5B5; } .dark .RequestResponseTabStrip__stripContainer___1yjz4 {border-bottom: 1px solid #515152; } .dark .RequestResponseTabStrip__stripItemLeft___bkEF4 {border-right: 1px solid #515152; } .dark .RequestResponseTabStripModal__title___14DNw {border-right: 1px solid #46464a; } .dark .ServiceView__serviceDuration___VxP0I {color: #999999; } .dark .ExpansionBar__expansionBar___1MJFU {color: #f1f1f1; background-color: #2d2d30; border-top-color: #46464a; } .dark .ExpansionBar__expansionBar___1MJFU:hover {background-color: #3f3f46; } .dark .ExpansionBar__expansionBar___1MJFU:active {background-color: #007acc; } .dark .ServiceBarChart__serviceBarChart___3LYEB {color: #f1f1f1; } .light button {color: #1e1e1e; } .light ::-webkit-scrollbar-thumb {background: rgba(206, 206, 206, 0.5); } .light .ShellView__shellContent___vo90n {background-color: #ffffff; color: #1e1e1e; } .light .ShellView__shellContentActivityBar___hrU73 {background-color: #cecece; } .light .ShellActivityBarView__activityBarButton___2v3pv {color: #848484; } .light .ShellActivityBarView__activityBarButton___2v3pv:hover {color: #1e1e1e; } .light .ShellActivityBarView__activityBarButton___2v3pv:active {border-color: #3399ff; } .light .ShellActivityBarView__activityBarButtonActive___1ysdE {color: #1e1e1e; } .light .ShellStatusBarView__statusBar___d0l8w {background-color: #007acc; color: #f1f1f1; } .light .ShellStatusBarView__statusBarButton___36JYf:hover {background-color: #278bcf; } .light .Common__table___3VuJF > thead > tr > th + th {border-left-color: #e0e0e0; } .light .Common__table___3VuJF > tbody > tr:nth-child(even) {background-color: #f4f4f4; } .light .Common__table___3VuJF > tbody > tr.Common__tableSelectableRow___1M8AJ:hover {background-color: #eaf0ff; } .light .Common__table___3VuJF > tbody > tr.Common__tableSelectedRow___2_thp.Common__tableSelectableRow___1M8AJ {background-color: #3399ff; } .light .Common__table___3VuJF > tbody > tr > td.Common__tableNoData___1Ybo- {color: #6d6d6d; } .light .Common__table___3VuJF .Common__tableHeadSpacer___3blY1 {border-bottom-color: #e0e0e0; } .light .Common__noData___24Ofu {color: #6d6d6d; } .light .Common__paramValue___hBbfe {color: #1e1e1e; } .light .Common__paramOverwritten___3hFN0 {color: #1e1e1e; text-decoration-color: #3399ff; -moz-text-decoration-color: #3399ff; -webkit-text-decoration-color: #3399ff; } .light .Common__modal___d4R-Y {border: 1px solid #515152; background: #ffffff; color: #1e1e1e; } .light .SideBar__sideBar___2UI2S {background-color: #f4f4f4; border-right-color: #e0e0e0; } .light .SideBarSection__sideBarTitleHolder___2Tbjp {background-color: #cecece; border-top-color: #e0e0e0; } .light .SideBarSection__sideBarTitleIsImportant___w_-zs .SideBarSection__sideBarTitle___pJVSt {border-left-color: #3399ff; } .light .SideBarSection__sideBarNoRecords___8BDPu {color: #6d6d6d; } .light .RequestsSideBarRequestView__requestButton___3EwbS:hover {background-color: #eaf0ff; } .light .RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT {background-color: #3399ff; } .light .RequestsSideBarRequestView__requestSummaryLine___2EClN {color: #1e1e1e; } .light .RequestsSideBarRequestView__requestDetailLine___2XTl3 {color: #6d6d6d; } .light svg.RequestsSideBarRequestView__requestClientIcon___2xIKF {color: #6d6d6d; } .light .RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT .RequestsSideBarRequestView__requestSummaryLine___2EClN, .light .RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT .RequestsSideBarRequestView__requestDetailLine___2XTl3, .light .RequestsSideBarRequestView__requestButton___3EwbS.RequestsSideBarRequestView__requestButtonActive___20llT svg.RequestsSideBarRequestView__requestClientIcon___2xIKF {color: #ffffff; } .light .UrlText__urlProtocolHttpsColor___1iwZP {color: #1a7f17; } .light .ClientLabel__clientLabelIcon___1bPcZ {color: #1e1e1e; } .light .RequestsDetailsView__detailTitle___2ZX0b {border-bottom-color: #e0e0e0; } .light .TabStrip__stripButton___2pizC:hover {color: #0e70c0; } .light .TabStrip__stripButtonActive___1O88B {color: #0e70c0; } .light .TabStrip__stripPlain___3JjMv .TabStrip__stripButtonActive___1O88B {border-bottom-color: #0e70c0; } .light .TabStrip__stripTabs___16pyx {border-bottom-color: #0e70c0; } .light .TabStrip__stripTabs___16pyx .TabStrip__stripButtonActive___1O88B {background-color: #ffffff; border-top-color: #0e70c0; border-right-color: #0e70c0; border-left-color: #0e70c0; } .light .RequestsDetailsOverviewView__overview___1s-8L {border-color: #e0e0e0; } .light .RequestsDetailsOverviewView__overviewDetailTitle___1czqF {color: #6d6d6d; } .light .ExpandCollapseButton__expandCollapseButtonIcon___12o5i {color: #1e1e1e; } .light .Logging__logViewExpandCollapseAll___2KOc- {border-left-color: #e0e0e0; } .light .Logging__logNoMessages___2M5NZ {color: #6d6d6d; } .light .Logging__logContent___sabR- a {color: #0e70c0; } .light .Logging__logContent___sabR- a:active {color: #dce0ec; } .light .Logging__logTimeSpanIconPath___108a4 {fill: #6d6d6d; } .light .Logging__logGroup___1TV7j.Logging__logGroupLine___1BRe6:before {border-left-color: #1e1e1e; } .light .AgentIcon__iconPathClient___3a-DF {fill: #79d7f2; } .light .AgentIcon__iconPathServer___3FuE5 {fill: #903f8b; } .light .ExpandCollapseAllBar__expandCollapseAllIconPath___3_Lkq {fill: #1e1e1e; } .light .JsonTable__jsonTableFaderEven___2daXG {background-image: linear-gradient(to bottom, transparent, #f4f4f4 40%); } .light .JsonTable__jsonTableFaderOdd___1w2yC {background-image: linear-gradient(to bottom, transparent, #ffffff 40%); } .light .JsonTable__jsonTable___2veE9 > thead {border-bottom-color: #e0e0e0; } .light .JsonTable__jsonTableHeaderCount___3Fqv1 {color: #6d6d6d; } .light .LoggingLabel__loggingLabelUnnamed___1gjW8 {color: #6d6d6d; } .light .token {border-color: #808080; } .light .token.tokenString {color: #B84803; } .light .token.tokenInteger {color: #198844; } .light .LoggingTimeSpan__logTimeSpanDuration___2YBv8 {border-left-color: #e0e0e0; border-right-color: #e0e0e0; } .light .FilterBar__filterGroup___2GLr4 {border-left-color: #e0e0e0; } .light .FilterBar__filterShowAll___rIBiy, .light .FilterBar__filterShowAll___rIBiy:hover, .light .FilterBar__filterShowAll___rIBiy:active {color: #0e70c0; } .light .FilterBar__filterShowAll___rIBiy:active {color: #dce0ec; } .light .FilterButton__filterButton___1waRX, .light .FilterButton__filterButtonShown___dM8it, .light .FilterButton__filterButtonNotShown___kr-em {color: #1e1e1e; } .light .FilterButton__filterButtonShown___dM8it {border-color: #3399FF; } .light .FilterButton__filterButtonShown___dM8it:hover {border-color: #137CC9; background-color: #eaf0ff; } .light .FilterButton__filterButtonNotShown___kr-em:hover {background-color: #eaf0ff; } .light .FilterButton__filterButtonNotShown___kr-em:active {background-color: #007acc; } .light .LoggingFilterBar__agentBrowserIcon___32h-c {fill: #79d7f2; } .light .LoggingFilterBar__agentServerIcon___3TNK2 {fill: #903f8b; } .light .DetailBiPanel__detail___24y3T {border-top-color: #3399ff; } .light .DetailBiPanel__detailMargin___2KlbB {background-color: #e0e0e0; } .light .DetailBiPanel__detailPanelTitle___FHOIq {background-color: #848484; color: #1e1e1e; } .light .CodeView__codeView___QXLAq > pre > code {color: #1e1e1e; } .light .FixedWidthLeftColumnTable__fixedWidthLeftColumnTableScrollableFade___2pza5 {background-image: linear-gradient(to left, transparent, #ffffff 90%); } .light .FixedWidthLeftColumnTable__fixedWidthLeftColumnTableNameHeader___2VaBz {border-right-color: #e0e0e0; } .light .CookiesView__iconCookieTrue___295Gw {fill: #71b252; } .light .CookiesView__iconCookieFalse___3QPGJ {fill: #b03b00; } .light .BodyView__metadataSpacer___nRl5T {border-left: 1px solid #e0e0e0; } .light .InformationLabel__message___2kkkx {color: #6d6d6d; } .light .InformationLabel__messageIcon___1MokF {color: #0e70c0; } .light .RequestMiddleware__middlewareRequestIcon___Fic3s {color: #ff7bac; } .light .RequestMiddleware__middlewareResponseIcon___3kupI {color: #deaf8f; } .light .RequestMiddleware__middlewareOperationType___Uza3O {color: #6d6d6d; } .light .RequestMiddleware__middlewareNameAnonymous___2zluq {color: #6d6d6d; } .light .RequestResourceTable__requestResourceTablePercentage___18e3W {color: #6d6d6d; } .light .RequestResourceTable__requestResourceTableTotalCell___3vsUm {border-top-color: #e0e0e0; } .light .RequestResourceTable__requestResourceTableColor1___pgfd8 {background-color: #71B252; } .light .RequestResourceTable__requestResourceTableColor2___2EjnU {background-color: #BF3F00; } .light .RequestResourceTable__requestResourceTableColor3___2_5Qt {background-color: #FCB714; } .light .RequestResourceTable__requestResourceTableColor4___eBo2n {background-color: #903F8B; } .light .RequestResourceTable__requestResourceTableColor5___3WWFb {background-color: #117AD1; } .light .RequestResourceTable__requestResourceTableColor6___ABqc1 {background-color: #79D7F2; } .light .RequestResourceTable__requestResourceTableColor7___1zEV8 {background-color: #B5B5B5; } .light .RequestResponseTabStrip__stripContainer___1yjz4 {border-bottom: 1px solid #515152; } .light .RequestResponseTabStrip__stripItemLeft___bkEF4 {border-right: 1px solid #515152; } .light .RequestResponseTabStripModal__title___14DNw {border-right: 1px solid #e0e0e0; } .light .ServiceView__serviceDuration___VxP0I {color: #6d6d6d; } .light .ExpansionBar__expansionBar___1MJFU {color: #1e1e1e; background-color: #848484; border-top-color: #e0e0e0; } .light .ExpansionBar__expansionBar___1MJFU:hover {background-color: #eaf0ff; } .light .ExpansionBar__expansionBar___1MJFU:active {background-color: #007acc; } .light .ServiceBarChart__serviceBarChart___3LYEB {color: #1e1e1e; } 
