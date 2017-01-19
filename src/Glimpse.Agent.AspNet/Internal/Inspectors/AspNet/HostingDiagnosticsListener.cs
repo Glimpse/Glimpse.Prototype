@@ -103,6 +103,12 @@ namespace Glimpse.Agent.Internal.Inspectors
             message.Url = $"{request.Scheme}://{request.Host}{request.PathBase}{request.Path}{request.QueryString}"; // TODO: check if there is a better way of doing this
             message.Headers = response.Headers.ToDictionary(h => h.Key, h => h.Value);
             message.StatusCode = response.StatusCode;
+
+            var webBody = (object)null;
+            if (httpContext.Items.TryGetValue("__GlimpseWebBody", out webBody))
+            {
+                message.Body = webBody as WebBody;
+            }
             
             // add timing data
             var timing = _broker.EndLogicalOperation<WebRequestMessage>();

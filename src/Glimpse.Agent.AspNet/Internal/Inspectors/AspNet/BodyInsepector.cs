@@ -96,7 +96,7 @@ namespace Glimpse.Agent.Internal.Inspectors
                 }
                 
                 // response write 
-                ResponseWrite(response, responseContentType, responseSize, responseContent);
+                ResponseWrite(response, responseContentType, responseSize, responseContent, httpContext);
             });
         }
 
@@ -114,10 +114,13 @@ namespace Glimpse.Agent.Internal.Inspectors
             //_broker.SendMessage(message);
         }
 
-        private void ResponseWrite(HttpResponse response, MediaTypeHeaderValue contentType, long size, string content)
+        private void ResponseWrite(HttpResponse response, MediaTypeHeaderValue contentType, long size, string content, HttpContext httpContext)
         {
             var webBody = new WebBody();
             ProcessBody(webBody, contentType, size, content);
+
+            // TODO: TOTOAL HACK!!! need to find a better way of doing this.
+            httpContext.Items.Add("__GlimpseWebBody", webBody);
 
             // TODO: need to build message
             //_broker.SendMessage(message);
