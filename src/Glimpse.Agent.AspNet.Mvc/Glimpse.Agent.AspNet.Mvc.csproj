@@ -14,11 +14,11 @@
     <PackageLicenseUrl>https://github.com/Glimpse/Glimpse.Prototype/blob/dev/LICENSE.txt</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Glimpse/Glimpse.Prototype</RepositoryUrl>
+    <EnableDefaultItems>false</EnableDefaultItems>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="**\*.cs" />
+    <Compile Include="**\*.cs" Exclude="bin\**;obj\**;" />
     <EmbeddedResource Include="**\*.resx" />
-    <EmbeddedResource Include="compiler\resources\**\*" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Glimpse.Agent.AspNet\Glimpse.Agent.AspNet.csproj" />
