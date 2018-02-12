@@ -145,7 +145,8 @@ namespace Glimpse.Agent.Internal.Inspectors
             return (body != null
                     && contentType != null
                     && (contentType.Encoding == Encoding.UTF8
-                        || MineTypesToCapture.Any(regex => regex.IsMatch(contentType.MediaType))));
+                        || (contentType.MediaType.HasValue 
+                            &&MineTypesToCapture.Any(regex => regex.IsMatch(contentType.MediaType.Value)))));
         }
     }
 }

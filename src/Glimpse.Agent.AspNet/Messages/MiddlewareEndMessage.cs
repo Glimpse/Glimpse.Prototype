@@ -2,10 +2,7 @@
 
 namespace Glimpse.Agent.Messages
 {
-    public class MiddlewareEndMessage
+    public class MiddlewareEndMessage : CorrelationEndMessage
     {
-        public Guid CorrelationId { get; set; }
-
-        public double? Duration { get; set; }
     }
 }

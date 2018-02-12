@@ -12,6 +12,8 @@ namespace Glimpse.Agent.Messages
         [PromoteToStatusCode]
         public int StatusCode { get; set; }
 
+        public string StatusMessage { get; set; }
+
         public IReadOnlyDictionary<string, StringValues> Headers { get; set; }
 
         public WebBody Body { get; set; }

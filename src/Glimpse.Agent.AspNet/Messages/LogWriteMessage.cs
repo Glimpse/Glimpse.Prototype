@@ -10,7 +10,7 @@ namespace Glimpse.Agent.Messages
     {
         public string Level { get; set; }
 
-        public string CategoryName { get; set; }
+        public string Category { get; set; }
 
         public object Message { get; set; }
     }

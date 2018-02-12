@@ -2,10 +2,8 @@
 
 namespace Glimpse.Agent.Messages
 {
-    public class MiddlewareStartMessage
+    public class MiddlewareStartMessage : CorrelationBeginMessage
     {
-        public Guid CorrelationId { get; set; }
-
         public string Name { get; set; }
 
         public string PackageName { get; set; }

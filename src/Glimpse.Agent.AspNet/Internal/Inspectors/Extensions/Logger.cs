@@ -39,8 +39,8 @@ namespace Glimpse.Agent.Internal.Inspectors
             {
                 var message = new LogWriteMessage();
                 message.Level = logLevel.ToString(); // TODO: validate that this gives us the correct value
-                message.CategoryName = CategoryName;
-                message.Message = formatter(state, exception);
+                message.Category = CategoryName;
+                message.Message = formatter(state, exception); // TODO: need to work on breaking out formatting
 
                 //var structure = state as IEnumerable<KeyValuePair<string, object>>;
                 //if (structure != null)
